@@ -1,23 +1,33 @@
-import Header from './components/Header'
-import Hero from './components/Hero'
-import About from './components/About'
-import Services from './components/Services'
-import Team from './components/Team'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import AboutPage from './pages/AboutPage'
+import TeamPage from './pages/TeamPage'
+import ServicesPage from './pages/ServicesPage'
+import ServiceDetailPage from './pages/ServiceDetailPage'
+import SectorsPage from './pages/SectorsPage'
+import SectorDetailPage from './pages/SectorDetailPage'
+import ArticlesPage from './pages/ArticlesPage'
+import ContactPage from './pages/ContactPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-cream-50 text-ink-800">
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Team />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="team" element={<TeamPage />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="services/:slug" element={<ServiceDetailPage />} />
+          <Route path="sectors" element={<SectorsPage />} />
+          <Route path="sectors/:slug" element={<SectorDetailPage />} />
+          <Route path="articles" element={<ArticlesPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }

@@ -1,12 +1,9 @@
+import { Link } from 'react-router-dom'
 import { ArrowLeft, Sparkles } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32"
-    >
-      {/* Decorative gradient blobs */}
+    <section className="relative overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32">
       <div
         aria-hidden
         className="pointer-events-none absolute -top-32 -start-32 h-96 w-96 rounded-full bg-blush-200/60 blur-3xl"
@@ -42,8 +39,8 @@ export default function Hero() {
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="group inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-semibold
               text-white shadow-[0_18px_40px_-12px_rgba(183,110,121,0.55)] transition-all duration-300
               hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_22px_48px_-12px_rgba(183,110,121,0.7)]"
@@ -53,15 +50,15 @@ export default function Hero() {
               size={18}
               className="transition-transform duration-300 group-hover:-translate-x-1"
             />
-          </a>
-          <a
-            href="#services"
+          </Link>
+          <Link
+            to="/services"
             className="inline-flex items-center gap-2 rounded-full border border-blush-200 bg-white/80 px-8 py-4
               text-base font-semibold text-ink-800 backdrop-blur-sm transition-all duration-300
               hover:border-rose-gold-400 hover:text-rose-gold-600"
           >
             לשירותים שלנו
-          </a>
+          </Link>
         </div>
 
         <div className="mt-16 grid grid-cols-3 gap-4 border-t border-blush-200/70 pt-10 md:gap-8">
