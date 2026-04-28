@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Heart, Star, Target, MapPin, Calendar, Clock, Coins, Sparkles, X } from 'lucide-react'
+import { sendLead } from '../lib/notify'
 
 const PAYMENT_URL = 'https://pay.sumit.co.il/3c09bh/tsf55r/tsf4na/payment/'
 const WA_NUMBER = '972523975659'
@@ -81,7 +82,16 @@ export default function OritGroupPage() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const formEl = e.currentTarget
+    const fd = new FormData(formEl)
     setSubmitting(true)
+    void sendLead({
+      target: 'orit',
+      name: String(fd.get('fullName') ?? name),
+      email: String(fd.get('email') ?? ''),
+      phone: String(fd.get('phone') ?? ''),
+      sessionDate: String(fd.get('sessionDate') ?? ''),
+    })
     window.setTimeout(() => {
       window.location.href = PAYMENT_URL
     }, 800)
@@ -282,6 +292,7 @@ export default function OritGroupPage() {
                     <label htmlFor="orit-name" className="mb-1 block text-sm font-semibold text-ink-800">שם מלא</label>
                     <input
                       id="orit-name"
+                      name="fullName"
                       type="text"
                       required
                       autoComplete="name"
@@ -295,6 +306,7 @@ export default function OritGroupPage() {
                     <label htmlFor="orit-phone" className="mb-1 block text-sm font-semibold text-ink-800">טלפון</label>
                     <input
                       id="orit-phone"
+                      name="phone"
                       type="tel"
                       required
                       autoComplete="tel"
@@ -307,6 +319,7 @@ export default function OritGroupPage() {
                     <label htmlFor="orit-email" className="mb-1 block text-sm font-semibold text-ink-800">דוא״ל</label>
                     <input
                       id="orit-email"
+                      name="email"
                       type="email"
                       required
                       autoComplete="email"

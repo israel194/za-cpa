@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MapPin, Globe, Send, CheckCircle2, Phone } from 'lucide-react'
+import { sendLead } from '../lib/notify'
 
 type FormState = {
   name: string
@@ -29,8 +30,15 @@ export default function Contact() {
       setForm((prev) => ({ ...prev, [key]: e.target.value }))
     }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    void sendLead({
+      target: 'office',
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      message: form.message,
+    })
     setSent(true)
     setForm(initial)
     setTimeout(() => setSent(false), 4000)
