@@ -110,7 +110,7 @@ export default function AccessibilityMenu() {
         onClick={() => setOpen(true)}
         aria-label={t('a11y.open')}
         title={t('a11y.title')}
-        className="group fixed bottom-6 end-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#1d4ed8] text-white shadow-[0_18px_40px_-8px_rgba(29,78,216,0.6)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#1e40af] hover:shadow-[0_22px_48px_-8px_rgba(29,78,216,0.75)] focus:outline-none focus:ring-4 focus:ring-blue-300/50"
+        className="group fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#1d4ed8] text-white shadow-[0_18px_40px_-8px_rgba(29,78,216,0.6)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#1e40af] hover:shadow-[0_22px_48px_-8px_rgba(29,78,216,0.75)] focus:outline-none focus:ring-4 focus:ring-blue-300/50"
       >
         <Accessibility size={26} className="transition-transform group-hover:scale-110" />
         <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-[#1d4ed8] opacity-50 blur-md transition-opacity group-hover:opacity-80" />
