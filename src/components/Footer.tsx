@@ -4,9 +4,11 @@ export default function Footer() {
     <footer className="border-t border-blush-100 bg-ink-900 text-cream-100">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-3 md:px-10">
         <div>
-          <div className="font-display text-2xl font-extrabold tracking-tight">
-            <span className="text-rose-gold-300">ZA</span>
-            <span className="text-white">-CPA</span>
+          <div className="font-display tracking-tight">
+            <div className="text-3xl font-extrabold text-rose-gold-300">עשור</div>
+            <div className="mt-1 text-base font-medium text-white/80">
+              רואי חשבון
+            </div>
           </div>
           <p className="mt-4 max-w-xs leading-relaxed text-cream-200/80">
             משרד רואי חשבון מוביל בישראל. מקצועיות, שקיפות וליווי אישי.
@@ -62,7 +64,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-sm text-cream-200/60 md:flex-row md:px-10">
-          <p>© {year} ZA-CPA. כל הזכויות שמורות.</p>
+          <p>© {year} עשור - רואי חשבון. כל הזכויות שמורות.</p>
           <p>נבנה בקפידה ובאהבה.</p>
         </div>
       </div>

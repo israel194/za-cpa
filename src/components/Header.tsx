@@ -30,10 +30,12 @@ export default function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
         <a
           href="#top"
-          className="font-display text-2xl font-extrabold tracking-tight text-ink-900"
+          className="flex items-baseline gap-2 font-display tracking-tight"
         >
-          <span className="text-rose-gold-500">ZA</span>
-          <span className="text-ink-900">-CPA</span>
+          <span className="text-2xl font-extrabold text-rose-gold-500">עשור</span>
+          <span className="hidden text-base font-medium text-ink-700 sm:inline">
+            <span className="mx-1 text-rose-gold-300">|</span> רואי חשבון
+          </span>
         </a>
 
         <ul className="hidden items-center gap-10 md:flex">
