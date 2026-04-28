@@ -1,6 +1,6 @@
 import { MessageCircle } from 'lucide-react'
 
-const PHONE = '972526666666' // TODO: replace with real WhatsApp number
+const PHONE = '972523975659'
 
 export default function WhatsAppFloat() {
   return (
