@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { useServices, useSectors } from '../data/content'
 import LanguageSwitcher from './LanguageSwitcher'
+import Logo from './Logo'
 
 type NavItem = {
   to?: string
@@ -70,17 +71,8 @@ export default function Header() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 md:px-10">
-        <Link
-          to="/"
-          className="flex items-baseline gap-2 font-display tracking-tight"
-        >
-          <span className="text-2xl font-extrabold text-rose-gold-500">
-            {t('brand.name')}
-          </span>
-          <span className="hidden text-base font-medium text-ink-700 sm:inline">
-            <span className="mx-1 text-rose-gold-300">|</span>{' '}
-            {t('brand.subtitle')}
-          </span>
+        <Link to="/" aria-label={`${t('brand.name')} - ${t('brand.subtitle')}`}>
+          <Logo variant="lockup" tone="default" size={44} />
         </Link>
 
         <ul className="hidden items-center gap-6 lg:flex">

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { MapPin, Mail, Phone, Globe } from 'lucide-react'
 import { useServices, useSectors } from '../data/content'
 import { openConsentSettings } from './CookieConsent'
+import Logo from './Logo'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -14,15 +15,8 @@ export default function Footer() {
     <footer className="border-t border-blush-100 bg-ink-900 text-cream-100">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-2 md:px-10 lg:grid-cols-4">
         <div>
-          <div className="font-display tracking-tight">
-            <div className="text-3xl font-extrabold text-rose-gold-300">
-              {t('brand.name')}
-            </div>
-            <div className="mt-1 text-base font-medium text-white/80">
-              {t('brand.subtitle')}
-            </div>
-          </div>
-          <p className="mt-4 max-w-xs leading-relaxed text-cream-200/80">
+          <Logo variant="lockup" tone="inverse" size={56} />
+          <p className="mt-5 max-w-xs leading-relaxed text-cream-200/80">
             {t('footer.description')}
           </p>
         </div>

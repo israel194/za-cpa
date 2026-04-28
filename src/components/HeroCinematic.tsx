@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft, ArrowRight, Phone } from 'lucide-react'
+import Logo from './Logo'
 
 export default function HeroCinematic() {
   const { t, i18n } = useTranslation()
@@ -44,6 +45,9 @@ export default function HeroCinematic() {
       <div className="relative z-10 flex min-h-[100svh] items-center">
         <div className="mx-auto w-full max-w-7xl px-6 pt-32 pb-20 md:px-10 md:pt-40 md:pb-28">
           <div className="max-w-3xl text-center md:text-start">
+            <div className="mb-6 flex md:justify-start justify-center">
+              <Logo variant="mark" tone="inverse" size={84} />
+            </div>
             <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-rose-gold-300/40 bg-white/10 px-4 py-1.5 text-sm font-medium text-cream-100 backdrop-blur-md">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-gold-400 opacity-75" />
