@@ -47,6 +47,7 @@ export default function Header() {
       })),
     },
     { to: '/articles', label: t('nav.articles') },
+    { to: '/orit-group', label: t('nav.oritGroup', 'קבוצת לימוד לנשים') },
     { to: '/contact', label: t('nav.contact') },
   ]
 

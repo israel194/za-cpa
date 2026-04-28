@@ -11,6 +11,7 @@ import ArticlesPage from './pages/ArticlesPage'
 import ContactPage from './pages/ContactPage'
 import AccessibilityPage from './pages/AccessibilityPage'
 import PrivacyPage from './pages/PrivacyPage'
+import OritGroupPage from './pages/OritGroupPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="accessibility" element={<AccessibilityPage />} />
           <Route path="privacy" element={<PrivacyPage />} />
+          <Route path="orit-group" element={<OritGroupPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
