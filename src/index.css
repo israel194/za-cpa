@@ -134,6 +134,11 @@ body {
   100% { transform: translateY(8px); opacity: 0; }
 }
 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Accessibility modes — applied to <html> root */
 html.a11y-text-small { font-size: 90%; }
 html.a11y-text-large { font-size: 115%; }

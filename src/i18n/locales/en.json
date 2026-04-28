@@ -310,11 +310,13 @@
   "whatsapp": "Contact us on WhatsApp",
   "cookies": {
     "banner": {
-      "title": "Cookies and privacy",
-      "text": "This site uses essential cookies required for proper site operation (which cannot be disabled), and optional cookies for analytics and marketing. Use of optional cookies is subject to your explicit consent and consistent with the Israeli Privacy Protection Law, 1981. You may accept all cookies, allow only essential ones, or customize your consent. Consent may be withdrawn at any time.",
-      "policyLink": "Read the full privacy and cookies policy",
-      "acceptAll": "Accept all cookies",
-      "essentialOnly": "Essential only (reject optional)",
+      "eyebrow": "Privacy & personalization",
+      "title": "A few cookies for the perfect experience?",
+      "text": "Essential cookies keep the site running smoothly. Optional ones (analytics and marketing) help us improve — only with your consent.",
+      "tagline": "Your call, and you can change it anytime.",
+      "policyLink": "Read the full privacy policy",
+      "acceptAll": "Accept all",
+      "essentialOnly": "Essential only",
       "settings": "Customize"
     },
     "modal": {

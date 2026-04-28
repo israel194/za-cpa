@@ -1,7 +1,15 @@
 import { useEffect, useState, useCallback, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Cookie, X, Settings as SettingsIcon, Check } from 'lucide-react'
+import {
+  Cookie,
+  X,
+  Settings as SettingsIcon,
+  Check,
+  Sparkles,
+  ArrowLeft,
+  ArrowRight,
+} from 'lucide-react'
 
 type Consent = {
   decided: boolean
@@ -49,7 +57,9 @@ export function openConsentSettings() {
 }
 
 export default function CookieConsent() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRtl = i18n.dir() === 'rtl'
+  const Arrow = isRtl ? ArrowLeft : ArrowRight
   const [consent, setConsent] = useState<Consent>(defaults)
   const [bannerOpen, setBannerOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
@@ -129,59 +139,111 @@ export default function CookieConsent() {
 
   return (
     <>
-      {/* Bottom banner — shown only on first visit, raised above the float buttons */}
+      {/* Marketing-style banner — premium gradient card */}
       {bannerOpen && !modalOpen && (
         <div
           role="dialog"
           aria-labelledby="cookie-banner-title"
-          className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl rounded-2xl border border-blush-100 bg-white/98 p-5 shadow-[0_28px_60px_-20px_rgba(0,0,0,0.3)] backdrop-blur-md md:p-6"
+          className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl animate-[fadeUp_400ms_ease-out_both] overflow-hidden rounded-3xl border border-blush-200/80 bg-gradient-to-bl from-cream-50 via-white to-blush-50 shadow-[0_32px_70px_-22px_rgba(183,110,121,0.4)] backdrop-blur-md"
         >
-          <div className="flex flex-col gap-4 md:flex-row md:items-center">
-            <div className="flex flex-1 items-start gap-4">
-              <span className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-blush-100 text-rose-gold-500">
-                <Cookie size={22} />
-              </span>
-              <div>
+          {/* Decorative glows */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-12 -end-12 h-44 w-44 rounded-full bg-rose-gold-300/40 blur-3xl"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-16 -start-16 h-48 w-48 rounded-full bg-blush-200/50 blur-3xl"
+          />
+          {/* Top thin gold rule */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-rose-gold-400 to-transparent"
+          />
+
+          <div className="relative grid gap-5 p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-6 md:p-7">
+            {/* Icon side */}
+            <div className="flex items-start gap-4 md:items-center">
+              <div className="relative flex-none">
+                <div
+                  aria-hidden
+                  className="absolute inset-0 -z-10 rounded-2xl bg-rose-gold-400/35 blur-md"
+                />
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-10px_rgba(183,110,121,0.6)]">
+                  <Cookie size={26} />
+                </span>
+              </div>
+              {/* Mobile-only inline title (hidden on md) */}
+              <div className="md:hidden">
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-rose-gold-500">
+                  <Sparkles size={12} />
+                  {t('cookies.banner.eyebrow')}
+                </div>
                 <h3
                   id="cookie-banner-title"
-                  className="font-display text-base font-bold text-ink-900"
+                  className="mt-1 font-display text-lg font-extrabold leading-tight text-ink-900"
                 >
                   {t('cookies.banner.title')}
                 </h3>
-                <p className="mt-1 text-sm leading-relaxed text-ink-700">
-                  {t('cookies.banner.text')}{' '}
-                  <Link
-                    to="/privacy"
-                    className="font-semibold text-rose-gold-500 hover:text-rose-gold-600"
-                  >
-                    {t('cookies.banner.policyLink')}
-                  </Link>
-                  .
-                </p>
               </div>
             </div>
-            <div className="flex flex-wrap gap-2 md:flex-nowrap">
+
+            {/* Body */}
+            <div>
+              {/* Desktop title */}
+              <div className="hidden md:block">
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-rose-gold-500">
+                  <Sparkles size={12} />
+                  {t('cookies.banner.eyebrow')}
+                </div>
+                <h3
+                  id="cookie-banner-title"
+                  className="mt-1.5 font-display text-xl font-extrabold leading-tight text-ink-900 md:text-2xl"
+                >
+                  {t('cookies.banner.title')}
+                </h3>
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-ink-800 md:text-[15px]">
+                {t('cookies.banner.text')}
+              </p>
+              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-700">
+                <span className="font-medium text-rose-gold-500">
+                  {t('cookies.banner.tagline')}
+                </span>
+                <Link
+                  to="/privacy"
+                  className="inline-flex items-center gap-1 font-semibold text-ink-800 underline decoration-rose-gold-300 underline-offset-4 transition-colors hover:text-rose-gold-600 hover:decoration-rose-gold-500"
+                >
+                  {t('cookies.banner.policyLink')}
+                  <Arrow size={11} />
+                </Link>
+              </div>
+            </div>
+
+            {/* Buttons — vertical column on desktop, wrap on mobile */}
+            <div className="flex flex-wrap gap-2 md:flex-col md:gap-2.5">
               <button
                 type="button"
-                onClick={openSettings}
-                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-blush-200 bg-cream-50 px-4 py-2.5 text-sm font-semibold text-ink-800 transition-colors hover:border-rose-gold-400 hover:bg-white"
+                onClick={acceptAll}
+                className="group order-1 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-bl from-rose-gold-500 to-rose-gold-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_30px_-10px_rgba(183,110,121,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgba(183,110,121,0.8)] md:order-1 md:w-full"
               >
-                <SettingsIcon size={14} />
-                {t('cookies.banner.settings')}
+                <Sparkles size={14} className="transition-transform group-hover:scale-110" />
+                {t('cookies.banner.acceptAll')}
               </button>
               <button
                 type="button"
                 onClick={essentialOnly}
-                className="rounded-full border border-blush-200 bg-cream-50 px-4 py-2.5 text-sm font-semibold text-ink-800 transition-colors hover:border-rose-gold-400 hover:bg-white"
+                className="order-2 rounded-full border border-blush-200 bg-white/70 px-5 py-2.5 text-sm font-semibold text-ink-800 backdrop-blur-sm transition-all duration-200 hover:border-rose-gold-400 hover:bg-white md:order-2 md:w-full"
               >
                 {t('cookies.banner.essentialOnly')}
               </button>
               <button
                 type="button"
-                onClick={acceptAll}
-                className="rounded-full bg-rose-gold-500 px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(183,110,121,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                onClick={openSettings}
+                className="order-3 inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-ink-700 transition-colors hover:text-rose-gold-600 md:order-3 md:w-full"
               >
-                {t('cookies.banner.acceptAll')}
+                <SettingsIcon size={12} />
+                {t('cookies.banner.settings')}
               </button>
             </div>
           </div>
