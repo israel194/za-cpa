@@ -103,6 +103,18 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-6 py-4 text-center text-xs text-cream-200/50 md:px-10">
+          מיזם אישי של אורית עשור:{' '}
+          <Link
+            to="/orit-group"
+            className="text-cream-200/80 underline-offset-2 transition-colors hover:text-rose-gold-300 hover:underline"
+          >
+            לחזור לעצמך — קבוצת לימוד לנשים
+          </Link>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-sm text-cream-200/60 md:flex-row md:px-10">
           <p>
             {t('footer.rights', { year })}
