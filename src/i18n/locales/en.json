@@ -310,12 +310,12 @@
   "whatsapp": "Contact us on WhatsApp",
   "cookies": {
     "banner": {
-      "title": "Use of cookies",
-      "text": "This site uses cookies to enable a quality browsing experience and to analyze site usage. You can choose which cookies to allow.",
-      "policyLink": "Privacy and cookies policy",
-      "acceptAll": "Accept all",
-      "essentialOnly": "Essential only",
-      "settings": "Settings"
+      "title": "Cookies and privacy",
+      "text": "This site uses essential cookies required for proper site operation (which cannot be disabled), and optional cookies for analytics and marketing. Use of optional cookies is subject to your explicit consent and consistent with the Israeli Privacy Protection Law, 1981. You may accept all cookies, allow only essential ones, or customize your consent. Consent may be withdrawn at any time.",
+      "policyLink": "Read the full privacy and cookies policy",
+      "acceptAll": "Accept all cookies",
+      "essentialOnly": "Essential only (reject optional)",
+      "settings": "Customize"
     },
     "modal": {
       "title": "Cookie consent settings",
@@ -342,52 +342,97 @@
   "privacy": {
     "eyebrow": "Privacy",
     "title": "Privacy & cookies policy",
-    "subtitle": "We respect your privacy and are committed to protecting your information in accordance with the law.",
-    "introTitle": "General",
-    "intro": "This policy describes how Asor — Certified Public Accountants collects, stores, and uses personal information received via this site, as well as your rights regarding this information. Use of the site and services constitutes consent to this policy.",
+    "subtitle": "We are committed to protecting your privacy in accordance with the Israeli Privacy Protection Law, 1981 and its regulations.",
+
+    "introTitle": "Introduction",
+    "intro": "This privacy policy (the \"Policy\") describes how Asor — Certified Public Accountants (the \"Firm\", \"we\") collects, holds, uses, and transfers personal information received via this site, and your rights regarding such information. Using the site and submitting information through it constitutes consent to the terms of this Policy, subject to any applicable law.",
+
+    "controllerTitle": "Database controller and contact",
+    "controllerInfo": "Database owner and holder: Asor — Certified Public Accountants. Address: 17 Nahum Heftzadi St., Jerusalem, Ram Tower, Floor 11. Privacy Coordinator: Orit Asor — for any matter related to this Policy or to your statutory rights, by phone 052-3975659 or email office@za-cpa.com.",
+
     "lawTitle": "Legal framework",
-    "lawText": "Collection and processing of personal information on this site is conducted in accordance with the Israeli Privacy Protection Law (1981) and the Privacy Protection (Information Security) Regulations (2017).",
-    "collectTitle": "What information we collect",
-    "collectIntro": "We collect the following information, only when needed to provide the service:",
+    "lawText": "Collection and processing of personal information on this site is conducted in accordance with the Israeli Privacy Protection Law, 1981 (the \"Law\"), the Privacy Protection (Information Security) Regulations, 2017, the Privacy Protection Law (Amendment No. 13), 2024, and where relevant — the Israeli Communications Law (Telecommunications and Broadcasting), 1982 with respect to direct marketing.",
+
+    "collectTitle": "Information we collect",
+    "collectIntro": "We collect the following types of information, only to the extent necessary:",
     "collectItems": [
-      "Contact details you provide in the form: full name, email, phone, and message content",
-      "Basic technical information: IP address, browser type, operating system, and pages viewed",
-      "Personal preferences saved in cookies (interface language, accessibility settings, consents)",
-      "In some cases — anonymous statistical data about site usage"
+      "Information you provide voluntarily through site forms: full name, email, phone, and message content",
+      "Technical information collected automatically when you visit the site: IP address, browser type and version, operating system, screen resolution, referrer, and pages viewed",
+      "Personal preferences saved in cookies in your browser: interface language, accessibility settings, and cookie category consents",
+      "If you allow analytics cookies — aggregate, non-identifiable statistical information about usage patterns"
     ],
-    "useTitle": "Purposes of use",
+    "collectNote": "Information is collected directly from you or automatically through your browser. We do not collect sensitive information (as defined in Section 7 of the Law — such as health, political views, or religious beliefs) through this site.",
+
+    "useTitle": "Purposes for which information is collected",
     "useItems": [
-      "Responding to inquiries and handling service requests",
-      "Improving the site and user experience",
-      "Anonymous statistical analysis of site usage",
-      "Compliance with legal obligations applicable to the firm"
+      "Responding to inquiries, professional engagement, and handling service requests",
+      "Managing the ongoing relationship with clients and prospective clients",
+      "Improving the site and the firm's services and analyzing aggregate usage patterns",
+      "Compliance with legal, regulatory, and professional obligations applicable to CPAs, including bookkeeping and document retention",
+      "Information security, fraud detection, and prevention of misuse",
+      "If you have given express consent — sending marketing materials, professional newsletters, or updates"
     ],
+
+    "legalBasisTitle": "Legal basis for processing",
+    "legalBasisIntro": "We process personal information on one or more of the following bases:",
+    "legalBasisItems": [
+      "Your express consent — when you fill out a contact form, accept optional cookies, or join a mailing list",
+      "Performance of an engagement with you — for the provision of the professional services you requested",
+      "Legal obligation — including reporting, bookkeeping, and document retention duties imposed on the firm by tax law, the CPA Law, 1955, and other laws",
+      "The firm's legitimate interest — service improvement, information security, and prevention of misuse — balanced against your rights"
+    ],
+
     "cookiesTitle": "Cookies",
-    "cookiesIntro": "The site uses cookies — small text files saved in your browser — in three categories:",
-    "cookiesEssential": "Essential cookies: required for site operation (such as saving language choice and accessibility settings). Cannot be disabled.",
-    "cookiesAnalytics": "Analytics cookies: allow us to learn anonymously how visitors use the site. Can be disabled in settings.",
-    "cookiesMarketing": "Marketing cookies: may be used to tailor content and ads. Can be disabled in settings.",
-    "cookiesManage": "You can update your consents at any time via the \"Manage consent\" button at the bottom of the page.",
-    "rightsTitle": "Your legal rights",
-    "rightsIntro": "Under the Israeli Privacy Protection Law, you have the following rights regarding your personal information:",
+    "cookiesIntro": "Cookies are small text files saved in your browser when you visit the site. We use cookies in three categories, as detailed below. Essential cookies do not require consent. Optional cookies require your explicit consent, managed via the cookie banner.",
+    "cookiesEssential": "Essential (Strictly Necessary) cookies: required for proper site operation and cannot be disabled. They include language choice, accessibility settings, cookie consents, and session identification.",
+    "cookiesAnalytics": "Analytics cookies: allow us to understand how visitors use the site based on aggregated, non-identifiable data. Loaded only after your consent.",
+    "cookiesMarketing": "Marketing cookies: may be used to tailor content and measure advertising effectiveness, including through external partners. Loaded only after your express consent.",
+    "cookiesRetention": "Cookie retention varies between session-only and longer durations (up to 12 months). You can delete cookies at any time via your browser settings.",
+    "cookiesManage": "You can update or withdraw your consent for optional cookies at any time using the \"Manage consent\" button at the bottom of every page. Withdrawal of consent does not affect the lawfulness of processing carried out before withdrawal.",
+
+    "retentionTitle": "Information retention period",
+    "retentionText": "We retain personal information for the period required for the purposes for which it was collected, or longer where required by law. In particular: documents related to professional services are retained as required by tax law and the CPA Law (typically not less than 7 years from the end of the tax year). Inquiries that did not lead to engagement are kept for up to 24 months for documentation and follow-up. Upon expiration of the retention period, the information is deleted or anonymized.",
+
+    "thirdPartyTitle": "Sharing information with third parties",
+    "thirdPartyText": "We do not sell, rent, or trade your personal information. Information may be transferred to third parties only in the following circumstances: (1) infrastructure and service providers acting on our behalf (site hosting, information security, email and analytics providers), subject to their contractual confidentiality obligations and compliance with the Information Security Regulations; (2) competent authorities — where required by law or judicial order; (3) in the course of professional service delivery — to tax authorities, the Companies Registrar, or other parties with your consent.",
+
+    "internationalTitle": "Cross-border data transfers",
+    "internationalText": "The site is hosted on GitHub Pages, and as a result certain technical information (including IP addresses) may be processed on servers located outside Israel. Such transfer is conducted in accordance with the Privacy Protection Regulations (Transfer of Information to Databases Outside the State Borders), 2001, to countries with adequate privacy-protection arrangements or based on equivalent contractual safeguards.",
+
+    "directMarketingTitle": "Direct marketing and promotional outreach",
+    "directMarketingText": "If you choose to receive newsletters, professional materials, or marketing messages from us, we will send them only after receiving your express consent and in accordance with Section 30A of the Israeli Communications Law (Telecommunications and Broadcasting), 1982 and Section 17F of the Law. Every such message will include a simple option to unsubscribe, and we commit to honor unsubscribe requests without delay.",
+
+    "minorsTitle": "Children's privacy",
+    "minorsText": "The site is not intended to collect information from minors under the age of 16, and we do not knowingly collect personal information from them without parental or legal-guardian consent. If you become aware that a minor has submitted information through the site without appropriate consent, please contact us and we will act promptly to delete the information.",
+
+    "rightsTitle": "Your statutory rights",
+    "rightsIntro": "The Law grants you the following rights regarding personal information held about you:",
     "rightsItems": [
-      "The right to access the personal information held about you",
-      "The right to request correction of inaccurate or outdated information",
-      "The right to request deletion of information",
-      "The right to withdraw consent for processing (beyond legal obligations)"
+      "Right of access — Section 13 of the Law: the right to receive information about what is held about you",
+      "Right of correction or deletion — Section 14 of the Law: request to correct inaccurate, outdated, or incomplete information, or to delete it where appropriate",
+      "Right to withdraw consent — including for optional cookies or marketing, at any time",
+      "Right to opt out of direct marketing — Section 17F of the Law and Section 30A of the Communications Law",
+      "Right to file a complaint with the Privacy Protection Authority — if you believe your rights have been infringed"
     ],
-    "rightsContact": "To exercise your rights or for any privacy-related question, please contact us using the details at the bottom of this page.",
+    "rightsContact": "To exercise your rights, contact us using the details at the bottom of this page. We will address your request within 30 days; if additional time is required we will inform you accordingly.",
+
     "securityTitle": "Information security",
-    "securityText": "We take reasonable technical and organizational measures to protect your information from loss, unauthorized access, misuse, or disclosure. However, no online method is fully secure.",
-    "thirdPartyTitle": "Third parties",
-    "thirdPartyText": "We do not sell your information to third parties. Information may be transferred to trusted infrastructure providers (hosting, security, analytics) solely for service provision, subject to security and privacy commitments.",
-    "changesTitle": "Policy changes",
-    "changesText": "We may update this policy from time to time. The current version is the one published on the site, with the last-updated date shown.",
+    "securityText": "We take reasonable technical and organizational security measures in accordance with the Privacy Protection (Information Security) Regulations, 2017, including encrypted transport (HTTPS), access control, security monitoring, and ongoing software updates. In the event of a serious security incident (as defined in the Regulations), we will notify the Privacy Protection Authority and affected individuals as required. However, no online method of safeguarding information guarantees absolute security.",
+
+    "complaintTitle": "Right to file a complaint with the Privacy Protection Authority",
+    "complaintText": "If you believe your right to privacy has been infringed and you have not received an appropriate response from us, you may file a complaint with the Privacy Protection Authority at the Israeli Ministry of Justice, via the Authority's website (privacy.gov.il) or by mail: Privacy Protection Authority, P.O.B. 27338, Jerusalem 9127202.",
+
+    "changesTitle": "Policy updates",
+    "changesText": "We may update this Policy from time to time, including due to changes in legislation, technology, or our services. The current version is the one published on the site, alongside the last-updated date. In the event of a material change to the Policy, we will take reasonable steps to notify active users.",
+
     "contactTitle": "Privacy contact",
-    "contactIntro": "For privacy-related inquiries, questions, or requests:",
-    "contactName": "Orit Asor (Accessibility & Privacy Coordinator)",
-    "updatedText": "This policy was last updated on {{date}}.",
-    "manageConsent": "Manage cookie consent"
+    "contactIntro": "For any privacy-related question, request, or comment — including the exercise of statutory rights — please contact our Privacy Coordinator:",
+    "contactName": "Orit Asor — Accessibility & Privacy Coordinator",
+    "updatedText": "This Policy was last updated on {{date}}. The most current version is always available on this page.",
+    "manageConsent": "Manage cookie consent",
+
+    "disclaimerTitle": "General",
+    "disclaimerText": "This document is intended to describe our privacy practices in plain language. In the event of any inconsistency between this document and applicable law, the law shall prevail. Nothing in this Policy diminishes any of your rights under any applicable law."
   },
   "a11y": {
     "title": "Accessibility menu",

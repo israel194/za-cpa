@@ -12,6 +12,14 @@ import {
   Phone,
   Calendar,
   Settings as SettingsIcon,
+  Building2,
+  Scale,
+  Megaphone,
+  Baby,
+  Globe,
+  AlertTriangle,
+  Info,
+  Clock,
 } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import { openConsentSettings } from '../components/CookieConsent'
@@ -22,6 +30,9 @@ export default function PrivacyPage() {
     returnObjects: true,
   }) as string[]
   const useItems = t('privacy.useItems', { returnObjects: true }) as string[]
+  const legalBasisItems = t('privacy.legalBasisItems', {
+    returnObjects: true,
+  }) as string[]
   const rightsItems = t('privacy.rightsItems', {
     returnObjects: true,
   }) as string[]
@@ -43,31 +54,64 @@ export default function PrivacyPage() {
 
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 md:px-10">
-          {/* Intro */}
+          {/* Disclaimer notice at top */}
+          <div className="mb-10 rounded-2xl border border-blush-200 bg-blush-50 p-5">
+            <div className="flex items-start gap-3">
+              <Info size={20} className="mt-0.5 flex-none text-rose-gold-500" />
+              <div className="text-sm leading-relaxed text-ink-800">
+                <strong className="font-bold">
+                  {t('privacy.disclaimerTitle')}.
+                </strong>{' '}
+                {t('privacy.disclaimerText')}
+              </div>
+            </div>
+          </div>
+
+          {/* 1. Intro */}
           <Block icon={<FileText size={22} />} title={t('privacy.introTitle')}>
             <p className="leading-loose">{t('privacy.intro')}</p>
           </Block>
 
-          {/* Legal framework */}
-          <Block icon={<ShieldCheck size={22} />} title={t('privacy.lawTitle')}>
+          {/* 2. Controller */}
+          <Block
+            icon={<Building2 size={22} />}
+            title={t('privacy.controllerTitle')}
+          >
+            <p className="leading-relaxed">{t('privacy.controllerInfo')}</p>
+          </Block>
+
+          {/* 3. Legal framework */}
+          <Block icon={<Scale size={22} />} title={t('privacy.lawTitle')}>
             <p className="leading-relaxed">{t('privacy.lawText')}</p>
           </Block>
 
-          {/* What we collect */}
+          {/* 4. What we collect */}
           <Block
             icon={<UserCheck size={22} />}
             title={t('privacy.collectTitle')}
           >
             <p className="mb-4">{t('privacy.collectIntro')}</p>
             <BulletList items={collectItems} />
+            <p className="mt-4 text-sm leading-relaxed text-ink-700">
+              {t('privacy.collectNote')}
+            </p>
           </Block>
 
-          {/* Purposes */}
+          {/* 5. Purposes */}
           <Block icon={<FileText size={22} />} title={t('privacy.useTitle')}>
             <BulletList items={useItems} />
           </Block>
 
-          {/* Cookies */}
+          {/* 6. Legal basis */}
+          <Block
+            icon={<Scale size={22} />}
+            title={t('privacy.legalBasisTitle')}
+          >
+            <p className="mb-4">{t('privacy.legalBasisIntro')}</p>
+            <BulletList items={legalBasisItems} />
+          </Block>
+
+          {/* 7. Cookies */}
           <Block icon={<Cookie size={22} />} title={t('privacy.cookiesTitle')}>
             <p className="mb-4">{t('privacy.cookiesIntro')}</p>
             <ul className="space-y-3">
@@ -87,7 +131,10 @@ export default function PrivacyPage() {
                 </span>
               </li>
             </ul>
-            <p className="mt-4 text-sm text-ink-700">
+            <p className="mt-4 text-sm leading-relaxed text-ink-700">
+              {t('privacy.cookiesRetention')}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-ink-700">
               {t('privacy.cookiesManage')}
             </p>
             <button
@@ -100,24 +147,12 @@ export default function PrivacyPage() {
             </button>
           </Block>
 
-          {/* Rights */}
-          <Block
-            icon={<UserCheck size={22} />}
-            title={t('privacy.rightsTitle')}
-          >
-            <p className="mb-4">{t('privacy.rightsIntro')}</p>
-            <BulletList items={rightsItems} />
-            <p className="mt-4 text-sm text-ink-700">
-              {t('privacy.rightsContact')}
-            </p>
+          {/* 8. Retention */}
+          <Block icon={<Clock size={22} />} title={t('privacy.retentionTitle')}>
+            <p className="leading-relaxed">{t('privacy.retentionText')}</p>
           </Block>
 
-          {/* Security */}
-          <Block icon={<Lock size={22} />} title={t('privacy.securityTitle')}>
-            <p className="leading-relaxed">{t('privacy.securityText')}</p>
-          </Block>
-
-          {/* Third parties */}
+          {/* 9. Third parties */}
           <Block
             icon={<Users size={22} />}
             title={t('privacy.thirdPartyTitle')}
@@ -125,7 +160,55 @@ export default function PrivacyPage() {
             <p className="leading-relaxed">{t('privacy.thirdPartyText')}</p>
           </Block>
 
-          {/* Changes */}
+          {/* 10. International */}
+          <Block
+            icon={<Globe size={22} />}
+            title={t('privacy.internationalTitle')}
+          >
+            <p className="leading-relaxed">{t('privacy.internationalText')}</p>
+          </Block>
+
+          {/* 11. Direct marketing */}
+          <Block
+            icon={<Megaphone size={22} />}
+            title={t('privacy.directMarketingTitle')}
+          >
+            <p className="leading-relaxed">
+              {t('privacy.directMarketingText')}
+            </p>
+          </Block>
+
+          {/* 12. Minors */}
+          <Block icon={<Baby size={22} />} title={t('privacy.minorsTitle')}>
+            <p className="leading-relaxed">{t('privacy.minorsText')}</p>
+          </Block>
+
+          {/* 13. Rights */}
+          <Block
+            icon={<UserCheck size={22} />}
+            title={t('privacy.rightsTitle')}
+          >
+            <p className="mb-4">{t('privacy.rightsIntro')}</p>
+            <BulletList items={rightsItems} />
+            <p className="mt-4 text-sm leading-relaxed text-ink-700">
+              {t('privacy.rightsContact')}
+            </p>
+          </Block>
+
+          {/* 14. Security */}
+          <Block icon={<Lock size={22} />} title={t('privacy.securityTitle')}>
+            <p className="leading-relaxed">{t('privacy.securityText')}</p>
+          </Block>
+
+          {/* 15. Complaint to PPA */}
+          <Block
+            icon={<AlertTriangle size={22} />}
+            title={t('privacy.complaintTitle')}
+          >
+            <p className="leading-relaxed">{t('privacy.complaintText')}</p>
+          </Block>
+
+          {/* 16. Changes */}
           <Block
             icon={<RefreshCw size={22} />}
             title={t('privacy.changesTitle')}
@@ -133,12 +216,17 @@ export default function PrivacyPage() {
             <p className="leading-relaxed">{t('privacy.changesText')}</p>
           </Block>
 
-          {/* Contact */}
+          {/* 17. Contact (highlighted) */}
           <article className="mt-10 rounded-3xl border border-rose-gold-300/40 bg-gradient-to-bl from-rose-gold-500 to-blush-400 p-8 text-white shadow-[0_24px_56px_-28px_rgba(183,110,121,0.6)] md:p-10">
-            <h2 className="font-display text-2xl font-extrabold md:text-3xl">
-              {t('privacy.contactTitle')}
-            </h2>
-            <p className="mt-3 text-base leading-relaxed text-white/90 md:text-lg">
+            <div className="mb-4 flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/25 backdrop-blur-sm">
+                <ShieldCheck size={20} />
+              </span>
+              <h2 className="font-display text-2xl font-extrabold md:text-3xl">
+                {t('privacy.contactTitle')}
+              </h2>
+            </div>
+            <p className="text-base leading-relaxed text-white/90 md:text-lg">
               {t('privacy.contactIntro')}
             </p>
             <div className="mt-5 rounded-xl bg-white/15 p-4 backdrop-blur-sm">
@@ -176,14 +264,12 @@ export default function PrivacyPage() {
             </ul>
           </article>
 
-          {/* Last updated */}
+          {/* 18. Last updated */}
           <div className="mt-10 rounded-2xl border border-blush-100 bg-cream-50/60 p-6">
             <div className="flex items-center gap-2 text-rose-gold-500">
               <Calendar size={18} />
               <h3 className="font-display text-base font-bold text-ink-900">
-                {t('updatedTitle', {
-                  defaultValue: t('a11y.statement.updatedTitle'),
-                })}
+                {t('a11y.statement.updatedTitle')}
               </h3>
             </div>
             <p className="mt-2 leading-relaxed text-ink-700">
