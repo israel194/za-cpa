@@ -308,6 +308,87 @@
     "home": "Home"
   },
   "whatsapp": "Contact us on WhatsApp",
+  "cookies": {
+    "banner": {
+      "title": "Use of cookies",
+      "text": "This site uses cookies to enable a quality browsing experience and to analyze site usage. You can choose which cookies to allow.",
+      "policyLink": "Privacy and cookies policy",
+      "acceptAll": "Accept all",
+      "essentialOnly": "Essential only",
+      "settings": "Settings"
+    },
+    "modal": {
+      "title": "Cookie consent settings",
+      "subtitle": "Choose which types of cookies you'd like to allow. You can update these settings at any time.",
+      "save": "Save settings",
+      "categories": {
+        "essential": {
+          "title": "Essential cookies",
+          "text": "Required for the site to function properly (language preference, accessibility settings). Cannot be disabled."
+        },
+        "analytics": {
+          "title": "Analytics cookies",
+          "text": "Help us understand how visitors use the site through anonymous data."
+        },
+        "marketing": {
+          "title": "Marketing cookies",
+          "text": "Used to display relevant content and messages, including on third-party networks."
+        }
+      },
+      "alwaysOn": "Always on",
+      "manage": "Manage consent"
+    }
+  },
+  "privacy": {
+    "eyebrow": "Privacy",
+    "title": "Privacy & cookies policy",
+    "subtitle": "We respect your privacy and are committed to protecting your information in accordance with the law.",
+    "introTitle": "General",
+    "intro": "This policy describes how Asor — Certified Public Accountants collects, stores, and uses personal information received via this site, as well as your rights regarding this information. Use of the site and services constitutes consent to this policy.",
+    "lawTitle": "Legal framework",
+    "lawText": "Collection and processing of personal information on this site is conducted in accordance with the Israeli Privacy Protection Law (1981) and the Privacy Protection (Information Security) Regulations (2017).",
+    "collectTitle": "What information we collect",
+    "collectIntro": "We collect the following information, only when needed to provide the service:",
+    "collectItems": [
+      "Contact details you provide in the form: full name, email, phone, and message content",
+      "Basic technical information: IP address, browser type, operating system, and pages viewed",
+      "Personal preferences saved in cookies (interface language, accessibility settings, consents)",
+      "In some cases — anonymous statistical data about site usage"
+    ],
+    "useTitle": "Purposes of use",
+    "useItems": [
+      "Responding to inquiries and handling service requests",
+      "Improving the site and user experience",
+      "Anonymous statistical analysis of site usage",
+      "Compliance with legal obligations applicable to the firm"
+    ],
+    "cookiesTitle": "Cookies",
+    "cookiesIntro": "The site uses cookies — small text files saved in your browser — in three categories:",
+    "cookiesEssential": "Essential cookies: required for site operation (such as saving language choice and accessibility settings). Cannot be disabled.",
+    "cookiesAnalytics": "Analytics cookies: allow us to learn anonymously how visitors use the site. Can be disabled in settings.",
+    "cookiesMarketing": "Marketing cookies: may be used to tailor content and ads. Can be disabled in settings.",
+    "cookiesManage": "You can update your consents at any time via the \"Manage consent\" button at the bottom of the page.",
+    "rightsTitle": "Your legal rights",
+    "rightsIntro": "Under the Israeli Privacy Protection Law, you have the following rights regarding your personal information:",
+    "rightsItems": [
+      "The right to access the personal information held about you",
+      "The right to request correction of inaccurate or outdated information",
+      "The right to request deletion of information",
+      "The right to withdraw consent for processing (beyond legal obligations)"
+    ],
+    "rightsContact": "To exercise your rights or for any privacy-related question, please contact us using the details at the bottom of this page.",
+    "securityTitle": "Information security",
+    "securityText": "We take reasonable technical and organizational measures to protect your information from loss, unauthorized access, misuse, or disclosure. However, no online method is fully secure.",
+    "thirdPartyTitle": "Third parties",
+    "thirdPartyText": "We do not sell your information to third parties. Information may be transferred to trusted infrastructure providers (hosting, security, analytics) solely for service provision, subject to security and privacy commitments.",
+    "changesTitle": "Policy changes",
+    "changesText": "We may update this policy from time to time. The current version is the one published on the site, with the last-updated date shown.",
+    "contactTitle": "Privacy contact",
+    "contactIntro": "For privacy-related inquiries, questions, or requests:",
+    "contactName": "Orit Asor (Accessibility & Privacy Coordinator)",
+    "updatedText": "This policy was last updated on {{date}}.",
+    "manageConsent": "Manage cookie consent"
+  },
   "a11y": {
     "title": "Accessibility menu",
     "open": "Open accessibility menu",

@@ -6,6 +6,7 @@ import Header from './Header'
 import Footer from './Footer'
 import WhatsAppFloat from './WhatsAppFloat'
 import AccessibilityMenu from './AccessibilityMenu'
+import CookieConsent from './CookieConsent'
 
 export default function Layout() {
   const location = useLocation()
@@ -33,6 +34,7 @@ export default function Layout() {
       <Footer />
       <WhatsAppFloat />
       <AccessibilityMenu />
+      <CookieConsent />
     </div>
   )
 }

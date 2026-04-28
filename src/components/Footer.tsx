@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { MapPin, Mail, Phone, Globe } from 'lucide-react'
 import { useServices, useSectors } from '../data/content'
+import { openConsentSettings } from './CookieConsent'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -110,7 +111,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-sm text-cream-200/60 md:flex-row md:px-10">
           <p>{t('footer.rights', { year })}</p>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <Link to="/about" className="transition-colors hover:text-white">
               {t('nav.about')}
             </Link>
@@ -123,6 +124,16 @@ export default function Footer() {
             >
               {t('a11y.statement.title')}
             </Link>
+            <Link to="/privacy" className="transition-colors hover:text-white">
+              {t('privacy.title')}
+            </Link>
+            <button
+              type="button"
+              onClick={openConsentSettings}
+              className="text-cream-200/60 transition-colors hover:text-white"
+            >
+              {t('cookies.modal.manage')}
+            </button>
           </div>
         </div>
       </div>
