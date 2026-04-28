@@ -133,3 +133,77 @@ body {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(8px); opacity: 0; }
 }
+
+/* Accessibility modes — applied to <html> root */
+html.a11y-text-small { font-size: 90%; }
+html.a11y-text-large { font-size: 115%; }
+html.a11y-text-xlarge { font-size: 130%; }
+
+html.a11y-high-contrast {
+  filter: contrast(1.25);
+}
+html.a11y-high-contrast body {
+  background: #000 !important;
+  color: #fff !important;
+}
+html.a11y-high-contrast img,
+html.a11y-high-contrast video {
+  filter: contrast(1.1) brightness(1.05);
+}
+html.a11y-high-contrast a,
+html.a11y-high-contrast button {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
+
+html.a11y-highlight-links a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  background-color: rgba(253, 230, 138, 0.55);
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+html.a11y-readable-font,
+html.a11y-readable-font body,
+html.a11y-readable-font * {
+  font-family: "Arial", "Verdana", "Tahoma", sans-serif !important;
+  letter-spacing: 0.02em;
+  word-spacing: 0.06em;
+  line-height: 1.65 !important;
+}
+
+html.a11y-large-cursor,
+html.a11y-large-cursor *,
+html.a11y-large-cursor *:hover {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><path d='M8 4 L8 38 L18 28 L24 42 L30 40 L24 26 L38 26 Z' fill='%23000' stroke='%23fff' stroke-width='2' stroke-linejoin='round'/></svg>") 4 4, auto !important;
+}
+html.a11y-large-cursor a,
+html.a11y-large-cursor button,
+html.a11y-large-cursor [role="button"] {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><path d='M16 4 L16 28 L10 22 L6 26 L20 44 L36 24 L28 24 L28 4 Z' fill='%23000' stroke='%23fff' stroke-width='2' stroke-linejoin='round'/></svg>") 16 4, pointer !important;
+}
+
+html.a11y-no-motion *,
+html.a11y-no-motion *::before,
+html.a11y-no-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+html.a11y-no-motion video {
+  display: none !important;
+}
+
+/* Honor user's prefers-reduced-motion at OS level */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

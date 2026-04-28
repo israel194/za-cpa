@@ -5,6 +5,7 @@ import { rtlLanguages, type Language } from '../i18n'
 import Header from './Header'
 import Footer from './Footer'
 import WhatsAppFloat from './WhatsAppFloat'
+import AccessibilityMenu from './AccessibilityMenu'
 
 export default function Layout() {
   const location = useLocation()
@@ -31,6 +32,7 @@ export default function Layout() {
       </main>
       <Footer />
       <WhatsAppFloat />
+      <AccessibilityMenu />
     </div>
   )
 }

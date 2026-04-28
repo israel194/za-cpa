@@ -9,6 +9,7 @@ import SectorsPage from './pages/SectorsPage'
 import SectorDetailPage from './pages/SectorDetailPage'
 import ArticlesPage from './pages/ArticlesPage'
 import ContactPage from './pages/ContactPage'
+import AccessibilityPage from './pages/AccessibilityPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="sectors/:slug" element={<SectorDetailPage />} />
           <Route path="articles" element={<ArticlesPage />} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="accessibility" element={<AccessibilityPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

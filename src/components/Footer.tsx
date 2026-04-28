@@ -110,12 +110,18 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-sm text-cream-200/60 md:flex-row md:px-10">
           <p>{t('footer.rights', { year })}</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             <Link to="/about" className="transition-colors hover:text-white">
               {t('nav.about')}
             </Link>
             <Link to="/contact" className="transition-colors hover:text-white">
               {t('nav.contact')}
+            </Link>
+            <Link
+              to="/accessibility"
+              className="transition-colors hover:text-white"
+            >
+              {t('a11y.statement.title')}
             </Link>
           </div>
         </div>

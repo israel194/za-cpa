@@ -307,5 +307,58 @@
   "breadcrumb": {
     "home": "Home"
   },
-  "whatsapp": "Contact us on WhatsApp"
+  "whatsapp": "Contact us on WhatsApp",
+  "a11y": {
+    "title": "Accessibility menu",
+    "open": "Open accessibility menu",
+    "close": "Close",
+    "fontSize": "Text size",
+    "fontDecrease": "Decrease",
+    "fontReset": "Default",
+    "fontIncrease": "Increase",
+    "highContrast": "High contrast",
+    "highlightLinks": "Highlight links",
+    "readableFont": "Readable font",
+    "largeCursor": "Larger cursor",
+    "stopAnimations": "Stop animations",
+    "reset": "Reset settings",
+    "statementLink": "Accessibility statement",
+    "statement": {
+      "eyebrow": "Accessibility",
+      "title": "Accessibility statement",
+      "subtitle": "We are committed to making this site accessible to all users, including people with disabilities.",
+      "introTitle": "Our commitment",
+      "intro": "Asor — Certified Public Accountants places great importance on providing equitable and accessible service to all clients, including people with disabilities. The site is being made accessible as part of our effort to enable every individual to receive quality service independently and equally, in accordance with the Israeli Equal Rights for Persons with Disabilities Law (1998) and the Equal Rights for Persons with Disabilities Regulations (Accessibility Adjustments to a Service), 2013.",
+      "standardTitle": "Standard and conformance level",
+      "standardText": "The site is built to meet Israeli Standard 5568 at level AA, which is based on the W3C WCAG 2.0 guidelines. Accessibility adaptations are reviewed and improved on an ongoing basis.",
+      "featuresTitle": "Accessibility features on the site",
+      "features": [
+        "A floating accessibility menu available on every page",
+        "Text size adjustment (increase and decrease)",
+        "High contrast mode",
+        "Link highlighting",
+        "Especially readable font",
+        "Enlarged cursor",
+        "Stop animations and automatic motion",
+        "Semantic heading structure and keyboard navigation",
+        "Alt text for images",
+        "Screen reader support",
+        "Sufficient color contrast between text and background"
+      ],
+      "limitationsTitle": "Areas that are not yet accessible",
+      "limitations": "Some sections of the site may not yet be fully accessible. We are working to complete accessibility as soon as possible.",
+      "coordinatorTitle": "Accessibility contact",
+      "coordinatorIntro": "Found an accessibility issue? We'd appreciate hearing from you so we can address it promptly. You can contact our accessibility coordinator:",
+      "coordinatorName": "Accessibility coordinator",
+      "coordinatorNameValue": "Israel Asor",
+      "coordinatorPhone": "Phone",
+      "coordinatorPhoneValue": "052-3975659",
+      "coordinatorEmail": "Email",
+      "coordinatorEmailValue": "office@za-cpa.com",
+      "responseTitle": "Response time",
+      "responseText": "We commit to responding to accessibility inquiries within 14 business days.",
+      "updatedTitle": "Last updated",
+      "updatedText": "This statement was last updated on {{date}}."
+    }
+  }
 }
