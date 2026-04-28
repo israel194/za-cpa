@@ -1,21 +1,26 @@
+import { useTranslation } from 'react-i18next'
 import PageHero from '../components/PageHero'
 import Team from '../components/Team'
 import CallToAction from '../components/CallToAction'
 
 export default function TeamPage() {
+  const { t } = useTranslation()
   return (
     <>
       <PageHero
-        eyebrow="הצוות שלנו"
-        title="הצוות המקצועי"
-        subtitle="צוות מנוסה, אכפתי ומחויב, שעומד לרשותכם בכל שלב של הדרך."
+        eyebrow={t('team.eyebrow')}
+        title={t('team.title')}
+        subtitle={t('team.subtitle')}
         crumbs={[
-          { to: '/about', label: 'אודות' },
-          { to: '/team', label: 'הצוות שלנו' },
+          { to: '/about', label: t('nav.about') },
+          { to: '/team', label: t('nav.team') },
         ]}
       />
       <Team />
-      <CallToAction title="רוצים לעבוד איתנו?" subtitle="צרו איתנו קשר ונחזור אליכם להיכרות אישית." />
+      <CallToAction
+        title={t('cta.teamTitle')}
+        subtitle={t('cta.teamSubtitle')}
+      />
     </>
   )
 }

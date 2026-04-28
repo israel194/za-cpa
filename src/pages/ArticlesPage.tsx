@@ -1,15 +1,18 @@
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { BookOpen } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import CallToAction from '../components/CallToAction'
 
 export default function ArticlesPage() {
+  const { t } = useTranslation()
   return (
     <>
       <PageHero
-        eyebrow="תוכן וידע"
-        title="מאמרים ומדריכים"
-        subtitle="חומרי קריאה מקצועיים בתחומי המס, החשבונאות והייעוץ העסקי — מתעדכנים באופן שוטף."
-        crumbs={[{ to: '/articles', label: 'מאמרים' }]}
+        eyebrow={t('articles.eyebrow')}
+        title={t('articles.title')}
+        subtitle={t('articles.subtitle')}
+        crumbs={[{ to: '/articles', label: t('nav.articles') }]}
       />
 
       <section className="bg-white py-20 md:py-28">
@@ -18,21 +21,20 @@ export default function ArticlesPage() {
             <BookOpen size={28} />
           </div>
           <h2 className="font-display text-2xl font-extrabold text-ink-900 md:text-3xl">
-            התוכן בדרך
+            {t('articles.comingTitle')}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-700">
-            אנחנו עובדים על ספריית מאמרים ומדריכים מקצועיים בנושאי מיסוי,
-            ביקורת, ייעוץ עסקי ומקרקעין. בקרוב כאן.
+            {t('articles.comingText')}
           </p>
           <p className="mt-3 text-base text-ink-700">
-            יש שאלה ספציפית בינתיים?{' '}
-            <a
-              href="/contact"
+            {t('articles.questionPrefix')}{' '}
+            <Link
+              to="/contact"
               className="font-semibold text-rose-gold-500 hover:text-rose-gold-600"
             >
-              צרו איתנו קשר
-            </a>{' '}
-            — נשמח לעזור.
+              {t('articles.questionLink')}
+            </Link>{' '}
+            {t('articles.questionSuffix')}
           </p>
         </div>
       </section>

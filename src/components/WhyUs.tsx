@@ -1,26 +1,28 @@
+import { useTranslation } from 'react-i18next'
 import { ShieldCheck, UserCheck, Eye, Award } from 'lucide-react'
-import { whyUs } from '../data/content'
+import { useWhyUs } from '../data/content'
 
 const icons = [UserCheck, ShieldCheck, Eye, Award]
 
 export default function WhyUs() {
+  const { t } = useTranslation()
+  const items = useWhyUs()
+
   return (
     <section className="relative bg-white py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
-            למה אנחנו
+            {t('whyUs.eyebrow')}
           </div>
           <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
-            הבחירה הנכונה ללקוח שמחפש יותר
+            {t('whyUs.title')}
           </h2>
-          <p className="mt-5 text-lg text-ink-700">
-            ארבעה עקרונות שמובילים אותנו בכל אינטראקציה עם לקוחותינו.
-          </p>
+          <p className="mt-5 text-lg text-ink-700">{t('whyUs.subtitle')}</p>
         </div>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {whyUs.map((item, idx) => {
+          {items.map((item, idx) => {
             const Icon = icons[idx % icons.length]
             return (
               <div

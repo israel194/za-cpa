@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
   Building2,
   HeartHandshake,
@@ -6,10 +7,11 @@ import {
   UserRound,
   Check,
   ArrowLeft,
+  ArrowRight,
 } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import CallToAction from '../components/CallToAction'
-import { sectors, type SectorIcon } from '../data/content'
+import { useSectors, type SectorIcon } from '../data/content'
 
 const iconMap: Record<SectorIcon, React.ElementType> = {
   companies: Building2,
@@ -20,8 +22,12 @@ const iconMap: Record<SectorIcon, React.ElementType> = {
 
 export default function SectorDetailPage() {
   const { slug } = useParams()
-  const sector = sectors.find((s) => s.slug === slug)
+  const { t, i18n } = useTranslation()
+  const sectors = useSectors()
+  const isRtl = i18n.dir() === 'rtl'
+  const Arrow = isRtl ? ArrowLeft : ArrowRight
 
+  const sector = sectors.find((s) => s.slug === slug)
   if (!sector) return <Navigate to="/sectors" replace />
 
   const Icon = iconMap[sector.iconName]
@@ -30,11 +36,11 @@ export default function SectorDetailPage() {
   return (
     <>
       <PageHero
-        eyebrow="סקטור"
+        eyebrow={t('sectors.kindOf')}
         title={sector.title}
         subtitle={sector.summary}
         crumbs={[
-          { to: '/sectors', label: 'סקטורים' },
+          { to: '/sectors', label: t('nav.sectors') },
           { to: `/sectors/${sector.slug}`, label: sector.shortTitle },
         ]}
       />
@@ -47,7 +53,7 @@ export default function SectorDetailPage() {
             </div>
 
             <h2 className="font-display text-2xl font-extrabold text-ink-900 md:text-3xl">
-              איך אנחנו מלווים {sector.title}
+              {t('sectors.howWeHelp', { name: sector.title })}
             </h2>
             <ul className="mt-6 space-y-3">
               {sector.bullets.map((item) => (
@@ -67,18 +73,17 @@ export default function SectorDetailPage() {
 
             <div className="mt-10 rounded-2xl border border-rose-gold-300/40 bg-blush-50 p-6 md:p-8">
               <h3 className="font-display text-lg font-bold text-ink-900">
-                לא בטוחים מאיפה להתחיל?
+                {t('sectors.notSure')}
               </h3>
               <p className="mt-2 leading-relaxed text-ink-800">
-                אנחנו כאן כדי להפוך את התהליך לפשוט. בפגישה ראשונה נמפה את
-                המצב הנוכחי, ונבנה תוכנית פעולה ברורה.
+                {t('sectors.notSureText')}
               </p>
               <Link
                 to="/contact"
                 className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(183,110,121,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
               >
-                בואו נדבר
-                <ArrowLeft size={16} />
+                {t('sectors.letsTalk')}
+                <Arrow size={16} />
               </Link>
             </div>
           </div>
@@ -86,7 +91,7 @@ export default function SectorDetailPage() {
           <aside>
             <div className="sticky top-28 rounded-2xl border border-blush-100 bg-cream-50/60 p-6">
               <h3 className="font-display text-base font-bold text-ink-900">
-                סקטורים נוספים
+                {t('sectors.otherSectors')}
               </h3>
               <ul className="mt-4 space-y-1">
                 {otherSectors.map((s) => (
@@ -96,7 +101,7 @@ export default function SectorDetailPage() {
                       className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:bg-white hover:text-rose-gold-500"
                     >
                       <span>{s.title}</span>
-                      <ArrowLeft size={14} className="text-blush-300" />
+                      <Arrow size={14} className="text-blush-300" />
                     </Link>
                   </li>
                 ))}

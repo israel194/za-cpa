@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Menu, X, ChevronDown } from 'lucide-react'
-import { services, sectors } from '../data/content'
+import { useServices, useSectors } from '../data/content'
+import LanguageSwitcher from './LanguageSwitcher'
 
 type NavItem = {
   to?: string
@@ -9,39 +11,43 @@ type NavItem = {
   children?: { to: string; label: string }[]
 }
 
-const navItems: NavItem[] = [
-  {
-    label: 'אודות',
-    children: [
-      { to: '/about', label: 'על המשרד' },
-      { to: '/team', label: 'הצוות שלנו' },
-    ],
-  },
-  {
-    to: '/sectors',
-    label: 'סקטורים',
-    children: sectors.map((s) => ({
-      to: `/sectors/${s.slug}`,
-      label: s.title,
-    })),
-  },
-  {
-    to: '/services',
-    label: 'שירותים',
-    children: services.map((s) => ({
-      to: `/services/${s.slug}`,
-      label: s.title,
-    })),
-  },
-  { to: '/articles', label: 'מאמרים' },
-  { to: '/contact', label: 'צור קשר' },
-]
-
 export default function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
   const location = useLocation()
+  const { t, i18n } = useTranslation()
+  const services = useServices()
+  const sectors = useSectors()
+  const isRtl = i18n.dir() === 'rtl'
+
+  const navItems: NavItem[] = [
+    {
+      label: t('nav.about'),
+      children: [
+        { to: '/about', label: t('nav.aboutFirm') },
+        { to: '/team', label: t('nav.team') },
+      ],
+    },
+    {
+      to: '/sectors',
+      label: t('nav.sectors'),
+      children: sectors.map((s) => ({
+        to: `/sectors/${s.slug}`,
+        label: s.title,
+      })),
+    },
+    {
+      to: '/services',
+      label: t('nav.services'),
+      children: services.map((s) => ({
+        to: `/services/${s.slug}`,
+        label: s.title,
+      })),
+    },
+    { to: '/articles', label: t('nav.articles') },
+    { to: '/contact', label: t('nav.contact') },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -50,7 +56,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close mobile menu on route change
   useEffect(() => {
     setOpen(false)
     setMobileExpanded(null)
@@ -64,18 +69,21 @@ export default function Header() {
           : 'bg-transparent'
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 md:px-10">
         <Link
           to="/"
           className="flex items-baseline gap-2 font-display tracking-tight"
         >
-          <span className="text-2xl font-extrabold text-rose-gold-500">עשור</span>
+          <span className="text-2xl font-extrabold text-rose-gold-500">
+            {t('brand.name')}
+          </span>
           <span className="hidden text-base font-medium text-ink-700 sm:inline">
-            <span className="mx-1 text-rose-gold-300">|</span> רואי חשבון
+            <span className="mx-1 text-rose-gold-300">|</span>{' '}
+            {t('brand.subtitle')}
           </span>
         </Link>
 
-        <ul className="hidden items-center gap-7 lg:flex">
+        <ul className="hidden items-center gap-6 lg:flex">
           {navItems.map((item) => (
             <li key={item.label} className="group relative">
               {item.children ? (
@@ -103,14 +111,18 @@ export default function Header() {
               )}
 
               {item.children && (
-                <div className="invisible absolute end-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                <div
+                  className={`invisible absolute top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 ${
+                    isRtl ? 'end-0' : 'start-0'
+                  }`}
+                >
                   <div className="min-w-[16rem] overflow-hidden rounded-2xl border border-blush-100 bg-white py-2 shadow-[0_24px_48px_-16px_rgba(183,110,121,0.25)]">
                     {item.to && (
                       <Link
                         to={item.to}
                         className="block border-b border-blush-100 px-5 py-3 text-sm font-semibold text-rose-gold-500 hover:bg-blush-50"
                       >
-                        כל ה{item.label}
+                        {t('nav.allOf', { label: item.label })}
                       </Link>
                     )}
                     {item.children.map((child) => (
@@ -129,23 +141,26 @@ export default function Header() {
           ))}
         </ul>
 
-        <Link
-          to="/contact"
-          className="hidden rounded-full bg-rose-gold-500 px-5 py-2.5 text-sm font-semibold text-white
-            shadow-[0_8px_24px_-8px_rgba(183,110,121,0.6)] transition-all duration-300
-            hover:bg-rose-gold-600 hover:shadow-[0_12px_28px_-8px_rgba(183,110,121,0.7)] lg:inline-block"
-        >
-          קבעו פגישה
-        </Link>
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher />
+          <Link
+            to="/contact"
+            className="hidden rounded-full bg-rose-gold-500 px-5 py-2.5 text-sm font-semibold text-white
+              shadow-[0_8px_24px_-8px_rgba(183,110,121,0.6)] transition-all duration-300
+              hover:bg-rose-gold-600 hover:shadow-[0_12px_28px_-8px_rgba(183,110,121,0.7)] xl:inline-block"
+          >
+            {t('nav.bookMeeting')}
+          </Link>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="rounded-full p-2 text-ink-800 hover:bg-blush-100 lg:hidden"
-          aria-label="פתיחת תפריט"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="rounded-full p-2 text-ink-800 hover:bg-blush-100 lg:hidden"
+            aria-label={t('nav.openMenu')}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       {open && (
@@ -180,7 +195,7 @@ export default function Header() {
                               to={item.to}
                               className="block rounded-lg px-3 py-2 text-sm font-semibold text-rose-gold-500 hover:bg-blush-50"
                             >
-                              כל ה{item.label}
+                              {t('nav.allOf', { label: item.label })}
                             </Link>
                           </li>
                         )}
@@ -212,7 +227,7 @@ export default function Header() {
                 to="/contact"
                 className="block rounded-full bg-rose-gold-500 px-5 py-3 text-center text-sm font-semibold text-white"
               >
-                קבעו פגישה
+                {t('nav.bookMeeting')}
               </Link>
             </li>
           </ul>

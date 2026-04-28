@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
   FileSearch,
   BookOpen,
@@ -7,81 +8,58 @@ import {
   Building2,
   HeartHandshake,
   ArrowLeft,
+  ArrowRight,
 } from 'lucide-react'
 
-type Area = {
+type AreaKey =
+  | 'audit'
+  | 'bookkeeping'
+  | 'tax'
+  | 'consulting'
+  | 'realestate'
+  | 'nonprofits'
+
+const areaConfig: Array<{
+  key: AreaKey
   to: string
   icon: React.ElementType
-  title: string
-  description: string
   highlight?: boolean
-}
-
-const areas: Area[] = [
+}> = [
+  { key: 'audit', to: '/services/audit', icon: FileSearch },
+  { key: 'bookkeeping', to: '/services/bookkeeping', icon: BookOpen },
+  { key: 'tax', to: '/services/tax', icon: Receipt },
+  { key: 'consulting', to: '/services/consulting', icon: Briefcase },
   {
-    to: '/services/audit',
-    icon: FileSearch,
-    title: 'ביקורת ודיווחים כספיים',
-    description:
-      'ביקורת מקצועית ובלתי תלויה לחברות ולמלכ"רים, בהתאם לתקנים החשבונאיים המחמירים בארץ ובעולם.',
-  },
-  {
-    to: '/services/bookkeeping',
-    icon: BookOpen,
-    title: 'הנהלת חשבונות וחשבות שכר',
-    description:
-      'ניהול שוטף ומקצועי של ספרי החשבונות והשכר, עם בקרה הדוקה ודיווח שקוף בכל שלב.',
-  },
-  {
-    to: '/services/tax',
-    icon: Receipt,
-    title: 'מיסוי ותכנון מס',
-    description:
-      'תכנון מס מושכל, ייצוג מול רשויות המס וטיפול בהחזרי מס לעצמאים ולשכירים.',
-  },
-  {
-    to: '/services/consulting',
-    icon: Briefcase,
-    title: 'ייעוץ עסקי וליווי',
-    description:
-      'ליווי אסטרטגי בכל שלבי החיים של העסק — מהקמה דרך צמיחה ועד יציאה והעברה בין־דורית.',
-  },
-  {
+    key: 'realestate',
     to: '/services/realestate',
     icon: Building2,
-    title: 'מקרקעין והתחדשות עירונית',
-    description:
-      'התמחות ייחודית בליווי פרויקטי פינוי-בינוי, תמ"א 38 ובמיסוי עסקאות מקרקעין.',
     highlight: true,
   },
-  {
-    to: '/sectors/nonprofits',
-    icon: HeartHandshake,
-    title: 'מלכ"רים ועמותות',
-    description:
-      'ליווי מקיף לעמותות וחברות לתועלת הציבור, כולל אישור ניהול תקין ודיווחים תקופתיים.',
-  },
+  { key: 'nonprofits', to: '/sectors/nonprofits', icon: HeartHandshake },
 ]
 
 export default function ActivityAreas() {
+  const { t, i18n } = useTranslation()
+  const isRtl = i18n.dir() === 'rtl'
+  const Arrow = isRtl ? ArrowLeft : ArrowRight
+
   return (
     <section className="relative bg-white py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
-            תחומי פעילות
+            {t('activityAreas.eyebrow')}
           </div>
           <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
-            מקצה לקצה — בכל קנה־מידה
+            {t('activityAreas.title')}
           </h2>
           <p className="mt-5 text-lg text-ink-700">
-            ששת תחומי הליבה של המשרד — שירותים מקצועיים מקיפים שמחזיקים את
-            העסק שלכם בריא, מסודר ומוכן לכל החלטה.
+            {t('activityAreas.subtitle')}
           </p>
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {areas.map(({ to, icon: Icon, title, description, highlight }) => (
+          {areaConfig.map(({ key, to, icon: Icon, highlight }) => (
             <Link
               key={to}
               to={to}
@@ -93,14 +71,20 @@ export default function ActivityAreas() {
                 }`}
             >
               {highlight && (
-                <span className="absolute end-5 top-5 inline-flex items-center gap-1 rounded-full bg-rose-gold-500/15 px-3 py-1 text-xs font-bold text-rose-gold-600">
-                  פרימיום
+                <span
+                  className={`absolute top-5 inline-flex items-center gap-1 rounded-full bg-rose-gold-500/15 px-3 py-1 text-xs font-bold text-rose-gold-600 ${
+                    isRtl ? 'end-5' : 'start-5'
+                  }`}
+                >
+                  {t('activityAreas.premium')}
                 </span>
               )}
 
               <div
                 aria-hidden
-                className="absolute -end-12 -top-12 h-36 w-36 rounded-full bg-blush-100/0 transition-colors duration-300 group-hover:bg-blush-200/50"
+                className={`absolute -top-12 h-36 w-36 rounded-full bg-blush-100/0 transition-colors duration-300 group-hover:bg-blush-200/50 ${
+                  isRtl ? '-end-12' : '-start-12'
+                }`}
               />
 
               <div
@@ -114,17 +98,21 @@ export default function ActivityAreas() {
               </div>
 
               <h3 className="relative font-display text-xl font-bold leading-snug text-ink-900">
-                {title}
+                {t(`activityAreas.items.${key}.title`)}
               </h3>
               <p className="relative mt-3 text-base leading-relaxed text-ink-700">
-                {description}
+                {t(`activityAreas.items.${key}.description`)}
               </p>
 
               <div className="relative mt-6 inline-flex items-center gap-1 text-sm font-bold text-rose-gold-500">
-                קראו עוד
-                <ArrowLeft
+                {t('common.readMore')}
+                <Arrow
                   size={14}
-                  className="transition-transform duration-300 group-hover:-translate-x-1"
+                  className={`transition-transform duration-300 ${
+                    isRtl
+                      ? 'group-hover:-translate-x-1'
+                      : 'group-hover:translate-x-1'
+                  }`}
                 />
               </div>
             </Link>

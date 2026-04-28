@@ -1,9 +1,5 @@
-const team = [
-  { name: 'ישראל עשור', role: 'רו"ח (עו"ד)' },
-  { name: 'אורית עשור', role: 'רו"ח' },
-  { name: 'לאה פרידמן', role: 'רו"ח' },
-  { name: 'שרה בר שלום', role: 'חשבת שכר' },
-]
+import { useTranslation } from 'react-i18next'
+import { useTeam } from '../data/content'
 
 function initialsOf(fullName: string) {
   const parts = fullName.trim().split(/\s+/)
@@ -11,19 +7,20 @@ function initialsOf(fullName: string) {
 }
 
 export default function Team() {
+  const { t } = useTranslation()
+  const team = useTeam()
+
   return (
-    <section id="team" className="relative bg-white py-24 md:py-32">
+    <section className="relative bg-white py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
-            הצוות שלנו
+            {t('team.eyebrow')}
           </div>
           <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
-            הצוות המקצועי
+            {t('team.title')}
           </h2>
-          <p className="mt-5 text-lg text-ink-700">
-            צוות מנוסה, אכפתי ומחויב, שעומד לרשותכם בכל שלב של הדרך.
-          </p>
+          <p className="mt-5 text-lg text-ink-700">{t('team.subtitle')}</p>
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

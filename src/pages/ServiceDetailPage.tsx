@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
   FileSearch,
   BookOpen,
@@ -7,11 +8,12 @@ import {
   Building2,
   Check,
   ArrowLeft,
+  ArrowRight,
   Sparkles,
 } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import CallToAction from '../components/CallToAction'
-import { services, type ServiceIcon } from '../data/content'
+import { useServices, type ServiceIcon } from '../data/content'
 
 const iconMap: Record<ServiceIcon, React.ElementType> = {
   audit: FileSearch,
@@ -23,8 +25,12 @@ const iconMap: Record<ServiceIcon, React.ElementType> = {
 
 export default function ServiceDetailPage() {
   const { slug } = useParams()
-  const service = services.find((s) => s.slug === slug)
+  const { t, i18n } = useTranslation()
+  const services = useServices()
+  const isRtl = i18n.dir() === 'rtl'
+  const Arrow = isRtl ? ArrowLeft : ArrowRight
 
+  const service = services.find((s) => s.slug === slug)
   if (!service) return <Navigate to="/services" replace />
 
   const Icon = iconMap[service.iconName]
@@ -33,11 +39,13 @@ export default function ServiceDetailPage() {
   return (
     <>
       <PageHero
-        eyebrow={service.premium ? 'שירות פרימיום' : 'שירות'}
+        eyebrow={
+          service.premium ? t('services.premiumBadge') : t('nav.services')
+        }
         title={service.title}
         subtitle={service.summary}
         crumbs={[
-          { to: '/services', label: 'שירותים' },
+          { to: '/services', label: t('nav.services') },
           { to: `/services/${service.slug}`, label: service.shortTitle },
         ]}
       />
@@ -58,13 +66,13 @@ export default function ServiceDetailPage() {
               {service.premium && (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-gold-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-rose-gold-600">
                   <Sparkles size={12} />
-                  שירות פרימיום
+                  {t('services.premiumBadge')}
                 </span>
               )}
             </div>
 
             <h2 className="font-display text-2xl font-extrabold text-ink-900 md:text-3xl">
-              מה כולל השירות
+              {t('services.whatIncluded')}
             </h2>
             <ul className="mt-6 space-y-3">
               {service.bullets.map((item) => (
@@ -84,18 +92,17 @@ export default function ServiceDetailPage() {
 
             <div className="mt-10 rounded-2xl border border-rose-gold-300/40 bg-blush-50 p-6 md:p-8">
               <h3 className="font-display text-lg font-bold text-ink-900">
-                איך מתחילים?
+                {t('services.howStart')}
               </h3>
               <p className="mt-2 leading-relaxed text-ink-800">
-                התחלת העבודה איתנו מתחילה בפגישת היכרות ללא התחייבות, בה נכיר
-                את הצרכים שלכם, נציג את גישתנו, ונבנה יחד תוכנית עבודה מותאמת.
+                {t('services.howStartText')}
               </p>
               <Link
                 to="/contact"
                 className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(183,110,121,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
               >
-                לקביעת פגישה
-                <ArrowLeft size={16} />
+                {t('services.scheduleMeeting')}
+                <Arrow size={16} />
               </Link>
             </div>
           </div>
@@ -103,7 +110,7 @@ export default function ServiceDetailPage() {
           <aside>
             <div className="sticky top-28 rounded-2xl border border-blush-100 bg-cream-50/60 p-6">
               <h3 className="font-display text-base font-bold text-ink-900">
-                שירותים נוספים
+                {t('services.otherServices')}
               </h3>
               <ul className="mt-4 space-y-1">
                 {otherServices.map((s) => (
@@ -113,7 +120,7 @@ export default function ServiceDetailPage() {
                       className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:bg-white hover:text-rose-gold-500"
                     >
                       <span>{s.title}</span>
-                      <ArrowLeft size={14} className="text-blush-300" />
+                      <Arrow size={14} className="text-blush-300" />
                     </Link>
                   </li>
                 ))}

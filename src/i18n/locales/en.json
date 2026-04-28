@@ -1,0 +1,311 @@
+{
+  "brand": {
+    "name": "Asor",
+    "subtitle": "Certified Public Accountants"
+  },
+  "nav": {
+    "about": "About",
+    "aboutFirm": "About the Firm",
+    "team": "Our Team",
+    "services": "Services",
+    "sectors": "Sectors",
+    "articles": "Articles",
+    "contact": "Contact",
+    "allOf": "All {{label}}",
+    "openMenu": "Open menu",
+    "bookMeeting": "Book a Meeting"
+  },
+  "common": {
+    "readMore": "Read more",
+    "viewAll": "View all services",
+    "bookConsultation": "Book a consultation",
+    "callNow": "Call now",
+    "contactUs": "Contact us",
+    "send": "Send message",
+    "sent": "Message sent",
+    "loading": "Loading...",
+    "language": "Language"
+  },
+  "lang": {
+    "he": "עברית",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "hero": {
+    "badge": "A leading CPA firm in Israel",
+    "line1": "From the bigger picture",
+    "line2": "down to the last digit",
+    "line3": "in your report",
+    "subtitle": "Asor — Certified Public Accountants. Professionalism, transparency, and personal guidance that handles your business at every scale — from the wide view to the smallest detail.",
+    "primaryCta": "Book a consultation",
+    "secondaryCta": "Call now"
+  },
+  "activityAreas": {
+    "eyebrow": "Areas of Practice",
+    "title": "End to end — at every scale",
+    "subtitle": "Six core practice areas that keep your business healthy, organized, and ready for any decision.",
+    "premium": "Premium",
+    "items": {
+      "audit": {
+        "title": "Audit & Financial Reporting",
+        "description": "Independent, professional audits for companies and nonprofits — aligned with the strictest local and international accounting standards."
+      },
+      "bookkeeping": {
+        "title": "Bookkeeping & Payroll",
+        "description": "Ongoing, professional management of your books and payroll, with tight controls and transparent reporting at every step."
+      },
+      "tax": {
+        "title": "Taxation & Tax Planning",
+        "description": "Smart tax planning, representation before tax authorities, and tax refund handling for both self-employed and salaried clients."
+      },
+      "consulting": {
+        "title": "Business Consulting",
+        "description": "Strategic guidance through every stage of business — from launch through growth, exit, and intergenerational transfer."
+      },
+      "realestate": {
+        "title": "Real Estate & Urban Renewal",
+        "description": "A unique specialty in evacuation-and-rebuild (Pinui-Binui), TAMA 38, and the taxation of real estate transactions."
+      },
+      "nonprofits": {
+        "title": "Nonprofits & NGOs",
+        "description": "Comprehensive support for nonprofits and public-benefit corporations, including proper-management certification and routine reporting."
+      }
+    }
+  },
+  "whyUs": {
+    "eyebrow": "Why us",
+    "title": "The right choice for clients who expect more",
+    "subtitle": "Four principles that guide every interaction with our clients.",
+    "items": {
+      "personal": { "title": "Personal Service", "text": "Every client gets a dedicated professional who knows the business deeply and is available for any question." },
+      "expertise": { "title": "Proven Expertise", "text": "An experienced, fully licensed team with deep knowledge across accounting, taxation, and consulting." },
+      "transparency": { "title": "Full Transparency", "text": "Clear reporting, fair pricing, and open communication — with no surprises." },
+      "specialty": { "title": "Unique Specialty", "text": "Special expertise in real estate taxation, Pinui-Binui, and TAMA 38 — alongside core CPA services." }
+    }
+  },
+  "values": {
+    "reliability": { "title": "Reliability", "text": "Full commitment to the client and to the highest standards. Every decision is weighed through the lens of the client's best interest." },
+    "transparency": { "title": "Transparency", "text": "Clear, open, proactive communication — at every stage of the financial relationship, with no surprises." },
+    "excellence": { "title": "Excellence", "text": "A constant pursuit of accurate, creative, and tailored solutions. No compromises." }
+  },
+  "services": {
+    "eyebrow": "Areas of Practice",
+    "title": "Our Services",
+    "subtitle": "A wide range of financial solutions, tailored personally to each client and each business.",
+    "premiumBadge": "Premium service",
+    "moreInfo": "Full information",
+    "whatIncluded": "What's included",
+    "howStart": "How do we start?",
+    "howStartText": "Working with us begins with a no-obligation introductory meeting, in which we get to know your needs, present our approach, and build a tailored work plan together.",
+    "scheduleMeeting": "Schedule a meeting",
+    "otherServices": "Other services",
+    "items": {
+      "audit": {
+        "title": "Financial Statement Audit",
+        "shortTitle": "Audit",
+        "summary": "Professional, accurate, and independent audits of your financial statements, in line with the strictest accounting standards.",
+        "bullets": [
+          "Annual audits for private and public companies",
+          "Audits for nonprofits and NGOs",
+          "Internal control and management audits",
+          "Financial statements under IFRS and Israeli GAAP"
+        ]
+      },
+      "bookkeeping": {
+        "title": "Bookkeeping & Payroll",
+        "shortTitle": "Bookkeeping",
+        "summary": "Ongoing, professional management of your books and payroll, with tight controls and transparent reporting at every step.",
+        "bullets": [
+          "Single and double-entry bookkeeping",
+          "Payroll accounting and management",
+          "Periodic filings to the tax authorities",
+          "Management reports for the business"
+        ]
+      },
+      "tax": {
+        "title": "Taxation & Tax Refunds",
+        "shortTitle": "Tax",
+        "summary": "Smart tax planning, representation before tax authorities, and tax refund handling for both salaried and self-employed clients.",
+        "bullets": [
+          "Tax planning for businesses and individuals",
+          "Representation before the Tax Authority, VAT, and Bituach Leumi",
+          "Annual filings for self-employed and salaried clients",
+          "Refund eligibility checks and recovery"
+        ]
+      },
+      "consulting": {
+        "title": "Business Consulting",
+        "shortTitle": "Consulting",
+        "summary": "Strategic business guidance through every stage of the business life cycle — from launch to growth and exit.",
+        "bullets": [
+          "Support for setting up businesses and companies",
+          "Strategic and management consulting",
+          "Business and financial plans",
+          "Mergers, acquisitions, and intergenerational transfer advice"
+        ]
+      },
+      "realestate": {
+        "title": "Real Estate, Pinui-Binui & TAMA 38",
+        "shortTitle": "Real Estate",
+        "summary": "A unique specialty in real estate taxation and professional support for urban renewal projects.",
+        "bullets": [
+          "Real estate transaction tax advisory",
+          "Tax planning and support for Pinui-Binui projects",
+          "Support for TAMA 38 (reinforcement and demolition-and-rebuild) projects",
+          "Tax advice for landowners, developers, and tenants"
+        ]
+      }
+    }
+  },
+  "sectors": {
+    "eyebrow": "Sectors",
+    "title": "Solutions for every kind of client",
+    "subtitle": "Every client has a world of their own. We know the nuances, regulations, and challenges of each sector.",
+    "subtitleLong": "Every client has a world of their own — companies, nonprofits, self-employed, and salaried clients. We specialize in the nuances of each sector.",
+    "kindOf": "Sector",
+    "howWeHelp": "How we support {{name}}",
+    "notSure": "Not sure where to begin?",
+    "notSureText": "We're here to make the process simple. In the first meeting we map the current situation and build a clear action plan together.",
+    "letsTalk": "Let's talk",
+    "otherSectors": "Other sectors",
+    "items": {
+      "companies": {
+        "title": "Companies",
+        "shortTitle": "Companies",
+        "summary": "Comprehensive support for private and public companies — audit, reporting, tax planning, and strategic consulting.",
+        "bullets": [
+          "Annual financial statement audits",
+          "Tax advice and planning for companies",
+          "Support for incorporation and ownership transfer",
+          "Reporting to the Companies Registrar and authorities"
+        ]
+      },
+      "nonprofits": {
+        "title": "Nonprofits & NGOs",
+        "shortTitle": "Nonprofits",
+        "summary": "Specialty in supporting nonprofits, public-benefit corporations, and not-for-profit institutions, including proper-management certification.",
+        "bullets": [
+          "Audits and ongoing support",
+          "Preparation of proper-management certification applications",
+          "VAT and withholding support for nonprofits",
+          "Section 46 donations and public-institution advisory"
+        ]
+      },
+      "self-employed": {
+        "title": "Self-Employed",
+        "shortTitle": "Self-Employed",
+        "summary": "Personal support for the self-employed — bookkeeping, filings, tax planning, and a service available year-round.",
+        "bullets": [
+          "Opening a self-employed file and initial guidance",
+          "Ongoing bookkeeping and filings",
+          "Annual report preparation and submission",
+          "Tax planning and growth support"
+        ]
+      },
+      "employees": {
+        "title": "Salaried Employees",
+        "shortTitle": "Employees",
+        "summary": "Eligibility checks and tax refunds for salaried clients — fast, efficient, and with real results.",
+        "bullets": [
+          "Tax refund eligibility checks",
+          "Filings up to 6 years back",
+          "Tax credit points and reliefs",
+          "Annual reports for clients with multiple income sources"
+        ]
+      }
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Client stories",
+    "title": "What our clients say",
+    "items": [
+      { "quote": "Personal, professional, and always available service. The team supports us with every question, at any hour — and that makes all the difference.", "name": "Dana Cohen", "role": "CEO, Tech company" },
+      { "quote": "Their experience with urban renewal projects saved us a lot of headaches. We started a TAMA 38 project with them and never looked back.", "name": "Avi Levy", "role": "Real estate developer" },
+      { "quote": "Since we moved to them our reports are organized, our decisions better-informed, and the relationship is simply human.", "name": "Michal Rosenberg", "role": "Nonprofit director" },
+      { "quote": "As a self-employed designer I was lost in the numbers. Now I have peace of mind, and a tax refund I didn't even know I was owed.", "name": "Noa Avraham", "role": "Independent designer" }
+    ]
+  },
+  "team": {
+    "eyebrow": "Our team",
+    "title": "The professional team",
+    "subtitle": "An experienced, caring, and committed team — at your side at every stage.",
+    "members": [
+      { "name": "Israel Asor", "role": "CPA (Attorney)" },
+      { "name": "Orit Asor", "role": "CPA" },
+      { "name": "Lea Friedman", "role": "CPA" },
+      { "name": "Sara Bar Shalom", "role": "Payroll Accountant" }
+    ]
+  },
+  "cta": {
+    "title": "Ready to start working together?",
+    "subtitle": "A first introductory meeting — with no obligation. We'll get to know your needs and build an action plan.",
+    "teamTitle": "Want to work with us?",
+    "teamSubtitle": "Get in touch and we'll come back to you for a personal introduction."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "We'd love to hear from you",
+    "subtitle": "Leave your details, call, or send a WhatsApp — we'll get back to you shortly.",
+    "form": {
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "messagePlaceholder": "Tell us how we can help..."
+    },
+    "details": {
+      "address": "Address",
+      "addressLine1": "17 Nahum Heftzadi St., Jerusalem",
+      "addressLine2": "Ram Tower, Floor 11",
+      "site": "Website",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "consultBox": {
+      "title": "Initial consultation",
+      "text": "We invite you to a no-obligation introductory meeting, in which we'll get to know your needs and explore together how we can help."
+    }
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "About the firm",
+    "subtitle": "Asor — Certified Public Accountants, founded on the belief that quality financial guidance is much more than tallying numbers at year-end.",
+    "storyTitle": "Our story",
+    "p1": "Our firm provides personal, professional, and comprehensive service, tailored precisely to each client's financial needs. We stand for reliability, transparency, and the pursuit of excellence — and we accompany our clients at every stage of business life.",
+    "p2": "Our team combines deep professional knowledge with a personal, attentive approach. We believe that every client deserves direct access to a professional who knows their business deeply, and who can support strategic decisions — not just technical ones.",
+    "p3": "Alongside our core CPA services — audit, bookkeeping, and taxation — we have developed a unique specialty in real estate, Pinui-Binui, and TAMA 38, an area that requires combined knowledge of accounting, taxation, and the complexities of the Israeli real estate world.",
+    "meetTeam": "Meet the team",
+    "ourServices": "Our services"
+  },
+  "articles": {
+    "eyebrow": "Knowledge",
+    "title": "Articles & guides",
+    "subtitle": "Professional reading materials in tax, accounting, and business consulting — updated regularly.",
+    "comingTitle": "Content coming soon",
+    "comingText": "We're working on a library of professional articles and guides on taxation, audit, business consulting, and real estate. Coming soon.",
+    "questionPrefix": "Have a specific question in the meantime?",
+    "questionLink": "Get in touch",
+    "questionSuffix": "— we'd be glad to help."
+  },
+  "footer": {
+    "description": "A leading CPA firm in Israel. Professionalism, transparency, and personal service.",
+    "servicesTitle": "Services",
+    "sectorsTitle": "Sectors",
+    "contactTitle": "Contact",
+    "rights": "© {{year}} Asor - CPA. All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "The link may be wrong or the page has been removed.",
+    "backHome": "Back to home"
+  },
+  "stats": {
+    "experience": "years of experience",
+    "happyClients": "happy clients",
+    "commitment": "personal commitment"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "whatsapp": "Contact us on WhatsApp"
+}

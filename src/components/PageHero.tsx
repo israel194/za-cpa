@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { ChevronLeft } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 type Crumb = { to: string; label: string }
 
@@ -11,6 +12,10 @@ type Props = {
 }
 
 export default function PageHero({ eyebrow, title, subtitle, crumbs }: Props) {
+  const { t, i18n } = useTranslation()
+  const isRtl = i18n.dir() === 'rtl'
+  const Chevron = isRtl ? ChevronLeft : ChevronRight
+
   return (
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div
@@ -19,11 +24,15 @@ export default function PageHero({ eyebrow, title, subtitle, crumbs }: Props) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-32 -end-24 h-80 w-80 rounded-full bg-blush-200/50 blur-3xl"
+        className={`pointer-events-none absolute -top-32 h-80 w-80 rounded-full bg-blush-200/50 blur-3xl ${
+          isRtl ? '-end-24' : '-start-24'
+        }`}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-24 -start-24 h-72 w-72 rounded-full bg-rose-gold-300/30 blur-3xl"
+        className={`pointer-events-none absolute -bottom-24 h-72 w-72 rounded-full bg-rose-gold-300/30 blur-3xl ${
+          isRtl ? '-start-24' : '-end-24'
+        }`}
       />
 
       <div className="relative mx-auto max-w-5xl px-6 text-center md:px-10">
@@ -32,12 +41,12 @@ export default function PageHero({ eyebrow, title, subtitle, crumbs }: Props) {
             <ol className="flex items-center gap-2">
               <li>
                 <Link to="/" className="hover:text-rose-gold-500">
-                  בית
+                  {t('breadcrumb.home')}
                 </Link>
               </li>
               {crumbs.map((c, i) => (
                 <li key={c.to} className="flex items-center gap-2">
-                  <ChevronLeft size={14} className="text-blush-300" />
+                  <Chevron size={14} className="text-blush-300" />
                   {i === crumbs.length - 1 ? (
                     <span className="text-rose-gold-500">{c.label}</span>
                   ) : (

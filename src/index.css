@@ -49,6 +49,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+:lang(ar) {
+  font-family: "Cairo", "Tajawal", "Assistant", sans-serif;
+}
+
 * {
   box-sizing: border-box;
 }
