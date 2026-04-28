@@ -104,7 +104,11 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-sm text-cream-200/60 md:flex-row md:px-10">
-          <p>{t('footer.rights', { year })}</p>
+          <p>
+            {t('footer.rights', { year })}
+            <span className="mx-2 opacity-60">|</span>
+            <span dir="ltr">ח.פ. 515367779</span>
+          </p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <Link to="/about" className="transition-colors hover:text-white">
               {t('nav.about')}
