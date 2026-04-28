@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Assistant", "Heebo", "Rubik", system-ui, sans-serif;
+  --font-display: "Heebo", "Assistant", system-ui, sans-serif;
+
+  /* Soft, feminine palette — blush, powder pink, rose gold, cream */
+  --color-blush-50: #fdf6f3;
+  --color-blush-100: #fbeae3;
+  --color-blush-200: #f6d2c6;
+  --color-blush-300: #f0b3a1;
+  --color-blush-400: #e89380;
+  --color-blush-500: #dd7460;
+
+  --color-rose-gold-300: #e6b8a8;
+  --color-rose-gold-400: #d4a190;
+  --color-rose-gold-500: #b76e79;
+  --color-rose-gold-600: #9c5560;
+
+  --color-cream-50: #fffaf6;
+  --color-cream-100: #fdf3ea;
+  --color-cream-200: #f9e7d6;
+
+  /* Deep, professional ink for text */
+  --color-ink-700: #2d2536;
+  --color-ink-800: #1f1a28;
+  --color-ink-900: #14101b;
+
+  --color-navy-700: #1f2a44;
+  --color-navy-800: #131c33;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-cream-50);
+  color: var(--color-ink-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
