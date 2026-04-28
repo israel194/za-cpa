@@ -1,16 +1,16 @@
-import Hero from '../components/Hero'
-import Sectors from '../components/Sectors'
-import Services from '../components/Services'
+import HeroCinematic from '../components/HeroCinematic'
+import ActivityAreas from '../components/ActivityAreas'
 import WhyUs from '../components/WhyUs'
+import Sectors from '../components/Sectors'
 import Testimonials from '../components/Testimonials'
 import CallToAction from '../components/CallToAction'
 
 export default function Home() {
   return (
     <>
-      <Hero />
+      <HeroCinematic />
+      <ActivityAreas />
       <WhyUs />
-      <Services />
       <Sectors />
       <Testimonials />
       <CallToAction />
