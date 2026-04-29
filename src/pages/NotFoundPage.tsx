@@ -19,7 +19,7 @@ export default function NotFoundPage() {
         <p className="mt-3 text-lg text-ink-700">{t('notFound.subtitle')}</p>
         <Link
           to="/"
-          className="mt-8 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-7 py-3.5 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(197,74,120,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+          className="mt-8 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-7 py-3.5 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
         >
           {t('notFound.backHome')}
           <Arrow size={16} />

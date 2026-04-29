@@ -61,10 +61,10 @@ function Medallion({
 
   const stops =
     tone === 'inverse'
-      ? ['#fde2d8', '#f5cdd5', '#ecaab9']
+      ? ['#fde6dc', '#f7d2da', '#ecabb8']
       : tone === 'gold'
         ? ['#e8d8da', '#bcaab2', '#7a5e6a']
-        : ['#d97c97', '#c54a78', '#a3325f']
+        : ['#d68697', '#bd5f7c', '#9d4663']
 
   return (
     <div className={className}>

@@ -7,19 +7,19 @@
   /* Feminine couture palette — rose, pink, peach, with silver + burgundy depth */
 
   /* BLUSH — soft pink-peach foundation */
-  --color-blush-50:  #fff6f3;
-  --color-blush-100: #fde2d8;
-  --color-blush-200: #fbc7be;
-  --color-blush-300: #f4a5a6;
-  --color-blush-400: #ed8090;
-  --color-blush-500: #de5e7a;
+  --color-blush-50:  #fff7f4;
+  --color-blush-100: #fde6dc;
+  --color-blush-200: #facdc1;
+  --color-blush-300: #f3afac;
+  --color-blush-400: #ec8e95;
+  --color-blush-500: #d76a7e;
 
-  /* ROSE-GOLD — main brand: vibrant rose-pink */
-  --color-rose-gold-200: #f5cdd5;
-  --color-rose-gold-300: #ecaab9;
-  --color-rose-gold-400: #d97c97;
-  --color-rose-gold-500: #c54a78;
-  --color-rose-gold-600: #a3325f;
+  /* ROSE-GOLD — main brand: dusty rose, soft and feminine */
+  --color-rose-gold-200: #f7d2da;
+  --color-rose-gold-300: #ecabb8;
+  --color-rose-gold-400: #d68697;
+  --color-rose-gold-500: #bd5f7c;
+  --color-rose-gold-600: #9d4663;
 
   /* CREAM — warm peach-tinted cream */
   --color-cream-50:  #fff9f4;
@@ -35,32 +35,32 @@
   --color-navy-700: #2a1228;
   --color-navy-800: #180720;
 
-  /* PEACH — warm peach accent */
-  --color-peach-100: #ffe9d7;
-  --color-peach-200: #ffd0ad;
-  --color-peach-300: #ffaf7f;
-  --color-peach-400: #fa8a55;
-  --color-peach-500: #ee6e35;
+  /* PEACH — soft warm peach accent */
+  --color-peach-100: #ffeadd;
+  --color-peach-200: #fed3b8;
+  --color-peach-300: #ffba94;
+  --color-peach-400: #f99a72;
+  --color-peach-500: #ed7b50;
 
-  /* PINK — vivid pink for sparkle and hover accents */
-  --color-pink-100: #ffe1ee;
-  --color-pink-200: #ffbedc;
-  --color-pink-300: #ff97c5;
-  --color-pink-400: #f56fa8;
-  --color-pink-500: #e64a8d;
+  /* PINK — soft feminine pink for sparkle and hover accents */
+  --color-pink-100: #ffe7f1;
+  --color-pink-200: #ffc7df;
+  --color-pink-300: #ffa6cc;
+  --color-pink-400: #f583b5;
+  --color-pink-500: #e26499;
 
   /* SILVER — cool metallic shimmer for elegant accents */
-  --color-silver-100: #f3f0f3;
-  --color-silver-200: #ddd5dd;
-  --color-silver-300: #b9adb9;
-  --color-silver-400: #8e7e8e;
-  --color-silver-500: #645664;
+  --color-silver-100: #f4f1f4;
+  --color-silver-200: #dfd7df;
+  --color-silver-300: #beb2be;
+  --color-silver-400: #948494;
+  --color-silver-500: #6a5b6a;
 
-  /* BURGUNDY — deep wine for dramatic CTAs and premium depth */
-  --color-burgundy-400: #a8345c;
-  --color-burgundy-500: #832143;
-  --color-burgundy-600: #65142f;
-  --color-burgundy-700: #4a0a20;
+  /* BURGUNDY — soft wine for premium depth */
+  --color-burgundy-400: #b04866;
+  --color-burgundy-500: #903a55;
+  --color-burgundy-600: #74284a;
+  --color-burgundy-700: #56183a;
 }
 
 html,
@@ -104,7 +104,7 @@ body {
   height: 60vmax;
   top: -20vmax;
   left: -10vmax;
-  background: radial-gradient(circle, rgba(197, 74, 120, 0.55), transparent 65%);
+  background: radial-gradient(circle, rgba(189, 95, 124, 0.5), transparent 65%);
   animation: orb-drift-1 22s ease-in-out infinite;
 }
 
@@ -113,7 +113,7 @@ body {
   height: 50vmax;
   bottom: -15vmax;
   right: -10vmax;
-  background: radial-gradient(circle, rgba(250, 138, 85, 0.45), transparent 65%);
+  background: radial-gradient(circle, rgba(249, 154, 114, 0.4), transparent 65%);
   animation: orb-drift-2 26s ease-in-out infinite;
 }
 
@@ -123,7 +123,7 @@ body {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(255, 151, 197, 0.35), transparent 60%);
+  background: radial-gradient(circle, rgba(255, 166, 204, 0.32), transparent 60%);
   animation: orb-pulse 18s ease-in-out infinite;
 }
 

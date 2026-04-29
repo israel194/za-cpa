@@ -64,7 +64,7 @@ export default function ActivityAreas() {
               key={to}
               to={to}
               className={`group relative overflow-hidden rounded-3xl border p-8 transition-all duration-300
-                hover:-translate-y-1 hover:shadow-[0_28px_56px_-28px_rgba(197,74,120,0.45)] ${
+                hover:-translate-y-1 hover:shadow-[0_28px_56px_-28px_rgba(189,95,124,0.45)] ${
                   highlight
                     ? 'border-rose-gold-300/60 bg-gradient-to-br from-peach-100 via-cream-50 to-pink-100'
                     : 'border-blush-100 bg-cream-50/60 hover:border-rose-gold-300 hover:bg-white'
@@ -90,7 +90,7 @@ export default function ActivityAreas() {
               <div
                 className={`relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300 ${
                   highlight
-                    ? 'bg-gradient-to-br from-burgundy-500 via-rose-gold-500 to-peach-400 text-white shadow-[0_12px_24px_-10px_rgba(131,33,67,0.6)]'
+                    ? 'bg-gradient-to-br from-burgundy-400 via-rose-gold-500 to-peach-300 text-white shadow-[0_12px_24px_-10px_rgba(144,58,85,0.5)]'
                     : 'bg-blush-100 text-rose-gold-500 group-hover:bg-rose-gold-500 group-hover:text-white'
                 }`}
               >

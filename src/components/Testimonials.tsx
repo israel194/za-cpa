@@ -36,7 +36,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, idx) => (
             <figure
               key={idx}
-              className="relative rounded-3xl border border-blush-100 bg-white p-8 shadow-[0_18px_48px_-28px_rgba(197,74,120,0.4)] md:p-10"
+              className="relative rounded-3xl border border-blush-100 bg-white p-8 shadow-[0_18px_48px_-28px_rgba(189,95,124,0.4)] md:p-10"
             >
               <Quote
                 size={32}

@@ -71,7 +71,7 @@ export default function HeroCinematic() {
             <div className="mt-10 flex flex-col items-center justify-start gap-4 sm:flex-row md:items-start">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-bold text-white shadow-[0_18px_40px_-12px_rgba(197,74,120,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                className="group inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-bold text-white shadow-[0_18px_40px_-12px_rgba(189,95,124,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
               >
                 {t('hero.primaryCta')}
                 <Arrow

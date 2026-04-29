@@ -51,7 +51,7 @@ export default function Sectors({ variant = 'preview' }: Props) {
                 to={`/sectors/${sector.slug}`}
                 className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-white p-8 transition-all
                   duration-300 hover:-translate-y-1 hover:border-rose-gold-300
-                  hover:shadow-[0_24px_48px_-24px_rgba(197,74,120,0.4)]"
+                  hover:shadow-[0_24px_48px_-24px_rgba(189,95,124,0.4)]"
               >
                 <div
                   aria-hidden
@@ -59,7 +59,7 @@ export default function Sectors({ variant = 'preview' }: Props) {
                     isRtl ? '-end-12' : '-start-12'
                   }`}
                 />
-                <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-12px_rgba(197,74,120,0.5)]">
+                <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-12px_rgba(189,95,124,0.5)]">
                   <Icon size={26} />
                 </div>
                 <h3 className="relative font-display text-xl font-bold leading-snug text-ink-900">

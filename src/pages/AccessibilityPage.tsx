@@ -28,7 +28,7 @@ export default function AccessibilityPage() {
 
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 md:px-10">
-          <div className="mb-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-burgundy-500 to-rose-gold-500 text-white shadow-[0_12px_24px_-12px_rgba(131,33,67,0.5)]">
+          <div className="mb-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-burgundy-400 to-rose-gold-500 text-white shadow-[0_12px_24px_-12px_rgba(176,72,102,0.45)]">
             <Accessibility size={28} />
           </div>
 
@@ -85,7 +85,7 @@ export default function AccessibilityPage() {
           </article>
 
           {/* Coordinator contact */}
-          <article className="mb-10 rounded-3xl border border-rose-gold-300/40 bg-gradient-to-bl from-rose-gold-500 to-blush-400 p-8 text-white shadow-[0_24px_56px_-28px_rgba(197,74,120,0.6)] md:p-10">
+          <article className="mb-10 rounded-3xl border border-rose-gold-300/40 bg-gradient-to-bl from-rose-gold-500 to-blush-400 p-8 text-white shadow-[0_24px_56px_-28px_rgba(189,95,124,0.6)] md:p-10">
             <h2 className="font-display text-2xl font-extrabold md:text-3xl">
               {t('a11y.statement.coordinatorTitle')}
             </h2>

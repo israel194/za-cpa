@@ -48,7 +48,7 @@ export default function SectorDetailPage() {
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-12px_rgba(197,74,120,0.5)]">
+            <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-12px_rgba(189,95,124,0.5)]">
               <Icon size={28} />
             </div>
 
@@ -80,7 +80,7 @@ export default function SectorDetailPage() {
               </p>
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(197,74,120,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
               >
                 {t('sectors.letsTalk')}
                 <Arrow size={16} />

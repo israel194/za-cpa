@@ -41,7 +41,7 @@ export default function AboutPage() {
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               to="/team"
-              className="inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(197,74,120,0.6)] transition-all hover:-translate-y-0.5 hover:bg-rose-gold-600"
+              className="inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(189,95,124,0.6)] transition-all hover:-translate-y-0.5 hover:bg-rose-gold-600"
             >
               {t('about.meetTeam')}
               <Arrow size={16} />
@@ -61,7 +61,7 @@ export default function AboutPage() {
                 return (
                   <div
                     key={key}
-                    className="rounded-2xl border border-blush-100 bg-cream-50/60 p-7 transition-all duration-300 hover:border-rose-gold-300/60 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(197,74,120,0.35)]"
+                    className="rounded-2xl border border-blush-100 bg-cream-50/60 p-7 transition-all duration-300 hover:border-rose-gold-300/60 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.35)]"
                   >
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blush-100 text-rose-gold-500">
                       <Icon size={22} />

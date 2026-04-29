@@ -54,7 +54,7 @@ export default function Services({ variant = 'full' }: Props) {
               <Link
                 key={service.slug}
                 to={`/services/${service.slug}`}
-                className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-rose-gold-300 hover:shadow-[0_24px_48px_-24px_rgba(197,74,120,0.4)]"
+                className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-rose-gold-300 hover:shadow-[0_24px_48px_-24px_rgba(189,95,124,0.4)]"
               >
                 <div
                   aria-hidden
@@ -94,7 +94,7 @@ export default function Services({ variant = 'full' }: Props) {
           >
             <div
               aria-hidden
-              className="absolute inset-0 bg-gradient-to-bl from-burgundy-500 via-rose-gold-500 to-peach-400"
+              className="absolute inset-0 bg-gradient-to-bl from-rose-gold-500 via-blush-400 to-peach-300"
             />
             <div
               aria-hidden
@@ -134,7 +134,7 @@ export default function Services({ variant = 'full' }: Props) {
                     key={item}
                     className="flex items-center gap-4 rounded-2xl bg-white/95 p-5 shadow-[0_12px_36px_-16px_rgba(0,0,0,0.25)] backdrop-blur-sm"
                   >
-                    <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-burgundy-500 via-rose-gold-500 to-peach-400 text-white shadow-[0_8px_18px_-8px_rgba(131,33,67,0.55)]">
+                    <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-burgundy-400 via-rose-gold-500 to-peach-300 text-white shadow-[0_8px_18px_-8px_rgba(144,58,85,0.5)]">
                       <Building2 size={20} />
                     </span>
                     <span className="font-display text-base font-bold text-ink-900 md:text-lg">

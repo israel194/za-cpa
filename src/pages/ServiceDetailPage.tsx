@@ -57,7 +57,7 @@ export default function ServiceDetailPage() {
               <div
                 className={`flex h-16 w-16 items-center justify-center rounded-2xl ${
                   service.premium
-                    ? 'bg-gradient-to-br from-burgundy-500 via-rose-gold-500 to-peach-400 text-white shadow-[0_12px_24px_-10px_rgba(131,33,67,0.6)]'
+                    ? 'bg-gradient-to-br from-burgundy-400 via-rose-gold-500 to-peach-300 text-white shadow-[0_12px_24px_-10px_rgba(144,58,85,0.5)]'
                     : 'bg-blush-100 text-rose-gold-500'
                 }`}
               >
@@ -99,7 +99,7 @@ export default function ServiceDetailPage() {
               </p>
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(197,74,120,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
               >
                 {t('services.scheduleMeeting')}
                 <Arrow size={16} />

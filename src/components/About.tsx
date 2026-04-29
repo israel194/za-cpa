@@ -42,7 +42,7 @@ export default function About() {
             <div
               key={title}
               className="group flex items-start gap-5 rounded-2xl border border-blush-100 bg-cream-50/60 p-6 transition-all
-                duration-300 hover:-translate-y-0.5 hover:border-rose-gold-300/60 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(197,74,120,0.35)]"
+                duration-300 hover:-translate-y-0.5 hover:border-rose-gold-300/60 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.35)]"
             >
               <div
                 className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-blush-100

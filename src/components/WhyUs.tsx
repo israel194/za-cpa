@@ -29,7 +29,7 @@ export default function WhyUs() {
                 key={item.title}
                 className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-cream-50/60 p-7 transition-all
                   duration-300 hover:-translate-y-1 hover:border-rose-gold-300 hover:bg-white
-                  hover:shadow-[0_24px_48px_-24px_rgba(197,74,120,0.4)]"
+                  hover:shadow-[0_24px_48px_-24px_rgba(189,95,124,0.4)]"
               >
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blush-100 text-rose-gold-500 transition-colors group-hover:bg-rose-gold-500 group-hover:text-white">
                   <Icon size={22} />
