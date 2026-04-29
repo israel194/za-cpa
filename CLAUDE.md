@@ -70,6 +70,10 @@ The endpoint is the Apps Script web app in `apps-script/Code.gs`. It routes by `
 
 Custom palette (blush, rose-gold, cream, ink, navy) is defined as CSS variables in the `@theme` block of `src/index.css`. Tailwind picks them up automatically as utility colors (`bg-rose-gold-500`, `text-ink-800`, etc.). The hero animation classes (`hero-orb*`, `hero-stars`, `@keyframes orb-drift-*`) are also defined there.
 
+### Home hero video
+
+`src/components/HeroCinematic.tsx` shows a tilted floating video card next to the editorial headline. It plays `/office.mp4` (with `/office-poster.jpg` as the poster). Neither asset is committed — drop them in `public/` to make the video appear. If the video errors out (or the file is missing in production), the component swaps in a styled brand placeholder via `onError`, so the page still renders cleanly.
+
 ### Routing map (kept in sync with `src/App.tsx`)
 
 Top-level routes: `/`, `/about`, `/team`, `/services`, `/services/:slug`, `/sectors`, `/sectors/:slug`, `/articles`, `/contact`, `/accessibility`, `/privacy`, `/orit-group`, plus a `*` 404. All sit inside the shared `Layout` route.
