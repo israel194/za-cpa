@@ -45,21 +45,21 @@ export default function Contact() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-cream-50 to-blush-50 py-24 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-cream-50 to-pink-100 py-24 md:py-32">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -end-32 h-96 w-96 rounded-full bg-blush-200/40 blur-3xl"
+        className="pointer-events-none absolute -top-40 -end-32 h-96 w-96 rounded-full bg-peach-200/45 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-40 -start-32 h-[28rem] w-[28rem] rounded-full bg-rose-gold-300/30 blur-3xl"
+        className="pointer-events-none absolute -bottom-40 -start-32 h-[28rem] w-[28rem] rounded-full bg-pink-200/40 blur-3xl"
       />
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">
         <div className="mt-2 grid gap-8 lg:grid-cols-5">
           <form
             onSubmit={handleSubmit}
-            className="rounded-3xl border border-blush-100 bg-white/90 p-8 shadow-[0_24px_60px_-32px_rgba(183,110,121,0.4)] backdrop-blur-sm md:p-10 lg:col-span-3"
+            className="rounded-3xl border border-blush-100 bg-white/90 p-8 shadow-[0_24px_60px_-32px_rgba(197,74,120,0.4)] backdrop-blur-sm md:p-10 lg:col-span-3"
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <Field
@@ -101,7 +101,7 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(183,110,121,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_22px_48px_-12px_rgba(183,110,121,0.7)] sm:w-auto"
+              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(197,74,120,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_22px_48px_-12px_rgba(197,74,120,0.7)] sm:w-auto"
             >
               {sent ? (
                 <>
@@ -139,7 +139,7 @@ export default function Contact() {
               href="https://www.za-cpa.com"
             />
 
-            <div className="rounded-2xl border border-rose-gold-300/40 bg-gradient-to-bl from-rose-gold-500 to-blush-400 p-8 text-white shadow-[0_24px_56px_-28px_rgba(183,110,121,0.6)]">
+            <div className="rounded-2xl border border-rose-gold-300/40 bg-gradient-to-bl from-burgundy-500 via-rose-gold-500 to-peach-400 p-8 text-white shadow-[0_24px_56px_-28px_rgba(131,33,67,0.55)]">
               <h3 className="font-display text-xl font-bold">
                 {t('contact.consultBox.title')}
               </h3>
@@ -190,7 +190,7 @@ function DetailCard({
       {...wrapperProps}
       className={`group flex items-start gap-4 rounded-2xl border border-blush-100 bg-white/80 p-6 backdrop-blur-sm transition-all duration-300 ${
         href
-          ? 'hover:-translate-y-0.5 hover:border-rose-gold-300 hover:shadow-[0_18px_40px_-20px_rgba(183,110,121,0.4)]'
+          ? 'hover:-translate-y-0.5 hover:border-rose-gold-300 hover:shadow-[0_18px_40px_-20px_rgba(197,74,120,0.4)]'
           : ''
       }`}
     >

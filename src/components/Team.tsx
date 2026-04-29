@@ -29,7 +29,7 @@ export default function Team() {
               key={member.name}
               className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-cream-50/60 p-8 text-center
                 transition-all duration-300 hover:-translate-y-1 hover:border-rose-gold-300
-                hover:bg-white hover:shadow-[0_24px_48px_-24px_rgba(183,110,121,0.4)]"
+                hover:bg-white hover:shadow-[0_24px_48px_-24px_rgba(197,74,120,0.4)]"
             >
               <div
                 aria-hidden

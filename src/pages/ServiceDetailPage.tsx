@@ -57,14 +57,14 @@ export default function ServiceDetailPage() {
               <div
                 className={`flex h-16 w-16 items-center justify-center rounded-2xl ${
                   service.premium
-                    ? 'bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white'
+                    ? 'bg-gradient-to-br from-burgundy-500 via-rose-gold-500 to-peach-400 text-white shadow-[0_12px_24px_-10px_rgba(131,33,67,0.6)]'
                     : 'bg-blush-100 text-rose-gold-500'
                 }`}
               >
                 <Icon size={28} />
               </div>
               {service.premium && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-gold-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-rose-gold-600">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-silver-200 bg-gradient-to-l from-silver-100 to-blush-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-burgundy-500">
                   <Sparkles size={12} />
                   {t('services.premiumBadge')}
                 </span>
@@ -99,7 +99,7 @@ export default function ServiceDetailPage() {
               </p>
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(183,110,121,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(197,74,120,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
               >
                 {t('services.scheduleMeeting')}
                 <Arrow size={16} />

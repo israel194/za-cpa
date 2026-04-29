@@ -4,30 +4,63 @@
   --font-sans: "Assistant", "Heebo", "Rubik", system-ui, sans-serif;
   --font-display: "Heebo", "Assistant", system-ui, sans-serif;
 
-  /* Soft, feminine palette — blush, powder pink, rose gold, cream */
-  --color-blush-50: #fdf6f3;
-  --color-blush-100: #fbeae3;
-  --color-blush-200: #f6d2c6;
-  --color-blush-300: #f0b3a1;
-  --color-blush-400: #e89380;
-  --color-blush-500: #dd7460;
+  /* Feminine couture palette — rose, pink, peach, with silver + burgundy depth */
 
-  --color-rose-gold-300: #e6b8a8;
-  --color-rose-gold-400: #d4a190;
-  --color-rose-gold-500: #b76e79;
-  --color-rose-gold-600: #9c5560;
+  /* BLUSH — soft pink-peach foundation */
+  --color-blush-50:  #fff6f3;
+  --color-blush-100: #fde2d8;
+  --color-blush-200: #fbc7be;
+  --color-blush-300: #f4a5a6;
+  --color-blush-400: #ed8090;
+  --color-blush-500: #de5e7a;
 
-  --color-cream-50: #fffaf6;
-  --color-cream-100: #fdf3ea;
-  --color-cream-200: #f9e7d6;
+  /* ROSE-GOLD — main brand: vibrant rose-pink */
+  --color-rose-gold-200: #f5cdd5;
+  --color-rose-gold-300: #ecaab9;
+  --color-rose-gold-400: #d97c97;
+  --color-rose-gold-500: #c54a78;
+  --color-rose-gold-600: #a3325f;
 
-  /* Deep, professional ink for text */
-  --color-ink-700: #2d2536;
-  --color-ink-800: #1f1a28;
-  --color-ink-900: #14101b;
+  /* CREAM — warm peach-tinted cream */
+  --color-cream-50:  #fff9f4;
+  --color-cream-100: #fdefe1;
+  --color-cream-200: #fadcc4;
 
-  --color-navy-700: #1f2a44;
-  --color-navy-800: #131c33;
+  /* INK — deep burgundy-tinted text colors */
+  --color-ink-700: #2e1f2a;
+  --color-ink-800: #1f1420;
+  --color-ink-900: #150d18;
+
+  /* NAVY — kept for the cinematic hero, now with a wine undertone */
+  --color-navy-700: #2a1228;
+  --color-navy-800: #180720;
+
+  /* PEACH — warm peach accent */
+  --color-peach-100: #ffe9d7;
+  --color-peach-200: #ffd0ad;
+  --color-peach-300: #ffaf7f;
+  --color-peach-400: #fa8a55;
+  --color-peach-500: #ee6e35;
+
+  /* PINK — vivid pink for sparkle and hover accents */
+  --color-pink-100: #ffe1ee;
+  --color-pink-200: #ffbedc;
+  --color-pink-300: #ff97c5;
+  --color-pink-400: #f56fa8;
+  --color-pink-500: #e64a8d;
+
+  /* SILVER — cool metallic shimmer for elegant accents */
+  --color-silver-100: #f3f0f3;
+  --color-silver-200: #ddd5dd;
+  --color-silver-300: #b9adb9;
+  --color-silver-400: #8e7e8e;
+  --color-silver-500: #645664;
+
+  /* BURGUNDY — deep wine for dramatic CTAs and premium depth */
+  --color-burgundy-400: #a8345c;
+  --color-burgundy-500: #832143;
+  --color-burgundy-600: #65142f;
+  --color-burgundy-700: #4a0a20;
 }
 
 html,
@@ -71,7 +104,7 @@ body {
   height: 60vmax;
   top: -20vmax;
   left: -10vmax;
-  background: radial-gradient(circle, rgba(183, 110, 121, 0.55), transparent 65%);
+  background: radial-gradient(circle, rgba(197, 74, 120, 0.55), transparent 65%);
   animation: orb-drift-1 22s ease-in-out infinite;
 }
 
@@ -80,7 +113,7 @@ body {
   height: 50vmax;
   bottom: -15vmax;
   right: -10vmax;
-  background: radial-gradient(circle, rgba(232, 147, 128, 0.45), transparent 65%);
+  background: radial-gradient(circle, rgba(250, 138, 85, 0.45), transparent 65%);
   animation: orb-drift-2 26s ease-in-out infinite;
 }
 
@@ -90,7 +123,7 @@ body {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(230, 184, 168, 0.3), transparent 60%);
+  background: radial-gradient(circle, rgba(255, 151, 197, 0.35), transparent 60%);
   animation: orb-pulse 18s ease-in-out infinite;
 }
 

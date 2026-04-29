@@ -140,7 +140,7 @@ export default function PrivacyPage() {
             <button
               type="button"
               onClick={openConsentSettings}
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(183,110,121,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(197,74,120,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
             >
               <SettingsIcon size={14} />
               {t('privacy.manageConsent')}
@@ -217,7 +217,7 @@ export default function PrivacyPage() {
           </Block>
 
           {/* 17. Contact (highlighted) */}
-          <article className="mt-10 rounded-3xl border border-rose-gold-300/40 bg-gradient-to-bl from-rose-gold-500 to-blush-400 p-8 text-white shadow-[0_24px_56px_-28px_rgba(183,110,121,0.6)] md:p-10">
+          <article className="mt-10 rounded-3xl border border-rose-gold-300/40 bg-gradient-to-bl from-rose-gold-500 to-blush-400 p-8 text-white shadow-[0_24px_56px_-28px_rgba(197,74,120,0.6)] md:p-10">
             <div className="mb-4 flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/25 backdrop-blur-sm">
                 <ShieldCheck size={20} />

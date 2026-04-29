@@ -110,10 +110,10 @@ export default function AccessibilityMenu() {
         onClick={() => setOpen(true)}
         aria-label={t('a11y.open')}
         title={t('a11y.title')}
-        className="group fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#1d4ed8] text-white shadow-[0_18px_40px_-8px_rgba(29,78,216,0.6)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#1e40af] hover:shadow-[0_22px_48px_-8px_rgba(29,78,216,0.75)] focus:outline-none focus:ring-4 focus:ring-blue-300/50"
+        className="group fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-burgundy-500 text-white shadow-[0_18px_40px_-8px_rgba(131,33,67,0.6)] transition-all duration-300 hover:-translate-y-1 hover:bg-burgundy-600 hover:shadow-[0_22px_48px_-8px_rgba(131,33,67,0.75)] focus:outline-none focus:ring-4 focus:ring-rose-gold-300/50"
       >
         <Accessibility size={26} className="transition-transform group-hover:scale-110" />
-        <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-[#1d4ed8] opacity-50 blur-md transition-opacity group-hover:opacity-80" />
+        <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-burgundy-500 opacity-50 blur-md transition-opacity group-hover:opacity-80" />
       </button>
 
       {open && (
@@ -129,9 +129,9 @@ export default function AccessibilityMenu() {
             aria-labelledby="a11y-title"
             className="fixed end-0 top-0 bottom-0 z-50 flex w-full max-w-sm flex-col bg-white shadow-[0_0_60px_rgba(0,0,0,0.25)]"
           >
-            <header className="flex items-center justify-between border-b border-blush-100 bg-gradient-to-bl from-blue-50 to-blush-50 px-6 py-5">
+            <header className="flex items-center justify-between border-b border-blush-100 bg-gradient-to-bl from-silver-100 via-blush-50 to-pink-100 px-6 py-5">
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1d4ed8] text-white">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-burgundy-500 to-rose-gold-500 text-white shadow-[0_8px_18px_-6px_rgba(131,33,67,0.55)]">
                   <Accessibility size={20} />
                 </span>
                 <h2

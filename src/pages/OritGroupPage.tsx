@@ -103,12 +103,12 @@ export default function OritGroupPage() {
     <div dir="rtl" lang="he">
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-cream-100 via-cream-50 to-white" />
-        <div aria-hidden className="pointer-events-none absolute -top-32 -end-24 h-80 w-80 rounded-full bg-blush-200/50 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-24 -start-24 h-72 w-72 rounded-full bg-rose-gold-300/30 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-peach-100 via-cream-50 to-white" />
+        <div aria-hidden className="pointer-events-none absolute -top-32 -end-24 h-80 w-80 rounded-full bg-peach-200/55 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -bottom-24 -start-24 h-72 w-72 rounded-full bg-pink-200/45 blur-3xl" />
 
         <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
-          <div className="mx-auto mb-7 h-36 w-36 overflow-hidden rounded-full border-4 border-white shadow-[0_20px_50px_-15px_rgba(183,110,121,0.45)] md:h-40 md:w-40">
+          <div className="mx-auto mb-7 h-36 w-36 overflow-hidden rounded-full border-4 border-white shadow-[0_20px_50px_-15px_rgba(197,74,120,0.45)] md:h-40 md:w-40">
             <img src="/orit/orit.jpeg" alt="אורית עשור — מנחת קבוצות העצמה לנשים" className="h-full w-full object-cover" />
           </div>
 
@@ -126,7 +126,7 @@ export default function OritGroupPage() {
           <button
             type="button"
             onClick={() => setModalOpen(true)}
-            className="mt-9 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(183,110,121,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_18px_36px_-10px_rgba(183,110,121,0.75)]"
+            className="mt-9 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(197,74,120,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_18px_36px_-10px_rgba(197,74,120,0.75)]"
           >
             רוצה להצטרף? שומרת מקום
           </button>
@@ -157,7 +157,7 @@ export default function OritGroupPage() {
             {benefits.map(({ icon: Icon, title, body }) => (
               <li
                 key={title}
-                className="rounded-2xl border border-blush-100 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-rose-gold-300/60 hover:shadow-[0_18px_40px_-20px_rgba(183,110,121,0.4)]"
+                className="rounded-2xl border border-blush-100 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-rose-gold-300/60 hover:shadow-[0_18px_40px_-20px_rgba(197,74,120,0.4)]"
               >
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-blush-100 text-rose-gold-500">
                   <Icon size={26} />
@@ -190,9 +190,9 @@ export default function OritGroupPage() {
       </section>
 
       {/* TESTIMONIAL */}
-      <section className="relative bg-gradient-to-bl from-blush-100 via-cream-50 to-blush-50 py-16 md:py-24">
+      <section className="relative bg-gradient-to-bl from-peach-100 via-cream-50 to-pink-100 py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
-          <blockquote className="rounded-3xl bg-white p-8 shadow-[0_24px_60px_-30px_rgba(183,110,121,0.45)] md:p-12">
+          <blockquote className="rounded-3xl bg-white p-8 shadow-[0_24px_60px_-30px_rgba(197,74,120,0.45)] md:p-12">
             <div className="mb-5 text-6xl leading-none text-rose-gold-300">״</div>
             <p className="text-lg leading-loose text-ink-800 md:text-xl">
               הגעתי לקבוצה בתחושה שאני פשוט טובעת. כבר מהמפגש הראשון הרגשתי שמשהו מתחיל להשתנות. היום אני כבר לא אותה אישה — אני מביאה הרבה אור הביתה, רגועה יותר, נוכחת יותר ומשפיעה הרבה טוב על הסביבה שלי.
@@ -211,7 +211,7 @@ export default function OritGroupPage() {
       <section className="relative bg-white py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
           <h2 className="font-display text-3xl font-extrabold text-ink-900 md:text-4xl">מי אני?</h2>
-          <div className="mx-auto mt-8 h-44 w-44 overflow-hidden rounded-full border-4 border-blush-100 shadow-[0_20px_50px_-15px_rgba(183,110,121,0.4)]">
+          <div className="mx-auto mt-8 h-44 w-44 overflow-hidden rounded-full border-4 border-blush-100 shadow-[0_20px_50px_-15px_rgba(197,74,120,0.4)]">
             <img src="/orit/orit.jpeg" alt="אורית עשור" className="h-full w-full object-cover" />
           </div>
           <div className="mt-8 space-y-5 text-lg leading-loose text-ink-700">
@@ -233,7 +233,7 @@ export default function OritGroupPage() {
             {details.map(({ icon: Icon, label }) => (
               <li
                 key={label}
-                className="flex items-start gap-4 rounded-2xl border border-blush-100 bg-white p-5 shadow-[0_4px_18px_-12px_rgba(183,110,121,0.35)]"
+                className="flex items-start gap-4 rounded-2xl border border-blush-100 bg-white p-5 shadow-[0_4px_18px_-12px_rgba(197,74,120,0.35)]"
               >
                 <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-blush-100 text-rose-gold-500">
                   <Icon size={20} />
@@ -247,7 +247,7 @@ export default function OritGroupPage() {
             <button
               type="button"
               onClick={() => setModalOpen(true)}
-              className="inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(183,110,121,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_18px_36px_-10px_rgba(183,110,121,0.75)]"
+              className="inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(197,74,120,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_18px_36px_-10px_rgba(197,74,120,0.75)]"
             >
               שומרת מקום בקבוצה
             </button>
@@ -349,7 +349,7 @@ export default function OritGroupPage() {
 
                   <button
                     type="submit"
-                    className="w-full rounded-full bg-rose-gold-500 px-6 py-4 text-base font-bold text-white shadow-[0_10px_24px_-8px_rgba(183,110,121,0.6)] transition-all hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                    className="w-full rounded-full bg-rose-gold-500 px-6 py-4 text-base font-bold text-white shadow-[0_10px_24px_-8px_rgba(197,74,120,0.6)] transition-all hover:-translate-y-0.5 hover:bg-rose-gold-600"
                   >
                     המשך לתשלום
                   </button>

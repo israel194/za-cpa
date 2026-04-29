@@ -6,15 +6,19 @@ export default function Hero() {
     <section className="relative overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-32 -start-32 h-96 w-96 rounded-full bg-blush-200/60 blur-3xl"
+        className="pointer-events-none absolute -top-32 -start-32 h-96 w-96 rounded-full bg-peach-200/55 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-32 -end-32 h-[28rem] w-[28rem] rounded-full bg-rose-gold-300/40 blur-3xl"
+        className="pointer-events-none absolute -bottom-32 -end-32 h-[28rem] w-[28rem] rounded-full bg-pink-200/45 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-cream-50 via-cream-100 to-cream-50"
+        className="pointer-events-none absolute top-1/3 start-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-rose-gold-300/30 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-cream-50 via-blush-50 to-cream-50"
       />
 
       <div className="relative mx-auto max-w-5xl px-6 text-center md:px-10">
@@ -29,7 +33,7 @@ export default function Hero() {
         <h1 className="font-display text-4xl font-extrabold leading-[1.15] tracking-tight text-ink-900 md:text-6xl lg:text-7xl">
           משרד רואי חשבון
           <br />
-          <span className="bg-gradient-to-l from-rose-gold-500 via-rose-gold-400 to-blush-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-l from-burgundy-500 via-rose-gold-500 to-peach-400 bg-clip-text text-transparent">
             מוביל בישראל
           </span>
         </h1>
@@ -42,8 +46,8 @@ export default function Hero() {
           <Link
             to="/contact"
             className="group inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-semibold
-              text-white shadow-[0_18px_40px_-12px_rgba(183,110,121,0.55)] transition-all duration-300
-              hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_22px_48px_-12px_rgba(183,110,121,0.7)]"
+              text-white shadow-[0_18px_40px_-12px_rgba(197,74,120,0.55)] transition-all duration-300
+              hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_22px_48px_-12px_rgba(197,74,120,0.7)]"
           >
             קבעו פגישת ייעוץ
             <ArrowLeft

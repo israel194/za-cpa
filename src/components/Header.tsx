@@ -66,7 +66,7 @@ export default function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-cream-50/90 backdrop-blur-md border-b border-blush-100 shadow-[0_1px_24px_rgba(183,110,121,0.06)]'
+          ? 'bg-cream-50/90 backdrop-blur-md border-b border-blush-100 shadow-[0_1px_24px_rgba(197,74,120,0.06)]'
           : 'bg-transparent'
       }`}
     >
@@ -108,7 +108,7 @@ export default function Header() {
                     isRtl ? 'end-0' : 'start-0'
                   }`}
                 >
-                  <div className="min-w-[16rem] overflow-hidden rounded-2xl border border-blush-100 bg-white py-2 shadow-[0_24px_48px_-16px_rgba(183,110,121,0.25)]">
+                  <div className="min-w-[16rem] overflow-hidden rounded-2xl border border-blush-100 bg-white py-2 shadow-[0_24px_48px_-16px_rgba(197,74,120,0.25)]">
                     {item.to && (
                       <Link
                         to={item.to}
@@ -138,8 +138,8 @@ export default function Header() {
           <Link
             to="/contact"
             className="hidden rounded-full bg-rose-gold-500 px-5 py-2.5 text-sm font-semibold text-white
-              shadow-[0_8px_24px_-8px_rgba(183,110,121,0.6)] transition-all duration-300
-              hover:bg-rose-gold-600 hover:shadow-[0_12px_28px_-8px_rgba(183,110,121,0.7)] xl:inline-block"
+              shadow-[0_8px_24px_-8px_rgba(197,74,120,0.6)] transition-all duration-300
+              hover:bg-rose-gold-600 hover:shadow-[0_12px_28px_-8px_rgba(197,74,120,0.7)] xl:inline-block"
           >
             {t('nav.bookMeeting')}
           </Link>

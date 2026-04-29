@@ -11,13 +11,13 @@ export default function HeroCinematic() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden">
       <div aria-hidden className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-900 via-navy-700 to-ink-900" />
         <div className="hero-orb hero-orb-1" />
         <div className="hero-orb hero-orb-2" />
         <div className="hero-orb hero-orb-3" />
         <div className="hero-stars" />
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-rose-gold-500/20 via-blush-300/10 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(20,16,27,0.55)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-rose-gold-500/25 via-peach-300/15 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(20,8,30,0.55)_100%)]" />
       </div>
 
       <video
@@ -58,7 +58,7 @@ export default function HeroCinematic() {
 
             <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-white md:text-6xl lg:text-7xl">
               <span className="block">{t('hero.line1')}</span>
-              <span className="block bg-gradient-to-l from-rose-gold-300 via-blush-300 to-rose-gold-200 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-l from-pink-300 via-peach-300 to-rose-gold-300 bg-clip-text text-transparent">
                 {t('hero.line2')}
               </span>
               <span className="block text-cream-100">{t('hero.line3')}</span>
@@ -71,7 +71,7 @@ export default function HeroCinematic() {
             <div className="mt-10 flex flex-col items-center justify-start gap-4 sm:flex-row md:items-start">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-bold text-white shadow-[0_18px_40px_-12px_rgba(183,110,121,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                className="group inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-bold text-white shadow-[0_18px_40px_-12px_rgba(197,74,120,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
               >
                 {t('hero.primaryCta')}
                 <Arrow

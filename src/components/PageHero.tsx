@@ -20,17 +20,17 @@ export default function PageHero({ eyebrow, title, subtitle, crumbs }: Props) {
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-cream-100 via-cream-50 to-white"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-peach-100 via-cream-50 to-white"
       />
       <div
         aria-hidden
-        className={`pointer-events-none absolute -top-32 h-80 w-80 rounded-full bg-blush-200/50 blur-3xl ${
+        className={`pointer-events-none absolute -top-32 h-80 w-80 rounded-full bg-peach-200/55 blur-3xl ${
           isRtl ? '-end-24' : '-start-24'
         }`}
       />
       <div
         aria-hidden
-        className={`pointer-events-none absolute -bottom-24 h-72 w-72 rounded-full bg-rose-gold-300/30 blur-3xl ${
+        className={`pointer-events-none absolute -bottom-24 h-72 w-72 rounded-full bg-pink-200/40 blur-3xl ${
           isRtl ? '-start-24' : '-end-24'
         }`}
       />

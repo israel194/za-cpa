@@ -144,7 +144,7 @@ export default function CookieConsent() {
         <div
           role="dialog"
           aria-labelledby="cookie-banner-title"
-          className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl animate-[fadeUp_400ms_ease-out_both] overflow-hidden rounded-3xl border border-blush-200/80 bg-gradient-to-bl from-cream-50 via-white to-blush-50 shadow-[0_32px_70px_-22px_rgba(183,110,121,0.4)] backdrop-blur-md"
+          className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl animate-[fadeUp_400ms_ease-out_both] overflow-hidden rounded-3xl border border-blush-200/80 bg-gradient-to-bl from-cream-50 via-white to-blush-50 shadow-[0_32px_70px_-22px_rgba(197,74,120,0.4)] backdrop-blur-md"
         >
           {/* Decorative glows */}
           <div
@@ -169,7 +169,7 @@ export default function CookieConsent() {
                   aria-hidden
                   className="absolute inset-0 -z-10 rounded-2xl bg-rose-gold-400/35 blur-md"
                 />
-                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-10px_rgba(183,110,121,0.6)]">
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-10px_rgba(197,74,120,0.6)]">
                   <Cookie size={26} />
                 </span>
               </div>
@@ -225,7 +225,7 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="group order-1 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-bl from-rose-gold-500 to-rose-gold-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_30px_-10px_rgba(183,110,121,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgba(183,110,121,0.8)] md:order-1 md:w-full"
+                className="group order-1 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-bl from-rose-gold-500 to-rose-gold-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_30px_-10px_rgba(197,74,120,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgba(197,74,120,0.8)] md:order-1 md:w-full"
               >
                 <Sparkles size={14} className="transition-transform group-hover:scale-110" />
                 {t('cookies.banner.acceptAll')}
@@ -329,7 +329,7 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={saveDraft}
-                className="inline-flex items-center gap-1.5 rounded-full bg-rose-gold-500 px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(183,110,121,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                className="inline-flex items-center gap-1.5 rounded-full bg-rose-gold-500 px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(197,74,120,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
               >
                 <Check size={14} />
                 {t('cookies.modal.save')}

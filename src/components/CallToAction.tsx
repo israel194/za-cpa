@@ -15,10 +15,10 @@ export default function CallToAction({ title, subtitle }: Props) {
   return (
     <section className="relative overflow-hidden">
       <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-bl from-rose-gold-500 via-rose-gold-400 to-blush-300 p-10 text-center shadow-[0_30px_60px_-30px_rgba(183,110,121,0.6)] md:p-16">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-bl from-burgundy-500 via-rose-gold-500 to-peach-400 p-10 text-center shadow-[0_30px_60px_-30px_rgba(131,33,67,0.55)] md:p-16">
           <div
             aria-hidden
-            className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.4),transparent_45%),radial-gradient(circle_at_85%_75%,rgba(255,255,255,0.35),transparent_50%)]"
+            className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.45),transparent_45%),radial-gradient(circle_at_85%_75%,rgba(255,225,238,0.4),transparent_50%)]"
           />
           <div
             aria-hidden
