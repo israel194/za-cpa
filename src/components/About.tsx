@@ -23,7 +23,7 @@ export default function About() {
     <section id="about" className="relative bg-white py-24 md:py-32">
       <div className="mx-auto grid max-w-7xl gap-16 px-6 md:px-10 lg:grid-cols-2 lg:gap-20">
         <div>
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
+          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             אודות
           </div>
           <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
@@ -41,12 +41,12 @@ export default function About() {
           {values.map(({ icon: Icon, title, text }) => (
             <div
               key={title}
-              className="group flex items-start gap-5 rounded-2xl border border-blush-100 bg-cream-50/60 p-6 transition-all
-                duration-300 hover:-translate-y-0.5 hover:border-rose-gold-300/60 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.35)]"
+              className="group flex items-start gap-5 rounded-2xl border border-blush-100 bg-background/60 p-6 transition-all
+                duration-300 hover:-translate-y-0.5 hover:border-accent/60/60 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.35)]"
             >
               <div
                 className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-blush-100
-                  text-rose-gold-500 transition-colors group-hover:bg-rose-gold-500 group-hover:text-white"
+                  text-accent transition-colors group-hover:bg-primary group-hover:text-white"
               >
                 <Icon size={22} />
               </div>

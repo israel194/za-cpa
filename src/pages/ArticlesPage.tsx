@@ -17,7 +17,7 @@ export default function ArticlesPage() {
 
       <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blush-100 text-rose-gold-500">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blush-100 text-accent">
             <BookOpen size={28} />
           </div>
           <h2 className="font-display text-2xl font-extrabold text-ink-900 md:text-3xl">
@@ -30,7 +30,7 @@ export default function ArticlesPage() {
             {t('articles.questionPrefix')}{' '}
             <Link
               to="/contact"
-              className="font-semibold text-rose-gold-500 hover:text-rose-gold-600"
+              className="font-semibold text-accent hover:text-primary"
             >
               {t('articles.questionLink')}
             </Link>{' '}

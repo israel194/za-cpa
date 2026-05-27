@@ -47,7 +47,7 @@ export default function ActivityAreas() {
     <section className="relative bg-white py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
+          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             {t('activityAreas.eyebrow')}
           </div>
           <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
@@ -67,7 +67,7 @@ export default function ActivityAreas() {
                 hover:-translate-y-1 hover:shadow-[0_28px_56px_-28px_rgba(189,95,124,0.45)] ${
                   highlight
                     ? 'border-rose-gold-300/60 bg-gradient-to-br from-peach-100 via-cream-50 to-pink-100'
-                    : 'border-blush-100 bg-cream-50/60 hover:border-rose-gold-300 hover:bg-white'
+                    : 'border-blush-100 bg-background/60 hover:border-accent/60 hover:bg-white'
                 }`}
             >
               {highlight && (
@@ -91,7 +91,7 @@ export default function ActivityAreas() {
                 className={`relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300 ${
                   highlight
                     ? 'bg-gradient-to-br from-burgundy-400 via-rose-gold-500 to-peach-300 text-white shadow-[0_12px_24px_-10px_rgba(144,58,85,0.5)]'
-                    : 'bg-blush-100 text-rose-gold-500 group-hover:bg-rose-gold-500 group-hover:text-white'
+                    : 'bg-blush-100 text-accent group-hover:bg-primary group-hover:text-white'
                 }`}
               >
                 <Icon size={26} />
@@ -104,7 +104,7 @@ export default function ActivityAreas() {
                 {t(`activityAreas.items.${key}.description`)}
               </p>
 
-              <div className="relative mt-6 inline-flex items-center gap-1 text-sm font-bold text-rose-gold-500">
+              <div className="relative mt-6 inline-flex items-center gap-1 text-sm font-bold text-accent">
                 {t('common.readMore')}
                 <Arrow
                   size={14}

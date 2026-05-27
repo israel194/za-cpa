@@ -93,7 +93,7 @@ export default function Contact() {
                   value={form.message}
                   onChange={handleChange('message')}
                   required
-                  className="w-full resize-none rounded-xl border border-blush-200 bg-cream-50/60 px-4 py-3 text-base text-ink-900 transition-all duration-200 placeholder:text-ink-700/40 focus:border-rose-gold-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-gold-300/30"
+                  className="w-full resize-none rounded-xl border border-blush-200 bg-background/60 px-4 py-3 text-base text-ink-900 transition-all duration-200 placeholder:text-ink-700/40 focus:border-accent focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-gold-300/30"
                   placeholder={t('contact.form.messagePlaceholder')}
                 />
               </div>
@@ -101,7 +101,7 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(189,95,124,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_22px_48px_-12px_rgba(189,95,124,0.7)] sm:w-auto"
+              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(189,95,124,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_22px_48px_-12px_rgba(189,95,124,0.7)] sm:w-auto"
             >
               {sent ? (
                 <>
@@ -165,7 +165,7 @@ function Field({
       </label>
       <input
         {...rest}
-        className="w-full rounded-xl border border-blush-200 bg-cream-50/60 px-4 py-3 text-base text-ink-900 transition-all duration-200 placeholder:text-ink-700/40 focus:border-rose-gold-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-gold-300/30"
+        className="w-full rounded-xl border border-blush-200 bg-background/60 px-4 py-3 text-base text-ink-900 transition-all duration-200 placeholder:text-ink-700/40 focus:border-accent focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-gold-300/30"
       />
     </div>
   )
@@ -190,11 +190,11 @@ function DetailCard({
       {...wrapperProps}
       className={`group flex items-start gap-4 rounded-2xl border border-blush-100 bg-white/80 p-6 backdrop-blur-sm transition-all duration-300 ${
         href
-          ? 'hover:-translate-y-0.5 hover:border-rose-gold-300 hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.4)]'
+          ? 'hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.4)]'
           : ''
       }`}
     >
-      <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-blush-100 text-rose-gold-500 transition-colors group-hover:bg-rose-gold-500 group-hover:text-white">
+      <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-blush-100 text-accent transition-colors group-hover:bg-primary group-hover:text-white">
         {icon}
       </span>
       <div>

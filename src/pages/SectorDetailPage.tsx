@@ -59,9 +59,9 @@ export default function SectorDetailPage() {
               {sector.bullets.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 rounded-xl border border-blush-100 bg-cream-50/60 p-4 transition-colors hover:border-rose-gold-300/50 hover:bg-white"
+                  className="flex items-start gap-3 rounded-xl border border-blush-100 bg-background/60 p-4 transition-colors hover:border-accent/60/50 hover:bg-white"
                 >
-                  <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-rose-gold-500 text-white">
+                  <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-primary text-white">
                     <Check size={14} />
                   </span>
                   <span className="text-base leading-relaxed text-ink-800 md:text-lg">
@@ -80,7 +80,7 @@ export default function SectorDetailPage() {
               </p>
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
               >
                 {t('sectors.letsTalk')}
                 <Arrow size={16} />
@@ -89,7 +89,7 @@ export default function SectorDetailPage() {
           </div>
 
           <aside>
-            <div className="sticky top-28 rounded-2xl border border-blush-100 bg-cream-50/60 p-6">
+            <div className="sticky top-28 rounded-2xl border border-blush-100 bg-background/60 p-6">
               <h3 className="font-display text-base font-bold text-ink-900">
                 {t('sectors.otherSectors')}
               </h3>
@@ -98,7 +98,7 @@ export default function SectorDetailPage() {
                   <li key={s.slug}>
                     <Link
                       to={`/sectors/${s.slug}`}
-                      className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:bg-white hover:text-rose-gold-500"
+                      className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:bg-white hover:text-accent"
                     >
                       <span>{s.title}</span>
                       <Arrow size={14} className="text-blush-300" />

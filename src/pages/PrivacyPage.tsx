@@ -57,7 +57,7 @@ export default function PrivacyPage() {
           {/* Disclaimer notice at top */}
           <div className="mb-10 rounded-2xl border border-blush-200 bg-blush-50 p-5">
             <div className="flex items-start gap-3">
-              <Info size={20} className="mt-0.5 flex-none text-rose-gold-500" />
+              <Info size={20} className="mt-0.5 flex-none text-accent" />
               <div className="text-sm leading-relaxed text-ink-800">
                 <strong className="font-bold">
                   {t('privacy.disclaimerTitle')}.
@@ -115,17 +115,17 @@ export default function PrivacyPage() {
           <Block icon={<Cookie size={22} />} title={t('privacy.cookiesTitle')}>
             <p className="mb-4">{t('privacy.cookiesIntro')}</p>
             <ul className="space-y-3">
-              <li className="rounded-xl border border-blush-100 bg-cream-50/60 p-4">
+              <li className="rounded-xl border border-blush-100 bg-background/60 p-4">
                 <span className="text-base leading-relaxed text-ink-800">
                   {t('privacy.cookiesEssential')}
                 </span>
               </li>
-              <li className="rounded-xl border border-blush-100 bg-cream-50/60 p-4">
+              <li className="rounded-xl border border-blush-100 bg-background/60 p-4">
                 <span className="text-base leading-relaxed text-ink-800">
                   {t('privacy.cookiesAnalytics')}
                 </span>
               </li>
-              <li className="rounded-xl border border-blush-100 bg-cream-50/60 p-4">
+              <li className="rounded-xl border border-blush-100 bg-background/60 p-4">
                 <span className="text-base leading-relaxed text-ink-800">
                   {t('privacy.cookiesMarketing')}
                 </span>
@@ -140,7 +140,7 @@ export default function PrivacyPage() {
             <button
               type="button"
               onClick={openConsentSettings}
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
             >
               <SettingsIcon size={14} />
               {t('privacy.manageConsent')}
@@ -265,8 +265,8 @@ export default function PrivacyPage() {
           </article>
 
           {/* 18. Last updated */}
-          <div className="mt-10 rounded-2xl border border-blush-100 bg-cream-50/60 p-6">
-            <div className="flex items-center gap-2 text-rose-gold-500">
+          <div className="mt-10 rounded-2xl border border-blush-100 bg-background/60 p-6">
+            <div className="flex items-center gap-2 text-accent">
               <Calendar size={18} />
               <h3 className="font-display text-base font-bold text-ink-900">
                 {t('a11y.statement.updatedTitle')}
@@ -294,7 +294,7 @@ function Block({
   return (
     <article className="mb-10">
       <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blush-100 text-rose-gold-500">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blush-100 text-accent">
           {icon}
         </span>
         <h2 className="font-display text-xl font-extrabold text-ink-900 md:text-2xl">
@@ -314,9 +314,9 @@ function BulletList({ items }: { items: string[] }) {
       {items.map((item) => (
         <li
           key={item}
-          className="flex items-start gap-3 rounded-xl border border-blush-100 bg-cream-50/60 p-4"
+          className="flex items-start gap-3 rounded-xl border border-blush-100 bg-background/60 p-4"
         >
-          <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-rose-gold-500" />
+          <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-primary" />
           <span className="text-base leading-relaxed text-ink-800">
             {item}
           </span>

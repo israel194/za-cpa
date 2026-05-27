@@ -139,7 +139,7 @@ function Medallion({
       </svg>
       {showName && (
         <div className="mt-2 text-center">
-          <div className="font-display text-sm font-extrabold tracking-tight text-rose-gold-500">
+          <div className="font-display text-sm font-extrabold tracking-tight text-accent">
             עשור
           </div>
           <div className="text-[10px] font-medium uppercase tracking-[0.25em] text-ink-700">
@@ -159,7 +159,7 @@ function Wordmark({
   align?: 'start' | 'center'
 }) {
   const goldClass =
-    tone === 'inverse' ? 'text-rose-gold-300' : 'text-rose-gold-500'
+    tone === 'inverse' ? 'text-rose-gold-300' : 'text-accent'
   const subtitleClass =
     tone === 'inverse' ? 'text-cream-100/85' : 'text-ink-800/80'
   const ruleClass =

@@ -20,7 +20,7 @@ export default function PageHero({ eyebrow, title, subtitle, crumbs }: Props) {
     <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-peach-100 via-cream-50 to-white"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-peach-100 via-background to-white"
       />
       <div
         aria-hidden
@@ -37,20 +37,20 @@ export default function PageHero({ eyebrow, title, subtitle, crumbs }: Props) {
 
       <div className="relative mx-auto max-w-5xl px-6 text-center md:px-10">
         {crumbs && crumbs.length > 0 && (
-          <nav className="mb-6 flex justify-center text-sm text-ink-700">
+          <nav className="mb-6 flex justify-center text-sm text-muted-foreground">
             <ol className="flex items-center gap-2">
               <li>
-                <Link to="/" className="hover:text-rose-gold-500">
+                <Link to="/" className="hover:text-accent">
                   {t('breadcrumb.home')}
                 </Link>
               </li>
               {crumbs.map((c, i) => (
                 <li key={c.to} className="flex items-center gap-2">
-                  <Chevron size={14} className="text-blush-300" />
+                  <Chevron size={14} className="text-accent/60" />
                   {i === crumbs.length - 1 ? (
-                    <span className="text-rose-gold-500">{c.label}</span>
+                    <span className="text-primary">{c.label}</span>
                   ) : (
-                    <Link to={c.to} className="hover:text-rose-gold-500">
+                    <Link to={c.to} className="hover:text-accent">
                       {c.label}
                     </Link>
                   )}
@@ -61,15 +61,15 @@ export default function PageHero({ eyebrow, title, subtitle, crumbs }: Props) {
         )}
 
         {eyebrow && (
-          <div className="mb-3 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
+          <div className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.22em] text-accent">
             {eyebrow}
           </div>
         )}
-        <h1 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl lg:text-6xl">
+        <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-primary md:text-5xl lg:text-6xl">
           {title}
         </h1>
         {subtitle && (
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-700 md:text-xl">
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-foreground/80 md:text-xl">
             {subtitle}
           </p>
         )}

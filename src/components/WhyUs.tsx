@@ -12,7 +12,7 @@ export default function WhyUs() {
     <section className="relative bg-white py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
+          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             {t('whyUs.eyebrow')}
           </div>
           <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
@@ -27,11 +27,11 @@ export default function WhyUs() {
             return (
               <div
                 key={item.title}
-                className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-cream-50/60 p-7 transition-all
-                  duration-300 hover:-translate-y-1 hover:border-rose-gold-300 hover:bg-white
+                className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-background/60 p-7 transition-all
+                  duration-300 hover:-translate-y-1 hover:border-accent/60 hover:bg-white
                   hover:shadow-[0_24px_48px_-24px_rgba(189,95,124,0.4)]"
               >
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blush-100 text-rose-gold-500 transition-colors group-hover:bg-rose-gold-500 group-hover:text-white">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blush-100 text-accent transition-colors group-hover:bg-primary group-hover:text-white">
                   <Icon size={22} />
                 </div>
                 <h3 className="font-display text-lg font-bold leading-snug text-ink-900">
