@@ -175,7 +175,7 @@ export default function CookieConsent() {
               </div>
               {/* Mobile-only inline title (hidden on md) */}
               <div className="md:hidden">
-                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-rose-gold-500">
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                   <Sparkles size={12} />
                   {t('cookies.banner.eyebrow')}
                 </div>
@@ -192,7 +192,7 @@ export default function CookieConsent() {
             <div>
               {/* Desktop title */}
               <div className="hidden md:block">
-                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-rose-gold-500">
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                   <Sparkles size={12} />
                   {t('cookies.banner.eyebrow')}
                 </div>
@@ -207,12 +207,12 @@ export default function CookieConsent() {
                 {t('cookies.banner.text')}
               </p>
               <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-700">
-                <span className="font-medium text-rose-gold-500">
+                <span className="font-medium text-accent">
                   {t('cookies.banner.tagline')}
                 </span>
                 <Link
                   to="/privacy"
-                  className="inline-flex items-center gap-1 font-semibold text-ink-800 underline decoration-rose-gold-300 underline-offset-4 transition-colors hover:text-rose-gold-600 hover:decoration-rose-gold-500"
+                  className="inline-flex items-center gap-1 font-semibold text-ink-800 underline decoration-rose-gold-300 underline-offset-4 transition-colors hover:text-primary hover:decoration-rose-gold-500"
                 >
                   {t('cookies.banner.policyLink')}
                   <Arrow size={11} />
@@ -233,14 +233,14 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={essentialOnly}
-                className="order-2 rounded-full border border-blush-200 bg-white/70 px-5 py-2.5 text-sm font-semibold text-ink-800 backdrop-blur-sm transition-all duration-200 hover:border-rose-gold-400 hover:bg-white md:order-2 md:w-full"
+                className="order-2 rounded-full border border-blush-200 bg-white/70 px-5 py-2.5 text-sm font-semibold text-ink-800 backdrop-blur-sm transition-all duration-200 hover:border-accent hover:bg-white md:order-2 md:w-full"
               >
                 {t('cookies.banner.essentialOnly')}
               </button>
               <button
                 type="button"
                 onClick={openSettings}
-                className="order-3 inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-ink-700 transition-colors hover:text-rose-gold-600 md:order-3 md:w-full"
+                className="order-3 inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-ink-700 transition-colors hover:text-primary md:order-3 md:w-full"
               >
                 <SettingsIcon size={12} />
                 {t('cookies.banner.settings')}
@@ -266,7 +266,7 @@ export default function CookieConsent() {
           >
             <header className="flex items-center justify-between border-b border-blush-100 bg-gradient-to-bl from-blush-50 to-cream-50 px-6 py-5">
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-rose-gold-500 text-white">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white">
                   <Cookie size={18} />
                 </span>
                 <h2
@@ -318,18 +318,18 @@ export default function CookieConsent() {
               </div>
             </div>
 
-            <footer className="flex flex-wrap justify-end gap-2 border-t border-blush-100 bg-cream-50/60 px-6 py-4">
+            <footer className="flex flex-wrap justify-end gap-2 border-t border-blush-100 bg-background/60 px-6 py-4">
               <button
                 type="button"
                 onClick={essentialOnly}
-                className="rounded-full border border-blush-200 bg-white px-4 py-2.5 text-sm font-semibold text-ink-800 transition-colors hover:border-rose-gold-400"
+                className="rounded-full border border-blush-200 bg-white px-4 py-2.5 text-sm font-semibold text-ink-800 transition-colors hover:border-accent"
               >
                 {t('cookies.banner.essentialOnly')}
               </button>
               <button
                 type="button"
                 onClick={saveDraft}
-                className="inline-flex items-center gap-1.5 rounded-full bg-rose-gold-500 px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-gold-600"
+                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
               >
                 <Check size={14} />
                 {t('cookies.modal.save')}
@@ -381,7 +381,7 @@ function CategoryRow({
         </div>
         <div className="flex flex-none items-center">
           {alwaysOn ? (
-            <span className="rounded-full bg-rose-gold-500/15 px-3 py-1 text-xs font-bold text-rose-gold-600">
+            <span className="rounded-full bg-primary/15 px-3 py-1 text-xs font-bold text-primary">
               {alwaysOnLabel}
             </span>
           ) : (
@@ -391,7 +391,7 @@ function CategoryRow({
               aria-checked={active}
               onClick={onToggle}
               className={`relative h-6 w-11 rounded-full transition-colors ${
-                active ? 'bg-rose-gold-500' : 'bg-blush-200'
+                active ? 'bg-primary' : 'bg-blush-200'
               }`}
             >
               <span

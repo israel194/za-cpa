@@ -66,7 +66,7 @@ export default function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-cream-50/90 backdrop-blur-md border-b border-blush-100 shadow-[0_1px_24px_rgba(189,95,124,0.06)]'
+          ? 'bg-background/90 backdrop-blur-md border-b border-blush-100 shadow-[0_1px_24px_rgba(189,95,124,0.06)]'
           : 'bg-transparent'
       }`}
     >
@@ -81,7 +81,7 @@ export default function Header() {
               {item.children ? (
                 <button
                   type="button"
-                  className="flex items-center gap-1 text-[15px] font-medium text-ink-700 transition-colors hover:text-rose-gold-500"
+                  className="flex items-center gap-1 text-[15px] font-medium text-ink-700 transition-colors hover:text-accent"
                 >
                   {item.label}
                   <ChevronDown
@@ -93,8 +93,8 @@ export default function Header() {
                 <NavLink
                   to={item.to!}
                   className={({ isActive }) =>
-                    `text-[15px] font-medium transition-colors hover:text-rose-gold-500 ${
-                      isActive ? 'text-rose-gold-500' : 'text-ink-700'
+                    `text-[15px] font-medium transition-colors hover:text-accent ${
+                      isActive ? 'text-accent' : 'text-ink-700'
                     }`
                   }
                 >
@@ -112,7 +112,7 @@ export default function Header() {
                     {item.to && (
                       <Link
                         to={item.to}
-                        className="block border-b border-blush-100 px-5 py-3 text-sm font-semibold text-rose-gold-500 hover:bg-blush-50"
+                        className="block border-b border-blush-100 px-5 py-3 text-sm font-semibold text-accent hover:bg-blush-50"
                       >
                         {t('nav.allOf', { label: item.label })}
                       </Link>
@@ -121,7 +121,7 @@ export default function Header() {
                       <Link
                         key={child.to}
                         to={child.to}
-                        className="block px-5 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:bg-blush-50 hover:text-rose-gold-500"
+                        className="block px-5 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:bg-blush-50 hover:text-accent"
                       >
                         {child.label}
                       </Link>
@@ -137,9 +137,9 @@ export default function Header() {
           <LanguageSwitcher />
           <Link
             to="/contact"
-            className="hidden rounded-full bg-rose-gold-500 px-5 py-2.5 text-sm font-semibold text-white
+            className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white
               shadow-[0_8px_24px_-8px_rgba(189,95,124,0.6)] transition-all duration-300
-              hover:bg-rose-gold-600 hover:shadow-[0_12px_28px_-8px_rgba(189,95,124,0.7)] xl:inline-block"
+              hover:bg-primary/90 hover:shadow-[0_12px_28px_-8px_rgba(189,95,124,0.7)] xl:inline-block"
           >
             {t('nav.bookMeeting')}
           </Link>
@@ -156,7 +156,7 @@ export default function Header() {
       </nav>
 
       {open && (
-        <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-blush-100 bg-cream-50/98 backdrop-blur-md lg:hidden">
+        <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-blush-100 bg-background/98 backdrop-blur-md lg:hidden">
           <ul className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
             {navItems.map((item) => (
               <li key={item.label}>
@@ -185,7 +185,7 @@ export default function Header() {
                           <li>
                             <Link
                               to={item.to}
-                              className="block rounded-lg px-3 py-2 text-sm font-semibold text-rose-gold-500 hover:bg-blush-50"
+                              className="block rounded-lg px-3 py-2 text-sm font-semibold text-accent hover:bg-blush-50"
                             >
                               {t('nav.allOf', { label: item.label })}
                             </Link>
@@ -195,7 +195,7 @@ export default function Header() {
                           <li key={child.to}>
                             <Link
                               to={child.to}
-                              className="block rounded-lg px-3 py-2 text-sm text-ink-700 hover:bg-blush-50 hover:text-rose-gold-500"
+                              className="block rounded-lg px-3 py-2 text-sm text-ink-700 hover:bg-blush-50 hover:text-accent"
                             >
                               {child.label}
                             </Link>
@@ -217,7 +217,7 @@ export default function Header() {
             <li className="pt-3">
               <Link
                 to="/contact"
-                className="block rounded-full bg-rose-gold-500 px-5 py-3 text-center text-sm font-semibold text-white"
+                className="block rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-white"
               >
                 {t('nav.bookMeeting')}
               </Link>

@@ -38,7 +38,7 @@ export default function CallToAction({ title, subtitle }: Props) {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-bold text-rose-gold-600 shadow-[0_12px_30px_-10px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgba(0,0,0,0.3)]"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-bold text-primary shadow-[0_12px_30px_-10px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgba(0,0,0,0.3)]"
               >
                 {t('common.bookConsultation')}
                 <Arrow

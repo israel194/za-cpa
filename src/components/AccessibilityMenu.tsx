@@ -164,7 +164,7 @@ export default function AccessibilityMenu() {
                       update('fontSize', Math.max(-1, settings.fontSize - 1))
                     }
                     aria-label={t('a11y.fontDecrease')}
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-blush-200 bg-cream-50 px-3 py-3 text-sm font-semibold text-ink-800 hover:border-rose-gold-400 hover:bg-white"
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-blush-200 bg-background px-3 py-3 text-sm font-semibold text-ink-800 hover:border-accent hover:bg-white"
                   >
                     <Minus size={16} />
                     {t('a11y.fontDecrease')}
@@ -175,8 +175,8 @@ export default function AccessibilityMenu() {
                     aria-label={t('a11y.fontReset')}
                     className={`flex flex-1 items-center justify-center rounded-xl border px-3 py-3 text-sm font-semibold ${
                       settings.fontSize === 0
-                        ? 'border-rose-gold-500 bg-rose-gold-500 text-white'
-                        : 'border-blush-200 bg-cream-50 text-ink-800 hover:border-rose-gold-400'
+                        ? 'border-rose-gold-500 bg-primary text-white'
+                        : 'border-blush-200 bg-background text-ink-800 hover:border-accent'
                     }`}
                   >
                     {t('a11y.fontReset')}
@@ -187,7 +187,7 @@ export default function AccessibilityMenu() {
                       update('fontSize', Math.min(2, settings.fontSize + 1))
                     }
                     aria-label={t('a11y.fontIncrease')}
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-blush-200 bg-cream-50 px-3 py-3 text-sm font-semibold text-ink-800 hover:border-rose-gold-400 hover:bg-white"
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-blush-200 bg-background px-3 py-3 text-sm font-semibold text-ink-800 hover:border-accent hover:bg-white"
                   >
                     <Plus size={16} />
                     {t('a11y.fontIncrease')}
@@ -233,14 +233,14 @@ export default function AccessibilityMenu() {
               <button
                 type="button"
                 onClick={reset}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-blush-200 bg-white px-4 py-3 text-sm font-bold text-ink-800 transition-colors hover:border-rose-gold-400 hover:text-rose-gold-600"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-blush-200 bg-white px-4 py-3 text-sm font-bold text-ink-800 transition-colors hover:border-accent hover:text-primary"
               >
                 <RotateCcw size={16} />
                 {t('a11y.reset')}
               </button>
             </div>
 
-            <footer className="border-t border-blush-100 bg-cream-50/60 px-6 py-4">
+            <footer className="border-t border-blush-100 bg-background/60 px-6 py-4">
               <Link
                 to="/accessibility"
                 onClick={() => setOpen(false)}
@@ -276,16 +276,16 @@ function ToggleRow({
       aria-checked={active}
       className={`flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3 text-start transition-all ${
         active
-          ? 'border-rose-gold-400 bg-blush-50'
-          : 'border-blush-100 bg-white hover:border-rose-gold-300 hover:bg-cream-50'
+          ? 'border-accent bg-blush-50'
+          : 'border-blush-100 bg-white hover:border-accent/60 hover:bg-background'
       }`}
     >
       <span className="flex items-center gap-3">
         <span
           className={`flex h-9 w-9 items-center justify-center rounded-lg ${
             active
-              ? 'bg-rose-gold-500 text-white'
-              : 'bg-blush-100 text-rose-gold-500'
+              ? 'bg-primary text-white'
+              : 'bg-blush-100 text-accent'
           }`}
         >
           {icon}
@@ -294,7 +294,7 @@ function ToggleRow({
       </span>
       <span
         className={`relative h-6 w-11 rounded-full transition-colors ${
-          active ? 'bg-rose-gold-500' : 'bg-blush-200'
+          active ? 'bg-primary' : 'bg-blush-200'
         }`}
       >
         <span

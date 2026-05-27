@@ -24,7 +24,7 @@ export default function Testimonials() {
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
+          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             {t('testimonials.eyebrow')}
           </div>
           <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">

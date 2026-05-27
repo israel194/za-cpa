@@ -26,7 +26,7 @@ export default function Layout() {
   }, [location.pathname])
 
   return (
-    <div className="min-h-screen bg-cream-50 text-ink-800">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
         <Outlet />

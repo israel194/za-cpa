@@ -24,9 +24,9 @@ export default function Hero() {
       <div className="relative mx-auto max-w-5xl px-6 text-center md:px-10">
         <div
           className="mx-auto mb-8 inline-flex items-center gap-2 rounded-full border border-rose-gold-300/50 bg-white/60
-          px-4 py-1.5 text-sm font-medium text-rose-gold-600 backdrop-blur-sm"
+          px-4 py-1.5 text-sm font-medium text-primary backdrop-blur-sm"
         >
-          <Sparkles size={15} className="text-rose-gold-500" />
+          <Sparkles size={15} className="text-accent" />
           משרד מוביל בליווי פיננסי אישי
         </div>
 
@@ -45,9 +45,9 @@ export default function Hero() {
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-rose-gold-500 px-8 py-4 text-base font-semibold
+            className="group inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold
               text-white shadow-[0_18px_40px_-12px_rgba(189,95,124,0.55)] transition-all duration-300
-              hover:-translate-y-0.5 hover:bg-rose-gold-600 hover:shadow-[0_22px_48px_-12px_rgba(189,95,124,0.7)]"
+              hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_22px_48px_-12px_rgba(189,95,124,0.7)]"
           >
             קבעו פגישת ייעוץ
             <ArrowLeft
@@ -59,7 +59,7 @@ export default function Hero() {
             to="/services"
             className="inline-flex items-center gap-2 rounded-full border border-blush-200 bg-white/80 px-8 py-4
               text-base font-semibold text-ink-800 backdrop-blur-sm transition-all duration-300
-              hover:border-rose-gold-400 hover:text-rose-gold-600"
+              hover:border-accent hover:text-primary"
           >
             לשירותים שלנו
           </Link>
@@ -72,7 +72,7 @@ export default function Hero() {
             { stat: '100%', label: 'מחויבות אישית' },
           ].map((item) => (
             <div key={item.label} className="text-center">
-              <div className="font-display text-3xl font-extrabold text-rose-gold-500 md:text-4xl">
+              <div className="font-display text-3xl font-extrabold text-accent md:text-4xl">
                 {item.stat}
               </div>
               <div className="mt-1 text-sm font-medium text-ink-700 md:text-base">

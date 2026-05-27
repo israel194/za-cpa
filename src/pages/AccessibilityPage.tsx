@@ -43,7 +43,7 @@ export default function AccessibilityPage() {
           </article>
 
           {/* Standard */}
-          <article className="mb-10 rounded-2xl border border-blush-100 bg-cream-50/60 p-7">
+          <article className="mb-10 rounded-2xl border border-blush-100 bg-background/60 p-7">
             <h2 className="font-display text-xl font-extrabold text-ink-900 md:text-2xl">
               {t('a11y.statement.standardTitle')}
             </h2>
@@ -63,7 +63,7 @@ export default function AccessibilityPage() {
                   key={feature}
                   className="flex items-start gap-3 rounded-xl border border-blush-100 bg-white p-4"
                 >
-                  <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-rose-gold-500 text-white">
+                  <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-primary text-white">
                     <Check size={14} />
                   </span>
                   <span className="text-sm leading-relaxed text-ink-800">
@@ -148,8 +148,8 @@ export default function AccessibilityPage() {
 
           {/* Response time + last update */}
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-blush-100 bg-cream-50/60 p-6">
-              <div className="flex items-center gap-2 text-rose-gold-500">
+            <div className="rounded-2xl border border-blush-100 bg-background/60 p-6">
+              <div className="flex items-center gap-2 text-accent">
                 <Clock size={18} />
                 <h3 className="font-display text-base font-bold text-ink-900">
                   {t('a11y.statement.responseTitle')}
@@ -159,8 +159,8 @@ export default function AccessibilityPage() {
                 {t('a11y.statement.responseText')}
               </p>
             </div>
-            <div className="rounded-2xl border border-blush-100 bg-cream-50/60 p-6">
-              <div className="flex items-center gap-2 text-rose-gold-500">
+            <div className="rounded-2xl border border-blush-100 bg-background/60 p-6">
+              <div className="flex items-center gap-2 text-accent">
                 <Calendar size={18} />
                 <h3 className="font-display text-base font-bold text-ink-900">
                   {t('a11y.statement.updatedTitle')}

@@ -29,11 +29,11 @@ export default function Sectors({ variant = 'preview' }: Props) {
 
   return (
     <section
-      className={`relative ${variant === 'preview' ? 'bg-cream-50' : 'bg-white'} py-20 md:py-28`}
+      className={`relative ${variant === 'preview' ? 'bg-background' : 'bg-white'} py-20 md:py-28`}
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-500">
+          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             {t('sectors.eyebrow')}
           </div>
           <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
@@ -50,7 +50,7 @@ export default function Sectors({ variant = 'preview' }: Props) {
                 key={sector.slug}
                 to={`/sectors/${sector.slug}`}
                 className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-white p-8 transition-all
-                  duration-300 hover:-translate-y-1 hover:border-rose-gold-300
+                  duration-300 hover:-translate-y-1 hover:border-accent/60
                   hover:shadow-[0_24px_48px_-24px_rgba(189,95,124,0.4)]"
               >
                 <div
@@ -68,7 +68,7 @@ export default function Sectors({ variant = 'preview' }: Props) {
                 <p className="relative mt-3 text-sm leading-relaxed text-ink-700">
                   {sector.summary}
                 </p>
-                <div className="relative mt-5 inline-flex items-center gap-1 text-sm font-semibold text-rose-gold-500">
+                <div className="relative mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent">
                   {t('common.readMore')}
                   <Arrow
                     size={14}

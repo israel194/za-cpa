@@ -156,7 +156,7 @@ export default function LanguageSwitcher({ variant = 'header' }: Props) {
             </span>
             <span
               className={`text-[10px] font-semibold leading-none ${
-                active ? 'text-rose-gold-600' : 'text-ink-700'
+                active ? 'text-primary' : 'text-ink-700'
               }`}
             >
               {labels[lang].native}

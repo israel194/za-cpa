@@ -2,9 +2,30 @@
 
 @theme {
   --font-sans: "Assistant", "Heebo", "Rubik", system-ui, sans-serif;
-  --font-display: "Heebo", "Assistant", system-ui, sans-serif;
+  /* Per-language display font; defaults to Hebrew. Overridden via :lang(en) / :lang(ar) below. */
+  --font-display: "Frank Ruhl Libre", "David Libre", "Heebo", "Assistant", serif;
+  --font-display-en: "Playfair Display", "Frank Ruhl Libre", serif;
+  --font-display-he: "Frank Ruhl Libre", "David Libre", "Heebo", "Assistant", serif;
+  --font-display-ar: "Amiri", "Cairo", "Tajawal", serif;
 
-  /* Feminine couture palette — rose, pink, peach, with silver + burgundy depth */
+  /* ── Soft Burgundy Boutique — semantic tokens ─────────────────────────────
+     New primaries used by the redesign (added Phase 1). The legacy named
+     palettes below remain for components that still reference them. */
+  --color-primary: #831843;            /* deep rose for CTAs/headings */
+  --color-primary-foreground: #ffffff;
+  --color-accent: #a16207;             /* antique gold — WCAG-safe on white & pink-cream */
+  --color-accent-foreground: #ffffff;
+  --color-background: #fdf2f8;         /* warm cream pink page bg */
+  --color-surface: #ffffff;            /* card bg */
+  --color-foreground: #451a2c;         /* rich plum body text */
+  --color-muted: #f0edf4;
+  --color-muted-foreground: #64748b;
+  --color-border: #fbcfe8;
+  --color-ring: #831843;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+
+  /* ── Feminine couture palette — rose, pink, peach, with silver + burgundy depth ── */
 
   /* BLUSH — soft pink-peach foundation */
   --color-blush-50:  #fff7f4;
@@ -75,15 +96,21 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-cream-50);
-  color: var(--color-ink-800);
+  background: var(--color-background);
+  color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
+/* Per-language display font override — every component using `font-display`
+   automatically switches to the right serif family. */
+:lang(en) {
+  --font-display: var(--font-display-en);
+}
 :lang(ar) {
   font-family: "Cairo", "Tajawal", "Assistant", sans-serif;
+  --font-display: var(--font-display-ar);
 }
 
 * {
