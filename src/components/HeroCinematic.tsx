@@ -105,13 +105,13 @@ export default function HeroCinematic() {
             }`}
           >
             <img
-              src="/israel-asor.jpg"
+              src="/orit/orit.jpeg"
               alt={t('hero.portraitAlt')}
               width="480"
               height="600"
               decoding="async"
               fetchPriority="high"
-              className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
+              className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
             />
 
             <div
