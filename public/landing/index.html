@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>עשור רואי חשבון | פתיחת תיק עוסק וייעוץ חשבונאי</title>
+    <meta
+      name="description"
+      content="עוסק פטור, עוסק מורשה, חברה בע״מ או עמותה? צוות עשור רואי חשבון יבחר איתכם את המסגרת הנכונה ויטפל בכל הצעדים — מהפתיחה ועד הדוח השנתי."
+    />
+    <meta property="og:title" content="עשור רואי חשבון | פתיחת תיק עוסק וייעוץ חשבונאי" />
+    <meta property="og:description" content="ליווי חשבונאי בגובה העיניים. בחירת מסגרת, פתיחת תיק וניהול שוטף." />
+    <meta property="og:locale" content="he_IL" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Assistant:wght@400;500;600;700&display=swap"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: {
+                950: '#070F1F',
+                900: '#0B1426',
+                800: '#0F1B33',
+                700: '#1A2845',
+                600: '#2A3A5C',
+              },
+              gold: {
+                DEFAULT: '#C9A961',
+                light: '#E5C988',
+                dark: '#8B6F2E',
+                muted: '#A4894A',
+              },
+              cream: '#FAF8F1',
+              ink: '#1F2937',
+            },
+            fontFamily: {
+              sans: ['Heebo', 'Assistant', 'system-ui', 'sans-serif'],
+            },
+            boxShadow: {
+              card: '0 24px 60px -28px rgba(11, 20, 38, 0.35)',
+              gold: '0 18px 40px -16px rgba(201, 169, 97, 0.55)',
+            },
+          },
+        },
+      }
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Heebo', 'Assistant', system-ui, sans-serif; }
+      /* Subtle paper-grain background helper */
+      .grain::before {
+        content: '';
+        position: absolute; inset: 0;
+        background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 3px 3px;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      /* Hairline gold divider */
+      .gold-divider {
+        height: 1px;
+        background: linear-gradient(to left, transparent, #C9A961, transparent);
+      }
+      /* Form field focus ring */
+      .field input:focus, .field select:focus, .field textarea:focus {
+        outline: none;
+        border-color: #C9A961;
+        box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.18);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { animation: none !important; transition: none !important; }
+      }
+    </style>
+  </head>
+
+  <body class="bg-cream text-ink antialiased">
+    <!-- ════════════════════════════════════════════════════════════════
+         HERO
+         ════════════════════════════════════════════════════════════════ -->
+    <section class="relative overflow-hidden bg-navy-900 grain text-white">
+      <!-- Decorative gold halos -->
+      <div aria-hidden class="pointer-events-none absolute -top-32 -start-32 h-[28rem] w-[28rem] rounded-full bg-gold/15 blur-3xl"></div>
+      <div aria-hidden class="pointer-events-none absolute -bottom-40 -end-40 h-[32rem] w-[32rem] rounded-full bg-gold/10 blur-3xl"></div>
+
+      <!-- Top bar -->
+      <header class="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+        <a href="https://za-cpa.com" class="flex items-center gap-2 font-semibold tracking-wide text-white/90 hover:text-gold transition-colors">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden>
+            <rect x="3" y="3" width="26" height="26" rx="6" stroke="#C9A961" stroke-width="2"/>
+            <path d="M10 21 L16 9 L22 21 M12.5 17 L19.5 17" stroke="#C9A961" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="text-lg">עשור · רואי חשבון</span>
+        </a>
+        <a href="tel:0523975659" class="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-gold transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          052-3975659
+        </a>
+      </header>
+
+      <!-- Hero content -->
+      <div class="relative z-10 mx-auto max-w-6xl px-6 pt-12 pb-24 md:pt-20 md:pb-32 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-gold backdrop-blur-sm">
+          <span class="h-1.5 w-1.5 rounded-full bg-gold animate-pulse"></span>
+          ייעוץ ראשוני ללא עלות
+        </span>
+
+        <h1 class="mx-auto mt-7 max-w-4xl text-4xl font-extrabold leading-[1.1] tracking-tight md:text-6xl lg:text-[4.25rem]">
+          הצעד הראשון לעסק מצליח
+          <span class="block text-gold">מתחיל כאן</span>
+        </h1>
+
+        <p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
+          ליווי חשבונאי דיסקרטי, מקצועי ומדויק. צוות עשור יבחר איתכם את המסגרת הנכונה — עוסק, חברה או עמותה — ויקפיד שתישנו בלילה בידיעה שהמספרים בידיים טובות.
+        </p>
+
+        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="#contact"
+            class="group inline-flex items-center gap-2 rounded-full bg-gold px-9 py-4 text-base font-bold text-navy-900 shadow-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-light"
+          >
+            לקבלת ייעוץ אישי
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden class="transition-transform group-hover:-translate-x-1">
+              <path d="M19 12H5"/><path d="m12 5-7 7 7 7"/>
+            </svg>
+          </a>
+          <a
+            href="tel:0523975659"
+            class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-9 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-gold hover:text-gold"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            התקשרו עכשיו
+          </a>
+        </div>
+
+        <!-- Trust strip -->
+        <div class="mx-auto mt-14 grid max-w-3xl grid-cols-3 gap-6 border-t border-white/10 pt-8 text-center">
+          <div>
+            <div class="text-3xl font-extrabold text-gold md:text-4xl">+25</div>
+            <div class="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-white/60">שנות ניסיון</div>
+          </div>
+          <div class="border-x border-white/10">
+            <div class="text-3xl font-extrabold text-gold md:text-4xl">+500</div>
+            <div class="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-white/60">לקוחות מרוצים</div>
+          </div>
+          <div>
+            <div class="text-3xl font-extrabold text-gold md:text-4xl">100%</div>
+            <div class="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-white/60">דיסקרטיות</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         SERVICES / ENTITY TYPES
+         ════════════════════════════════════════════════════════════════ -->
+    <section id="services" class="relative bg-white py-20 md:py-28">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mx-auto max-w-2xl text-center">
+          <span class="text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark">סוגי תיקים</span>
+          <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-navy-900 md:text-4xl">
+            בחרו את המסגרת שתקדם את העסק שלכם
+          </h2>
+          <div class="gold-divider mx-auto mt-8 w-32"></div>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <!-- Exempt Dealer -->
+          <article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold/60">
+            <div aria-hidden class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-transparent via-gold to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            <div class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+                <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy-900">עוסק פטור</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+              מתאים לעצמאים בתחילת הדרך עם מחזור מתחת לתקרה. דיווח מינימלי, פתיחת תיק מהירה ושקט תפעולי מהיום הראשון.
+            </p>
+            <ul class="mt-5 space-y-1.5 text-xs text-slate-500">
+              <li>פטור ממע״מ עד תקרת המחזור</li>
+              <li>ניהול ספרים פשוט</li>
+              <li>דוח שנתי בלבד</li>
+            </ul>
+          </article>
+
+          <!-- Authorized Dealer -->
+          <article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold/60">
+            <div aria-hidden class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-transparent via-gold to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            <div class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+                <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1m4 0h1M9 13h1m4 0h1M9 17h1m4 0h1"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy-900">עוסק מורשה</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+              המבנה המקובל לעצמאים פעילים — דיווח מע״מ סדיר, החזרי מס מלאים והכרה בהוצאות עסקיות.
+            </p>
+            <ul class="mt-5 space-y-1.5 text-xs text-slate-500">
+              <li>החזרי מע״מ על הוצאות</li>
+              <li>גמישות בצמיחה</li>
+              <li>דיווח חודשי/דו־חודשי</li>
+            </ul>
+          </article>
+
+          <!-- Ltd. Company -->
+          <article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold/60">
+            <div aria-hidden class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-transparent via-gold to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            <div class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+                <rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 13v4"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy-900">חברה בע״מ</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+              הגנה משפטית מלאה, הפרדה בין הון פרטי לעסקי ויתרונות מיסוי משמעותיים — לעסקים בצמיחה.
+            </p>
+            <ul class="mt-5 space-y-1.5 text-xs text-slate-500">
+              <li>אחריות מוגבלת</li>
+              <li>תכנון מס מתקדם</li>
+              <li>אמינות מול ספקים ובנקים</li>
+            </ul>
+          </article>
+
+          <!-- Non-profit -->
+          <article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold/60">
+            <div aria-hidden class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-transparent via-gold to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            <div class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy-900">עמותה</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+              הקמה, ניהול שוטף ואישור ניהול תקין — מהצעד הראשון ועד דוחות שנתיים ותרומות מוכרות.
+            </p>
+            <ul class="mt-5 space-y-1.5 text-xs text-slate-500">
+              <li>אישור 46א׳ לתרומות</li>
+              <li>דוחות לרשם העמותות</li>
+              <li>ניהול תקין שנה אחר שנה</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         CONSULTATION
+         ════════════════════════════════════════════════════════════════ -->
+    <section class="relative bg-navy-900 grain py-20 md:py-28 text-white">
+      <div aria-hidden class="pointer-events-none absolute inset-y-0 -end-32 w-[40rem] rounded-full bg-gold/10 blur-3xl"></div>
+      <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-[0.22em] text-gold">ייעוץ מקצועי</span>
+          <h2 class="mt-3 text-3xl font-extrabold leading-tight md:text-4xl">
+            לא בטוחים איזה תיק
+            <span class="text-gold">מתאים לכם?</span>
+          </h2>
+          <p class="mt-6 text-lg leading-relaxed text-white/80">
+            נקבע פגישת היכרות קצרה, נבחן את ההיקף הצפוי, סוג הפעילות והיעדים שלכם — ונכוון אתכם למסגרת שתעבוד לטובתכם מהיום הראשון. הייעוץ ללא התחייבות וללא עלות.
+          </p>
+          <div class="mt-8 flex flex-col items-start gap-3">
+            <div class="flex items-center gap-3 text-white/85">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gold/15 text-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              ניתוח אישי של ההיקף והעלויות הצפויות
+            </div>
+            <div class="flex items-center gap-3 text-white/85">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gold/15 text-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              הסבר ברור על יתרונות וחסרונות של כל מסלול
+            </div>
+            <div class="flex items-center gap-3 text-white/85">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gold/15 text-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              המלצה מותאמת אישית — ופתיחת תיק מיידית
+            </div>
+          </div>
+          <a
+            href="#contact"
+            class="group mt-10 inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 text-base font-bold text-navy-900 shadow-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-light"
+          >
+            קבעו ייעוץ ללא התחייבות
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden class="transition-transform group-hover:-translate-x-1">
+              <path d="M19 12H5"/><path d="m12 5-7 7 7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Decorative side card -->
+        <div class="relative">
+          <div class="relative rounded-3xl border border-gold/20 bg-navy-800/60 p-10 backdrop-blur-sm">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden class="mb-6">
+              <path d="M14 18 24 8l10 10M14 30l10 10 10-10" stroke="#C9A961" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="24" cy="24" r="3" fill="#C9A961"/>
+            </svg>
+            <blockquote class="text-xl font-medium leading-relaxed text-white md:text-2xl">
+              "המסגרת הנכונה חוסכת לכם מאות אלפי שקלים לאורך חיי העסק. בחרו במחשבה תחילה."
+            </blockquote>
+            <div class="gold-divider my-6"></div>
+            <p class="text-sm font-medium text-gold-light">צוות עשור · רואי חשבון</p>
+          </div>
+          <div aria-hidden class="absolute -bottom-4 -end-4 -z-10 h-full w-full rounded-3xl border border-gold/15"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         CONTACT FORM
+         ════════════════════════════════════════════════════════════════ -->
+    <section id="contact" class="relative bg-cream py-20 md:py-28">
+      <div class="mx-auto max-w-3xl px-6">
+        <div class="text-center">
+          <span class="text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark">השאירו פרטים</span>
+          <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-navy-900 md:text-4xl">
+            נשמח לדבר אתכם
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600 md:text-lg">
+            מלאו את הפרטים ונחזור אליכם תוך יום עסקים אחד. כל הפנייה דיסקרטית.
+          </p>
+          <div class="gold-divider mx-auto mt-8 w-32"></div>
+        </div>
+
+        <form id="lead-form" novalidate class="mt-12 rounded-3xl border border-slate-200 bg-white p-8 shadow-card md:p-12">
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="field sm:col-span-2">
+              <label for="name" class="mb-2 block text-sm font-semibold text-navy-900">
+                שם מלא <span class="text-gold-dark">*</span>
+              </label>
+              <input
+                id="name" name="name" type="text" required autocomplete="name"
+                class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-navy-900 placeholder:text-slate-400 transition"
+                placeholder="ישראל ישראלי"
+              />
+            </div>
+
+            <div class="field">
+              <label for="phone" class="mb-2 block text-sm font-semibold text-navy-900">
+                טלפון <span class="text-gold-dark">*</span>
+              </label>
+              <input
+                id="phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel"
+                class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-navy-900 placeholder:text-slate-400 transition"
+                placeholder="050-0000000"
+                pattern="[0-9\-\+\s\(\)]{7,}"
+              />
+            </div>
+
+            <div class="field">
+              <label for="email" class="mb-2 block text-sm font-semibold text-navy-900">
+                דוא״ל
+              </label>
+              <input
+                id="email" name="email" type="email" autocomplete="email" inputmode="email"
+                class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-navy-900 placeholder:text-slate-400 transition"
+                placeholder="name@example.com"
+                dir="ltr"
+              />
+            </div>
+
+            <div class="field sm:col-span-2">
+              <label for="service" class="mb-2 block text-sm font-semibold text-navy-900">
+                סוג השירות המבוקש
+              </label>
+              <select
+                id="service" name="service"
+                class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-navy-900 transition"
+              >
+                <option value="">בחרו אפשרות (אופציונלי)</option>
+                <option value="עוסק פטור">פתיחת תיק עוסק פטור</option>
+                <option value="עוסק מורשה">פתיחת תיק עוסק מורשה</option>
+                <option value="חברה בע״מ">הקמת חברה בע״מ</option>
+                <option value="עמותה">הקמת עמותה</option>
+                <option value="ייעוץ">ייעוץ — לא בטוח/ה איזה תיק מתאים</option>
+                <option value="אחר">אחר</option>
+              </select>
+            </div>
+
+            <div class="field sm:col-span-2">
+              <label for="message" class="mb-2 block text-sm font-semibold text-navy-900">
+                הודעה
+              </label>
+              <textarea
+                id="message" name="message" rows="4"
+                class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-navy-900 placeholder:text-slate-400 transition"
+                placeholder="ספרו לנו בקצרה על העסק או על מה שהכי בוער לכם"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Status banner -->
+          <div id="form-status" role="status" aria-live="polite" class="mt-6 hidden rounded-xl border px-4 py-3 text-sm font-medium"></div>
+
+          <button
+            id="submit-btn" type="submit"
+            class="group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy-900 px-8 py-4 text-base font-bold text-white shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:bg-navy-700 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span class="btn-label">שלחו פנייה</span>
+            <svg class="btn-spinner hidden h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/>
+              <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </button>
+
+          <p class="mt-4 text-center text-xs text-slate-500">
+            * שדות חובה. הפרטים מגיעים ישירות ל-<span dir="ltr">office@za-cpa.com</span> ולא נשמרים בשרת חיצוני.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         FOOTER
+         ════════════════════════════════════════════════════════════════ -->
+    <footer class="bg-navy-950 py-10 text-white/70">
+      <div class="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 sm:flex-row sm:justify-between">
+        <a
+          href="https://za-cpa.com"
+          class="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-gold transition-colors"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+            <path d="M19 12H5"/><path d="m12 5-7 7 7 7"/>
+          </svg>
+          חזרה לאתר הראשי
+        </a>
+        <p class="text-xs text-white/55">
+          © <span id="year"></span> עשור — רואי חשבון. כל הזכויות שמורות.
+        </p>
+      </div>
+    </footer>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         BEHAVIOR — form submission + helpers
+         ════════════════════════════════════════════════════════════════ -->
+    <script>
+      // ───────────────────────────────────────────────────────────────
+      // Form endpoint configuration.
+      //
+      // The form posts to one of two backends, chosen by ENDPOINT below:
+      //   'apps-script' — Google Apps Script web app. Works on a static host
+      //                   like GitHub Pages. Set APPS_SCRIPT_URL after deploying
+      //                   apps-script/Code.gs (see notify.ts in the main repo).
+      //   'php'         — submit.php in this directory. Requires hosting on a
+      //                   PHP-capable server (cPanel / Hostinger / Liquid Web).
+      // ───────────────────────────────────────────────────────────────
+      const ENDPOINT = 'apps-script' // 'apps-script' | 'php'
+      const APPS_SCRIPT_URL =
+        'https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec'
+
+      document.getElementById('year').textContent = new Date().getFullYear()
+
+      const form = document.getElementById('lead-form')
+      const statusEl = document.getElementById('form-status')
+      const submitBtn = document.getElementById('submit-btn')
+      const btnLabel = submitBtn.querySelector('.btn-label')
+      const btnSpinner = submitBtn.querySelector('.btn-spinner')
+
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const PHONE_RE = /^[\d\s\-\+\(\)]{7,}$/
+
+      function setStatus(kind, text) {
+        statusEl.className =
+          'mt-6 rounded-xl border px-4 py-3 text-sm font-medium ' +
+          (kind === 'success'
+            ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
+            : kind === 'error'
+            ? 'border-rose-200 bg-rose-50 text-rose-800'
+            : 'hidden')
+        statusEl.textContent = text || ''
+      }
+
+      function setLoading(on) {
+        submitBtn.disabled = on
+        btnLabel.textContent = on ? 'שולח...' : 'שלחו פנייה'
+        btnSpinner.classList.toggle('hidden', !on)
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        setStatus(null)
+
+        const data = Object.fromEntries(new FormData(form))
+        data.name = (data.name || '').trim()
+        data.phone = (data.phone || '').trim()
+        data.email = (data.email || '').trim()
+
+        if (!data.name) {
+          setStatus('error', 'יש להזין שם מלא')
+          form.querySelector('#name').focus()
+          return
+        }
+        if (!PHONE_RE.test(data.phone)) {
+          setStatus('error', 'יש להזין מספר טלפון תקין')
+          form.querySelector('#phone').focus()
+          return
+        }
+        if (data.email && !EMAIL_RE.test(data.email)) {
+          setStatus('error', 'כתובת דוא״ל לא תקינה')
+          form.querySelector('#email').focus()
+          return
+        }
+
+        setLoading(true)
+        try {
+          let ok = false
+          if (ENDPOINT === 'apps-script') {
+            // Apps Script needs text/plain to avoid CORS preflight.
+            const res = await fetch(APPS_SCRIPT_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({ target: 'office', ...data }),
+              keepalive: true,
+            })
+            // Apps Script web apps return 200 even on script errors; check body when available.
+            try {
+              const body = await res.clone().json()
+              ok = body && body.ok !== false
+            } catch {
+              ok = res.ok
+            }
+          } else {
+            const fd = new FormData(form)
+            const res = await fetch('./submit.php', { method: 'POST', body: fd })
+            const body = await res.json().catch(() => ({}))
+            ok = res.ok && body.ok !== false
+          }
+
+          if (ok) {
+            setStatus('success', 'תודה! קיבלנו את הפנייה ונחזור אליכם בהקדם.')
+            form.reset()
+          } else {
+            throw new Error('Backend reported failure')
+          }
+        } catch (err) {
+          console.error('[form] send failed', err)
+          setStatus(
+            'error',
+            'משהו השתבש בשליחה. אפשר להתקשר ישירות: 052-3975659 או לשלוח מייל ל-office@za-cpa.com'
+          )
+        } finally {
+          setLoading(false)
+        }
+      })
+    </script>
+  </body>
+</html>
