@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
@@ -6,16 +6,13 @@ import {
   ArrowRight,
   Phone,
   Sparkles,
-  Play,
   HeartHandshake,
 } from 'lucide-react'
-import Logo from './Logo'
 
 export default function HeroCinematic() {
   const { t, i18n } = useTranslation()
   const isRtl = i18n.dir() === 'rtl'
   const Arrow = isRtl ? ArrowLeft : ArrowRight
-  const [videoFailed, setVideoFailed] = useState(false)
 
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
@@ -91,7 +88,7 @@ export default function HeroCinematic() {
           </div>
         </div>
 
-        {/* FLOATING VIDEO CARD */}
+        {/* FLOATING PORTRAIT CARD */}
         <div className="relative mx-auto w-full max-w-[480px] lg:mx-0">
           <div
             aria-hidden
@@ -107,39 +104,32 @@ export default function HeroCinematic() {
               isRtl ? 'rotate-[2deg]' : '-rotate-[2deg]'
             }`}
           >
-            {!videoFailed ? (
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="absolute inset-0 h-full w-full object-cover"
-                onError={() => setVideoFailed(true)}
-                poster="/office-poster.jpg"
-              >
-                <source src="/office.mp4" type="video/mp4" />
-              </video>
-            ) : (
-              <ElegantPlaceholder />
-            )}
-
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-900/65 via-ink-900/15 to-transparent"
+            <img
+              src="/israel-asor.jpg"
+              alt={t('hero.portraitAlt')}
+              width="480"
+              height="600"
+              decoding="async"
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
             />
 
             <div
-              className={`absolute bottom-5 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md ${
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink-900/80 via-ink-900/25 to-transparent"
+            />
+
+            <div
+              className={`absolute bottom-5 max-w-[calc(100%-2.5rem)] rounded-2xl border border-white/25 bg-white/15 px-4 py-3 text-white backdrop-blur-md ${
                 isRtl ? 'end-5' : 'start-5'
               }`}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-gold-300 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-rose-gold-400" />
-              </span>
-              <Play size={11} className="fill-white" />
-              {t('hero.liveLabel')}
+              <div className="font-display text-base font-semibold leading-tight">
+                {t('hero.portraitName')}
+              </div>
+              <div className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white/80">
+                {t('hero.portraitRole')}
+              </div>
             </div>
           </div>
 
@@ -212,32 +202,3 @@ function FloatingCard({
   )
 }
 
-function ElegantPlaceholder() {
-  const { t } = useTranslation()
-  return (
-    <div className="absolute inset-0 bg-gradient-to-bl from-rose-gold-500 via-blush-400 to-peach-300">
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_25%_25%,rgba(255,255,255,0.5),transparent_45%),radial-gradient(circle_at_75%_75%,rgba(255,225,238,0.4),transparent_55%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.25)_1px,transparent_1px)] [background-size:48px_48px]"
-      />
-
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-8 text-center text-white">
-        <Logo variant="mark" tone="inverse" size={88} />
-        <div className="font-display text-2xl font-extrabold leading-none">
-          {t('brand.name')}
-        </div>
-        <div className="text-xs font-semibold uppercase tracking-[0.3em] text-white/85">
-          {t('brand.subtitle')}
-        </div>
-      </div>
-
-      <div className="absolute top-5 end-5 flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-white/85 backdrop-blur-sm">
-        <Sparkles size={15} />
-      </div>
-    </div>
-  )
-}

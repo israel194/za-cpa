@@ -36,12 +36,24 @@ export default function Team() {
                 className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-rose-gold-500 via-blush-400 to-rose-gold-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               />
 
-              <div className="relative mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-blush-200 via-blush-100 to-cream-200">
-                <div className="flex h-[5.25rem] w-[5.25rem] items-center justify-center rounded-full bg-white">
-                  <span className="font-display text-2xl font-extrabold text-accent">
-                    {initialsOf(member.name)}
-                  </span>
-                </div>
+              <div className="relative mx-auto mb-6 flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-accent/30 via-blush-100 to-cream-200 p-[3px] shadow-[0_12px_24px_-12px_rgba(131,24,67,0.35)]">
+                {member.image ? (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    loading="lazy"
+                    decoding="async"
+                    width="112"
+                    height="112"
+                    className="h-full w-full rounded-full object-cover object-[center_15%]"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center rounded-full bg-white">
+                    <span className="font-display text-2xl font-semibold text-accent">
+                      {initialsOf(member.name)}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <h3 className="font-display text-xl font-bold text-ink-900">

@@ -83,6 +83,7 @@ export function useTestimonials(): Testimonial[] {
 export type TeamMember = {
   name: string
   role: string
+  image?: string
 }
 
 export function useTeam(): TeamMember[] {
