@@ -1,7 +1,7 @@
 // Google Apps Script web-app endpoint. Replace this URL after deploying
 // apps-script/Code.gs (see that file's header for instructions).
 const NOTIFY_ENDPOINT =
-  'https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec'
+  'https://script.google.com/a/macros/za-cpa.com/s/AKfycbwS025C9-OhEynAqpPWQc3RX4cDimKzLiH_zhW5Rr8yY0Jp4v4SgJDpaTAt3dnH09ud/exec'
 
 export type NotifyTarget = 'office' | 'orit'
 
