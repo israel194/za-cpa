@@ -82,8 +82,8 @@ export default function HeroCinematic() {
           </div>
 
           <div className="mx-auto mt-12 grid max-w-md grid-cols-3 gap-4 border-t border-border pt-8 lg:mx-0 lg:max-w-lg">
-            <Stat value="+25" label={t('stats.experience')} />
-            <Stat value="+500" label={t('stats.happyClients')} />
+            <Stat value="+12" label={t('stats.experience')} />
+            <Stat value="+250" label={t('stats.happyClients')} />
             <Stat value="100%" label={t('stats.commitment')} />
           </div>
         </div>
@@ -137,14 +137,14 @@ export default function HeroCinematic() {
             position="top"
             isRtl={isRtl}
             icon={<Sparkles size={18} />}
-            title="+25"
+            title="+12"
             subtitle={t('stats.experience')}
           />
           <FloatingCard
             position="bottom"
             isRtl={isRtl}
             icon={<HeartHandshake size={18} />}
-            title="+500"
+            title="+250"
             subtitle={t('stats.happyClients')}
           />
         </div>

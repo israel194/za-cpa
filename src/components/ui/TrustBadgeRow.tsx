@@ -14,8 +14,8 @@ type Props = {
 }
 
 const DEFAULT_BADGES: Badge[] = [
-  { icon: <Award className="h-5 w-5" />, value: '25+', label: 'שנות ניסיון' },
-  { icon: <Sparkles className="h-5 w-5" />, value: '500+', label: 'לקוחות מרוצים' },
+  { icon: <Award className="h-5 w-5" />, value: '12+', label: 'שנות ניסיון' },
+  { icon: <Sparkles className="h-5 w-5" />, value: '250+', label: 'לקוחות מרוצים' },
   { icon: <ShieldCheck className="h-5 w-5" />, value: 'תקן 5568', label: 'נגישות' },
   { icon: <ScrollText className="h-5 w-5" />, value: 'GDPR', label: 'פרטיות מלאה' },
 ]
