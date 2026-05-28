@@ -8,6 +8,15 @@ import WhatsAppFloat from './WhatsAppFloat'
 import AccessibilityMenu from './AccessibilityMenu'
 import CookieConsent from './CookieConsent'
 
+function SkipLink() {
+  const { t } = useTranslation()
+  return (
+    <a href="#main" className="skip-link">
+      {t('a11y.skipToContent')}
+    </a>
+  )
+}
+
 export default function Layout() {
   const location = useLocation()
   const { i18n } = useTranslation()
@@ -27,8 +36,9 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SkipLink />
       <Header />
-      <main>
+      <main id="main">
         <Outlet />
       </main>
       <Footer />

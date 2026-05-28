@@ -272,3 +272,63 @@ html.a11y-no-motion video {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Letter spacing — 3 levels */
+html.a11y-letter-1 * { letter-spacing: 0.04em !important; }
+html.a11y-letter-2 * { letter-spacing: 0.09em !important; }
+
+/* Line height — 3 levels */
+html.a11y-line-1 * { line-height: 1.65 !important; }
+html.a11y-line-2 * { line-height: 1.95 !important; }
+
+/* Color saturation modes (mutually exclusive in practice but stackable) */
+html.a11y-saturation-low { filter: saturate(0.4); }
+html.a11y-saturation-high { filter: saturate(1.7); }
+html.a11y-invert { filter: invert(1) hue-rotate(180deg); }
+html.a11y-invert img,
+html.a11y-invert video,
+html.a11y-invert svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Stack high-contrast + invert correctly when both are on */
+html.a11y-high-contrast.a11y-invert { filter: contrast(1.25) invert(1) hue-rotate(180deg); }
+html.a11y-high-contrast.a11y-saturation-low { filter: contrast(1.25) saturate(0.4); }
+html.a11y-high-contrast.a11y-saturation-high { filter: contrast(1.25) saturate(1.7); }
+
+/* Reading guide — horizontal bar that follows the cursor */
+html.a11y-reading-guide::after {
+  content: '';
+  position: fixed;
+  inset-inline: 0;
+  top: var(--a11y-cursor-y, 50%);
+  height: 28px;
+  margin-top: -14px;
+  background: rgba(183, 110, 121, 0.18);
+  border-block: 2px solid rgba(183, 110, 121, 0.85);
+  pointer-events: none;
+  z-index: 30;
+  transition: top 60ms linear;
+}
+
+/* Skip link — only visible on keyboard focus */
+.skip-link {
+  position: fixed;
+  top: -3rem;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--color-rose-gold-500);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: 0 12px 28px -10px rgba(183, 110, 121, 0.6);
+  transition: top 200ms ease;
+}
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
