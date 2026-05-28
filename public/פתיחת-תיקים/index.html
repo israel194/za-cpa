@@ -189,6 +189,17 @@
       .cookie-cat.is-on { border-color: #c9a227; background: rgba(201, 162, 39, 0.1); }
       .cookie-cat.is-on .cookie-sw { background: #c9a227; }
       .cookie-cat.is-on .cookie-sw::after { inset-inline-start: 24px; }
+
+      /* Legal statement modals (privacy / accessibility) */
+      .legal-sec { margin-bottom: 18px; }
+      .legal-sec > h3 { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; color: #0a1c3a; }
+      .legal-sec > h3::before { content: ''; flex: none; width: 4px; height: 16px; border-radius: 2px; background: #c9a227; }
+      .legal-sec p { margin-top: 6px; font-size: 13.5px; line-height: 1.7; color: #33405a; }
+      .legal-ul { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+      .legal-ul li { display: flex; gap: 8px; font-size: 13.5px; line-height: 1.7; color: #33405a; }
+      .legal-ul li::before { content: ''; flex: none; width: 6px; height: 6px; border-radius: 9999px; background: #c9a227; margin-top: 7px; }
+      .legal-contact { margin-top: 8px; border-radius: 14px; border: 1px solid #d6e2f3; background: #eef3fb; padding: 14px; font-size: 13.5px; line-height: 1.8; color: #0e2750; }
+      .legal-updated { margin-top: 12px; font-size: 12px; color: #8ba0bd; }
     </style>
   </head>
 
@@ -653,6 +664,13 @@
       </div>
       <div class="border-t border-white/10">
         <div class="mx-auto max-w-6xl px-5 py-5 text-center text-xs text-navy-100/60">
+          <div class="mb-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <button type="button" data-legal-open="privacy" class="transition-colors hover:text-white">מדיניות פרטיות</button>
+            <span class="text-white/20">|</span>
+            <button type="button" data-legal-open="a11y" class="transition-colors hover:text-white">הצהרת נגישות</button>
+            <span class="text-white/20">|</span>
+            <button type="button" data-cookie-manage class="transition-colors hover:text-white">ניהול הסכמות עוגיות</button>
+          </div>
           © <span id="year"></span> עשור רואי חשבון. כל הזכויות שמורות.
         </div>
       </div>
@@ -742,9 +760,9 @@
         </div>
 
         <footer class="border-t border-navy-100 bg-navy-50/60 px-6 py-4">
-          <a href="https://za-cpa.com/accessibility" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white hover:bg-navy-800">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> הצהרת נגישות
-          </a>
+          <button type="button" data-legal-open="a11y" class="flex w-full items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white hover:bg-navy-800">
+            <i class="fa-solid fa-file-lines"></i> הצהרת נגישות
+          </button>
         </footer>
       </aside>
     </div>
@@ -760,7 +778,7 @@
           <p class="mt-2 text-sm leading-relaxed text-navy-800/85">עוגיות חיוניות שומרות על האתר עובד חלק. עוגיות אופציונליות (אנליטיקה ושיווק) עוזרות לנו להשתפר — רק בהסכמתכם.</p>
           <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-navy-800/70">
             <span class="font-medium text-gold-600">הבחירה שלכם, וניתן לשנות בכל רגע.</span>
-            <a href="https://za-cpa.com/privacy" target="_blank" rel="noopener" class="font-semibold text-navy-800 underline decoration-gold-300 underline-offset-4 hover:text-navy-900">למדיניות הפרטיות המלאה</a>
+            <button type="button" data-legal-open="privacy" class="font-semibold text-navy-800 underline decoration-gold-300 underline-offset-4 hover:text-navy-900">למדיניות הפרטיות המלאה</button>
           </div>
         </div>
         <div class="flex flex-wrap gap-2 md:flex-col md:gap-2.5">
@@ -806,6 +824,146 @@
           <button id="cookie-modal-save" type="button" class="inline-flex items-center gap-1.5 rounded-full bg-navy-900 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-navy-800"><i class="fa-solid fa-check"></i> שמירת הגדרות</button>
           <button id="cookie-modal-acceptall" type="button" class="rounded-full bg-gold-500 px-5 py-2.5 text-sm font-bold text-navy-950 transition-colors hover:bg-gold-400">אישור הכל</button>
         </footer>
+      </div>
+    </div>
+
+    <!-- ============ PRIVACY POLICY MODAL (ported from main site) ============ -->
+    <div id="privacy-modal" class="hidden">
+      <div class="fixed inset-0 z-[60] bg-navy-950/55" data-legal-close></div>
+      <div role="dialog" aria-modal="true" aria-label="מדיניות פרטיות ועוגיות" class="fixed inset-x-3 top-1/2 z-[60] mx-auto flex max-h-[88vh] max-w-2xl -translate-y-1/2 flex-col overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]">
+        <header class="flex items-center justify-between gap-3 border-b border-navy-100 bg-navy-900 px-6 py-5 text-white">
+          <div class="flex items-center gap-3">
+            <span class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-gold-500 text-navy-950"><i class="fa-solid fa-shield-halved"></i></span>
+            <div>
+              <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-400">פרטיות</div>
+              <h2 class="text-lg font-extrabold leading-tight">מדיניות פרטיות ועוגיות</h2>
+            </div>
+          </div>
+          <button type="button" data-legal-close aria-label="סגירה" class="rounded-full p-2 text-white/80 transition-colors hover:bg-white/10"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </header>
+        <div class="overflow-y-auto px-6 py-6 md:px-8">
+          <p class="mb-5 text-sm leading-relaxed text-navy-800/85">אנו מחויבים להגן על פרטיותכם ולפעול בהתאם לחוק הגנת הפרטיות, התשמ״א-1981 ולתקנות מכוחו.</p>
+
+          <div class="legal-sec"><h3>כללי</h3><p>מסמך זה נועד לתאר את עיקרי מדיניות הפרטיות שלנו בשפה ברורה ונגישה. במקרה של סתירה בין מסמך זה להוראות הדין החל, יגברו הוראות הדין. אין באמור במדיניות זו כדי לגרוע מזכויותיכם לפי כל דין.</p></div>
+          <div class="legal-sec"><h3>מבוא</h3><p>מדיניות פרטיות זו מתארת כיצד משרד עשור — רואי חשבון אוסף, מחזיק, משתמש ומעביר מידע אישי המתקבל באמצעות אתר זה, וכן את זכויותיכם ביחס למידע. השימוש באתר ומסירת מידע באמצעותו מהווים הסכמה לתנאי מדיניות זו, בכפוף לכל דין.</p></div>
+          <div class="legal-sec"><h3>זהות בעל המאגר ופרטי הקשר</h3><p>בעל המאגר ומחזיקו: משרד עשור — רואי חשבון, ח.פ. 515367779. כתובת: רח׳ נחום חפצדי 17, ירושלים, מגדל רם, קומה 11. רכזת פרטיות: אורית עשור — אליה ניתן לפנות בכל עניין הקשור למדיניות זו או לזכויותיכם לפי דין, בטלפון 052-3975659 או בדוא״ל office@za-cpa.com.</p></div>
+          <div class="legal-sec"><h3>המסגרת החוקית</h3><p>איסוף ועיבוד מידע אישי באתר נעשים בהתאם לחוק הגנת הפרטיות, התשמ״א-1981, תקנות הגנת הפרטיות (אבטחת מידע), התשע״ז-2017, חוק הגנת הפרטיות (תיקון מס׳ 13), התשפ״ה-2024, ובמידת הצורך — חוק התקשורת (בזק ושידורים), התשמ״ב-1982 לעניין דיוור ישיר.</p></div>
+          <div class="legal-sec"><h3>המידע שאנו אוספים</h3><p>אנו אוספים את סוגי המידע הבאים, ורק במידה הנדרשת:</p>
+            <ul class="legal-ul">
+              <li>מידע שאתם מוסרים לנו ביוזמתכם בטופסי האתר: שם מלא, כתובת דוא״ל, מספר טלפון ותוכן ההודעה</li>
+              <li>מידע טכני הנאסף אוטומטית בעת ביקור: כתובת IP, סוג ודגם הדפדפן, מערכת הפעלה, רזולוציה, מקור הפנייה ודפים שנצפו</li>
+              <li>מידע על העדפות אישיות הנשמר בעוגיות: שפת ממשק, הגדרות נגישות והסכמות לקטגוריות עוגיות</li>
+              <li>אם אפשרתם עוגיות אנליטיקה — מידע סטטיסטי על דפוסי שימוש באופן מצרפי ובלתי מזוהה</li>
+            </ul>
+            <p>המידע נאסף ישירות מכם או אוטומטית דרך הדפדפן. איננו אוספים מידע רגיש כהגדרתו בסעיף 7 לחוק באמצעות האתר.</p>
+          </div>
+          <div class="legal-sec"><h3>המטרות שלשמן המידע נאסף</h3>
+            <ul class="legal-ul">
+              <li>מתן מענה לפניות, התקשרות מקצועית וטיפול בבקשות שירות</li>
+              <li>ניהול הקשר השוטף עם לקוחות ולקוחות פוטנציאליים</li>
+              <li>שיפור האתר ושירותי המשרד וניתוח מצרפי של דפוסי שימוש</li>
+              <li>עמידה בחובות חוקיות, רגולטוריות ומקצועיות החלות על רואי חשבון</li>
+              <li>אבטחת מידע, איתור ומניעת ניסיונות הונאה או שימוש לרעה</li>
+              <li>בהסכמה מפורשת — משלוח חומרים שיווקיים, ידיעונים או עדכונים</li>
+            </ul>
+          </div>
+          <div class="legal-sec"><h3>הבסיס החוקי לעיבוד</h3><p>אנו מעבדים מידע על אחד או יותר מהבסיסים: הסכמתכם המפורשת; ביצוע התקשרות עמכם; חובה חוקית (חובות דיווח, ניהול ספרים ושמירת מסמכים); ואינטרס לגיטימי של המשרד המאוזן מול זכויותיכם.</p></div>
+          <div class="legal-sec"><h3>שימוש בעוגיות (Cookies)</h3><p>עוגיות הן קבצי טקסט קטנים הנשמרים בדפדפן. אנו משתמשים בשלוש קטגוריות:</p>
+            <ul class="legal-ul">
+              <li><strong>חיוניות:</strong> נדרשות לתפעול תקין ואינן ניתנות לביטול (שפה, נגישות, הסכמות, מושב גלישה).</li>
+              <li><strong>אנליטיקה:</strong> הבנת אופן השימוש על בסיס נתונים מצרפיים — נטענות רק לאחר הסכמה.</li>
+              <li><strong>שיווק:</strong> התאמת תוכן ומדידת אפקטיביות — נטענות רק לאחר הסכמה מפורשת.</li>
+            </ul>
+            <p>תקופת השמירה נעה בין משך המושב לבין עד 12 חודשים. ניתן למחוק עוגיות בכל עת דרך הגדרות הדפדפן, או לעדכן הסכמה בלחצן ״ניהול הסכמות עוגיות״ בתחתית הדף.</p>
+          </div>
+          <div class="legal-sec"><h3>תקופת שמירת המידע</h3><p>אנו שומרים מידע לתקופה הנדרשת למטרות שלשמן נאסף או כנדרש בדין. מסמכים הקשורים בשירות מקצועי נשמרים לתקופה הנדרשת בדיני המס וחוק רואי חשבון (לרוב לא פחות מ-7 שנים מתום שנת המס). פניות שלא הבשילו נשמרות עד 24 חודשים. בתום התקופה המידע נמחק או עובר אנונימיזציה.</p></div>
+          <div class="legal-sec"><h3>מסירת מידע לצדדים שלישיים</h3><p>איננו מוכרים או סוחרים במידע שלכם. מידע עשוי לעבור רק ל: ספקי תשתית הפועלים מטעמנו (בכפוף לסודיות); רשויות מוסמכות אם נדרש בדין; ובמסגרת השירות המקצועי — לרשויות המס, רשם החברות או גורמים אחרים בהסכמתכם.</p></div>
+          <div class="legal-sec"><h3>העברת מידע אל מחוץ לישראל</h3><p>האתר מתארח על GitHub Pages, ולכן מידע טכני מסוים (כולל כתובות IP) עשוי להיות מעובד בשרתים מחוץ לישראל, בהתאם לתקנות הגנת הפרטיות (העברת מידע אל מאגרים מחוץ לגבולות המדינה), התשס״א-2001.</p></div>
+          <div class="legal-sec"><h3>דיוור ישיר ופניות שיווקיות</h3><p>ידיעונים והודעות שיווקיות יישלחו רק לאחר הסכמתכם המפורשת ובהתאם לסעיף 30א לחוק התקשורת. בכל הודעה תופיע אפשרות פשוטה להסרה מרשימת התפוצה, ואנו מתחייבים לכבד בקשת הסרה ללא דיחוי.</p></div>
+          <div class="legal-sec"><h3>פרטיות של קטינים</h3><p>האתר אינו מיועד לאיסוף מידע מקטינים מתחת לגיל 16, ואיננו אוספים ביודעין מידע מהם ללא הסכמת הוריהם. אם נודע לכם שקטין מסר מידע ללא הסכמה — פנו אלינו ונפעל למחיקתו ללא דיחוי.</p></div>
+          <div class="legal-sec"><h3>זכויותיכם לפי חוק</h3>
+            <ul class="legal-ul">
+              <li>זכות עיון במידע (סעיף 13 לחוק)</li>
+              <li>זכות תיקון או מחיקה (סעיף 14 לחוק)</li>
+              <li>זכות לבטל הסכמה — לרבות עוגיות אופציונליות ודיוור, בכל עת</li>
+              <li>זכות להסרה מדיוור ישיר (סעיף 17ו לחוק וסעיף 30א לחוק התקשורת)</li>
+              <li>זכות לפנות לרשות להגנת הפרטיות</li>
+            </ul>
+            <p>למימוש זכויותיכם פנו אלינו בפרטים שלהלן. נטפל בפנייתכם תוך 30 ימים.</p>
+          </div>
+          <div class="legal-sec"><h3>אבטחת מידע</h3><p>אנו נוקטים אמצעי אבטחה טכניים וארגוניים סבירים בהתאם לתקנות הגנת הפרטיות (אבטחת מידע), התשע״ז-2017, לרבות הצפנת תקשורת (HTTPS), בקרת גישה וניטור. עם זאת, אין שיטה לשמירת מידע מקוון המבטיחה אבטחה מוחלטת.</p></div>
+          <div class="legal-sec"><h3>זכות הגשת תלונה לרשות להגנת הפרטיות</h3><p>אם הנכם סבורים שזכותכם לפרטיות נפגעה ולא קיבלתם מענה מתאים, ניתן להגיש תלונה לרשות להגנת הפרטיות במשרד המשפטים (privacy.gov.il), או בכתובת: ת.ד. 27338, ירושלים 9127202.</p></div>
+          <div class="legal-sec"><h3>עדכונים למדיניות</h3><p>אנו עשויים לעדכן מדיניות זו מעת לעת. הגרסה התקפה היא זו המתפרסמת באתר, ולצדה תאריך עדכון אחרון. במקרה של שינוי מהותי נפעל ליידע משתמשים פעילים.</p></div>
+          <div class="legal-sec"><h3>יצירת קשר בנושאי פרטיות</h3>
+            <div class="legal-contact">
+              <strong>אורית עשור — רכזת נגישות ופרטיות</strong><br>
+              טלפון: <a href="tel:0523975659" dir="ltr" class="text-navy-900 underline">052-3975659</a><br>
+              דוא״ל: <a href="mailto:office@za-cpa.com" dir="ltr" class="text-navy-900 underline">office@za-cpa.com</a><br>
+              כתובת: רח׳ נחום חפצדי 17, מגדל רם, קומה 11, ירושלים
+            </div>
+          </div>
+          <p class="legal-updated">מדיניות זו עודכנה לאחרונה ב-28 באפריל 2026.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ACCESSIBILITY STATEMENT MODAL (ported from main site) ============ -->
+    <div id="a11y-statement-modal" class="hidden">
+      <div class="fixed inset-0 z-[60] bg-navy-950/55" data-legal-close></div>
+      <div role="dialog" aria-modal="true" aria-label="הצהרת נגישות" class="fixed inset-x-3 top-1/2 z-[60] mx-auto flex max-h-[88vh] max-w-2xl -translate-y-1/2 flex-col overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]">
+        <header class="flex items-center justify-between gap-3 border-b border-navy-100 bg-navy-900 px-6 py-5 text-white">
+          <div class="flex items-center gap-3">
+            <span class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#1d4ed8] text-white"><i class="fa-solid fa-universal-access"></i></span>
+            <div>
+              <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-400">נגישות</div>
+              <h2 class="text-lg font-extrabold leading-tight">הצהרת נגישות</h2>
+            </div>
+          </div>
+          <button type="button" data-legal-close aria-label="סגירה" class="rounded-full p-2 text-white/80 transition-colors hover:bg-white/10"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </header>
+        <div class="overflow-y-auto px-6 py-6 md:px-8">
+          <p class="mb-5 text-sm leading-relaxed text-navy-800/85">אנו מחויבים להנגשת האתר לכל המשתמשים, כולל אנשים עם מוגבלות.</p>
+
+          <div class="legal-sec"><h3>כללי</h3><p>אנו עושים כל מאמץ להנגיש את האתר ברמה הגבוהה ביותר, גם כאשר לא תמיד ניתן להגיע להנגשה מלאה של כלל חלקי האתר. אנו ממשיכים במאמצים לשפר את הנגישות באופן שוטף, כחלק ממחויבותנו לאפשר שימוש באתר לכלל האוכלוסייה, לרבות אנשים עם מוגבלות.</p></div>
+          <div class="legal-sec"><h3>מחויבותנו</h3><p>משרד עשור — רואי חשבון רואה חשיבות עליונה במתן שירות שוויוני וזמין לכלל הלקוחות, לרבות אנשים עם מוגבלויות, ובהתאם לחוק שוויון זכויות לאנשים עם מוגבלות (תשנ״ח-1998) ותקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), תשע״ג-2013.</p></div>
+          <div class="legal-sec"><h3>המסגרת החוקית</h3><p>הנגשת האתר נעשית בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ״ח-1998, ולתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע״ג-2013.</p></div>
+          <div class="legal-sec"><h3>תקן ורמת התאמה</h3><p>האתר נבנה בשאיפה לעמוד בדרישות תקן ישראלי 5568 ברמה AA, המבוסס על הנחיות WCAG 2.0 של ארגון ה-W3C. התאמות הנגישות נבדקות ומשופרות באופן שוטף.</p></div>
+          <div class="legal-sec"><h3>דרך ההנגשה</h3><p>האתר הונגש באמצעות התאמות בקוד ובעיצוב, בדיקות ידניות מול קוראי מסך וניווט מקלדת, ושימוש בכלי בדיקה אוטומטיים. ההתאמות נבדקות ומתעדכנות באופן שוטף, ובכלל זה עם הוספת תכנים חדשים.</p></div>
+          <div class="legal-sec"><h3>תאימות לקוראי מסך</h3><p>האתר תוכנן לתמיכה בטכנולוגיות מסייעות ובקוראי המסך הנפוצים. לחוויית גלישה מיטבית מומלץ להשתמש בגרסה עדכנית של קורא המסך ושל הדפדפן.</p></div>
+          <div class="legal-sec"><h3>ניווט במקלדת</h3><p>ניתן לנווט באתר באמצעות המקלדת בלבד: מעבר בין הרכיבים במקש Tab (ו-Shift+Tab לכיוון ההפוך), הפעלה במקש Enter או הרווח, וסגירת חלונות במקש Esc.</p></div>
+          <div class="legal-sec"><h3>אמצעי הנגישות באתר</h3>
+            <ul class="legal-ul">
+              <li>תפריט נגישות צף הזמין מכל עמוד</li>
+              <li>התאמת גודל הטקסט, מרווח אותיות וגובה שורה</li>
+              <li>מצב ניגודיות גבוהה, רוויה והיפוך צבעים</li>
+              <li>הדגשת קישורים וסמן עכבר מוגדל</li>
+              <li>מדריך קריאה ועצירת אנימציות</li>
+              <li>גופן קריא, מבנה כותרות סמנטי וניווט במקלדת</li>
+              <li>טקסטים אלטרנטיביים לתמונות ותמיכה בקוראי מסך</li>
+            </ul>
+          </div>
+          <div class="legal-sec"><h3>חלקים שאינם נגישים</h3><p>למרות מאמצינו, ייתכן שחלקים מסוימים טרם הונגשו במלואם, ובהם:</p>
+            <ul class="legal-ul">
+              <li>תכנים ומסמכים של צד שלישי שאינם בשליטת המשרד</li>
+              <li>קבצים להורדה שהועלו בעבר וטרם הונגשו במלואם</li>
+              <li>רכיבים אינטראקטיביים מסוימים הנמצאים בתהליך הנגשה</li>
+            </ul>
+            <p>אנו פועלים להשלמת ההנגשה בהקדם. אם נתקלתם בתוכן שאינו נגיש — נשמח שתפנו אלינו ונטפל בכך.</p>
+          </div>
+          <div class="legal-sec"><h3>פניות בנושא נגישות</h3>
+            <div class="legal-contact">
+              <strong>רכזת נגישות: אורית עשור</strong><br>
+              טלפון: <a href="tel:0523975659" dir="ltr" class="text-navy-900 underline">052-3975659</a><br>
+              דוא״ל: <a href="mailto:office@za-cpa.com" dir="ltr" class="text-navy-900 underline">office@za-cpa.com</a><br>
+              כתובת: רח׳ נחום חפצדי 17, מגדל רם, קומה 11, ירושלים
+            </div>
+          </div>
+          <div class="legal-sec"><h3>זמן תגובה</h3><p>אנו מתחייבים להשיב לפניות נגישות בתוך 14 ימי עבודה.</p></div>
+          <div class="legal-sec"><h3>התאמות פרטניות</h3><p>אדם עם מוגבלות הזקוק להתאמת נגישות פרטנית לצורך קבלת שירות מהמשרד מוזמן לפנות אל רכזת הנגישות, ואנו נשתדל לתת מענה מותאם בהתאם לצרכיו.</p></div>
+          <div class="legal-sec"><h3>פנייה לנציבות שוויון</h3><p>אם פניתם אלינו בנושא נגישות ולא קיבלתם מענה מספק, ניתן לפנות אל נציבות שוויון זכויות לאנשים עם מוגבלות במשרד המשפטים. פרטים מלאים זמינים באתר הנציבות.</p></div>
+          <div class="legal-sec"><h3>שיפור מתמשך</h3><p>אנו רואים בהנגשת האתר תהליך מתמשך, ופועלים לשיפורו ולעדכונו באופן שוטף כדי לאפשר שימוש נוח ושוויוני לכלל המשתמשים.</p></div>
+          <p class="legal-updated">הצהרה זו עודכנה לאחרונה ב-28 באפריל 2026.</p>
+        </div>
       </div>
     </div>
 
@@ -1004,6 +1162,37 @@
         document.querySelectorAll('.cookie-cat').forEach(function (b) {
           b.addEventListener('click', function () { var k = b.getAttribute('data-cookie'); draft[k] = !draft[k]; syncCats() })
         })
+        document.querySelectorAll('[data-cookie-manage]').forEach(function (b) {
+          b.addEventListener('click', openModal)
+        })
+      })();
+
+      // ===== Legal statement modals (privacy / accessibility) =====
+      (function () {
+        var modals = {
+          privacy: document.getElementById('privacy-modal'),
+          a11y: document.getElementById('a11y-statement-modal'),
+        }
+        var a11yPanel = document.getElementById('a11y-panel')
+        function closeAll() {
+          Object.keys(modals).forEach(function (k) { if (modals[k]) modals[k].classList.add('hidden') })
+        }
+        document.querySelectorAll('[data-legal-open]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var which = b.getAttribute('data-legal-open')
+            if (a11yPanel) a11yPanel.classList.add('hidden') // close a11y drawer if open
+            closeAll()
+            if (modals[which]) {
+              modals[which].classList.remove('hidden')
+              var body = modals[which].querySelector('.overflow-y-auto')
+              if (body) body.scrollTop = 0
+            }
+          })
+        })
+        document.querySelectorAll('[data-legal-close]').forEach(function (b) {
+          b.addEventListener('click', closeAll)
+        })
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll() })
       })()
     </script>
   </body>
