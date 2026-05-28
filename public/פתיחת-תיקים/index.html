@@ -83,9 +83,118 @@
         body { @apply font-sans text-navy-900 antialiased; }
       }
     </style>
+
+    <!-- Accessibility modes (ported from the main site, applied to <html>) -->
+    <style>
+      html.a11y-text-small { font-size: 90%; }
+      html.a11y-text-large { font-size: 115%; }
+      html.a11y-text-xlarge { font-size: 130%; }
+
+      html.a11y-high-contrast { filter: contrast(1.25); }
+      html.a11y-high-contrast body { background: #000 !important; color: #fff !important; }
+      html.a11y-high-contrast img, html.a11y-high-contrast video { filter: contrast(1.1) brightness(1.05); }
+      html.a11y-high-contrast a, html.a11y-high-contrast button { outline: 2px solid #ffd700; outline-offset: 2px; }
+
+      html.a11y-highlight-links a {
+        text-decoration: underline !important;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 2px;
+        background-color: rgba(253, 230, 138, 0.55);
+        padding: 0 2px;
+        border-radius: 3px;
+      }
+
+      html.a11y-readable-font, html.a11y-readable-font body, html.a11y-readable-font * {
+        font-family: "Arial", "Verdana", "Tahoma", sans-serif !important;
+        letter-spacing: 0.02em;
+        word-spacing: 0.06em;
+        line-height: 1.65 !important;
+      }
+
+      html.a11y-large-cursor, html.a11y-large-cursor *, html.a11y-large-cursor *:hover {
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><path d='M8 4 L8 38 L18 28 L24 42 L30 40 L24 26 L38 26 Z' fill='%23000' stroke='%23fff' stroke-width='2' stroke-linejoin='round'/></svg>") 4 4, auto !important;
+      }
+      html.a11y-large-cursor a, html.a11y-large-cursor button, html.a11y-large-cursor [role="button"] {
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><path d='M16 4 L16 28 L10 22 L6 26 L20 44 L36 24 L28 24 L28 4 Z' fill='%23000' stroke='%23fff' stroke-width='2' stroke-linejoin='round'/></svg>") 16 4, pointer !important;
+      }
+
+      html.a11y-no-motion *, html.a11y-no-motion *::before, html.a11y-no-motion *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      html.a11y-letter-1 * { letter-spacing: 0.04em !important; }
+      html.a11y-letter-2 * { letter-spacing: 0.09em !important; }
+      html.a11y-line-1 * { line-height: 1.65 !important; }
+      html.a11y-line-2 * { line-height: 1.95 !important; }
+      html.a11y-saturation-low { filter: saturate(0.4); }
+      html.a11y-saturation-high { filter: saturate(1.7); }
+      html.a11y-invert { filter: invert(1) hue-rotate(180deg); }
+      html.a11y-invert img, html.a11y-invert video, html.a11y-invert svg { filter: invert(1) hue-rotate(180deg); }
+      html.a11y-high-contrast.a11y-invert { filter: contrast(1.25) invert(1) hue-rotate(180deg); }
+      html.a11y-high-contrast.a11y-saturation-low { filter: contrast(1.25) saturate(0.4); }
+      html.a11y-high-contrast.a11y-saturation-high { filter: contrast(1.25) saturate(1.7); }
+
+      html.a11y-reading-guide::after {
+        content: '';
+        position: fixed;
+        inset-inline: 0;
+        top: var(--a11y-cursor-y, 50%);
+        height: 28px;
+        margin-top: -14px;
+        background: rgba(29, 78, 216, 0.14);
+        border-block: 2px solid rgba(29, 78, 216, 0.8);
+        pointer-events: none;
+        z-index: 30;
+        transition: top 60ms linear;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: -4rem;
+        inset-inline-start: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        padding: 0.75rem 1.25rem;
+        border-radius: 9999px;
+        background: #0a1c3a;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.875rem;
+        box-shadow: 0 12px 28px -10px rgba(10, 28, 58, 0.6);
+        transition: top 200ms ease;
+      }
+      .skip-link:focus { top: 1rem; outline: 3px solid #fff; outline-offset: 2px; }
+
+      /* Accessibility panel + cookie modal controls */
+      .a11y-group { display: flex; align-items: center; gap: 8px; margin: 20px 0 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: #a9851a; }
+      .a11y-group:first-child { margin-top: 0; }
+      .a11y-group::before, .a11y-group::after { content: ''; flex: 1; height: 1px; background: #d6e2f3; }
+      .a11y-tri { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #d6e2f3; background: #eef3fb; border-radius: 12px; padding: 10px 8px; font-size: 14px; font-weight: 600; color: #0e2750; cursor: pointer; transition: all .2s; }
+      .a11y-tri:hover { border-color: #d9b94f; background: #fff; }
+      .a11y-tri.is-active { border-color: #c9a227; background: #c9a227; color: #06122a; }
+      .a11y-lvl { border: 1px solid #d6e2f3; background: #eef3fb; border-radius: 12px; padding: 10px 4px; font-size: 14px; font-weight: 600; color: #0e2750; cursor: pointer; transition: all .2s; }
+      .a11y-lvl:hover { border-color: #d9b94f; }
+      .a11y-lvl.is-active { border-color: #c9a227; background: #c9a227; color: #06122a; }
+      .a11y-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; margin-bottom: 8px; border: 1px solid #d6e2f3; background: #fff; border-radius: 12px; padding: 10px 16px; text-align: start; font-size: 14px; font-weight: 600; color: #0a1c3a; cursor: pointer; transition: all .2s; }
+      .a11y-row:hover { border-color: #8ba8d4; background: #eef3fb; }
+      .a11y-row.is-active { border-color: #c9a227; background: rgba(201, 162, 39, 0.12); }
+      .a11y-row i { margin-inline-end: 8px; color: #1d4ed8; }
+      .a11y-sw, .cookie-sw { position: relative; height: 24px; width: 44px; flex: none; border-radius: 9999px; background: #d6e2f3; transition: background .2s; }
+      .a11y-sw::after, .cookie-sw::after { content: ''; position: absolute; top: 4px; inset-inline-start: 4px; height: 16px; width: 16px; border-radius: 9999px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); transition: inset-inline-start .2s; }
+      .a11y-row.is-active .a11y-sw { background: #c9a227; }
+      .a11y-row.is-active .a11y-sw::after { inset-inline-start: 24px; }
+      .cookie-cat.is-on { border-color: #c9a227; background: rgba(201, 162, 39, 0.1); }
+      .cookie-cat.is-on .cookie-sw { background: #c9a227; }
+      .cookie-cat.is-on .cookie-sw::after { inset-inline-start: 24px; }
+    </style>
   </head>
 
   <body class="bg-white">
+    <a href="#hero" class="skip-link">דלג לתוכן הראשי</a>
+
     <!-- ============ HEADER ============ -->
     <header class="sticky top-0 z-50 border-b border-navy-100/70 bg-white/90 backdrop-blur">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
@@ -102,11 +211,11 @@
 
         <div class="flex items-center gap-3">
           <a
-            href="tel:025000275"
+            href="tel:0523975659"
             class="hidden items-center gap-2 text-sm font-semibold text-navy-800 transition-colors hover:text-gold-600 sm:flex"
           >
             <i class="fa-solid fa-phone-volume text-gold-500"></i>
-            02-500-0275
+            052-3975659
           </a>
           <a
             href="#contact"
@@ -215,6 +324,10 @@
             <div class="mt-6 rounded-2xl bg-gold-500/15 p-4 text-center">
               <div class="text-sm text-navy-100/80">פתיחת תיק החל מ־</div>
               <div class="text-3xl font-extrabold text-gold-300">999 ₪ <span class="text-base font-semibold">+ מע״מ</span></div>
+              <div class="mt-3 flex items-center justify-center gap-2 rounded-xl bg-gold-500 px-3 py-2 text-sm font-bold text-navy-950">
+                <i class="fa-solid fa-tags"></i>
+                50% הנחה לבעלי תעודת אגודת היועצים
+              </div>
             </div>
           </div>
         </div>
@@ -399,7 +512,7 @@
               <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-gold-500 shadow-card"><i class="fa-solid fa-phone"></i></span>
               <div>
                 <div class="text-xs text-navy-800/60">טלפון</div>
-                <a href="tel:025000275" class="text-base font-bold text-navy-900 hover:text-gold-600" dir="ltr">02-500-0275</a>
+                <a href="tel:0523975659" class="text-base font-bold text-navy-900 hover:text-gold-600" dir="ltr">052-3975659</a>
               </div>
             </li>
             <li class="flex items-center gap-4">
@@ -519,7 +632,7 @@
         <div>
           <div class="text-sm font-bold uppercase tracking-wide text-gold-400">יצירת קשר</div>
           <ul class="mt-4 space-y-2.5 text-sm">
-            <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-gold-500"></i> <a href="tel:025000275" dir="ltr" class="hover:text-white">02-500-0275</a></li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-gold-500"></i> <a href="tel:0523975659" dir="ltr" class="hover:text-white">052-3975659</a></li>
             <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-gold-500"></i> <a href="mailto:office@za-cpa.com" dir="ltr" class="hover:text-white">office@za-cpa.com</a></li>
             <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-gold-500"></i> רח׳ נחום חפצדי 17, מגדל רם, קומה 11, ירושלים</li>
           </ul>
@@ -543,13 +656,154 @@
 
     <!-- floating WhatsApp -->
     <a
-      href="https://wa.me/972525000000?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%AA%D7%95%D7%97%20%D7%AA%D7%99%D7%A7%20%D7%91%D7%A8%D7%A9%D7%95%D7%99%D7%95%D7%AA"
+      href="https://wa.me/972523975659?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%AA%D7%95%D7%97%20%D7%AA%D7%99%D7%A7%20%D7%91%D7%A8%D7%A9%D7%95%D7%99%D7%95%D7%AA"
       target="_blank" rel="noopener"
       aria-label="פנייה ב-WhatsApp"
       class="fixed bottom-6 left-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-gold transition-transform duration-300 hover:-translate-y-1"
     >
       <i class="fa-brands fa-whatsapp text-2xl"></i>
     </a>
+
+    <!-- ============ ACCESSIBILITY WIDGET (ported from main site) ============ -->
+    <button
+      id="a11y-open" type="button" aria-label="פתיחת תפריט נגישות" title="תפריט נגישות"
+      class="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#1d4ed8] text-white shadow-[0_18px_40px_-8px_rgba(29,78,216,0.6)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#1e40af] focus:outline-none focus:ring-4 focus:ring-blue-300/50"
+    >
+      <i class="fa-solid fa-universal-access text-2xl"></i>
+    </button>
+
+    <div id="a11y-panel" class="hidden">
+      <div id="a11y-overlay" class="fixed inset-0 z-50 bg-navy-950/40"></div>
+      <aside
+        role="dialog" aria-modal="true" aria-label="תפריט נגישות"
+        class="fixed end-0 top-0 bottom-0 z-50 flex w-full max-w-sm flex-col bg-white shadow-[0_0_60px_rgba(0,0,0,0.25)]"
+      >
+        <header class="flex items-center justify-between border-b border-navy-100 bg-gradient-to-bl from-blue-50 to-navy-50 px-6 py-5">
+          <div class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#1d4ed8] text-white"><i class="fa-solid fa-universal-access"></i></span>
+            <h2 class="text-lg font-extrabold text-navy-900">תפריט נגישות</h2>
+          </div>
+          <button id="a11y-close" type="button" aria-label="סגירה" class="rounded-full p-2 text-navy-700 hover:bg-navy-50"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </header>
+
+        <div class="flex-1 overflow-y-auto px-6 py-5">
+          <div class="a11y-group">טקסט וקריאוּת</div>
+
+          <div class="mb-3">
+            <div class="mb-2 text-xs font-semibold text-navy-700">גודל טקסט</div>
+            <div class="flex gap-2">
+              <button type="button" data-font="dec" class="a11y-tri" aria-label="הקטנה"><i class="fa-solid fa-minus"></i> הקטנה</button>
+              <button type="button" data-font="reset" class="a11y-tri">ברירת מחדל</button>
+              <button type="button" data-font="inc" class="a11y-tri" aria-label="הגדלה"><i class="fa-solid fa-plus"></i> הגדלה</button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="mb-2 text-xs font-semibold text-navy-700">מרווח בין אותיות</div>
+            <div class="grid grid-cols-3 gap-2" data-level="letterSpacing">
+              <button type="button" data-val="0" class="a11y-lvl">רגיל</button>
+              <button type="button" data-val="1" class="a11y-lvl">בינוני</button>
+              <button type="button" data-val="2" class="a11y-lvl">מורחב</button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="mb-2 text-xs font-semibold text-navy-700">גובה שורה</div>
+            <div class="grid grid-cols-3 gap-2" data-level="lineHeight">
+              <button type="button" data-val="0" class="a11y-lvl">רגיל</button>
+              <button type="button" data-val="1" class="a11y-lvl">בינוני</button>
+              <button type="button" data-val="2" class="a11y-lvl">מורחב</button>
+            </div>
+          </div>
+
+          <button type="button" data-toggle="readableFont" class="a11y-row"><span><i class="fa-solid fa-font"></i>גופן קריא</span><span class="a11y-sw"></span></button>
+
+          <div class="a11y-group">ראייה וצבע</div>
+          <button type="button" data-toggle="highContrast" class="a11y-row"><span><i class="fa-solid fa-circle-half-stroke"></i>ניגודיות גבוהה</span><span class="a11y-sw"></span></button>
+          <button type="button" data-toggle="saturationLow" class="a11y-row"><span><i class="fa-solid fa-droplet"></i>רוויה נמוכה</span><span class="a11y-sw"></span></button>
+          <button type="button" data-toggle="saturationHigh" class="a11y-row"><span><i class="fa-solid fa-droplet"></i>רוויה גבוהה</span><span class="a11y-sw"></span></button>
+          <button type="button" data-toggle="invertColors" class="a11y-row"><span><i class="fa-solid fa-circle-nodes"></i>היפוך צבעים</span><span class="a11y-sw"></span></button>
+
+          <div class="a11y-group">ניווט ומיקוד</div>
+          <button type="button" data-toggle="highlightLinks" class="a11y-row"><span><i class="fa-solid fa-link"></i>הדגשת קישורים</span><span class="a11y-sw"></span></button>
+          <button type="button" data-toggle="largeCursor" class="a11y-row"><span><i class="fa-solid fa-arrow-pointer"></i>סמן גדול</span><span class="a11y-sw"></span></button>
+          <button type="button" data-toggle="readingGuide" class="a11y-row"><span><i class="fa-solid fa-grip-lines"></i>מדריך קריאה</span><span class="a11y-sw"></span></button>
+
+          <div class="a11y-group">תנועה</div>
+          <button type="button" data-toggle="stopAnimations" class="a11y-row"><span><i class="fa-solid fa-circle-pause"></i>עצירת אנימציות</span><span class="a11y-sw"></span></button>
+
+          <button id="a11y-reset" type="button" class="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-navy-100 bg-white px-4 py-3 text-sm font-bold text-navy-800 transition-colors hover:border-gold-400 hover:text-gold-600">
+            <i class="fa-solid fa-rotate-left"></i> איפוס הגדרות
+          </button>
+        </div>
+
+        <footer class="border-t border-navy-100 bg-navy-50/60 px-6 py-4">
+          <a href="https://za-cpa.com/accessibility" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white hover:bg-navy-800">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> הצהרת נגישות
+          </a>
+        </footer>
+      </aside>
+    </div>
+
+    <!-- ============ COOKIE CONSENT (Hebrew, ported from main site) ============ -->
+    <div id="cookie-banner" class="hidden fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-[0_32px_70px_-22px_rgba(10,28,58,0.4)]">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-gold-400 to-transparent"></div>
+      <div class="grid gap-5 p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-6 md:p-7">
+        <span class="flex h-14 w-14 flex-none items-center justify-center rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 text-navy-950"><i class="fa-solid fa-cookie-bite text-2xl"></i></span>
+        <div>
+          <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold-600"><i class="fa-solid fa-star"></i> פרטיות וחוויה אישית</div>
+          <h3 class="mt-1.5 text-xl font-extrabold leading-tight text-navy-900">כמה עוגיות לחוויה מושלמת?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-navy-800/85">עוגיות חיוניות שומרות על האתר עובד חלק. עוגיות אופציונליות (אנליטיקה ושיווק) עוזרות לנו להשתפר — רק בהסכמתכם.</p>
+          <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-navy-800/70">
+            <span class="font-medium text-gold-600">הבחירה שלכם, וניתן לשנות בכל רגע.</span>
+            <a href="https://za-cpa.com/privacy" target="_blank" rel="noopener" class="font-semibold text-navy-800 underline decoration-gold-300 underline-offset-4 hover:text-navy-900">למדיניות הפרטיות המלאה</a>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 md:flex-col md:gap-2.5">
+          <button id="cookie-accept" type="button" class="order-1 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-bl from-gold-500 to-gold-600 px-6 py-3 text-sm font-bold text-navy-950 shadow-gold transition-all duration-300 hover:-translate-y-0.5 md:w-full"><i class="fa-solid fa-star"></i> אישור הכל</button>
+          <button id="cookie-essential" type="button" class="order-2 rounded-full border border-navy-100 bg-white px-5 py-2.5 text-sm font-semibold text-navy-800 transition-colors hover:border-gold-400 md:w-full">רק חיוניות</button>
+          <button id="cookie-settings" type="button" class="order-3 inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-navy-700 transition-colors hover:text-navy-900 md:w-full"><i class="fa-solid fa-sliders"></i> התאמה אישית</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cookie-modal" class="hidden">
+      <div id="cookie-modal-overlay" class="fixed inset-0 z-50 bg-navy-950/45"></div>
+      <div role="dialog" aria-modal="true" aria-label="הגדרות הסכמות עוגיות" class="fixed inset-x-3 top-1/2 z-50 mx-auto max-h-[90vh] max-w-xl -translate-y-1/2 overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)]">
+        <header class="flex items-center justify-between border-b border-navy-100 bg-gradient-to-bl from-blue-50 to-navy-50 px-6 py-5">
+          <div class="flex items-center gap-3"><span class="flex h-10 w-10 items-center justify-center rounded-full bg-navy-900 text-white"><i class="fa-solid fa-cookie-bite"></i></span><h2 class="text-lg font-bold text-navy-900">הגדרות הסכמות עוגיות</h2></div>
+          <button id="cookie-modal-close" type="button" aria-label="סגירה" class="rounded-full p-2 text-navy-700 hover:bg-navy-50"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </header>
+        <div class="max-h-[60vh] overflow-y-auto px-6 py-5">
+          <p class="text-sm leading-relaxed text-navy-800/80">בחרו אילו סוגי עוגיות תרצו לאפשר. ניתן לעדכן הגדרות אלו בכל עת.</p>
+          <div class="mt-5 space-y-3">
+            <div class="rounded-xl border border-gold-300/60 bg-gold-500/10 p-4">
+              <div class="flex items-start justify-between gap-3">
+                <div><h3 class="text-base font-bold text-navy-900">עוגיות חיוניות</h3><p class="mt-1.5 text-sm leading-relaxed text-navy-800/75">נדרשות לתפעול תקין של האתר (העדפת שפה, הגדרות נגישות). לא ניתן לבטלן.</p></div>
+                <span class="flex-none rounded-full bg-navy-900/15 px-3 py-1 text-xs font-bold text-navy-900">תמיד פעיל</span>
+              </div>
+            </div>
+            <button type="button" data-cookie="analytics" class="cookie-cat block w-full rounded-xl border border-navy-100 bg-white p-4 text-start transition-colors">
+              <div class="flex items-start justify-between gap-3">
+                <div><h3 class="text-base font-bold text-navy-900">עוגיות אנליטיקה</h3><p class="mt-1.5 text-sm leading-relaxed text-navy-800/75">מסייעות לנו להבין כיצד מבקרים משתמשים באתר באמצעות נתונים אנונימיים.</p></div>
+                <span class="cookie-sw mt-1"></span>
+              </div>
+            </button>
+            <button type="button" data-cookie="marketing" class="cookie-cat block w-full rounded-xl border border-navy-100 bg-white p-4 text-start transition-colors">
+              <div class="flex items-start justify-between gap-3">
+                <div><h3 class="text-base font-bold text-navy-900">עוגיות שיווק</h3><p class="mt-1.5 text-sm leading-relaxed text-navy-800/75">משמשות להצגת תוכן ומסרים רלוונטיים, כולל ברשתות חיצוניות.</p></div>
+                <span class="cookie-sw mt-1"></span>
+              </div>
+            </button>
+          </div>
+        </div>
+        <footer class="flex flex-wrap justify-end gap-2 border-t border-navy-100 bg-navy-50/60 px-6 py-4">
+          <button id="cookie-modal-essential" type="button" class="rounded-full border border-navy-100 bg-white px-4 py-2.5 text-sm font-semibold text-navy-800 transition-colors hover:border-gold-400">רק חיוניות</button>
+          <button id="cookie-modal-save" type="button" class="inline-flex items-center gap-1.5 rounded-full bg-navy-900 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-navy-800"><i class="fa-solid fa-check"></i> שמירת הגדרות</button>
+          <button id="cookie-modal-acceptall" type="button" class="rounded-full bg-gold-500 px-5 py-2.5 text-sm font-bold text-navy-950 transition-colors hover:bg-gold-400">אישור הכל</button>
+        </footer>
+      </div>
+    </div>
 
     <script>
       document.getElementById('year').textContent = new Date().getFullYear()
@@ -611,7 +865,7 @@
         } catch (err) {
           showStatus(
             false,
-            'אירעה תקלה בשליחה. אפשר להתקשר 02-500-0275 או לכתוב ל-office@za-cpa.com'
+            'אירעה תקלה בשליחה. אפשר להתקשר 052-3975659 או לכתוב ל-office@za-cpa.com'
           )
         } finally {
           btn.disabled = false
@@ -620,6 +874,133 @@
           label.classList.remove('hidden')
         }
       })
+    </script>
+
+    <script>
+      // ===== Accessibility widget (ported from main site) =====
+      (function () {
+        var KEY = 'za-cpa-a11y'
+        var fontClasses = ['a11y-text-small', '', 'a11y-text-large', 'a11y-text-xlarge']
+        var defaults = {
+          fontSize: 0, letterSpacing: 0, lineHeight: 0,
+          highContrast: false, saturationLow: false, saturationHigh: false, invertColors: false,
+          highlightLinks: false, readableFont: false, largeCursor: false, readingGuide: false, stopAnimations: false,
+        }
+        var s
+        try { s = Object.assign({}, defaults, JSON.parse(localStorage.getItem(KEY) || '{}')) } catch (e) { s = Object.assign({}, defaults) }
+        var root = document.documentElement
+
+        function apply() {
+          fontClasses.forEach(function (c) { if (c) root.classList.remove(c) })
+          var fc = fontClasses[s.fontSize + 1]; if (fc) root.classList.add(fc)
+          root.classList.remove('a11y-letter-1', 'a11y-letter-2')
+          if (s.letterSpacing === 1) root.classList.add('a11y-letter-1')
+          if (s.letterSpacing === 2) root.classList.add('a11y-letter-2')
+          root.classList.remove('a11y-line-1', 'a11y-line-2')
+          if (s.lineHeight === 1) root.classList.add('a11y-line-1')
+          if (s.lineHeight === 2) root.classList.add('a11y-line-2')
+          root.classList.toggle('a11y-high-contrast', s.highContrast)
+          root.classList.toggle('a11y-saturation-low', s.saturationLow)
+          root.classList.toggle('a11y-saturation-high', s.saturationHigh)
+          root.classList.toggle('a11y-invert', s.invertColors)
+          root.classList.toggle('a11y-highlight-links', s.highlightLinks)
+          root.classList.toggle('a11y-readable-font', s.readableFont)
+          root.classList.toggle('a11y-large-cursor', s.largeCursor)
+          root.classList.toggle('a11y-reading-guide', s.readingGuide)
+          root.classList.toggle('a11y-no-motion', s.stopAnimations)
+        }
+        function syncUI() {
+          document.querySelectorAll('[data-toggle]').forEach(function (b) {
+            b.classList.toggle('is-active', !!s[b.getAttribute('data-toggle')])
+          })
+          document.querySelectorAll('[data-level]').forEach(function (g) {
+            var key = g.getAttribute('data-level')
+            g.querySelectorAll('[data-val]').forEach(function (b) {
+              b.classList.toggle('is-active', s[key] === parseInt(b.getAttribute('data-val'), 10))
+            })
+          })
+          var rb = document.querySelector('[data-font="reset"]')
+          if (rb) rb.classList.toggle('is-active', s.fontSize === 0)
+        }
+        function save() { try { localStorage.setItem(KEY, JSON.stringify(s)) } catch (e) {} }
+        function update() { apply(); save(); syncUI() }
+
+        apply()
+
+        var panel = document.getElementById('a11y-panel')
+        document.getElementById('a11y-open').addEventListener('click', function () { panel.classList.remove('hidden'); syncUI() })
+        document.getElementById('a11y-close').addEventListener('click', function () { panel.classList.add('hidden') })
+        document.getElementById('a11y-overlay').addEventListener('click', function () { panel.classList.add('hidden') })
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') panel.classList.add('hidden') })
+
+        document.querySelectorAll('[data-toggle]').forEach(function (b) {
+          b.addEventListener('click', function () { var k = b.getAttribute('data-toggle'); s[k] = !s[k]; update() })
+        })
+        document.querySelectorAll('[data-font]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var a = b.getAttribute('data-font')
+            if (a === 'dec') s.fontSize = Math.max(-1, s.fontSize - 1)
+            else if (a === 'inc') s.fontSize = Math.min(2, s.fontSize + 1)
+            else s.fontSize = 0
+            update()
+          })
+        })
+        document.querySelectorAll('[data-level]').forEach(function (g) {
+          var key = g.getAttribute('data-level')
+          g.querySelectorAll('[data-val]').forEach(function (b) {
+            b.addEventListener('click', function () { s[key] = parseInt(b.getAttribute('data-val'), 10); update() })
+          })
+        })
+        document.getElementById('a11y-reset').addEventListener('click', function () { s = Object.assign({}, defaults); update() })
+
+        window.addEventListener('mousemove', function (e) {
+          if (s.readingGuide) root.style.setProperty('--a11y-cursor-y', e.clientY + 'px')
+        })
+      })();
+
+      // ===== Cookie consent (Hebrew) =====
+      (function () {
+        var KEY = 'za-cpa-consent'
+        var draft = { analytics: false, marketing: false }
+        var banner = document.getElementById('cookie-banner')
+        var modal = document.getElementById('cookie-modal')
+        function loaded() { try { return JSON.parse(localStorage.getItem(KEY) || 'null') } catch (e) { return null } }
+        function persist(analytics, marketing) {
+          try {
+            localStorage.setItem(KEY, JSON.stringify({
+              decided: true, essential: true, analytics: analytics, marketing: marketing, date: new Date().toISOString(),
+            }))
+          } catch (e) {}
+        }
+        function syncCats() {
+          document.querySelectorAll('.cookie-cat').forEach(function (b) {
+            b.classList.toggle('is-on', !!draft[b.getAttribute('data-cookie')])
+          })
+        }
+        function close() { banner.classList.add('hidden'); modal.classList.add('hidden') }
+        function openModal() {
+          var c = loaded()
+          draft.analytics = c ? !!c.analytics : false
+          draft.marketing = c ? !!c.marketing : false
+          syncCats()
+          modal.classList.remove('hidden')
+        }
+
+        var c = loaded()
+        if (!c || !c.decided) banner.classList.remove('hidden')
+
+        document.getElementById('cookie-accept').addEventListener('click', function () { persist(true, true); close() })
+        document.getElementById('cookie-essential').addEventListener('click', function () { persist(false, false); close() })
+        document.getElementById('cookie-settings').addEventListener('click', openModal)
+        document.getElementById('cookie-modal-close').addEventListener('click', function () { modal.classList.add('hidden') })
+        document.getElementById('cookie-modal-overlay').addEventListener('click', function () { modal.classList.add('hidden') })
+        document.getElementById('cookie-modal-essential').addEventListener('click', function () { persist(false, false); close() })
+        document.getElementById('cookie-modal-acceptall').addEventListener('click', function () { persist(true, true); close() })
+        document.getElementById('cookie-modal-save').addEventListener('click', function () { persist(draft.analytics, draft.marketing); close() })
+        document.querySelectorAll('.cookie-cat').forEach(function (b) {
+          b.addEventListener('click', function () { var k = b.getAttribute('data-cookie'); draft[k] = !draft[k]; syncCats() })
+        })
+      })()
     </script>
   </body>
 </html>
