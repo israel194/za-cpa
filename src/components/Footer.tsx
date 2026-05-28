@@ -126,6 +126,12 @@ export default function Footer() {
             <span dir="ltr">ח.פ. 515367779</span>
           </p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <a
+              href="/פתיחת-תיקים/"
+              className="font-semibold text-rose-gold-300 transition-colors hover:text-white"
+            >
+              פתיחת תיקים
+            </a>
             <Link to="/about" className="transition-colors hover:text-white">
               {t('nav.about')}
             </Link>
