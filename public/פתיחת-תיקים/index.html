@@ -7,7 +7,7 @@
     <title>פתיחת עסק ברשויות | עשור רואי חשבון</title>
     <meta
       name="description"
-      content="פותחים עסק? עשור רואי חשבון פותחים לכם תיק ברשויות המס — עוסק פטור, עוסק מורשה, חברה בע״מ או עמותה. פתיחת תיק ב-999 ₪ + מע״מ. הטבה לבעלי תעודת אגודת היועצים."
+      content="פותחים עסק? עשור רואי חשבון פותחים לכם תיק ברשויות המס — עוסק פטור, עוסק מורשה, חברה בע״מ או עמותה. פתיחת תיק ב-999 ₪ + מע״מ. הטבה לבעלי תעודת אגודת היועצים והמטפלים במשפחה בישראל."
     />
     <meta property="og:title" content="פתיחת עסק ברשויות | עשור רואי חשבון" />
     <meta property="og:description" content="תנו למומחים לעשות לכם סדר ברשויות. פתיחת תיק מהירה ומקצועית ב-999 ₪ + מע״מ." />
@@ -336,8 +336,8 @@
               <div class="text-sm text-navy-100/80">פתיחת תיק החל מ־</div>
               <div class="text-3xl font-extrabold text-gold-300">999 ₪ <span class="text-base font-semibold">+ מע״מ</span></div>
               <div class="mt-3 flex items-center justify-center gap-2 rounded-xl bg-gold-500 px-3 py-2 text-sm font-bold text-navy-950">
-                <i class="fa-solid fa-tags"></i>
-                50% הנחה לבעלי תעודת אגודת היועצים
+                <i class="fa-solid fa-tags flex-none"></i>
+                <span>50% הנחה לבעלי תעודת <a href="https://acft.co.il/" target="_blank" rel="noopener" class="underline decoration-2 underline-offset-2 hover:opacity-80">אגודת היועצים והמטפלים במשפחה בישראל</a></span>
               </div>
             </div>
           </div>
@@ -496,7 +496,7 @@
                 50% הנחה על פתיחת התיק!
               </h3>
               <p class="relative mt-4 text-lg font-semibold leading-relaxed">
-                לבעלי <span class="underline decoration-navy-950/40 decoration-2 underline-offset-4">תעודת אגודת היועצים</span>
+                לבעלי <a href="https://acft.co.il/" target="_blank" rel="noopener" class="underline decoration-navy-950/40 decoration-2 underline-offset-4 transition-opacity hover:opacity-80">תעודת אגודת היועצים והמטפלים במשפחה בישראל</a>
                 — הטבה בלעדית על פתיחת התיק ברשויות.
               </p>
               <div class="relative mt-6 flex items-center gap-3 rounded-2xl bg-navy-950/10 p-4">
@@ -608,7 +608,7 @@
 
               <label class="flex items-start gap-2 text-sm text-navy-800/80">
                 <input id="advisor" name="advisor" type="checkbox" class="mt-1 h-4 w-4 rounded border-navy-200 text-gold-500 focus:ring-gold-400" />
-                <span>יש לי תעודת אגודת היועצים (זכאות ל-50% הנחה)</span>
+                <span>יש לי תעודת אגודת היועצים והמטפלים במשפחה בישראל (זכאות ל-50% הנחה)</span>
               </label>
             </div>
 
@@ -998,7 +998,7 @@
         var advisor = document.getElementById('advisor').checked
         var message =
           'בקשה לפתיחת תיק — ' + entity +
-          (advisor ? '\n*בעל/ת תעודת אגודת היועצים — זכאי/ת ל-50% הנחה*' : '') +
+          (advisor ? '\n*בעל/ת תעודת אגודת היועצים והמטפלים במשפחה בישראל — זכאי/ת ל-50% הנחה*' : '') +
           '\n(נשלח מדף הנחיתה: פתיחת עסק)'
 
         var payload = {
