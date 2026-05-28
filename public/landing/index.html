@@ -463,7 +463,7 @@
       // ───────────────────────────────────────────────────────────────
       const ENDPOINT = 'apps-script' // 'apps-script' | 'php'
       const APPS_SCRIPT_URL =
-        'https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec'
+        'https://script.google.com/a/macros/za-cpa.com/s/AKfycbwS025C9-OhEynAqpPWQc3RX4cDimKzLiH_zhW5Rr8yY0Jp4v4SgJDpaTAt3dnH09ud/exec'
 
       document.getElementById('year').textContent = new Date().getFullYear()
 
@@ -522,20 +522,16 @@
         try {
           let ok = false
           if (ENDPOINT === 'apps-script') {
-            // Apps Script needs text/plain to avoid CORS preflight.
-            const res = await fetch(APPS_SCRIPT_URL, {
+            // text/plain avoids the CORS preflight; no-cors lets the POST through
+            // cross-origin (the response is opaque, but doPost still runs + mails).
+            await fetch(APPS_SCRIPT_URL, {
               method: 'POST',
               headers: { 'Content-Type': 'text/plain;charset=utf-8' },
               body: JSON.stringify({ target: 'office', ...data }),
+              mode: 'no-cors',
               keepalive: true,
             })
-            // Apps Script web apps return 200 even on script errors; check body when available.
-            try {
-              const body = await res.clone().json()
-              ok = body && body.ok !== false
-            } catch {
-              ok = res.ok
-            }
+            ok = true
           } else {
             const fd = new FormData(form)
             const res = await fetch('./submit.php', { method: 'POST', body: fd })
