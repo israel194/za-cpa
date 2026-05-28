@@ -1,18 +1,21 @@
-function h(codes) { return String.fromCharCode.apply(null, codes); }
+/**
+ * ZA-CPA + Orit Group — form notification endpoint.
+ *
+ * Hebrew is written as normal UTF-8 string literals (the Apps Script editor
+ * stores UTF-8 correctly) so the labels render the same correct way the
+ * visitor's own submitted Hebrew does. Every subject/line is prefixed with a
+ * Right-to-Left Mark (U+200F) to force RTL base direction, which keeps Hebrew
+ * from rendering reversed in mail clients that default a line to LTR.
+ *
+ * After editing: paste this whole file into the Apps Script editor, then
+ * Deploy → Manage deployments → Edit (pencil) → Version: New version → Deploy.
+ */
 
-var SUBJ_OFFICE = h([1508,1504,1497,1497,1492,32,1495,1491,1513,1492,32,1502,1492,1488,1514,1512]);
-var SUBJ_ORIT   = h([1492,1512,1513,1502,1492,32,1495,1491,1513,1492,32,45,32,1511,1489,1493,1510,1514,32,1500,1495,1494,1493,1512,32,1500,1506,1510,1502,1498]);
-var L_NAME   = h([1513,1501]);
-var L_EMAIL  = h([1488,1497,1502,1497,1497,1500]);
-var L_PHONE  = h([1496,1500,1508,1493,1503]);
-var L_DATE   = h([1502,1493,1506,1491,32,1502,1489,1493,1511,1513]);
-var L_MSG    = h([1492,1493,1491,1506,1492]);
-var L_FOOT   = h([45,32,1504,1513,1500,1495,32,1488,1493,1496,1493,1502,1496,1497,1514,32,1502,1492,1488,1514,1512]);
-var L_NONAME = h([1500,1500,1488,32,1513,1501]);
+var RLM = '‏'; // Right-to-left mark — forces RTL base direction
 
 var ROUTES = {
-  office: { to: 'office@za-cpa.com', subjectPrefix: SUBJ_OFFICE },
-  orit:   { to: 'orit@za-cpa.com',   subjectPrefix: SUBJ_ORIT }
+  office: { to: 'office@za-cpa.com', subject: 'פנייה חדשה מהאתר' },
+  orit:   { to: 'orit@za-cpa.com',   subject: 'הרשמה חדשה - קבוצת לחזור לעצמך' }
 };
 
 function esc(s) {
@@ -37,27 +40,27 @@ function doPost(e) {
   var data = JSON.parse(e.postData.contents);
   var route = ROUTES[data.target] || ROUTES.office;
 
-  // Plain-text fallback part.
+  // Plain-text fallback — each line forced RTL with a leading RLM.
   var lines = [];
-  if (data.name)        lines.push(L_NAME  + ': ' + data.name);
-  if (data.email)       lines.push(L_EMAIL + ': ' + data.email);
-  if (data.phone)       lines.push(L_PHONE + ': ' + data.phone);
-  if (data.sessionDate) lines.push(L_DATE  + ': ' + data.sessionDate);
-  if (data.message)     lines.push('', L_MSG + ':', data.message);
-  lines.push('', L_FOOT);
+  if (data.name)        lines.push(RLM + 'שם: ' + data.name);
+  if (data.email)       lines.push(RLM + 'אימייל: ' + data.email);
+  if (data.phone)       lines.push(RLM + 'טלפון: ' + data.phone);
+  if (data.sessionDate) lines.push(RLM + 'מועד מבוקש: ' + data.sessionDate);
+  if (data.message)     lines.push('', RLM + 'הודעה:', RLM + data.message);
+  lines.push('', RLM + '- נשלח אוטומטית מהאתר');
   var plain = lines.join('\n');
 
   // HTML part — explicit RTL so Hebrew renders correctly in every client.
   var rows = '';
-  if (data.name)        rows += row(L_NAME,  data.name,  false);
-  if (data.email)       rows += row(L_EMAIL, data.email, true);
-  if (data.phone)       rows += row(L_PHONE, data.phone, true);
-  if (data.sessionDate) rows += row(L_DATE,  data.sessionDate, false);
+  if (data.name)        rows += row('שם', data.name, false);
+  if (data.email)       rows += row('אימייל', data.email, true);
+  if (data.phone)       rows += row('טלפון', data.phone, true);
+  if (data.sessionDate) rows += row('מועד מבוקש', data.sessionDate, false);
 
   var msg = '';
   if (data.message) {
     msg = '<div style="margin-top:16px">' +
-      '<div style="font-weight:bold;color:#0a1c3a;margin-bottom:4px">' + L_MSG + ':</div>' +
+      '<div style="font-weight:bold;color:#0a1c3a;margin-bottom:4px">הודעה:</div>' +
       '<div style="color:#222">' + esc(data.message).replace(/\n/g, '<br>') + '</div>' +
       '</div>';
   }
@@ -67,12 +70,12 @@ function doPost(e) {
     'font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.65;color:#222">' +
     '<table dir="rtl" cellpadding="0" cellspacing="0" style="border-collapse:collapse">' + rows + '</table>' +
     msg +
-    '<div style="margin-top:20px;color:#999;font-size:13px">' + L_FOOT + '</div>' +
+    '<div style="margin-top:20px;color:#999;font-size:13px">- נשלח אוטומטית מהאתר</div>' +
     '</div>';
 
   MailApp.sendEmail({
     to: route.to,
-    subject: route.subjectPrefix + ' - ' + (data.name || L_NONAME),
+    subject: RLM + route.subject + ' - ' + (data.name || 'ללא שם'),
     body: plain,
     htmlBody: html,
     replyTo: data.email || undefined,
