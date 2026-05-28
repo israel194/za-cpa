@@ -1122,7 +1122,9 @@
 
       // ===== Cookie consent (Hebrew) =====
       (function () {
-        var KEY = 'za-cpa-consent'
+        // Landing-page-specific key so the banner pops up on first visit here,
+        // independently of any consent given on the main site (same origin).
+        var KEY = 'za-cpa-lp-consent'
         var draft = { analytics: false, marketing: false }
         var banner = document.getElementById('cookie-banner')
         var modal = document.getElementById('cookie-modal')
