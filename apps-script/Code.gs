@@ -45,6 +45,10 @@ var ROUTES = {
   orit:   { to: 'orit@za-cpa.com',   subject: SUBJ_ORIT }
 };
 
+// Bumped whenever this file changes, so doGet() can report which build is
+// actually deployed. The deployed copy and the repo copy have drifted before.
+var VERSION = '2026-09-28-ascii-labels';
+
 // Fields that get their own Hebrew label, in display order.
 var KNOWN = ['name', 'email', 'phone', 'service', 'sessionDate', 'message'];
 
@@ -186,6 +190,57 @@ function handle(data) {
   return ContentService.createTextOutput('{"ok":true}');
 }
 
+function codes(s) {
+  var out = [];
+  for (var i = 0; i < s.length; i++) out.push(s.charCodeAt(i));
+  return out.join(',');
+}
+
+// Expected character codes for each label, in logical order.
+var EXPECTED = {
+  name:  '1513,1501',
+  email: '1488,1497,1502,1497,1497,1500',
+  phone: '1496,1500,1508,1493,1503',
+  msg:   '1492,1493,1491,1506,1492'
+};
+
+/**
+ * Open the deployment URL in a browser to see which build is actually live.
+ *
+ * If the page shows only the single line "ZA-CPA notify endpoint is live", an
+ * OLD build is still being served. Pasting the file into the editor is not
+ * enough on its own - a new version has to be deployed:
+ * Deploy > Manage deployments > pencil > Version: New version > Deploy.
+ *
+ * The character codes are the real evidence. A screen can render text in either
+ * direction, but the codes cannot lie about the order they are stored in.
+ */
 function doGet() {
-  return ContentService.createTextOutput('ZA-CPA notify endpoint is live');
+  var actual = {
+    name: codes(L_NAME), email: codes(L_EMAIL),
+    phone: codes(L_PHONE), msg: codes(L_MSG)
+  };
+  var ok = true;
+  var lines = [
+    'ZA-CPA notify endpoint is live',
+    'build: ' + VERSION,
+    '',
+    'Labels as this build stores them (each line should read correctly):',
+    '  ' + RLM + L_NAME,
+    '  ' + RLM + L_EMAIL,
+    '  ' + RLM + L_PHONE,
+    '  ' + RLM + L_SERVICE,
+    '  ' + RLM + L_MSG,
+    '',
+    'Character codes (the actual proof of order):'
+  ];
+  for (var key in EXPECTED) {
+    var good = actual[key] === EXPECTED[key];
+    if (!good) ok = false;
+    lines.push('  ' + key + ': ' + actual[key] + (good ? '  OK' : '  REVERSED, expected ' + EXPECTED[key]));
+  }
+  lines.push('');
+  lines.push(ok ? 'VERDICT: OK - labels are in logical order, mail will read correctly.'
+                : 'VERDICT: BROKEN - this build stores the labels backwards.');
+  return ContentService.createTextOutput(lines.join('\n'));
 }
