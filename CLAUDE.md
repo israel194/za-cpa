@@ -55,6 +55,10 @@ The endpoint is the Apps Script web app in `apps-script/Code.gs`. It routes by `
 - `'office'` → `office@za-cpa.com` (general site contact form)
 - `'orit'` → `orit@za-cpa.com` (Orit Group signup)
 
+**`apps-script/Code.gs` must stay pure ASCII.** Its Hebrew labels are emitted as numeric character codes by `apps-script/generate.py`. Plain Hebrew literals were used once and the Apps Script editor stored the pasted text in visual order, so every label in every notification mail arrived reversed letter by letter. No RTL attribute can undo that — the bidi algorithm never reorders letters inside a word. To change a label, edit `LABELS` in `generate.py`, run it, and paste the regenerated file; never type Hebrew into the Apps Script editor.
+
+Note also that the deployed script and this file can drift: the repo copy was already correct while the deployed copy was reversed. After any change, redeploy and send one test lead.
+
 `NOTIFY_ENDPOINT` in `src/lib/notify.ts` is a placeholder (`REPLACE_WITH_YOUR_DEPLOYMENT_ID`). When it is unset, `sendLead` warns and no-ops — UI flows still complete. The header comment in `apps-script/Code.gs` documents the deploy steps; if you change the script, the deployment URL must be re-pasted into `notify.ts`.
 
 ### Deployment & SPA routing on GitHub Pages
