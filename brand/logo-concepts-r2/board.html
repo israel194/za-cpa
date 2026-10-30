@@ -1,0 +1,55 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8" />
+<title>עשור רואי חשבון | לוח השוואת קונספטים</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;800&display=swap" />
+<style>
+  body { margin: 0; font-family: Heebo, sans-serif; background: #fbf7f4; color: #2b1a20; }
+  h1 { margin: 0; padding: 36px 48px 8px; color: #6e1a2d; font-weight: 800; font-size: 30px; }
+  .sub { padding: 0 48px 24px; color: #6b5a5f; }
+  .row { display: grid; grid-template-columns: 170px 1.3fr 1.3fr 1fr 0.9fr; gap: 18px; align-items: stretch; padding: 18px 48px; border-top: 1px solid #eadcdb; }
+  .label { font-weight: 800; color: #6e1a2d; font-size: 22px; align-self: center; }
+  .label small { display: block; font-weight: 400; font-size: 13px; color: #8a6a2f; margin-top: 4px; }
+  .cell { border-radius: 18px; display: flex; align-items: center; justify-content: center; padding: 18px; min-height: 150px; }
+  .light { background: #fff; border: 1px solid #eadcdb; }
+  .dark { background: #3a0f1c; padding: 0; overflow: hidden; }
+  .cell img { max-width: 100%; max-height: 130px; }
+  .dark img { max-height: 160px; width: 100%; object-fit: contain; }
+  .stack img { max-height: 170px; }
+  .sizes { background: #fff; border: 1px solid #eadcdb; gap: 18px; }
+  .sizes img { display: block; }
+</style>
+</head>
+<body>
+<h1>עשור רואי חשבון: סבב 2, מחוץ לקופסא</h1>
+<div class="sub">כותרת על רקע שנהב · גרסה על רקע בורדו · גרסה אנכית · הסמל במידות 128, 48 ו־32 פיקסלים (פביקון)</div>
+<script>
+  const concepts = [
+    ['e-ten', 'ה. עשר', 'עשרה רכיבים, שלמות'],
+    ['f-bottomline', 'ו. השורה התחתונה', 'קו כפול מתחת לסיכום'],
+    ['g-keystone', 'ז. אבן הראשה', 'האבן שמחזיקה את הקשת'],
+    ['h-wordmark', 'ח. כתב יד', 'המילה עשור לבדה'],
+    ['z-current', 'הנוכחי: הקשת', 'לייחוס'],
+    
+    
+    
+    
+  ]
+  for (const [dir, name, desc] of concepts) {
+    document.write(`
+      <div class="row">
+        <div class="label">${name}<small>${desc}</small></div>
+        <div class="cell light"><object type="image/svg+xml" data="${dir}/lockup-horizontal.svg" style="width:100%;height:130px"></object></div>
+        <div class="cell dark"><object type="image/svg+xml" data="${dir}/lockup-inverse.svg" style="width:100%;height:170px"></object></div>
+        <div class="cell light stack"><object type="image/svg+xml" data="${dir}/lockup-stacked.svg" style="width:100%;height:170px"></object></div>
+        <div class="cell sizes">
+          <object type="image/svg+xml" data="${dir}/mark.svg" style="width:128px;height:128px"></object>
+          <object type="image/svg+xml" data="${dir}/mark.svg" style="width:48px;height:48px"></object>
+          <object type="image/svg+xml" data="${dir}/mark.svg" style="width:32px;height:32px"></object>
+        </div>
+      </div>`)
+  }
+</script>
+</body>
+</html>

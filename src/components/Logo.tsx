@@ -11,13 +11,13 @@ type Props = {
 }
 
 const PALETTE = {
-  default: { arch: '#6e1a2d', letter: '#fbf7f4', frame: '#a8894f', word: '#6e1a2d', rule: '#a8894f', tag: '#8a6a2f' },
-  inverse: { arch: '#fbf7f4', letter: '#6e1a2d', frame: '#d9c08f', word: '#fbf7f4', rule: '#d9c08f', tag: '#d9c08f' },
+  default: { stone: '#6e1a2d', gold: '#a8894f', word: '#6e1a2d', rule: '#a8894f', tag: '#8a6a2f' },
+  inverse: { stone: '#fbf7f4', gold: '#d9c08f', word: '#fbf7f4', rule: '#d9c08f', tag: '#d9c08f' },
 }
 
 /**
- * עשור רואי חשבון: a Jerusalem-stone arch framing a drawn ע, with an
- * outlined Frank Ruhl Libre wordmark. Source of truth: brand/build_logo.py.
+ * עשור רואי חשבון: ten stones (a decade, the tetractys) beside an outlined
+ * Frank Ruhl Libre wordmark. Source of truth: brand/build_logo.py.
  */
 export default function Logo({ variant = 'lockup', tone = 'default', size = 56, className = '' }: Props) {
   if (variant === 'mark') {
@@ -40,23 +40,24 @@ export default function Logo({ variant = 'lockup', tone = 'default', size = 56, 
   )
 }
 
+// Ten stones in a 4·3·2·1 staircase (1+2+3+4 = 10, as in עשור). The last
+// stone of the tallest column is gold: the sum that closes the count.
+const HEIGHTS = [4, 3, 2, 1]
+const STONES = HEIGHTS.flatMap((h, col) =>
+  Array.from({ length: h }, (_, row) => ({
+    x: 9.25 + col * 26.5,
+    y: 9.25 + (3 - row) * 26.5,
+    gold: col === 0 && row === h - 1,
+  }))
+)
+
 function Mark({ tone, size, className = '' }: { tone: Tone; size: number; className?: string }) {
   const p = PALETTE[tone]
   return (
-    <svg viewBox="70 50 372 430" height={size} width={(size * 372) / 430} className={className} aria-hidden>
-      <g transform="translate(0 -14)">
-        <path d="M 90 470 V 214 A 166 166 0 0 1 422 214 V 470" fill="none" stroke={p.frame} strokeWidth="16" />
-        <rect x="74" y="484" width="364" height="16" fill={p.frame} />
-        <path d="M 120 470 V 214 A 136 136 0 0 1 392 214 V 470 Z" fill={p.arch} />
-        <g fill={p.letter}>
-          <path d="M 290 176 H 354 V 214 L 290 206 Z" />
-          <path d="M 160 176 H 222 V 214 L 160 206 Z" />
-        </g>
-        <g fill="none" stroke={p.letter} strokeLinejoin="round">
-          <path d="M 336 200 V 318 C 336 364 312 384 266 384 H 156" strokeWidth="38" />
-          <path d="M 196 200 L 328 365" strokeWidth="28" />
-        </g>
-      </g>
+    <svg viewBox="6 6 108 108" height={size} width={size} className={className} aria-hidden>
+      {STONES.map(({ x, y, gold }) => (
+        <rect key={`${x}-${y}`} x={x} y={y} width="22" height="22" rx="2.2" fill={gold ? p.gold : p.stone} />
+      ))}
     </svg>
   )
 }

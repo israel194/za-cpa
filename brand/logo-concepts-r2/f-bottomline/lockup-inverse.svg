@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="412 77 972 445" width="972" height="445">
+  <title>עשור רואי חשבון</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700&amp;family=Heebo:wght@400&amp;display=swap');
+    .wm{font-family:'Frank Ruhl Libre','Noto Serif Hebrew',serif;font-weight:700;font-size:206px;fill:#fbf7f4}
+    .tg{font-family:'Heebo','Assistant',sans-serif;font-weight:400;font-size:64px;fill:#d9c08f}</style>
+<rect x="412" y="77" width="972" height="445" fill="#3a0f1c"/>
+  <defs><clipPath id="asor-sun"><path d="M78 295 A178 178 0 0 1 434 295 Z"/></clipPath></defs>
+  <g transform="translate(890,0)">
+    <g clip-path="url(#asor-sun)" fill="#eed7da">
+      <rect x="70" y="117" width="372" height="28"/><rect x="70" y="167" width="372" height="28"/>
+      <rect x="70" y="217" width="372" height="28"/><rect x="70" y="267" width="372" height="28"/>
+    </g>
+  </g>
+  <rect x="452" y="317" width="892" height="28" fill="#d9c08f"/>
+  <rect x="452" y="367" width="892" height="28" fill="#d9c08f"/>
+  <text class="wm" x="860" y="268" direction="rtl" text-anchor="start">עשור</text>
+  <text class="tg" x="860" y="478" direction="rtl" text-anchor="start" textLength="400" lengthAdjust="spacing">רואי חשבון</text>
+</svg>

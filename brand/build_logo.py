@@ -1,6 +1,6 @@
 """Build the עשור רואי חשבון logo family as font-independent SVGs.
 
-The Hebrew wordmark and tagline are shaped with HarfBuzz and converted to
+Mark: ten stones (see below). The Hebrew wordmark and tagline are shaped with HarfBuzz and converted to
 outlines, so the files render identically everywhere (img tags, favicons,
 print, design tools). Run: py brand/build_logo.py
 """
@@ -62,28 +62,36 @@ class Face:
         return pen.getCommands(), x
 
 
-# ── The mark: a Jerusalem-stone arch framing a drawn ע ─────────────────────
-# Geometry lives in a 512 box; translate(0 -14) recentres it optically.
+# ── The mark: ten stones, a 4·3·2·1 staircase (the tetractys, 1+2+3+4 = 10) ──
+# עשור is "a set of ten". Nine wine stones and a gold tenth stone that closes
+# the count. Columns rise right-to-left, toward the Hebrew wordmark.
+# Geometry lives in a 120 grid, scaled into the 512 box used everywhere else.
+
+STONE = 22
+PITCH = 26.5
+ORIGIN = 9.25
+HEIGHTS = [4, 3, 2, 1]  # column heights from left to right
+
+
+def stones():
+    """Yield (x, y, is_gold) for each of the ten stones in the 120 grid."""
+    for col, h in enumerate(HEIGHTS):
+        x = ORIGIN + col * PITCH
+        for row in range(h):
+            y = ORIGIN + (3 - row) * PITCH
+            yield x, y, (col == 0 and row == h - 1)
+
 
 def mark_group(arch: str, letter: str, frame: str, with_frame: bool = True) -> str:
-    frame_svg = (
-        f'<path d="M 90 470 V 214 A 166 166 0 0 1 422 214 V 470" fill="none" stroke="{frame}" stroke-width="16"/>'
-        if with_frame
-        else ''
+    """Ten-stone mark in a 512 box. `arch` colours the nine stones, `frame` the gold tenth."""
+    del letter, with_frame  # kept for signature compatibility with older variants
+    rects = '\n      '.join(
+        f'<rect x="{x:g}" y="{y:g}" width="{STONE}" height="{STONE}" rx="2.2" fill="{frame if gold else arch}"/>'
+        for x, y, gold in stones()
     )
-    return f'''<g transform="translate(0 -14)">
-    {frame_svg}
-    <rect x="74" y="484" width="364" height="16" fill="{frame}"/>
-    <path d="M 120 470 V 214 A 136 136 0 0 1 392 214 V 470 Z" fill="{arch}"/>
-    <g fill="{letter}">
-      <path d="M 290 176 H 354 V 214 L 290 206 Z"/>
-      <path d="M 160 176 H 222 V 214 L 160 206 Z"/>
-    </g>
-    <g fill="none" stroke="{letter}" stroke-linejoin="round">
-      <path d="M 336 200 V 318 C 336 364 312 384 266 384 H 156" stroke-width="38"/>
-      <path d="M 196 200 L 328 365" stroke-width="28"/>
-    </g>
-  </g>'''
+    return f'''<g transform="scale({512 / 120:.6f})">
+      {rects}
+    </g>'''
 
 
 PALETTES = {
@@ -164,9 +172,9 @@ def build():
         )
         (OUT / f'mark{suffix}.svg').write_text(svg(512, 512, body, 'עשור'), encoding='utf-8')
 
-    # Favicon: no outer frame (it merges at 16px); tight square crop around arch + sill.
+    # Favicon: tight square crop around the ten stones.
     fav = (
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="46 52 420 420" width="64" height="64">\n'
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="26 26 460 460" width="64" height="64">\n'
         '  <title>עשור רואי חשבון</title>\n  '
         + mark_group(WINE, IVORY, GOLD, with_frame=False)
         + '\n</svg>\n'
