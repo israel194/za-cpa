@@ -1,4 +1,4 @@
-"""Build the עשור רואות חשבון logo family as font-independent SVGs.
+"""Build the עשור רואי חשבון logo family as font-independent SVGs.
 
 The Hebrew wordmark and tagline are shaped with HarfBuzz and converted to
 outlines, so the files render identically everywhere (img tags, favicons,
@@ -25,7 +25,7 @@ CHAMPAGNE = '#d9c08f'
 IVORY = '#fbf7f4'
 
 WORD = 'עשור'
-TAGLINE = 'רואות חשבון'
+TAGLINE = 'רואי חשבון'
 
 
 class Face:
@@ -94,7 +94,7 @@ PALETTES = {
 }
 
 
-def svg(view_w: float, view_h: float, body: str, title: str = 'עשור רואות חשבון') -> str:
+def svg(view_w: float, view_h: float, body: str, title: str = 'עשור רואי חשבון') -> str:
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {view_w:.0f} {view_h:.0f}" '
         f'width="{view_w:.0f}" height="{view_h:.0f}" role="img" aria-label="{title}">\n'
@@ -167,7 +167,7 @@ def build():
     # Favicon: no outer frame (it merges at 16px); tight square crop around arch + sill.
     fav = (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="46 52 420 420" width="64" height="64">\n'
-        '  <title>עשור רואות חשבון</title>\n  '
+        '  <title>עשור רואי חשבון</title>\n  '
         + mark_group(WINE, IVORY, GOLD, with_frame=False)
         + '\n</svg>\n'
     )

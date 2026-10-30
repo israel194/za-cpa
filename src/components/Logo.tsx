@@ -16,7 +16,7 @@ const PALETTE = {
 }
 
 /**
- * עשור רואות חשבון: a Jerusalem-stone arch framing a drawn ע, with an
+ * עשור רואי חשבון: a Jerusalem-stone arch framing a drawn ע, with an
  * outlined Frank Ruhl Libre wordmark. Source of truth: brand/build_logo.py.
  */
 export default function Logo({ variant = 'lockup', tone = 'default', size = 56, className = '' }: Props) {
@@ -66,7 +66,7 @@ function Wordmark({ tone, height }: { tone: Tone; height: number }) {
   const w = Math.max(WORD_WIDTH, TAG_WIDTH)
   // Block geometry matches build_logo.py: word baseline 120, rule 150, tagline baseline 212.
   return (
-    <svg viewBox={`0 0 ${w} 228`} height={height} width={(height * w) / 228} role="img" aria-label="עשור רואות חשבון">
+    <svg viewBox={`0 0 ${w} 228`} height={height} width={(height * w) / 228} role="img" aria-label="עשור רואי חשבון">
       <path transform={`translate(${w - WORD_WIDTH} 120)`} fill={p.word} d={WORD_PATH} />
       <rect x="0" y="150" width={w} height="3" fill={p.rule} />
       <path transform={`translate(${w - TAG_WIDTH} 212)`} fill={p.tag} d={TAG_PATH} />
