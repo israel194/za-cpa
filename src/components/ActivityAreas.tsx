@@ -10,6 +10,7 @@ import {
   ArrowLeft,
   ArrowRight,
 } from 'lucide-react'
+import Reveal from './ui/Reveal'
 
 type AreaKey =
   | 'audit'
@@ -44,79 +45,91 @@ export default function ActivityAreas() {
   const Arrow = isRtl ? ArrowLeft : ArrowRight
 
   return (
-    <section className="relative bg-white py-20 md:py-28">
+    <section className="bg-plus relative py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            {t('activityAreas.eyebrow')}
+        <Reveal className="grid items-end gap-6 lg:grid-cols-[1fr_auto]">
+          <div className="max-w-3xl">
+            <div className="mb-4 text-sm font-bold tracking-[0.2em] text-accent">
+              {t('activityAreas.eyebrow')}
+            </div>
+            <h2 className="heading-bar font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-5xl">
+              {t('activityAreas.title')}
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-ink-700">
+              {t('activityAreas.subtitle')}
+            </p>
           </div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
-            {t('activityAreas.title')}
-          </h2>
-          <p className="mt-5 text-lg text-ink-700">
-            {t('activityAreas.subtitle')}
-          </p>
-        </div>
+          <Link
+            to="/services"
+            className="group inline-flex items-center gap-2 self-end text-sm font-bold text-primary transition-colors hover:text-accent"
+          >
+            {t('common.viewAll')}
+            <Arrow size={16} className={`transition-transform duration-300 ${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
+          </Link>
+        </Reveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {areaConfig.map(({ key, to, icon: Icon, highlight }) => (
-            <Link
-              key={to}
-              to={to}
-              className={`group relative overflow-hidden rounded-3xl border p-8 transition-all duration-300
-                hover:-translate-y-1 hover:shadow-[0_28px_56px_-28px_rgba(189,95,124,0.45)] ${
-                  highlight
-                    ? 'border-rose-gold-300/60 bg-gradient-to-br from-peach-100 via-cream-50 to-pink-100'
-                    : 'border-blush-100 bg-background/60 hover:border-accent/60 hover:bg-white'
-                }`}
-            >
-              {highlight && (
-                <span
-                  className={`absolute top-5 inline-flex items-center gap-1 rounded-full border border-silver-200 bg-gradient-to-l from-silver-100 to-blush-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-burgundy-500 ${
-                    isRtl ? 'end-5' : 'start-5'
-                  }`}
+          {areaConfig.map(({ key, to, icon: Icon, highlight }, idx) => {
+            const gold = idx % 2 === 1
+            return (
+              <Reveal key={to} delay={(idx % 3) * 90}>
+                <Link
+                  to={to}
+                  className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white p-8 pt-9 shadow-[0_2px_0_rgba(110,26,45,0.02)] transition-all duration-500
+                    hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(110,26,45,0.45)] ${
+                      highlight ? 'border-gold-300/70' : 'border-border'
+                    }`}
                 >
-                  {t('activityAreas.premium')}
-                </span>
-              )}
+                  <span
+                    aria-hidden
+                    className={`absolute inset-x-0 top-0 h-1 transition-all duration-500 group-hover:h-1.5 ${
+                      gold
+                        ? 'bg-gradient-to-l from-gold-300 to-gold-500'
+                        : 'bg-gradient-to-l from-burgundy-400 to-burgundy-600'
+                    }`}
+                  />
 
-              <div
-                aria-hidden
-                className={`absolute -top-12 h-36 w-36 rounded-full bg-pink-100/0 transition-colors duration-300 group-hover:bg-pink-200/45 ${
-                  isRtl ? '-end-12' : '-start-12'
-                }`}
-              />
+                  <div className="flex items-start justify-between gap-4">
+                    <div
+                      className={`flex h-14 w-14 items-center justify-center rounded-full transition-all duration-500 ${
+                        gold
+                          ? 'bg-gold-100 text-gold-600 group-hover:bg-gold-500 group-hover:text-white'
+                          : 'bg-blush-100 text-primary group-hover:bg-primary group-hover:text-white'
+                      }`}
+                    >
+                      <Icon size={24} strokeWidth={1.75} />
+                    </div>
+                    {highlight ? (
+                      <span className="rounded-full bg-gradient-to-l from-gold-200 to-gold-100 px-3 py-1 text-xs font-bold text-gold-600">
+                        {t('activityAreas.premium')}
+                      </span>
+                    ) : (
+                      <span className="font-display text-3xl font-extrabold text-blush-200 transition-colors duration-500 group-hover:text-blush-300">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                    )}
+                  </div>
 
-              <div
-                className={`relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300 ${
-                  highlight
-                    ? 'bg-gradient-to-br from-burgundy-400 via-rose-gold-500 to-peach-300 text-white shadow-[0_12px_24px_-10px_rgba(144,58,85,0.5)]'
-                    : 'bg-blush-100 text-accent group-hover:bg-primary group-hover:text-white'
-                }`}
-              >
-                <Icon size={26} />
-              </div>
+                  <h3 className="mt-7 font-display text-xl font-bold leading-snug text-primary">
+                    {t(`activityAreas.items.${key}.title`)}
+                  </h3>
+                  <p className="mt-3 flex-1 text-base leading-relaxed text-ink-700">
+                    {t(`activityAreas.items.${key}.description`)}
+                  </p>
 
-              <h3 className="relative font-display text-xl font-bold leading-snug text-ink-900">
-                {t(`activityAreas.items.${key}.title`)}
-              </h3>
-              <p className="relative mt-3 text-base leading-relaxed text-ink-700">
-                {t(`activityAreas.items.${key}.description`)}
-              </p>
-
-              <div className="relative mt-6 inline-flex items-center gap-1 text-sm font-bold text-accent">
-                {t('common.readMore')}
-                <Arrow
-                  size={14}
-                  className={`transition-transform duration-300 ${
-                    isRtl
-                      ? 'group-hover:-translate-x-1'
-                      : 'group-hover:translate-x-1'
-                  }`}
-                />
-              </div>
-            </Link>
-          ))}
+                  <div className="mt-7 inline-flex items-center gap-1.5 border-t border-border pt-5 text-sm font-bold text-accent">
+                    {t('common.readMore')}
+                    <Arrow
+                      size={14}
+                      className={`transition-transform duration-300 ${
+                        isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'
+                      }`}
+                    />
+                  </div>
+                </Link>
+              </Reveal>
+            )
+          })}
         </div>
       </div>
     </section>

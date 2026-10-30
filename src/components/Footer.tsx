@@ -12,12 +12,13 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative bg-ink-900 text-cream-100">
+    <footer className="relative overflow-hidden rounded-t-[2.5rem] bg-gradient-to-br from-navy-800 via-navy-700 to-burgundy-700 text-cream-100 rtl:md:rounded-tl-[6rem] ltr:md:rounded-tr-[6rem]">
+      <div aria-hidden className="bg-plus-light pointer-events-none absolute inset-0" />
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-peach-400 via-rose-gold-500 to-burgundy-500"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-gold-300/0 via-gold-300/70 to-gold-300/0"
       />
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-2 md:px-10 lg:grid-cols-4">
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-2 md:px-10 lg:grid-cols-4">
         <div>
           <Logo variant="lockup" tone="inverse" size={56} />
           <p className="mt-5 max-w-xs leading-relaxed text-cream-200/80">
@@ -26,7 +27,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-300">
+          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
             {t('footer.servicesTitle')}
           </h4>
           <ul className="mt-4 space-y-2 text-sm text-cream-200/80">
@@ -44,7 +45,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-300">
+          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
             {t('footer.sectorsTitle')}
           </h4>
           <ul className="mt-4 space-y-2 text-sm text-cream-200/80">
@@ -62,12 +63,12 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-rose-gold-300">
+          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
             {t('footer.contactTitle')}
           </h4>
           <ul className="mt-4 space-y-3 text-sm text-cream-200/80">
             <li className="flex items-start gap-2">
-              <MapPin size={16} className="mt-0.5 flex-none text-rose-gold-300" />
+              <MapPin size={16} className="mt-0.5 flex-none text-gold-300" />
               <span>
                 {t('contact.details.addressLine1')}
                 <br />
@@ -75,7 +76,7 @@ export default function Footer() {
               </span>
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={16} className="flex-none text-rose-gold-300" />
+              <Phone size={16} className="flex-none text-gold-300" />
               <a
                 href="tel:0523975659"
                 className="transition-colors hover:text-white"
@@ -85,7 +86,17 @@ export default function Footer() {
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={16} className="flex-none text-rose-gold-300" />
+              <Phone size={16} className="flex-none text-gold-300" />
+              <a
+                href="tel:025000275"
+                className="transition-colors hover:text-white"
+                dir="ltr"
+              >
+                02-5000275
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Mail size={16} className="flex-none text-gold-300" />
               <a
                 href="mailto:office@za-cpa.com"
                 className="transition-colors hover:text-white"
@@ -94,7 +105,7 @@ export default function Footer() {
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <Globe size={16} className="flex-none text-rose-gold-300" />
+              <Globe size={16} className="flex-none text-gold-300" />
               <a
                 href="https://www.za-cpa.com"
                 className="transition-colors hover:text-white"
@@ -106,19 +117,19 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-white/10">
         <div className="mx-auto max-w-7xl px-6 py-4 text-center text-xs text-cream-200/50 md:px-10">
           מיזם אישי של אורית עשור:{' '}
           <Link
             to="/orit-group"
-            className="text-cream-200/80 underline-offset-2 transition-colors hover:text-rose-gold-300 hover:underline"
+            className="text-cream-200/80 underline-offset-2 transition-colors hover:text-gold-300 hover:underline"
           >
             לחזור לעצמך — קבוצת לימוד לנשים
           </Link>
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-sm text-cream-200/60 md:flex-row md:px-10">
           <p>
             {t('footer.rights', { year })}
@@ -128,7 +139,7 @@ export default function Footer() {
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <a
               href="/פתיחת-תיקים/"
-              className="font-semibold text-rose-gold-300 transition-colors hover:text-white"
+              className="font-semibold text-gold-300 transition-colors hover:text-white"
             >
               פתיחת תיקים
             </a>

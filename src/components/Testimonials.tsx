@@ -27,7 +27,7 @@ export default function Testimonials() {
           <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             {t('testimonials.eyebrow')}
           </div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
+          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-5xl">
             {t('testimonials.title')}
           </h2>
         </div>

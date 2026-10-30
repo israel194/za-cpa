@@ -61,10 +61,10 @@ function Medallion({
 
   const stops =
     tone === 'inverse'
-      ? ['#fde6dc', '#f7d2da', '#ecabb8']
+      ? ['#f1dfb5', '#d9c08f', '#a8894f']
       : tone === 'gold'
         ? ['#e8d8da', '#bcaab2', '#7a5e6a']
-        : ['#d68697', '#bd5f7c', '#9d4663']
+        : ['#b36672', '#82283b', '#521222']
 
   return (
     <div className={className}>
@@ -159,11 +159,11 @@ function Wordmark({
   align?: 'start' | 'center'
 }) {
   const goldClass =
-    tone === 'inverse' ? 'text-rose-gold-300' : 'text-accent'
+    tone === 'inverse' ? 'text-gold-200' : 'text-primary'
   const subtitleClass =
     tone === 'inverse' ? 'text-cream-100/85' : 'text-ink-800/80'
   const ruleClass =
-    tone === 'inverse' ? 'bg-rose-gold-300/60' : 'bg-rose-gold-400/60'
+    tone === 'inverse' ? 'bg-gold-300/60' : 'bg-gold-400/70'
   const alignClass = align === 'center' ? 'items-center' : 'items-start'
   const textAlign = align === 'center' ? 'text-center' : ''
 

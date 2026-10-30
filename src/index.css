@@ -1,87 +1,97 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Assistant", "Heebo", "Rubik", system-ui, sans-serif;
+  --font-sans: "Heebo", "Assistant", "Rubik", system-ui, sans-serif;
   /* Per-language display font; defaults to Hebrew. Overridden via :lang(en) / :lang(ar) below. */
-  --font-display: "Frank Ruhl Libre", "David Libre", "Heebo", "Assistant", serif;
+  --font-display: "Heebo", "Assistant", sans-serif;
   --font-display-en: "Playfair Display", "Frank Ruhl Libre", serif;
-  --font-display-he: "Frank Ruhl Libre", "David Libre", "Heebo", "Assistant", serif;
+  --font-display-he: "Heebo", "Assistant", sans-serif;
   --font-display-ar: "Amiri", "Cairo", "Tajawal", serif;
+  --font-serif-he: "Frank Ruhl Libre", "David Libre", serif;
 
-  /* ── Soft Burgundy Boutique — semantic tokens ─────────────────────────────
-     New primaries used by the redesign (added Phase 1). The legacy named
-     palettes below remain for components that still reference them. */
-  --color-primary: #831843;            /* deep rose for CTAs/headings */
+  /* ── Wine & Champagne — semantic tokens ─────────────────────────────────
+     Derived from the firm's stationery (price quotes / letterhead): deep wine
+     headings, dusty-rose surfaces, champagne-gold accents on warm ivory. */
+  --color-primary: #6e1a2d;            /* deep wine for CTAs/headings */
   --color-primary-foreground: #ffffff;
-  --color-accent: #a16207;             /* antique gold — WCAG-safe on white & pink-cream */
+  --color-accent: #8a6a2f;             /* champagne gold, WCAG AA on ivory */
   --color-accent-foreground: #ffffff;
-  --color-background: #fdf2f8;         /* warm cream pink page bg */
-  --color-surface: #ffffff;            /* card bg */
-  --color-foreground: #451a2c;         /* rich plum body text */
-  --color-muted: #f0edf4;
-  --color-muted-foreground: #64748b;
-  --color-border: #fbcfe8;
-  --color-ring: #831843;
-  --color-destructive: #dc2626;
+  --color-background: #fbf7f4;         /* warm ivory page bg */
+  --color-surface: #ffffff;
+  --color-foreground: #2b1a20;
+  --color-muted: #f4ece9;
+  --color-muted-foreground: #6b5a5f;
+  --color-border: #eadcdb;
+  --color-ring: #6e1a2d;
+  --color-destructive: #b42318;
   --color-destructive-foreground: #ffffff;
 
-  /* ── Feminine couture palette — rose, pink, peach, with silver + burgundy depth ── */
+  /* Champagne gold scale for metallic accents */
+  --color-gold-100: #f6efe0;
+  --color-gold-200: #ebdcbc;
+  --color-gold-300: #d9c08f;
+  --color-gold-400: #c4a468;
+  --color-gold-500: #a8894f;
+  --color-gold-600: #8a6a2f;
 
-  /* BLUSH — soft pink-peach foundation */
-  --color-blush-50:  #fff7f4;
-  --color-blush-100: #fde6dc;
-  --color-blush-200: #facdc1;
-  --color-blush-300: #f3afac;
-  --color-blush-400: #ec8e95;
-  --color-blush-500: #d76a7e;
+  /* Legacy named palettes, re-tuned to the wine/rose/champagne system so every
+     existing component inherits the new look without per-file edits. */
 
-  /* ROSE-GOLD — main brand: dusty rose, soft and feminine */
-  --color-rose-gold-200: #f7d2da;
-  --color-rose-gold-300: #ecabb8;
-  --color-rose-gold-400: #d68697;
-  --color-rose-gold-500: #bd5f7c;
-  --color-rose-gold-600: #9d4663;
+  /* BLUSH: soft rose-ivory */
+  --color-blush-50:  #fbf4f3;
+  --color-blush-100: #f3e5e4;
+  --color-blush-200: #e7cdd0;
+  --color-blush-300: #d8aeb3;
+  --color-blush-400: #c78b94;
+  --color-blush-500: #b16b77;
 
-  /* CREAM — warm peach-tinted cream */
-  --color-cream-50:  #fff9f4;
-  --color-cream-100: #fdefe1;
-  --color-cream-200: #fadcc4;
+  /* ROSE-GOLD: dusty rose, as on the letterhead band */
+  --color-rose-gold-200: #eed7da;
+  --color-rose-gold-300: #ddb2b8;
+  --color-rose-gold-400: #c98d96;
+  --color-rose-gold-500: #b36672;
+  --color-rose-gold-600: #8e3b4a;
 
-  /* INK — deep burgundy-tinted text colors */
-  --color-ink-700: #2e1f2a;
-  --color-ink-800: #1f1420;
-  --color-ink-900: #150d18;
+  /* CREAM: warm ivory */
+  --color-cream-50:  #fcf9f5;
+  --color-cream-100: #f6efe6;
+  --color-cream-200: #ecdfcd;
 
-  /* NAVY — kept for the cinematic hero, now with a wine undertone */
-  --color-navy-700: #2a1228;
-  --color-navy-800: #180720;
+  /* INK: wine-tinted text */
+  --color-ink-700: #3d2a30;
+  --color-ink-800: #281a1f;
+  --color-ink-900: #170d11;
 
-  /* PEACH — soft warm peach accent */
-  --color-peach-100: #ffeadd;
-  --color-peach-200: #fed3b8;
-  --color-peach-300: #ffba94;
-  --color-peach-400: #f99a72;
-  --color-peach-500: #ed7b50;
+  /* NAVY: now a near-black wine for dark bands */
+  --color-navy-700: #3a0f1c;
+  --color-navy-800: #22070f;
 
-  /* PINK — soft feminine pink for sparkle and hover accents */
-  --color-pink-100: #ffe7f1;
-  --color-pink-200: #ffc7df;
-  --color-pink-300: #ffa6cc;
-  --color-pink-400: #f583b5;
-  --color-pink-500: #e26499;
+  /* PEACH: mapped to champagne */
+  --color-peach-100: #f6efe0;
+  --color-peach-200: #ebdcbc;
+  --color-peach-300: #d9c08f;
+  --color-peach-400: #c4a468;
+  --color-peach-500: #a8894f;
 
-  /* SILVER — cool metallic shimmer for elegant accents */
-  --color-silver-100: #f4f1f4;
-  --color-silver-200: #dfd7df;
-  --color-silver-300: #beb2be;
-  --color-silver-400: #948494;
-  --color-silver-500: #6a5b6a;
+  /* PINK: mapped to muted rose */
+  --color-pink-100: #f8eded;
+  --color-pink-200: #efd5d8;
+  --color-pink-300: #e0b4ba;
+  --color-pink-400: #c98b95;
+  --color-pink-500: #b06b77;
 
-  /* BURGUNDY — soft wine for premium depth */
-  --color-burgundy-400: #b04866;
-  --color-burgundy-500: #903a55;
-  --color-burgundy-600: #74284a;
-  --color-burgundy-700: #56183a;
+  /* SILVER */
+  --color-silver-100: #f4f1f1;
+  --color-silver-200: #e0d8d8;
+  --color-silver-300: #bfb2b3;
+  --color-silver-400: #948586;
+  --color-silver-500: #6a5b5d;
+
+  /* BURGUNDY: the wine core */
+  --color-burgundy-400: #9e3a4d;
+  --color-burgundy-500: #82283b;
+  --color-burgundy-600: #6e1a2d;
+  --color-burgundy-700: #521222;
 }
 
 html,
@@ -117,6 +127,86 @@ body {
   box-sizing: border-box;
 }
 
+::selection {
+  background: rgba(110, 26, 45, 0.85);
+  color: #fff;
+}
+
+/* ── Brand textures & ornaments ─────────────────────────────────────────── */
+
+/* The "+" grid from the firm's stationery */
+.bg-plus {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><path d='M20 15v10M15 20h10' stroke='%236e1a2d' stroke-opacity='0.07' stroke-width='1.4' stroke-linecap='round'/></svg>");
+  background-size: 40px 40px;
+}
+.bg-plus-light {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><path d='M20 15v10M15 20h10' stroke='%23ffffff' stroke-opacity='0.09' stroke-width='1.4' stroke-linecap='round'/></svg>");
+  background-size: 40px 40px;
+}
+
+/* Champagne metallic text */
+.text-gold-gradient {
+  background: linear-gradient(100deg, #f1dfb5 0%, #d9c08f 35%, #b8955a 65%, #ecd9ad 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Heading bar, as in the quote's section titles */
+.heading-bar {
+  position: relative;
+  padding-inline-start: 1rem;
+}
+.heading-bar::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.15em;
+  inset-inline-start: 0;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--color-gold-400), var(--color-gold-600));
+}
+
+/* Scroll reveal (driven by components/ui/Reveal.tsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 800ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+html.a11y-no-motion .reveal {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+@keyframes sheen {
+  0% { transform: translateX(-120%) skewX(-18deg); }
+  100% { transform: translateX(220%) skewX(-18deg); }
+}
+.sheen {
+  position: relative;
+  overflow: hidden;
+}
+.sheen::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: translateX(-120%) skewX(-18deg);
+  pointer-events: none;
+}
+.sheen:hover::after {
+  animation: sheen 900ms ease;
+}
+
 /* Cinematic hero — animated cosmic-to-ground feel */
 .hero-orb {
   position: absolute;
@@ -131,7 +221,7 @@ body {
   height: 60vmax;
   top: -20vmax;
   left: -10vmax;
-  background: radial-gradient(circle, rgba(189, 95, 124, 0.5), transparent 65%);
+  background: radial-gradient(circle, rgba(179, 102, 114, 0.5), transparent 65%);
   animation: orb-drift-1 22s ease-in-out infinite;
 }
 
@@ -140,7 +230,7 @@ body {
   height: 50vmax;
   bottom: -15vmax;
   right: -10vmax;
-  background: radial-gradient(circle, rgba(249, 154, 114, 0.4), transparent 65%);
+  background: radial-gradient(circle, rgba(217, 192, 143, 0.35), transparent 65%);
   animation: orb-drift-2 26s ease-in-out infinite;
 }
 
@@ -150,7 +240,7 @@ body {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(255, 166, 204, 0.32), transparent 60%);
+  background: radial-gradient(circle, rgba(224, 180, 186, 0.3), transparent 60%);
   animation: orb-pulse 18s ease-in-out infinite;
 }
 

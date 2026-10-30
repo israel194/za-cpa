@@ -565,5 +565,68 @@
       "updatedTitle": "Last updated",
       "updatedText": "This statement was last updated on {{date}}."
     }
+  },
+  "engagement": {
+    "eyebrow": "Engagement tracks",
+    "title": "A clear framework from day one",
+    "subtitle": "Every engagement is built around a defined track: what is included, at what pace, and who is responsible. You always know exactly what you get.",
+    "cta": "Get a tailored proposal",
+    "plans": {
+      "ongoing": {
+        "tag": "Monthly",
+        "title": "Ongoing services",
+        "text": "We act as your organization's finance arm, month after month.",
+        "items": [
+          "Ongoing National Insurance reporting, on the statutory schedule",
+          "Annual and semi-annual 856 and 126 filings",
+          "Payroll preparation and ongoing VAT and National Insurance reporting",
+          "Professional support on payroll, employees and pension contributions"
+        ]
+      },
+      "audit": {
+        "tag": "Annual",
+        "title": "Audit and reporting",
+        "text": "An independent audit that gives management, authorities and funders real certainty.",
+        "items": [
+          "Audit of the annual financial statements",
+          "Annual filings with the Tax Authority and the Registrar of Associations",
+          "Attendance at board and finance committee meetings as needed",
+          "Handling questions and exceptional events throughout the year"
+        ]
+      },
+      "extras": {
+        "tag": "As needed",
+        "title": "Complementary services",
+        "text": "Modules that plug into your engagement and tailor it precisely to your needs.",
+        "items": [
+          "Economic work: business plans, valuations and due diligence",
+          "Government grants: full support before ministries and authorities",
+          "Budget execution reports and monthly supplier payment runs",
+          "Fully paperless workflow on the SUMIT platform"
+        ]
+      }
+    }
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "title": "From the first call to a steady routine",
+    "steps": [
+      {
+        "title": "Introductory meeting",
+        "text": "A no-obligation conversation to understand your organization and what matters to you."
+      },
+      {
+        "title": "Tailored proposal",
+        "text": "A transparent engagement proposal with a defined scope and clear pricing upfront."
+      },
+      {
+        "title": "Onboarding",
+        "text": "An orderly handover of materials and file setup, typically within about a month."
+      },
+      {
+        "title": "Ongoing partnership",
+        "text": "A dedicated professional, on-time reporting and genuine availability all year long."
+      }
+    ]
   }
 }
