@@ -20,7 +20,7 @@ export default function Footer() {
       />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-2 md:px-10 lg:grid-cols-4">
         <div>
-          <Logo variant="lockup" tone="inverse" size={56} />
+          <Logo variant="lockup" tone="inverse" size={68} />
           <p className="mt-5 max-w-xs leading-relaxed text-cream-200/80">
             {t('footer.description')}
           </p>

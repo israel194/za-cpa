@@ -1,190 +1,75 @@
-import { useId } from 'react'
+import { WORD_PATH, WORD_WIDTH, TAG_PATH, TAG_WIDTH } from './logoPaths'
 
-type Tone = 'default' | 'inverse' | 'gold'
+type Tone = 'default' | 'inverse'
 type Variant = 'mark' | 'lockup' | 'lockup-stacked'
 
 type Props = {
   variant?: Variant
   tone?: Tone
-  size?: number // mark size in px (height for lockup)
+  size?: number // mark height in px
   className?: string
-  showName?: boolean // for mark, optional brand name beneath
+}
+
+const PALETTE = {
+  default: { arch: '#6e1a2d', letter: '#fbf7f4', frame: '#a8894f', word: '#6e1a2d', rule: '#a8894f', tag: '#8a6a2f' },
+  inverse: { arch: '#fbf7f4', letter: '#6e1a2d', frame: '#d9c08f', word: '#fbf7f4', rule: '#d9c08f', tag: '#d9c08f' },
 }
 
 /**
- * עשור — Asor CPA
- * Original wordmark + medallion. The medallion holds the Hebrew letter ע
- * inside a thin double-circle frame; three subtle florets above and a
- * decorative horizontal line below.
+ * עשור רואות חשבון: a Jerusalem-stone arch framing a drawn ע, with an
+ * outlined Frank Ruhl Libre wordmark. Source of truth: brand/build_logo.py.
  */
-export default function Logo({
-  variant = 'lockup',
-  tone = 'default',
-  size = 56,
-  className = '',
-  showName = false,
-}: Props) {
+export default function Logo({ variant = 'lockup', tone = 'default', size = 56, className = '' }: Props) {
   if (variant === 'mark') {
-    return <Medallion tone={tone} size={size} className={className} showName={showName} />
+    return <Mark tone={tone} size={size} className={className} />
   }
   if (variant === 'lockup-stacked') {
     return (
       <div className={`flex flex-col items-center gap-3 ${className}`}>
-        <Medallion tone={tone} size={size} />
-        <Wordmark tone={tone} align="center" />
+        <Mark tone={tone} size={size} />
+        <Wordmark tone={tone} height={size * 0.85} />
       </div>
     )
   }
-  // horizontal lockup (default) — RTL: medallion on the right side
+  // Horizontal lockup. In RTL the mark sits on the right, as in the master artwork.
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <Medallion tone={tone} size={size} />
-      <Wordmark tone={tone} />
+      <Mark tone={tone} size={size} />
+      <Wordmark tone={tone} height={size * 0.88} />
     </div>
   )
 }
 
-function Medallion({
-  tone,
-  size,
-  className = '',
-  showName = false,
-}: {
-  tone: Tone
-  size: number
-  className?: string
-  showName?: boolean
-}) {
-  const gid = useId()
-  const gradId = `lg-${gid}-grad`
-  const innerGradId = `lg-${gid}-inner`
-
-  const stops =
-    tone === 'inverse'
-      ? ['#f1dfb5', '#d9c08f', '#a8894f']
-      : tone === 'gold'
-        ? ['#e8d8da', '#bcaab2', '#7a5e6a']
-        : ['#b36672', '#82283b', '#521222']
-
+function Mark({ tone, size, className = '' }: { tone: Tone; size: number; className?: string }) {
+  const p = PALETTE[tone]
   return (
-    <div className={className}>
-      <svg
-        viewBox="0 0 100 100"
-        width={size}
-        height={size}
-        role="img"
-        aria-label="עשור — רואי חשבון"
-      >
-        <defs>
-          <linearGradient id={gradId} x1="20%" y1="10%" x2="80%" y2="90%">
-            <stop offset="0%" stopColor={stops[0]} />
-            <stop offset="55%" stopColor={stops[1]} />
-            <stop offset="100%" stopColor={stops[2]} />
-          </linearGradient>
-          <linearGradient id={innerGradId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={stops[1]} stopOpacity="0.55" />
-            <stop offset="100%" stopColor={stops[2]} stopOpacity="0.85" />
-          </linearGradient>
-        </defs>
-
-        {/* Outer thin ring */}
-        <circle
-          cx="50"
-          cy="50"
-          r="46.5"
-          fill="none"
-          stroke={`url(#${gradId})`}
-          strokeWidth="1.4"
-        />
-        {/* Inner ghosted ring (luxury double border) */}
-        <circle
-          cx="50"
-          cy="50"
-          r="42"
-          fill="none"
-          stroke={`url(#${innerGradId})`}
-          strokeWidth="0.6"
-          strokeDasharray="0 0"
-          opacity="0.7"
-        />
-
-        {/* Top floret — three soft petals + center dot */}
-        <g transform="translate(50 9)" fill={`url(#${gradId})`}>
-          <ellipse cx="0" cy="0" rx="1.6" ry="3" />
-          <ellipse cx="-3.4" cy="1.4" rx="1.3" ry="2.4" transform="rotate(-32 -3.4 1.4)" opacity="0.85" />
-          <ellipse cx="3.4" cy="1.4" rx="1.3" ry="2.4" transform="rotate(32 3.4 1.4)" opacity="0.85" />
-          <circle cx="0" cy="3.6" r="0.9" />
+    <svg viewBox="70 50 372 430" height={size} width={(size * 372) / 430} className={className} aria-hidden>
+      <g transform="translate(0 -14)">
+        <path d="M 90 470 V 214 A 166 166 0 0 1 422 214 V 470" fill="none" stroke={p.frame} strokeWidth="16" />
+        <rect x="74" y="484" width="364" height="16" fill={p.frame} />
+        <path d="M 120 470 V 214 A 136 136 0 0 1 392 214 V 470 Z" fill={p.arch} />
+        <g fill={p.letter}>
+          <path d="M 290 176 H 354 V 214 L 290 206 Z" />
+          <path d="M 160 176 H 222 V 214 L 160 206 Z" />
         </g>
-
-        {/* Bottom decorative line + diamond */}
-        <g transform="translate(50 88)" fill={`url(#${gradId})`}>
-          <rect x="-12" y="-0.4" width="9" height="0.8" rx="0.4" />
-          <rect x="3" y="-0.4" width="9" height="0.8" rx="0.4" />
-          <path d="M 0 -2.6 L 2.2 0 L 0 2.6 L -2.2 0 Z" />
+        <g fill="none" stroke={p.letter} strokeLinejoin="round">
+          <path d="M 336 200 V 318 C 336 364 312 384 266 384 H 156" strokeWidth="38" />
+          <path d="M 196 200 L 328 365" strokeWidth="28" />
         </g>
-
-        {/* Hebrew letter ע centered */}
-        <text
-          x="50"
-          y="68"
-          textAnchor="middle"
-          fontFamily='"Heebo","Assistant",sans-serif'
-          fontWeight="800"
-          fontSize="56"
-          fill={`url(#${gradId})`}
-          style={{ letterSpacing: '0' }}
-        >
-          ע
-        </text>
-      </svg>
-      {showName && (
-        <div className="mt-2 text-center">
-          <div className="font-display text-sm font-extrabold tracking-tight text-accent">
-            עשור
-          </div>
-          <div className="text-[10px] font-medium uppercase tracking-[0.25em] text-ink-700">
-            רואי חשבון
-          </div>
-        </div>
-      )}
-    </div>
+      </g>
+    </svg>
   )
 }
 
-function Wordmark({
-  tone,
-  align = 'start',
-}: {
-  tone: Tone
-  align?: 'start' | 'center'
-}) {
-  const goldClass =
-    tone === 'inverse' ? 'text-gold-200' : 'text-primary'
-  const subtitleClass =
-    tone === 'inverse' ? 'text-cream-100/85' : 'text-ink-800/80'
-  const ruleClass =
-    tone === 'inverse' ? 'bg-gold-300/60' : 'bg-gold-400/70'
-  const alignClass = align === 'center' ? 'items-center' : 'items-start'
-  const textAlign = align === 'center' ? 'text-center' : ''
-
+function Wordmark({ tone, height }: { tone: Tone; height: number }) {
+  const p = PALETTE[tone]
+  const w = Math.max(WORD_WIDTH, TAG_WIDTH)
+  // Block geometry matches build_logo.py: word baseline 120, rule 150, tagline baseline 212.
   return (
-    <div className={`flex flex-col ${alignClass} font-display tracking-tight`}>
-      <div
-        className={`${textAlign} text-2xl font-extrabold leading-none ${goldClass} md:text-[1.65rem]`}
-        style={{ letterSpacing: '-0.01em' }}
-      >
-        עשור
-      </div>
-      <div className="mt-1.5 flex items-center gap-2">
-        <span className={`block h-px w-6 ${ruleClass}`} aria-hidden />
-        <span
-          className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${subtitleClass}`}
-          style={{ letterSpacing: '0.28em' }}
-        >
-          רואי חשבון
-        </span>
-        <span className={`block h-px w-6 ${ruleClass}`} aria-hidden />
-      </div>
-    </div>
+    <svg viewBox={`0 0 ${w} 228`} height={height} width={(height * w) / 228} role="img" aria-label="עשור רואות חשבון">
+      <path transform={`translate(${w - WORD_WIDTH} 120)`} fill={p.word} d={WORD_PATH} />
+      <rect x="0" y="150" width={w} height="3" fill={p.rule} />
+      <path transform={`translate(${w - TAG_WIDTH} 212)`} fill={p.tag} d={TAG_PATH} />
+    </svg>
   )
 }

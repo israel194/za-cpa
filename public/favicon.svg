@@ -1,26 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <defs>
-    <linearGradient id="g" x1="20%" y1="10%" x2="80%" y2="90%">
-      <stop offset="0%" stop-color="#d4a190"/>
-      <stop offset="55%" stop-color="#b76e79"/>
-      <stop offset="100%" stop-color="#9c5560"/>
-    </linearGradient>
-  </defs>
-  <rect width="100" height="100" rx="22" fill="#fdf6f3"/>
-  <circle cx="50" cy="50" r="42" fill="none" stroke="url(#g)" stroke-width="1.6"/>
-  <circle cx="50" cy="50" r="38" fill="none" stroke="url(#g)" stroke-width="0.7" opacity="0.7"/>
-  <g transform="translate(50 11)" fill="url(#g)">
-    <ellipse cx="0" cy="0" rx="1.6" ry="3"/>
-    <ellipse cx="-3.4" cy="1.4" rx="1.3" ry="2.4" transform="rotate(-32 -3.4 1.4)" opacity="0.85"/>
-    <ellipse cx="3.4" cy="1.4" rx="1.3" ry="2.4" transform="rotate(32 3.4 1.4)" opacity="0.85"/>
-    <circle cx="0" cy="3.6" r="0.9"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="46 52 420 420" width="64" height="64">
+  <title>עשור רואות חשבון</title>
+  <g transform="translate(0 -14)">
+    
+    <rect x="74" y="484" width="364" height="16" fill="#a8894f"/>
+    <path d="M 120 470 V 214 A 136 136 0 0 1 392 214 V 470 Z" fill="#6e1a2d"/>
+    <g fill="#fbf7f4">
+      <path d="M 290 176 H 354 V 214 L 290 206 Z"/>
+      <path d="M 160 176 H 222 V 214 L 160 206 Z"/>
+    </g>
+    <g fill="none" stroke="#fbf7f4" stroke-linejoin="round">
+      <path d="M 336 200 V 318 C 336 364 312 384 266 384 H 156" stroke-width="38"/>
+      <path d="M 196 200 L 328 365" stroke-width="28"/>
+    </g>
   </g>
-  <g transform="translate(50 86)" fill="url(#g)">
-    <rect x="-12" y="-0.4" width="9" height="0.8" rx="0.4"/>
-    <rect x="3" y="-0.4" width="9" height="0.8" rx="0.4"/>
-    <path d="M 0 -2.6 L 2.2 0 L 0 2.6 L -2.2 0 Z"/>
-  </g>
-  <text x="50" y="68" text-anchor="middle"
-        font-family="Heebo, Assistant, Arial, sans-serif"
-        font-weight="800" font-size="52" fill="url(#g)">ע</text>
 </svg>
