@@ -16,15 +16,13 @@ export default function Reveal({
   className = '',
 }: Props) {
   const ref = useRef<HTMLElement>(null)
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(
+    () => typeof IntersectionObserver === 'undefined'
+  )
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
-    if (typeof IntersectionObserver === 'undefined') {
-      setVisible(true)
-      return
-    }
+    if (!el || typeof IntersectionObserver === 'undefined') return
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
