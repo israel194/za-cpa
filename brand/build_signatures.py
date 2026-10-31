@@ -25,7 +25,7 @@ ADDRESS = 'נחום חפצדי 17, גבעת שאול, ירושלים · מגדל
 SITE = ('za-cpa.com', 'https://za-cpa.com')
 
 STAFF = [
-    {'key': 'orit', 'name': 'אורית עשור', 'title': 'רו"ח', 'email': 'orit@za-cpa.com', 'phone': '052-4975659'},
+    {'key': 'orit', 'name': 'אורית עשור', 'title': 'רו"ח', 'email': 'orit@za-cpa.com', 'phone': '052-3975659'},
     {'key': 'lea', 'name': 'לאה פרידמן', 'title': 'רו"ח (מתמחה)', 'email': 'leah@za-cpa.com', 'phone': '054-7936699'},
     {'key': 'tamar', 'name': 'תמר בן דוד', 'title': 'יועצת מס', 'email': 'tamar@za-cpa.com', 'phone': '054-7936699'},
     {'key': 'sara', 'name': 'שרה בר שלום', 'title': 'מנהלת תיקים', 'email': 'office@za-cpa.com', 'phone': '054-7936699'},
