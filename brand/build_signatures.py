@@ -59,10 +59,7 @@ def signature(p: dict) -> str:
     ])
     return f'''<table dir="rtl" cellpadding="0" cellspacing="0" border="0" style="direction:rtl;text-align:right;border-collapse:collapse;{FONT}">
 <tr>
-<td style="padding:0 0 0 16px;vertical-align:top;width:64px">
-<img src="{IMG}/sig2-mono-{p['key']}.png" width="64" height="64" alt="{escape(p['name'])}" style="display:block;border:0;border-radius:50%">
-</td>
-<td style="padding:2px 0 0 20px;vertical-align:top">
+<td style="padding:2px 0 0 24px;vertical-align:top">
 <div style="{FONT};font-size:22px;font-weight:bold;color:{WINE};line-height:1.2;letter-spacing:-0.2px">{escape(p['name'])}</div>
 <table cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 10px;border-collapse:separate"><tr>
 <td style="background:{PEACH_BG};border-radius:999px;padding:4px 12px;{FONT};font-size:13px;font-weight:bold;color:{ROSE};white-space:nowrap">{escape(p['title'])}</td>
@@ -77,13 +74,13 @@ def signature(p: dict) -> str:
 </td></tr></table>
 </td>
 </tr>
-<tr><td colspan="3" style="padding:14px 0 0">
+<tr><td colspan="2" style="padding:14px 0 0">
 <img src="{IMG}/sig2-bar.png" width="520" height="4" alt="" style="display:block;border:0;width:520px;max-width:100%;height:4px">
 </td></tr>
-<tr><td colspan="3" style="padding:8px 0 0;{FONT};font-size:12px;font-style:italic;font-weight:bold;color:{ROSE}">
+<tr><td colspan="2" style="padding:8px 0 0;{FONT};font-size:12px;font-style:italic;font-weight:bold;color:{ROSE}">
 מהתמונה הגדולה ועד המספר האחרון ♡
 </td></tr>
-<tr><td colspan="3" style="padding:5px 0 0;{FONT};font-size:10px;line-height:1.5;color:{MUTED}">
+<tr><td colspan="2" style="padding:5px 0 0;{FONT};font-size:10px;line-height:1.5;color:{MUTED}">
 הודעה זו והמצורף אליה מיועדים לנמען בלבד ועשויים להכיל מידע חסוי. אם קיבלת אותה בטעות, נא להודיע לשולח ולמחוק אותה.
 </td></tr>
 </table>'''
