@@ -13,20 +13,23 @@ OUT = ROOT / 'public' / 'signatures' / 'index.html'
 IMG = 'https://za-cpa.com/brand/email'
 
 WINE = '#6e1a2d'
+ROSE = '#b84a6c'       # deep rose: AA on white for the title text
+ROSE_SOFT = '#f3c9d3'  # hairlines
+PEACH_BG = '#fde8de'   # title pill
+BLUSH_BG = '#fbeff0'   # logo tile
 GOLD = '#8a6a2f'
-CHAMPAGNE = '#d9c08f'
-MUTED = '#7a6a6e'
-TEXT = '#2b1a20'
+MUTED = '#8a7479'
+TEXT = '#3d2a30'
 
 OFFICE_PHONE = ('02-5000275', 'tel:+97225000275')
 ADDRESS = 'נחום חפצדי 17, גבעת שאול, ירושלים · מגדל רם, קומה 11'
 SITE = ('za-cpa.com', 'https://za-cpa.com')
 
 STAFF = [
-    {'name': 'אורית עשור', 'title': 'רו"ח', 'email': 'orit@za-cpa.com'},
-    {'name': 'לאה פרידמן', 'title': 'מתמחה', 'email': 'office@za-cpa.com'},
-    {'name': 'תמר בן דוד', 'title': 'יועצת מס', 'email': 'office@za-cpa.com'},
-    {'name': 'שרה בר שלום', 'title': 'מנהלת תיקים', 'email': 'office@za-cpa.com'},
+    {'key': 'orit', 'name': 'אורית עשור', 'title': 'רו"ח', 'email': 'orit@za-cpa.com'},
+    {'key': 'lea', 'name': 'לאה פרידמן', 'title': 'מתמחה', 'email': 'office@za-cpa.com'},
+    {'key': 'tamar', 'name': 'תמר בן דוד', 'title': 'יועצת מס', 'email': 'office@za-cpa.com'},
+    {'key': 'sara', 'name': 'שרה בר שלום', 'title': 'מנהלת תיקים', 'email': 'office@za-cpa.com'},
 ]
 
 FONT = "font-family:Arial,Helvetica,sans-serif"
@@ -38,9 +41,9 @@ def ltr(s: str) -> str:
 
 def contact(icon: str, html: str) -> str:
     return (
-        f'<tr><td style="padding:2px 0 2px 8px;vertical-align:middle;width:16px">'
-        f'<img src="{IMG}/sig-{icon}.png" width="14" height="14" alt="" style="display:block;border:0"></td>'
-        f'<td style="padding:2px 0;{FONT};font-size:13px;color:{TEXT};vertical-align:middle">{html}</td></tr>'
+        f'<tr><td style="padding:3px 0 3px 9px;vertical-align:middle;width:22px">'
+        f'<img src="{IMG}/sig2-{icon}.png" width="22" height="22" alt="" style="display:block;border:0"></td>'
+        f'<td style="padding:3px 0;{FONT};font-size:13px;color:{TEXT};vertical-align:middle">{html}</td></tr>'
     )
 
 
@@ -57,18 +60,31 @@ def signature(p: dict) -> str:
     ])
     return f'''<table dir="rtl" cellpadding="0" cellspacing="0" border="0" style="direction:rtl;text-align:right;border-collapse:collapse;{FONT}">
 <tr>
-<td style="padding:0 0 0 18px;vertical-align:top">
-<div style="{FONT};font-size:20px;font-weight:bold;color:{WINE};line-height:1.25">{escape(p['name'])}</div>
-<div style="{FONT};font-size:14px;font-weight:bold;color:{GOLD};margin-top:2px">{escape(p['title'])} · עשור רואי חשבון</div>
-<div style="height:2px;width:56px;background:{CHAMPAGNE};margin:9px 0 8px;line-height:2px;font-size:0">&nbsp;</div>
+<td style="padding:0 0 0 16px;vertical-align:top;width:64px">
+<img src="{IMG}/sig2-mono-{p['key']}.png" width="64" height="64" alt="{escape(p['name'])}" style="display:block;border:0;border-radius:50%">
+</td>
+<td style="padding:2px 0 0 20px;vertical-align:top">
+<div style="{FONT};font-size:22px;font-weight:bold;color:{WINE};line-height:1.2;letter-spacing:-0.2px">{escape(p['name'])}</div>
+<table cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 10px;border-collapse:separate"><tr>
+<td style="background:{PEACH_BG};border-radius:999px;padding:4px 12px;{FONT};font-size:13px;font-weight:bold;color:{ROSE};white-space:nowrap">{escape(p['title'])}</td>
+<td style="padding:0 8px 0 0;{FONT};font-size:13px;color:{MUTED};white-space:nowrap">עשור · רואי חשבון</td>
+</tr></table>
 <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">{rows}</table>
 </td>
-<td style="width:2px;background:{CHAMPAGNE};font-size:0;line-height:0">&nbsp;</td>
-<td style="padding:0 18px 0 0;vertical-align:middle">
-<a href="{SITE[1]}"><img src="{IMG}/sig-logo.png" width="66" height="106" alt="עשור רואי חשבון" style="display:block;border:0"></a>
+<td style="vertical-align:middle;padding:0">
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate"><tr>
+<td style="background:{BLUSH_BG};border:1px solid {ROSE_SOFT};border-radius:16px;padding:12px 16px">
+<a href="{SITE[1]}"><img src="{IMG}/sig-logo.png" width="62" height="99" alt="עשור רואי חשבון" style="display:block;border:0"></a>
+</td></tr></table>
 </td>
 </tr>
-<tr><td colspan="3" style="padding-top:12px;{FONT};font-size:10px;line-height:1.5;color:{MUTED};max-width:520px">
+<tr><td colspan="3" style="padding:14px 0 0">
+<img src="{IMG}/sig2-bar.png" width="520" height="4" alt="" style="display:block;border:0;width:520px;max-width:100%;height:4px">
+</td></tr>
+<tr><td colspan="3" style="padding:8px 0 0;{FONT};font-size:12px;font-style:italic;font-weight:bold;color:{ROSE}">
+מהתמונה הגדולה ועד המספר האחרון ♡
+</td></tr>
+<tr><td colspan="3" style="padding:5px 0 0;{FONT};font-size:10px;line-height:1.5;color:{MUTED}">
 הודעה זו והמצורף אליה מיועדים לנמען בלבד ועשויים להכיל מידע חסוי. אם קיבלת אותה בטעות, נא להודיע לשולח ולמחוק אותה.
 </td></tr>
 </table>'''
@@ -98,8 +114,8 @@ def page() -> str:
   .card {{ background:#fff; border:1px solid #eadcdb; border-radius:18px; padding:20px 22px 24px; margin-bottom:18px; box-shadow:0 18px 40px -32px rgba(110,26,45,.45); }}
   .card header {{ display:flex; align-items:center; gap:10px; border-bottom:1px solid #f1e6e4; padding-bottom:12px; margin-bottom:18px; }}
   .card h2 {{ margin:0; font-size:18px; color:{WINE}; }}
-  .card header span {{ color:{GOLD}; font-size:14px; }}
-  .card button {{ margin-inline-start:auto; border:0; border-radius:999px; background:{WINE}; color:#fff; font:inherit; font-weight:700; font-size:14px; padding:9px 18px; cursor:pointer; }}
+  .card header span {{ color:{ROSE}; font-size:14px; }}
+  .card button {{ margin-inline-start:auto; border:0; border-radius:999px; background:linear-gradient(90deg,{WINE},{ROSE}); color:#fff; font:inherit; font-weight:700; font-size:14px; padding:9px 18px; cursor:pointer; }}
   .card button.done {{ background:#1f8f4e; }}
   .sig {{ overflow-x:auto; }}
   ol {{ line-height:1.9; padding-inline-start:20px; }}
