@@ -21,15 +21,14 @@ GOLD = '#8a6a2f'
 MUTED = '#8a7479'
 TEXT = '#3d2a30'
 
-OFFICE_PHONE = ('02-5000275', 'tel:+97225000275')
 ADDRESS = 'נחום חפצדי 17, גבעת שאול, ירושלים · מגדל רם, קומה 11'
 SITE = ('za-cpa.com', 'https://za-cpa.com')
 
 STAFF = [
-    {'key': 'orit', 'name': 'אורית עשור', 'title': 'רו"ח', 'email': 'orit@za-cpa.com'},
-    {'key': 'lea', 'name': 'לאה פרידמן', 'title': 'רו"ח (מתמחה)', 'email': 'office@za-cpa.com'},
-    {'key': 'tamar', 'name': 'תמר בן דוד', 'title': 'יועצת מס', 'email': 'office@za-cpa.com'},
-    {'key': 'sara', 'name': 'שרה בר שלום', 'title': 'מנהלת תיקים', 'email': 'office@za-cpa.com'},
+    {'key': 'orit', 'name': 'אורית עשור', 'title': 'רו"ח', 'email': 'orit@za-cpa.com', 'phone': '052-4975659'},
+    {'key': 'lea', 'name': 'לאה פרידמן', 'title': 'רו"ח (מתמחה)', 'email': 'leah@za-cpa.com', 'phone': '054-7936699'},
+    {'key': 'tamar', 'name': 'תמר בן דוד', 'title': 'יועצת מס', 'email': 'tamar@za-cpa.com', 'phone': '054-7936699'},
+    {'key': 'sara', 'name': 'שרה בר שלום', 'title': 'מנהלת תיקים', 'email': 'office@za-cpa.com', 'phone': '054-7936699'},
 ]
 
 FONT = "font-family:Arial,Helvetica,sans-serif"
@@ -53,9 +52,9 @@ def link(text: str, href: str) -> str:
 
 def signature(p: dict) -> str:
     rows = ''.join([
-        contact('phone', link(ltr(OFFICE_PHONE[0]), OFFICE_PHONE[1])),
+        contact('phone', link(ltr(p['phone']), 'tel:+972' + p['phone'].replace('-', '')[1:])),
         contact('mail', link(ltr(escape(p['email'])), 'mailto:' + p['email'])),
-        contact('globe', link(ltr(SITE[0]), SITE[1])),
+        contact('globe', f'<a href="{SITE[1]}" style="color:{ROSE};font-weight:bold;text-decoration:underline">{ltr("www." + SITE[0])}</a>'),
         contact('pin', escape(ADDRESS)),
     ])
     return f'''<table dir="rtl" cellpadding="0" cellspacing="0" border="0" style="direction:rtl;text-align:right;border-collapse:collapse;{FONT}">
