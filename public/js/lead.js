@@ -1,7 +1,6 @@
 /*
  * Lead delivery for the static landing pages (mirrors src/lib/notify.ts).
- * Primary: Web3Forms, as on asor-law.com. Fallback: the legacy Apps Script
- * endpoint, used only while a target has no Web3Forms key yet.
+ * Order: our Cloudflare Worker (Resend) → Web3Forms → legacy Apps Script.
  * Keys are public by design; keep them in sync with src/lib/notify.ts.
  */
 (function () {
@@ -52,8 +51,40 @@
     return payload
   }
 
-  /** Sends a lead. Resolves true when delivery was accepted. */
+  // Primary: our own Cloudflare Worker (branded email + Hebrew auto-reply via Resend).
+  var LEADS_ENDPOINT = 'https://za-cpa-leads.za-cpa-leads.workers.dev/lead'
+
+  function viaWorker(p) {
+    return fetch(LEADS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        target: p.target || 'office',
+        name: p.name,
+        phone: p.phone,
+        email: p.email,
+        entity: p.entity,
+        service: p.service,
+        discounts: p.discounts,
+        message: p.note,
+        sessionDate: p.sessionDate,
+        source: p.source,
+      }),
+      keepalive: true,
+    }).then(function (res) {
+      return res.json().then(function (b) { return res.ok && !!b.ok }, function () { return false })
+    }, function () { return false })
+  }
+
+  /** Sends a lead. Resolves true when delivery was accepted. Never loses a lead:
+   *  Worker first, then Web3Forms, then the legacy Apps Script endpoint. */
   window.zaSendLead = function (p) {
+    return viaWorker(p).then(function (ok) {
+      return ok ? true : fallback(p)
+    })
+  }
+
+  function fallback(p) {
     var key = WEB3FORMS_KEYS[p.target || 'office']
     if (key) {
       return fetch('https://api.web3forms.com/submit', {

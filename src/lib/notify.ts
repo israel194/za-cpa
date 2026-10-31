@@ -1,7 +1,5 @@
-// Lead delivery. Primary: Web3Forms (same service as asor-law.com) — the form
-// posts straight to api.web3forms.com and the lead lands in the inbox tied to
-// the access key. Fallback: the legacy Google Apps Script endpoint, used only
-// while a target has no Web3Forms key yet.
+// Lead delivery, in order: our Cloudflare Worker (Resend) → Web3Forms (as on
+// asor-law.com) → the legacy Google Apps Script endpoint.
 //
 // Keys are public by design (a Web3Forms access key can only send to the
 // address it was issued for). Keep in sync with public/js/lead.js.
@@ -67,7 +65,28 @@ function web3Payload(p: NotifyPayload, key: string) {
   return payload
 }
 
+// Primary delivery: our own Cloudflare Worker (worker/ in this repo), which
+// sends a branded email via Resend plus a Hebrew auto-reply to the lead.
+const LEADS_ENDPOINT = 'https://za-cpa-leads.za-cpa-leads.workers.dev/lead'
+
+async function viaWorker(p: NotifyPayload): Promise<boolean> {
+  try {
+    const res = await fetch(LEADS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(p),
+      keepalive: true,
+    })
+    const body = (await res.json().catch(() => ({}))) as { ok?: boolean }
+    return res.ok && !!body.ok
+  } catch {
+    return false
+  }
+}
+
+/** Worker first, then Web3Forms, then the legacy Apps Script — a lead is never lost. */
 export async function sendLead(payload: NotifyPayload): Promise<boolean> {
+  if (await viaWorker(payload)) return true
   const key = WEB3FORMS_KEYS[payload.target]
   try {
     if (key) {
