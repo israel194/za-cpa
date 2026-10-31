@@ -74,6 +74,12 @@ export default {
       console.error('office email failed', err)
       return json({ ok: false, error: 'send_failed' }, 502, cors)
     }
+    // Stored for the daily report; a storage hiccup must not fail the lead.
+    try {
+      await storeLead(env, lead)
+    } catch (err) {
+      console.error('store lead failed', err)
+    }
     // The auto-reply is a courtesy; never fail the request because of it.
     if (lead.email) {
       try {
@@ -84,6 +90,119 @@ export default {
     }
     return json({ ok: true }, 200, cors)
   },
+
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(runDailyReport(env))
+  },
+}
+
+// ── Daily report (18:00 Israel time, only on days with leads) ───────────────
+
+const LEAD_TTL_SECONDS = 60 * 24 * 60 * 60 // keep 60 days, then auto-delete
+
+function israelParts(date = new Date()) {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+    }).formatToParts(date).map((p) => [p.type, p.value])
+  )
+  return { day: `${parts.year}-${parts.month}-${parts.day}`, hour: Number(parts.hour), time: `${parts.hour}:${parts.minute}` }
+}
+
+async function storeLead(env, lead) {
+  if (!env.LEADS_KV) return
+  const { day, time } = israelParts()
+  const key = `lead:${day}:${Date.now()}:${crypto.randomUUID().slice(0, 8)}`
+  await env.LEADS_KV.put(key, JSON.stringify({ ...lead, time }), { expirationTtl: LEAD_TTL_SECONDS })
+}
+
+/** Sends the report for `day` (default: today in Israel). `force` skips the 18:00 and already-sent checks. */
+async function runDailyReport(env, { force = false, day } = {}) {
+  const now = israelParts()
+  if (!force && now.hour !== 18) return 'not 18:00 in Israel'
+  const reportDay = day || now.day
+  const sentKey = `report-sent:${reportDay}`
+  if (!force && (await env.LEADS_KV.get(sentKey))) return 'already sent'
+
+  // Window: 18:00 yesterday → 18:00 today, so leads after 18:00 make the next report.
+  const prevDay = new Date(Date.parse(`${reportDay}T12:00:00Z`) - 86400000).toISOString().slice(0, 10)
+  const leads = [
+    ...(await leadsFor(env, prevDay)).filter((l) => l.time >= '18:00').map((l) => ({ ...l, yesterday: true })),
+    ...(await leadsFor(env, reportDay)).filter((l) => l.time < '18:00'),
+  ]
+
+  if (leads.length === 0) return 'no leads'
+  leads.sort((a, b) => Number(!a.yesterday) - Number(!b.yesterday) || a.time.localeCompare(b.time))
+  await sendReportEmail(env, reportDay, leads)
+  await env.LEADS_KV.put(sentKey, '1', { expirationTtl: 7 * 24 * 60 * 60 })
+  return `sent ${leads.length}`
+}
+
+async function leadsFor(env, day) {
+  const out = []
+  let cursor
+  do {
+    const page = await env.LEADS_KV.list({ prefix: `lead:${day}:`, cursor })
+    for (const k of page.keys) {
+      const v = await env.LEADS_KV.get(k.name, 'json')
+      if (v) out.push(v)
+    }
+    cursor = page.list_complete ? undefined : page.cursor
+  } while (cursor)
+  return out
+}
+
+async function sendReportEmail(env, day, leads) {
+  const [y, m, d] = day.split('-')
+  const dateHe = `${d}/${m}/${y}`
+  const count = leads.length === 1 ? 'פנייה אחת' : `${leads.length} פניות`
+
+  const bySource = {}
+  for (const l of leads) bySource[l.source] = (bySource[l.source] || 0) + 1
+  const summary = Object.entries(bySource)
+    .map(([s, n]) => `<span style="display:inline-block;margin:3px 0 3px 6px;padding:5px 12px;border-radius:999px;background:#f6efe0;color:${BRAND.gold};font-size:13px;font-weight:bold">${esc(s)}: ${n}</span>`)
+    .join('')
+
+  const cards = leads.map((l, i) => {
+    const lines = []
+    if (l.phone) {
+      lines.push(`<a href="tel:+${intlPhone(l.phone)}" style="color:${BRAND.wine};text-decoration:none;font-weight:bold">${ltr(displayPhone(l.phone))}</a>
+ · <a href="https://wa.me/${intlPhone(l.phone)}" style="color:#1f8f4e;text-decoration:none;font-weight:bold">וואטסאפ</a>`)
+    }
+    if (l.email) lines.push(`<a href="mailto:${esc(l.email)}" style="color:${BRAND.wine};text-decoration:none">${ltr(esc(l.email))}</a>`)
+    const extra = [l.entity && `סוג תיק: ${esc(l.entity)}`, l.service && `שירות: ${esc(l.service)}`, l.sessionDate && `מועד: ${esc(l.sessionDate)}`]
+      .concat((l.discounts || []).map((x) => `הנחה: ${esc(x)}`))
+      .filter(Boolean)
+    return `<tr><td style="padding:14px 0;border-bottom:1px solid ${BRAND.line}">
+<div style="font-size:12px;color:${BRAND.muted}">${i + 1}. ${l.yesterday ? 'אתמול ' : ''}${ltr(esc(l.time))} · ${esc(l.source)}</div>
+<div style="font-size:18px;font-weight:bold;color:${BRAND.text};margin-top:3px">${esc(l.name)}</div>
+${lines.map((x) => `<div style="font-size:15px;margin-top:4px">${x}</div>`).join('')}
+${extra.length ? `<div style="font-size:13px;color:${BRAND.gold};margin-top:6px">${extra.join(' · ')}</div>` : ''}
+${l.message ? `<div style="font-size:14px;color:${BRAND.text};background:${BRAND.ivory};border-right:3px solid ${BRAND.champagne};border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.6">${esc(l.message).replace(/\n/g, '<br>')}</div>` : ''}
+</td></tr>`
+  }).join('')
+
+  const html = shell(`דוח פניות יומי · ${dateHe}`, `
+<tr><td style="padding:22px 28px 4px">
+<div style="font-size:28px;font-weight:bold;color:${BRAND.wine}">${count}</div>
+<div style="font-size:14px;color:${BRAND.muted};margin-top:2px">התקבלו מהאתר ומדפי הנחיתה, מ־18:00 אתמול עד 18:00 היום</div>
+<div style="margin-top:10px">${summary}</div>
+</td></tr>
+<tr><td style="padding:6px 28px 8px"><table role="presentation" dir="rtl" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${cards}</table></td></tr>
+<tr><td style="padding:16px 28px 22px;color:${BRAND.muted};font-size:12px">הדוח נשלח אוטומטית בכל יום בשעה 18:00, ורק אם התקבלו פניות.</td></tr>`)
+
+  const text = [`דוח פניות יומי ${dateHe}: ${count}`, '']
+    .concat(leads.map((l, i) => `${i + 1}. ${l.time} | ${l.name} | ${l.phone ? displayPhone(l.phone) : ''} ${l.email || ''} | ${l.source}`))
+    .map((x) => '‏' + x)
+    .join('\n')
+
+  await resend(env, {
+    from: env.EMAIL_FROM,
+    to: [env.REPORT_EMAIL],
+    subject: `דוח פניות יומי · ${dateHe} · ${count}`,
+    html,
+    text,
+  })
 }
 
 function json(body, status, headers) {

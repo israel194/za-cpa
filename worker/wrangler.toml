@@ -8,6 +8,7 @@ OFFICE_EMAIL = "office@za-cpa.com"
 ORIT_EMAIL = "orit@za-cpa.com"
 EMAIL_FROM = "אתר עשור רואי חשבון <website@za-cpa.com>"
 OFFICE_PHONE = "02-5000275"
+REPORT_EMAIL = "orit@za-cpa.com"
 
 # Per-IP limit on lead submissions (Workers Rate Limiting binding).
 [[ratelimits]]
@@ -16,3 +17,14 @@ namespace_id = "1001"
 simple = { limit = 5, period = 60 }
 
 # Secret (not stored here):  npx wrangler secret put RESEND_API_KEY
+
+# Leads are kept 60 days for the daily report, then expire automatically.
+[[kv_namespaces]]
+binding = "LEADS_KV"
+id = "e512f25bd3444c3e9feb7e19a5532667"
+
+# Daily report at 18:00 Israel time. Cron runs in UTC, and Israel is UTC+2 in
+# winter / UTC+3 in summer, so fire at both 15:00 and 16:00 UTC; the handler
+# sends only on the run where it is 18:00 in Jerusalem.
+[triggers]
+crons = ["0 15 * * *", "0 16 * * *"]
