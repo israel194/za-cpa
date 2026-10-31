@@ -263,6 +263,22 @@ export default function OritGroupPage() {
         </div>
       </section>
 
+      {/* NEXT STEP: the frequency course */}
+      <section className="relative bg-white pb-20">
+        <div className="mx-auto max-w-3xl px-6 md:px-10">
+          <a
+            href="/frequency-course"
+            className="group flex flex-col items-center gap-3 rounded-3xl bg-gradient-to-l from-[#fde8de] via-[#fbeff0] to-[#f3d3dc] p-8 text-center shadow-[0_20px_50px_-30px_rgba(110,26,45,0.5)] transition-transform duration-300 hover:-translate-y-1 md:flex-row md:justify-between md:text-start"
+          >
+            <span>
+              <span className="block text-sm font-bold text-[#b84a6c]">רוצה להעמיק?</span>
+              <span className="mt-1 block font-display text-2xl font-extrabold text-burgundy-700">קורס העלאת תדר · 8 מפגשים</span>
+            </span>
+            <span className="rounded-full bg-burgundy-600 px-6 py-3 text-sm font-bold text-white">לפרטים על הקורס</span>
+          </a>
+        </div>
+      </section>
+
       {/* REGISTRATION MODAL */}
       {modalOpen && (
         <div

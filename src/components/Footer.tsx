@@ -126,6 +126,13 @@ export default function Footer() {
           >
             לחזור לעצמך — קבוצת לימוד לנשים
           </Link>
+          <span className="mx-2 opacity-60">·</span>
+          <Link
+            to="/frequency-course"
+            className="text-cream-200/80 underline-offset-2 transition-colors hover:text-gold-300 hover:underline"
+          >
+            קורס העלאת תדר
+          </Link>
         </div>
       </div>
 

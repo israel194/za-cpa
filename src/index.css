@@ -422,3 +422,18 @@ html.a11y-reading-guide::after {
   outline: 3px solid #fff;
   outline-offset: 2px;
 }
+
+/* "Frequency" rings pulsing out from the portrait on the frequency-course page */
+.freq-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid rgba(209, 109, 138, 0.55);
+  animation: freq-pulse 3.9s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  pointer-events: none;
+}
+@keyframes freq-pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.65); opacity: 0; }
+}
+html.a11y-no-motion .freq-ring { display: none; }

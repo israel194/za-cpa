@@ -38,11 +38,14 @@ export default {
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         status: 204,
-        headers: { ...cors, 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Max-Age': '86400' },
+        headers: { ...cors, 'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization', 'Access-Control-Max-Age': '86400' },
       })
     }
 
     const url = new URL(request.url)
+    if (url.pathname.startsWith('/content/') || url.pathname === '/admin/check') {
+      return handleContent(request, env, url, cors, allowed.includes(origin))
+    }
     if (url.pathname !== '/lead') return json({ ok: false, error: 'not_found' }, 404, cors)
     if (request.method !== 'POST') return json({ ok: false, error: 'method_not_allowed' }, 405, cors)
     if (!allowed.includes(origin)) return json({ ok: false, error: 'forbidden_origin' }, 403, cors)
@@ -98,6 +101,93 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(runDailyReport(env))
   },
+}
+
+// ── Page content (mini CMS for the landing pages) ───────────────────────────
+// GET  /content/:slug                 public, returns the saved JSON (or null)
+// PUT  /content/:slug                 admin, saves + keeps the previous 30 versions
+// GET  /content/:slug/history         admin, list of saved versions
+// GET  /content/:slug/history/:ts     admin, one saved version
+// POST /admin/check                   admin, password check for the login screen
+
+const CONTENT_SLUGS = ['frequency-course']
+const MAX_CONTENT_BYTES = 200_000
+const HISTORY_KEEP = 30
+
+async function isAdmin(request, env) {
+  const given = (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '')
+  const expected = String(env.ADMIN_PASSWORD || '').replace(/^\uFEFF/, '').trim()
+  if (!expected || !given) return false
+  const enc = new TextEncoder()
+  const [a, b] = await Promise.all([
+    crypto.subtle.digest('SHA-256', enc.encode(given)),
+    crypto.subtle.digest('SHA-256', enc.encode(expected)),
+  ])
+  return crypto.subtle.timingSafeEqual(a, b)
+}
+
+async function handleContent(request, env, url, cors, originAllowed) {
+  const parts = url.pathname.split('/').filter(Boolean) // ['content', slug, 'history', ts]
+  const method = request.method
+
+  // Public read
+  if (method === 'GET' && parts.length === 2 && parts[0] === 'content') {
+    if (!CONTENT_SLUGS.includes(parts[1])) return json({ ok: false, error: 'unknown_page' }, 404, cors)
+    const raw = await env.LEADS_KV.get(`content:${parts[1]}`, 'json')
+    return json({ ok: true, content: raw?.content ?? null, updatedAt: raw?.updatedAt ?? null }, 200, { ...cors, 'Cache-Control': 'no-store' })
+  }
+
+  // Everything else is admin-only, from our own site, and rate-limited.
+  if (!originAllowed) return json({ ok: false, error: 'forbidden_origin' }, 403, cors)
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown'
+  if (!(await isAdmin(request, env))) {
+    if (env.LEAD_LIMITER) await env.LEAD_LIMITER.limit({ key: `auth:${ip}` })
+    return json({ ok: false, error: 'unauthorized' }, 401, cors)
+  }
+
+  if (method === 'POST' && parts[0] === 'admin' && parts[1] === 'check') return json({ ok: true }, 200, cors)
+
+  const slug = parts[1]
+  if (parts[0] !== 'content' || !CONTENT_SLUGS.includes(slug)) return json({ ok: false, error: 'unknown_page' }, 404, cors)
+
+  if (method === 'PUT' && parts.length === 2) {
+    const text = await request.text()
+    if (text.length > MAX_CONTENT_BYTES) return json({ ok: false, error: 'too_large' }, 413, cors)
+    let body
+    try {
+      body = JSON.parse(text)
+    } catch {
+      return json({ ok: false, error: 'bad_json' }, 400, cors)
+    }
+    if (!body || typeof body.content !== 'object' || Array.isArray(body.content)) {
+      return json({ ok: false, error: 'bad_content' }, 400, cors)
+    }
+    const updatedAt = new Date().toISOString()
+    const prev = await env.LEADS_KV.get(`content:${slug}`)
+    if (prev) {
+      const prevTs = JSON.parse(prev).updatedAt || updatedAt
+      await env.LEADS_KV.put(`content-history:${slug}:${prevTs}`, prev)
+      const old = await env.LEADS_KV.list({ prefix: `content-history:${slug}:` })
+      const names = old.keys.map((k) => k.name).sort()
+      for (const n of names.slice(0, Math.max(0, names.length - HISTORY_KEEP))) await env.LEADS_KV.delete(n)
+    }
+    await env.LEADS_KV.put(`content:${slug}`, JSON.stringify({ content: body.content, updatedAt }))
+    return json({ ok: true, updatedAt }, 200, cors)
+  }
+
+  if (method === 'GET' && parts[2] === 'history' && parts.length === 3) {
+    const list = await env.LEADS_KV.list({ prefix: `content-history:${slug}:` })
+    const history = list.keys.map((k) => ({ ts: k.name.slice(`content-history:${slug}:`.length) })).sort((a, b) => b.ts.localeCompare(a.ts))
+    return json({ ok: true, history }, 200, cors)
+  }
+
+  if (method === 'GET' && parts[2] === 'history' && parts.length === 4) {
+    const raw = await env.LEADS_KV.get(`content-history:${slug}:${decodeURIComponent(parts[3])}`, 'json')
+    if (!raw) return json({ ok: false, error: 'not_found' }, 404, cors)
+    return json({ ok: true, content: raw.content }, 200, cors)
+  }
+
+  return json({ ok: false, error: 'not_found' }, 404, cors)
 }
 
 // ── Daily report (18:00 Israel time, only on days with leads) ───────────────
@@ -301,7 +391,7 @@ function shell(title, inner) {
 async function resend(env, payload) {
   const res = await fetch(RESEND_ENDPOINT, {
     method: 'POST',
-    headers: { Authorization: `Bearer ${String(env.RESEND_API_KEY).replace(/^﻿/, '').trim()}`, 'Content-Type': 'application/json' },
+    headers: { Authorization: `Bearer ${String(env.RESEND_API_KEY).replace(/^\uFEFF/, '').trim()}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`)

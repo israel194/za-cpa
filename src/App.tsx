@@ -15,6 +15,8 @@ const ContactPage = lazy(() => import('./pages/ContactPage'))
 const AccessibilityPage = lazy(() => import('./pages/AccessibilityPage'))
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
 const OritGroupPage = lazy(() => import('./pages/OritGroupPage'))
+const FrequencyCoursePage = lazy(() => import('./pages/FrequencyCoursePage'))
+const AdminPage = lazy(() => import('./pages/AdminPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 function RouteFallback() {
@@ -120,6 +122,14 @@ export default function App() {
             }
           />
           <Route
+            path="frequency-course"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <FrequencyCoursePage />
+              </Suspense>
+            }
+          />
+          <Route
             path="*"
             element={
               <Suspense fallback={<RouteFallback />}>
@@ -128,6 +138,15 @@ export default function App() {
             }
           />
         </Route>
+        {/* Content admin: standalone, outside the public layout */}
+        <Route
+          path="admin"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <AdminPage />
+            </Suspense>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )
