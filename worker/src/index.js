@@ -74,6 +74,10 @@ export default {
       console.error('office email failed', err)
       return json({ ok: false, error: 'send_failed' }, 502, cors)
     }
+    // Technical test submissions ({ test: true }) are emailed but kept out of
+    // the daily report and get no auto-reply.
+    if (data.test === true) return json({ ok: true }, 200, cors)
+
     // Stored for the daily report; a storage hiccup must not fail the lead.
     try {
       await storeLead(env, lead)
