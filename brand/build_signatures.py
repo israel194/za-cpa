@@ -27,7 +27,7 @@ SITE = ('za-cpa.com', 'https://za-cpa.com')
 
 STAFF = [
     {'key': 'orit', 'name': 'אורית עשור', 'title': 'רו"ח', 'email': 'orit@za-cpa.com'},
-    {'key': 'lea', 'name': 'לאה פרידמן', 'title': 'מתמחה', 'email': 'office@za-cpa.com'},
+    {'key': 'lea', 'name': 'לאה פרידמן', 'title': 'רו"ח (מתמחה)', 'email': 'office@za-cpa.com'},
     {'key': 'tamar', 'name': 'תמר בן דוד', 'title': 'יועצת מס', 'email': 'office@za-cpa.com'},
     {'key': 'sara', 'name': 'שרה בר שלום', 'title': 'מנהלת תיקים', 'email': 'office@za-cpa.com'},
 ]
