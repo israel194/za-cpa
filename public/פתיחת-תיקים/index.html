@@ -14,6 +14,11 @@
     <meta property="og:locale" content="he_IL" />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#6e1a2d" />
+    <meta property="og:image" content="https://za-cpa.com/brand/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,30 +44,30 @@
             },
             colors: {
               navy: {
-                50: '#eef3fb',
-                100: '#d6e2f3',
-                200: '#b9cbe8',
-                300: '#8ba8d4',
-                400: '#5b7bb0',
-                700: '#13346b',
-                800: '#0e2750',
-                900: '#0a1c3a',
-                950: '#06122a',
+                50: '#fbf4f3',
+                100: '#f3e5e4',
+                200: '#e7cdd0',
+                300: '#c98d96',
+                400: '#9e3a4d',
+                700: '#6e1a2d',
+                800: '#521222',
+                900: '#3a0f1c',
+                950: '#22070f',
               },
               gold: {
-                300: '#e6cd7a',
-                400: '#d9b94f',
-                500: '#c9a227',
-                600: '#a9851a',
+                300: '#ebdcbc',
+                400: '#d9c08f',
+                500: '#c4a468',
+                600: '#8a6a2f',
               },
               sky: {
-                400: '#56b6e6',
-                500: '#2f9fd6',
+                400: '#c98d96',
+                500: '#b36672',
               },
             },
             boxShadow: {
-              card: '0 18px 45px -22px rgba(10, 28, 58, 0.45)',
-              gold: '0 16px 40px -16px rgba(201, 162, 39, 0.55)',
+              card: '0 18px 45px -22px rgba(58, 15, 28, 0.45)',
+              gold: '0 16px 40px -16px rgba(196, 164, 104, 0.55)',
             },
             keyframes: {
               floaty: {
@@ -79,13 +84,16 @@
     </script>
     <style type="text/tailwindcss">
       @layer base {
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: clip; }
+        body { overflow-x: clip; }
         body { @apply font-sans text-navy-900 antialiased; }
       }
     </style>
 
     <!-- Accessibility modes (ported from the main site, applied to <html>) -->
     <style>
+      .bg-plus-light { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><path d='M20 15v10M15 20h10' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1.4' stroke-linecap='round'/></svg>"); background-size: 40px 40px; }
+      .bg-plus { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><path d='M20 15v10M15 20h10' stroke='%236e1a2d' stroke-opacity='0.06' stroke-width='1.4' stroke-linecap='round'/></svg>"); background-size: 40px 40px; }
       html.a11y-text-small { font-size: 90%; }
       html.a11y-text-large { font-size: 115%; }
       html.a11y-text-xlarge { font-size: 130%; }
@@ -159,47 +167,47 @@
         z-index: 100;
         padding: 0.75rem 1.25rem;
         border-radius: 9999px;
-        background: #0a1c3a;
+        background: #3a0f1c;
         color: #fff;
         font-weight: 700;
         font-size: 0.875rem;
-        box-shadow: 0 12px 28px -10px rgba(10, 28, 58, 0.6);
+        box-shadow: 0 12px 28px -10px rgba(58, 15, 28, 0.6);
         transition: top 200ms ease;
       }
       .skip-link:focus { top: 1rem; outline: 3px solid #fff; outline-offset: 2px; }
 
       /* Accessibility panel + cookie modal controls */
-      .a11y-group { display: flex; align-items: center; gap: 8px; margin: 20px 0 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: #a9851a; }
+      .a11y-group { display: flex; align-items: center; gap: 8px; margin: 20px 0 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: #8a6a2f; }
       .a11y-group:first-child { margin-top: 0; }
-      .a11y-group::before, .a11y-group::after { content: ''; flex: 1; height: 1px; background: #d6e2f3; }
-      .a11y-tri { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #d6e2f3; background: #eef3fb; border-radius: 12px; padding: 10px 8px; font-size: 14px; font-weight: 600; color: #0e2750; cursor: pointer; transition: all .2s; }
-      .a11y-tri:hover { border-color: #d9b94f; background: #fff; }
-      .a11y-tri.is-active { border-color: #c9a227; background: #c9a227; color: #06122a; }
-      .a11y-lvl { border: 1px solid #d6e2f3; background: #eef3fb; border-radius: 12px; padding: 10px 4px; font-size: 14px; font-weight: 600; color: #0e2750; cursor: pointer; transition: all .2s; }
-      .a11y-lvl:hover { border-color: #d9b94f; }
-      .a11y-lvl.is-active { border-color: #c9a227; background: #c9a227; color: #06122a; }
-      .a11y-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; margin-bottom: 8px; border: 1px solid #d6e2f3; background: #fff; border-radius: 12px; padding: 10px 16px; text-align: start; font-size: 14px; font-weight: 600; color: #0a1c3a; cursor: pointer; transition: all .2s; }
-      .a11y-row:hover { border-color: #8ba8d4; background: #eef3fb; }
-      .a11y-row.is-active { border-color: #c9a227; background: rgba(201, 162, 39, 0.12); }
+      .a11y-group::before, .a11y-group::after { content: ''; flex: 1; height: 1px; background: #f3e5e4; }
+      .a11y-tri { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #f3e5e4; background: #fbf4f3; border-radius: 12px; padding: 10px 8px; font-size: 14px; font-weight: 600; color: #521222; cursor: pointer; transition: all .2s; }
+      .a11y-tri:hover { border-color: #d9c08f; background: #fff; }
+      .a11y-tri.is-active { border-color: #c4a468; background: #c4a468; color: #22070f; }
+      .a11y-lvl { border: 1px solid #f3e5e4; background: #fbf4f3; border-radius: 12px; padding: 10px 4px; font-size: 14px; font-weight: 600; color: #521222; cursor: pointer; transition: all .2s; }
+      .a11y-lvl:hover { border-color: #d9c08f; }
+      .a11y-lvl.is-active { border-color: #c4a468; background: #c4a468; color: #22070f; }
+      .a11y-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; margin-bottom: 8px; border: 1px solid #f3e5e4; background: #fff; border-radius: 12px; padding: 10px 16px; text-align: start; font-size: 14px; font-weight: 600; color: #3a0f1c; cursor: pointer; transition: all .2s; }
+      .a11y-row:hover { border-color: #c98d96; background: #fbf4f3; }
+      .a11y-row.is-active { border-color: #c4a468; background: rgba(196, 164, 104, 0.12); }
       .a11y-row i { margin-inline-end: 8px; color: #1d4ed8; }
-      .a11y-sw, .cookie-sw { position: relative; height: 24px; width: 44px; flex: none; border-radius: 9999px; background: #d6e2f3; transition: background .2s; }
+      .a11y-sw, .cookie-sw { position: relative; height: 24px; width: 44px; flex: none; border-radius: 9999px; background: #f3e5e4; transition: background .2s; }
       .a11y-sw::after, .cookie-sw::after { content: ''; position: absolute; top: 4px; inset-inline-start: 4px; height: 16px; width: 16px; border-radius: 9999px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); transition: inset-inline-start .2s; }
-      .a11y-row.is-active .a11y-sw { background: #c9a227; }
+      .a11y-row.is-active .a11y-sw { background: #c4a468; }
       .a11y-row.is-active .a11y-sw::after { inset-inline-start: 24px; }
-      .cookie-cat.is-on { border-color: #c9a227; background: rgba(201, 162, 39, 0.1); }
-      .cookie-cat.is-on .cookie-sw { background: #c9a227; }
+      .cookie-cat.is-on { border-color: #c4a468; background: rgba(196, 164, 104, 0.1); }
+      .cookie-cat.is-on .cookie-sw { background: #c4a468; }
       .cookie-cat.is-on .cookie-sw::after { inset-inline-start: 24px; }
 
       /* Legal statement modals (privacy / accessibility) */
       .legal-sec { margin-bottom: 18px; }
-      .legal-sec > h3 { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; color: #0a1c3a; }
-      .legal-sec > h3::before { content: ''; flex: none; width: 4px; height: 16px; border-radius: 2px; background: #c9a227; }
-      .legal-sec p { margin-top: 6px; font-size: 13.5px; line-height: 1.7; color: #33405a; }
+      .legal-sec > h3 { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; color: #3a0f1c; }
+      .legal-sec > h3::before { content: ''; flex: none; width: 4px; height: 16px; border-radius: 2px; background: #c4a468; }
+      .legal-sec p { margin-top: 6px; font-size: 13.5px; line-height: 1.7; color: #4a3237; }
       .legal-ul { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
-      .legal-ul li { display: flex; gap: 8px; font-size: 13.5px; line-height: 1.7; color: #33405a; }
-      .legal-ul li::before { content: ''; flex: none; width: 6px; height: 6px; border-radius: 9999px; background: #c9a227; margin-top: 7px; }
-      .legal-contact { margin-top: 8px; border-radius: 14px; border: 1px solid #d6e2f3; background: #eef3fb; padding: 14px; font-size: 13.5px; line-height: 1.8; color: #0e2750; }
-      .legal-updated { margin-top: 12px; font-size: 12px; color: #8ba0bd; }
+      .legal-ul li { display: flex; gap: 8px; font-size: 13.5px; line-height: 1.7; color: #4a3237; }
+      .legal-ul li::before { content: ''; flex: none; width: 6px; height: 6px; border-radius: 9999px; background: #c4a468; margin-top: 7px; }
+      .legal-contact { margin-top: 8px; border-radius: 14px; border: 1px solid #f3e5e4; background: #fbf4f3; padding: 14px; font-size: 13.5px; line-height: 1.8; color: #521222; }
+      .legal-updated { margin-top: 12px; font-size: 12px; color: #a08a8f; }
     </style>
   </head>
 
@@ -209,15 +217,8 @@
     <!-- ============ HEADER ============ -->
     <header class="sticky top-0 z-50 border-b border-navy-100/70 bg-white/90 backdrop-blur">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
-        <!-- Logo placeholder -->
-        <a href="#hero" class="flex items-center gap-3">
-          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-navy-900 text-gold-500 shadow-card">
-            <i class="fa-solid fa-landmark text-lg"></i>
-          </span>
-          <span class="leading-tight">
-            <span class="block text-lg font-extrabold text-navy-900">עשור רואי חשבון</span>
-            <span class="block text-[11px] font-medium tracking-wide text-navy-700/70">פתיחת תיק וליווי חשבונאי</span>
-          </span>
+        <a href="#hero" class="flex items-center" aria-label="עשור רואי חשבון">
+          <img src="/brand/logo-horizontal.svg" alt="עשור רואי חשבון" class="h-11 w-auto sm:h-12" />
         </a>
 
         <div class="flex items-center gap-3">
@@ -554,7 +555,12 @@
 
         <!-- form card -->
         <div class="rounded-3xl border border-navy-100 bg-white p-7 shadow-card md:p-9">
-          <form id="lead-form" novalidate>
+          <form id="lead-form" novalidate style="position:relative">
+            <!-- Honeypot: invisible to people, irresistible to bots -->
+            <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden">
+              <label for="company_website">אתר החברה</label>
+              <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
             <div class="space-y-4">
               <div>
                 <label for="name" class="mb-1.5 block text-sm font-semibold text-navy-900">שם מלא</label>
@@ -641,12 +647,11 @@
     </section>
 
     <!-- ============ FOOTER ============ -->
-    <footer class="bg-navy-950 text-navy-100/80">
+    <footer class="bg-navy-950 bg-plus-light text-navy-100/80">
       <div class="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-3">
         <div>
           <div class="flex items-center gap-3">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-900 text-gold-500"><i class="fa-solid fa-landmark"></i></span>
-            <span class="text-lg font-extrabold text-white">עשור רואי חשבון</span>
+            <img src="/brand/logo-horizontal-on-dark.svg" alt="עשור רואי חשבון" class="h-14 w-auto" />
           </div>
           <p class="mt-4 max-w-xs text-sm leading-relaxed">
             פתיחת תיק, ייעוץ חשבונאי וליווי שוטף לעסקים, עצמאים וחברות — בגובה העיניים
@@ -777,7 +782,7 @@
     </div>
 
     <!-- ============ COOKIE CONSENT (Hebrew, ported from main site) ============ -->
-    <div id="cookie-banner" class="hidden fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-[0_32px_70px_-22px_rgba(10,28,58,0.4)]">
+    <div id="cookie-banner" class="hidden fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-[0_32px_70px_-22px_rgba(58,15,28,0.4)]">
       <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-gold-400 to-transparent"></div>
       <div class="grid gap-5 p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-6 md:p-7">
         <span class="flex h-14 w-14 flex-none items-center justify-center rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 text-navy-950"><i class="fa-solid fa-cookie-bite text-2xl"></i></span>
@@ -977,6 +982,47 @@
     </div>
 
     <script>
+      // ===== Lead-form bot guard (shared by the landing pages) =====
+      // Bots get a fake "thank you" and nothing is sent, so they learn nothing.
+      window.zaGuard = (function () {
+        var loadedAt = Date.now()
+        var touched = false
+        ;['keydown', 'pointerdown', 'touchstart'].forEach(function (ev) {
+          window.addEventListener(ev, function (e) { if (e.isTrusted) touched = true }, { passive: true })
+        })
+        function normalizePhone(raw) {
+          var d = String(raw || '').replace(/[\s\-().]/g, '')
+          if (d.indexOf('+972') === 0) d = '0' + d.slice(4)
+          else if (d.indexOf('972') === 0 && d.length >= 11) d = '0' + d.slice(3)
+          return d
+        }
+        // Israeli landline (02/03/04/08/09 + 7) or mobile/VoIP (05x/07x + 7).
+        function isIsraeliPhone(raw) {
+          return /^0(?:[23489]\d{7}|[57]\d{8})$/.test(normalizePhone(raw))
+        }
+        // Random-looking Latin strings such as "ZzSJUTEzqilpXpwPN".
+        function isGibberishName(name) {
+          var n = String(name || '').trim()
+          if (/[֐-׿؀-ۿ]/.test(n)) return false
+          if (/\s/.test(n)) return false
+          var inner = n.slice(1)
+          return n.length >= 8 && /^[A-Za-z]+$/.test(n) && /[a-z]/.test(n) && (inner.match(/[A-Z]/g) || []).length >= 2
+        }
+        return {
+          isIsraeliPhone: isIsraeliPhone,
+          normalizePhone: normalizePhone,
+          /** True when the submission looks automated and must be dropped silently. */
+          isBot: function (form, name) {
+            var trap = form.querySelector('input[name="company_website"]')
+            if (trap && trap.value) return true
+            if (Date.now() - loadedAt < 3000) return true
+            if (!touched) return true
+            return isGibberishName(name)
+          },
+        }
+      })()
+    </script>
+    <script>
       document.getElementById('year').textContent = new Date().getFullYear()
 
       // Google Apps Script endpoint (same backend the main site uses).
@@ -1002,6 +1048,17 @@
           form.reportValidity()
           return
         }
+        var phoneVal = document.getElementById('phone').value
+        if (!zaGuard.isIsraeliPhone(phoneVal)) {
+          showStatus(false, 'יש להזין מספר טלפון ישראלי תקין, למשל 050-1234567 או 02-5000275')
+          document.getElementById('phone').focus()
+          return
+        }
+        if (zaGuard.isBot(form, document.getElementById('name').value)) {
+          form.reset()
+          showStatus(true, 'תודה! קיבלנו את הפרטים ונחזור אליכם בהקדם.')
+          return
+        }
 
         var entity = document.getElementById('entity').value
         var advisor = document.getElementById('advisor').checked
@@ -1015,7 +1072,7 @@
         var payload = {
           target: 'office',
           name: document.getElementById('name').value.trim(),
-          phone: document.getElementById('phone').value.trim(),
+          phone: zaGuard.normalizePhone(document.getElementById('phone').value),
           email: document.getElementById('email').value.trim(),
           message: message,
         }

@@ -13,6 +13,11 @@
     <meta property="og:description" content="ליווי חשבונאי בגובה העיניים. בחירת מסגרת, פתיחת תיק וניהול שוטף." />
     <meta property="og:locale" content="he_IL" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#6e1a2d" />
+    <meta property="og:image" content="https://za-cpa.com/brand/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,27 +33,27 @@
           extend: {
             colors: {
               navy: {
-                950: '#070F1F',
-                900: '#0B1426',
-                800: '#0F1B33',
-                700: '#1A2845',
-                600: '#2A3A5C',
+                950: '#22070f',
+                900: '#3a0f1c',
+                800: '#521222',
+                700: '#6e1a2d',
+                600: '#82283b',
               },
               gold: {
-                DEFAULT: '#C9A961',
-                light: '#E5C988',
-                dark: '#8B6F2E',
-                muted: '#A4894A',
+                DEFAULT: '#c4a468',
+                light: '#e5d3a8',
+                dark: '#8a6a2f',
+                muted: '#a8894f',
               },
-              cream: '#FAF8F1',
-              ink: '#1F2937',
+              cream: '#fbf7f4',
+              ink: '#2b1a20',
             },
             fontFamily: {
               sans: ['Heebo', 'Assistant', 'system-ui', 'sans-serif'],
             },
             boxShadow: {
-              card: '0 24px 60px -28px rgba(11, 20, 38, 0.35)',
-              gold: '0 18px 40px -16px rgba(201, 169, 97, 0.55)',
+              card: '0 24px 60px -28px rgba(58, 15, 28, 0.35)',
+              gold: '0 18px 40px -16px rgba(196, 164, 104, 0.55)',
             },
           },
         },
@@ -57,6 +62,7 @@
 
     <style>
       html { scroll-behavior: smooth; }
+      html, body { overflow-x: clip; }
       body { font-family: 'Heebo', 'Assistant', system-ui, sans-serif; }
       /* Subtle paper-grain background helper */
       .grain::before {
@@ -67,16 +73,18 @@
         opacity: 0.6;
         pointer-events: none;
       }
+      .bg-plus-light { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><path d='M20 15v10M15 20h10' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1.4' stroke-linecap='round'/></svg>"); background-size: 40px 40px; }
+      .bg-plus { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><path d='M20 15v10M15 20h10' stroke='%236e1a2d' stroke-opacity='0.06' stroke-width='1.4' stroke-linecap='round'/></svg>"); background-size: 40px 40px; }
       /* Hairline gold divider */
       .gold-divider {
         height: 1px;
-        background: linear-gradient(to left, transparent, #C9A961, transparent);
+        background: linear-gradient(to left, transparent, #c4a468, transparent);
       }
       /* Form field focus ring */
       .field input:focus, .field select:focus, .field textarea:focus {
         outline: none;
-        border-color: #C9A961;
-        box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.18);
+        border-color: #c4a468;
+        box-shadow: 0 0 0 4px rgba(196, 164, 104, 0.18);
       }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
@@ -89,19 +97,16 @@
     <!-- ════════════════════════════════════════════════════════════════
          HERO
          ════════════════════════════════════════════════════════════════ -->
-    <section class="relative overflow-hidden bg-navy-900 grain text-white">
+    <section class="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-800 to-navy-700 text-white">
+      <div aria-hidden class="bg-plus-light pointer-events-none absolute inset-0"></div>
       <!-- Decorative gold halos -->
       <div aria-hidden class="pointer-events-none absolute -top-32 -start-32 h-[28rem] w-[28rem] rounded-full bg-gold/15 blur-3xl"></div>
       <div aria-hidden class="pointer-events-none absolute -bottom-40 -end-40 h-[32rem] w-[32rem] rounded-full bg-gold/10 blur-3xl"></div>
 
       <!-- Top bar -->
       <header class="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <a href="https://za-cpa.com" class="flex items-center gap-2 font-semibold tracking-wide text-white/90 hover:text-gold transition-colors">
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden>
-            <rect x="3" y="3" width="26" height="26" rx="6" stroke="#C9A961" stroke-width="2"/>
-            <path d="M10 21 L16 9 L22 21 M12.5 17 L19.5 17" stroke="#C9A961" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="text-lg">עשור · רואי חשבון</span>
+        <a href="https://za-cpa.com" class="flex items-center transition-opacity hover:opacity-90" aria-label="עשור רואי חשבון, לאתר הראשי">
+          <img src="/brand/logo-horizontal-on-dark.svg" alt="עשור רואי חשבון" class="h-12 w-auto sm:h-14" />
         </a>
         <a href="tel:0523975659" class="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-gold transition-colors">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
@@ -309,8 +314,8 @@
         <div class="relative">
           <div class="relative rounded-3xl border border-gold/20 bg-navy-800/60 p-10 backdrop-blur-sm">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden class="mb-6">
-              <path d="M14 18 24 8l10 10M14 30l10 10 10-10" stroke="#C9A961" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="24" cy="24" r="3" fill="#C9A961"/>
+              <path d="M14 18 24 8l10 10M14 30l10 10 10-10" stroke="#c4a468" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="24" cy="24" r="3" fill="#c4a468"/>
             </svg>
             <blockquote class="text-xl font-medium leading-relaxed text-white md:text-2xl">
               "המסגרת הנכונה חוסכת לכם מאות אלפי שקלים לאורך חיי העסק. בחרו במחשבה תחילה."
@@ -339,7 +344,12 @@
           <div class="gold-divider mx-auto mt-8 w-32"></div>
         </div>
 
-        <form id="lead-form" novalidate class="mt-12 rounded-3xl border border-slate-200 bg-white p-8 shadow-card md:p-12">
+        <form id="lead-form" novalidate style="position:relative" class="mt-12 rounded-3xl border border-slate-200 bg-white p-8 shadow-card md:p-12">
+            <!-- Honeypot: invisible to people, irresistible to bots -->
+            <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden">
+              <label for="company_website">אתר החברה</label>
+              <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
           <div class="grid gap-6 sm:grid-cols-2">
             <div class="field sm:col-span-2">
               <label for="name" class="mb-2 block text-sm font-semibold text-navy-900">
@@ -430,7 +440,7 @@
     <!-- ════════════════════════════════════════════════════════════════
          FOOTER
          ════════════════════════════════════════════════════════════════ -->
-    <footer class="bg-navy-950 py-10 text-white/70">
+    <footer class="bg-navy-950 bg-plus-light py-10 text-white/70">
       <div class="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 sm:flex-row sm:justify-between">
         <a
           href="https://za-cpa.com"
@@ -450,6 +460,47 @@
     <!-- ════════════════════════════════════════════════════════════════
          BEHAVIOR — form submission + helpers
          ════════════════════════════════════════════════════════════════ -->
+    <script>
+      // ===== Lead-form bot guard (shared by the landing pages) =====
+      // Bots get a fake "thank you" and nothing is sent, so they learn nothing.
+      window.zaGuard = (function () {
+        var loadedAt = Date.now()
+        var touched = false
+        ;['keydown', 'pointerdown', 'touchstart'].forEach(function (ev) {
+          window.addEventListener(ev, function (e) { if (e.isTrusted) touched = true }, { passive: true })
+        })
+        function normalizePhone(raw) {
+          var d = String(raw || '').replace(/[\s\-().]/g, '')
+          if (d.indexOf('+972') === 0) d = '0' + d.slice(4)
+          else if (d.indexOf('972') === 0 && d.length >= 11) d = '0' + d.slice(3)
+          return d
+        }
+        // Israeli landline (02/03/04/08/09 + 7) or mobile/VoIP (05x/07x + 7).
+        function isIsraeliPhone(raw) {
+          return /^0(?:[23489]\d{7}|[57]\d{8})$/.test(normalizePhone(raw))
+        }
+        // Random-looking Latin strings such as "ZzSJUTEzqilpXpwPN".
+        function isGibberishName(name) {
+          var n = String(name || '').trim()
+          if (/[֐-׿؀-ۿ]/.test(n)) return false
+          if (/\s/.test(n)) return false
+          var inner = n.slice(1)
+          return n.length >= 8 && /^[A-Za-z]+$/.test(n) && /[a-z]/.test(n) && (inner.match(/[A-Z]/g) || []).length >= 2
+        }
+        return {
+          isIsraeliPhone: isIsraeliPhone,
+          normalizePhone: normalizePhone,
+          /** True when the submission looks automated and must be dropped silently. */
+          isBot: function (form, name) {
+            var trap = form.querySelector('input[name="company_website"]')
+            if (trap && trap.value) return true
+            if (Date.now() - loadedAt < 3000) return true
+            if (!touched) return true
+            return isGibberishName(name)
+          },
+        }
+      })()
+    </script>
     <script>
       // ───────────────────────────────────────────────────────────────
       // Form endpoint configuration.
@@ -474,7 +525,6 @@
       const btnSpinner = submitBtn.querySelector('.btn-spinner')
 
       const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      const PHONE_RE = /^[\d\s\-\+\(\)]{7,}$/
 
       function setStatus(kind, text) {
         statusEl.className =
@@ -507,14 +557,23 @@
           form.querySelector('#name').focus()
           return
         }
-        if (!PHONE_RE.test(data.phone)) {
-          setStatus('error', 'יש להזין מספר טלפון תקין')
+        if (!zaGuard.isIsraeliPhone(data.phone)) {
+          setStatus('error', 'יש להזין מספר טלפון ישראלי תקין, למשל 050-1234567 או 02-5000275')
           form.querySelector('#phone').focus()
           return
         }
+        data.phone = zaGuard.normalizePhone(data.phone)
         if (data.email && !EMAIL_RE.test(data.email)) {
           setStatus('error', 'כתובת דוא״ל לא תקינה')
           form.querySelector('#email').focus()
+          return
+        }
+
+        const trapped = zaGuard.isBot(form, data.name)
+        delete data.company_website
+        if (trapped) {
+          setStatus('success', 'תודה! קיבלנו את הפנייה ונחזור אליכם בהקדם.')
+          form.reset()
           return
         }
 

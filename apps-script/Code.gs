@@ -36,8 +36,28 @@ function row(label, value, ltr) {
     '</tr>';
 }
 
+// Spam filter. Returns true for submissions that look automated; doPost then
+// returns success without sending mail, so bots learn nothing.
+function looksLikeSpam(data) {
+  if (data.company_website) return true; // honeypot field on the landing pages
+  var name = String(data.name || '').trim();
+  var inner = name.slice(1);
+  if (name.length >= 8 && /^[A-Za-z]+$/.test(name) && /[a-z]/.test(name) &&
+      (inner.match(/[A-Z]/g) || []).length >= 2) return true; // e.g. "ZzSJUTEzqilpXpwPN"
+  var phone = String(data.phone || '').replace(/[\s\-().]/g, '');
+  if (phone) {
+    if (phone.indexOf('+972') === 0) phone = '0' + phone.slice(4);
+    else if (phone.indexOf('972') === 0 && phone.length >= 11) phone = '0' + phone.slice(3);
+    if (!/^0(?:[23489]\d{7}|[57]\d{8})$/.test(phone)) return true; // not an Israeli number
+  }
+  return false;
+}
+
 function doPost(e) {
   var data = JSON.parse(e.postData.contents);
+  if (looksLikeSpam(data)) {
+    return ContentService.createTextOutput(JSON.stringify({ ok: true })).setMimeType(ContentService.MimeType.JSON);
+  }
   var route = ROUTES[data.target] || ROUTES.office;
 
   // Plain-text fallback — each line forced RTL with a leading RLM.
