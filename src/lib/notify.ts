@@ -12,6 +12,8 @@ export type NotifyPayload = {
   phone?: string
   message?: string
   sessionDate?: string
+  /** Where the lead came from, shown in the notification email */
+  source?: string
 }
 
 export async function sendLead(payload: NotifyPayload): Promise<boolean> {

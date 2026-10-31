@@ -87,6 +87,7 @@ export default function OritGroupPage() {
     setSubmitting(true)
     void sendLead({
       target: 'orit',
+      source: 'דף "לחזור לעצמך"',
       name: String(fd.get('fullName') ?? name),
       email: String(fd.get('email') ?? ''),
       phone: String(fd.get('phone') ?? ''),

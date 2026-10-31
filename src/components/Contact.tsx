@@ -34,6 +34,7 @@ export default function Contact() {
     e.preventDefault()
     void sendLead({
       target: 'office',
+      source: 'האתר הראשי · צור קשר',
       name: form.name,
       email: form.email,
       phone: form.phone,

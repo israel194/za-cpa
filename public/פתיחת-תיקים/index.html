@@ -1075,6 +1075,13 @@
           phone: zaGuard.normalizePhone(document.getElementById('phone').value),
           email: document.getElementById('email').value.trim(),
           message: message,
+          // Structured copies for the new email template (message kept for older deployments)
+          entity: entity,
+          discounts: [].concat(
+            advisor ? ['בעל/ת תעודת אגודת היועצים והמטפלים במשפחה בישראל (50% הנחה)'] : [],
+            tahel ? ['הגיע/ה דרך תהל אזולאי (50% הנחה)'] : []
+          ),
+          source: 'דף נחיתה: פתיחת עסק',
         }
 
         btn.disabled = true

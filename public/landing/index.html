@@ -586,7 +586,7 @@
             await fetch(APPS_SCRIPT_URL, {
               method: 'POST',
               headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-              body: JSON.stringify({ target: 'office', ...data }),
+              body: JSON.stringify({ target: 'office', source: 'דף נחיתה: פתיחת תיק עוסק', ...data }),
               mode: 'no-cors',
               keepalive: true,
             })
