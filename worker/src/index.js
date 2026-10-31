@@ -263,8 +263,13 @@ function esc(s) {
 }
 const ltr = (s) => `<span dir="ltr" style="unicode-bidi:isolate;direction:ltr">${s}</span>`
 
-function button(href, label, bg) {
-  return `<td style="padding:4px"><a href="${esc(href)}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:${bg};color:#ffffff;font-weight:bold;font-size:15px;text-decoration:none;white-space:nowrap">${label}</a></td>`
+// Round icon buttons (white PNG glyph on a brand-colour circle). Icons are
+// hosted on the site because email clients don't render SVG; `label` is the
+// alt/title text shown if a client blocks images.
+const ICON_BASE = 'https://za-cpa.com/brand/email'
+
+function button(href, label, bg, icon) {
+  return `<td style="padding:0 0 0 12px"><a href="${esc(href)}" title="${esc(label)}" style="display:inline-block;width:52px;height:52px;border-radius:50%;background:${bg};text-align:center;text-decoration:none;color:#ffffff;font-size:11px;font-weight:bold"><img src="${ICON_BASE}/${icon}.png" width="26" height="26" alt="${esc(label)}" style="display:block;border:0;margin:13px auto 0;width:26px;height:26px"></a></td>`
 }
 
 function row(label, valueHtml) {
@@ -302,10 +307,10 @@ async function sendOfficeEmail(env, l) {
   const route = ROUTES[l.target]
   let buttons = ''
   if (l.phone) {
-    buttons += button(`tel:+${intlPhone(l.phone)}`, 'התקשרות', BRAND.wine)
-    buttons += button(`https://wa.me/${intlPhone(l.phone)}`, 'וואטסאפ', '#1f8f4e')
+    buttons += button(`tel:+${intlPhone(l.phone)}`, 'התקשרות', BRAND.wine, 'phone')
+    buttons += button(`https://wa.me/${intlPhone(l.phone)}`, 'וואטסאפ', '#1f8f4e', 'whatsapp')
   }
-  if (l.email) buttons += button(`mailto:${l.email}`, 'מענה במייל', BRAND.gold)
+  if (l.email) buttons += button(`mailto:${l.email}`, 'מענה במייל', BRAND.gold, 'mail')
 
   let rows = ''
   if (l.phone) rows += row('טלפון', `<a href="tel:+${intlPhone(l.phone)}" style="color:${BRAND.wine};text-decoration:none">${ltr(displayPhone(l.phone))}</a>`)
