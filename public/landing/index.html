@@ -460,6 +460,7 @@
     <!-- ════════════════════════════════════════════════════════════════
          BEHAVIOR — form submission + helpers
          ════════════════════════════════════════════════════════════════ -->
+    <script src="/js/lead.js"></script>
     <script>
       // ===== Lead-form bot guard (shared by the landing pages) =====
       // Bots get a fake "thank you" and nothing is sent, so they learn nothing.
@@ -513,9 +514,6 @@
       //                   PHP-capable server (cPanel / Hostinger / Liquid Web).
       // ───────────────────────────────────────────────────────────────
       const ENDPOINT = 'apps-script' // 'apps-script' | 'php'
-      const APPS_SCRIPT_URL =
-        'https://script.google.com/a/macros/za-cpa.com/s/AKfycbwS025C9-OhEynAqpPWQc3RX4cDimKzLiH_zhW5Rr8yY0Jp4v4SgJDpaTAt3dnH09ud/exec'
-
       document.getElementById('year').textContent = new Date().getFullYear()
 
       const form = document.getElementById('lead-form')
@@ -581,16 +579,18 @@
         try {
           let ok = false
           if (ENDPOINT === 'apps-script') {
-            // text/plain avoids the CORS preflight; no-cors lets the POST through
-            // cross-origin (the response is opaque, but doPost still runs + mails).
-            await fetch(APPS_SCRIPT_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-              body: JSON.stringify({ target: 'office', source: 'דף נחיתה: פתיחת תיק עוסק', ...data }),
-              mode: 'no-cors',
-              keepalive: true,
+            // Name kept for the 'php' switch below; delivery is Web3Forms (Apps Script fallback).
+            const source = 'דף נחיתה: פתיחת תיק עוסק'
+            ok = await zaSendLead({
+              target: 'office',
+              name: data.name,
+              phone: data.phone,
+              email: data.email,
+              service: data.service,
+              note: data.message,
+              source: source,
+              legacy: { target: 'office', source: source, ...data },
             })
-            ok = true
           } else {
             const fd = new FormData(form)
             const res = await fetch('./submit.php', { method: 'POST', body: fd })

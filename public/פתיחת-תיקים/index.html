@@ -981,6 +981,7 @@
       </div>
     </div>
 
+    <script src="/js/lead.js"></script>
     <script>
       // ===== Lead-form bot guard (shared by the landing pages) =====
       // Bots get a fake "thank you" and nothing is sent, so they learn nothing.
@@ -1025,9 +1026,6 @@
     <script>
       document.getElementById('year').textContent = new Date().getFullYear()
 
-      // Google Apps Script endpoint (same backend the main site uses).
-      var NOTIFY_ENDPOINT =
-        'https://script.google.com/a/macros/za-cpa.com/s/AKfycbwS025C9-OhEynAqpPWQc3RX4cDimKzLiH_zhW5Rr8yY0Jp4v4SgJDpaTAt3dnH09ud/exec'
 
       var form = document.getElementById('lead-form')
       var btn = document.getElementById('submit-btn')
@@ -1090,13 +1088,17 @@
         spinner.classList.add('flex')
 
         try {
-          await fetch(NOTIFY_ENDPOINT, {
-            method: 'POST',
-            body: JSON.stringify(payload),
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            mode: 'no-cors',
-            keepalive: true,
+          var ok = await zaSendLead({
+            target: 'office',
+            name: payload.name,
+            phone: payload.phone,
+            email: payload.email,
+            entity: entity,
+            discounts: payload.discounts,
+            source: payload.source,
+            legacy: payload,
           })
+          if (!ok) throw new Error('send failed')
           form.reset()
           showStatus(true, 'תודה! קיבלנו את הפרטים ונחזור אליכם בהקדם.')
         } catch (err) {
