@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { ChevronDown, ArrowUp, ArrowDown, Trash2, Plus, ExternalLink, History, LogOut, Save, RotateCcw, Lock, X } from 'lucide-react'
 import { adminPassword, checkPassword, listHistory, loadContent, loadVersion, saveContent, type HistoryEntry } from '../lib/cms'
 import { DEFAULT_FREQUENCY, FREQUENCY_SCHEMA, withDefaults, type Field, type FrequencyContent } from '../content/frequencyCourse'
@@ -259,13 +259,22 @@ function Editor({ page, onLogout }: { page: (typeof PAGES)[number]; onLogout: ()
 const INPUT = 'w-full rounded-xl border border-[#f3c9d3] bg-[#fffafa] px-3.5 py-2.5 text-base outline-none focus:border-[#b84a6c] focus:bg-white'
 
 function AutoTextarea({ value, onChange, label }: { value: string; onChange: (v: string) => void; label: string }) {
+  const ref = useRef<HTMLTextAreaElement>(null)
+  // Grow with the content so long paragraphs are fully visible on a phone.
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${el.scrollHeight + 2}px`
+  }, [value])
   return (
     <textarea
+      ref={ref}
       aria-label={label}
       value={value}
+      rows={2}
       onChange={(e) => onChange(e.target.value)}
-      rows={Math.min(10, Math.max(2, Math.ceil(value.length / 55) + value.split('\n').length - 1))}
-      className={`${INPUT} resize-y leading-relaxed`}
+      className={`${INPUT} resize-none overflow-hidden leading-relaxed`}
     />
   )
 }

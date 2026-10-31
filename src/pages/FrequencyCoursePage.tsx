@@ -93,7 +93,7 @@ export default function FrequencyCoursePage() {
             <Waves size={14} /> {c.hero.badge}
           </span>
 
-          <h1 className="mt-6 bg-gradient-to-l from-[#e98e7f] via-[#c2577a] to-burgundy-700 bg-clip-text pb-2 font-display text-5xl font-extrabold leading-tight tracking-tight text-transparent md:text-7xl">
+          <h1 className="mt-6 bg-gradient-to-l from-[#e98e7f] via-[#c2577a] to-burgundy-700 bg-clip-text pb-2 font-display text-[2.55rem] font-extrabold leading-tight tracking-tight text-transparent sm:text-6xl md:text-7xl">
             {c.hero.title}
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-700 md:text-xl">{c.hero.subtitle}</p>
