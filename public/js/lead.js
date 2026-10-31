@@ -41,7 +41,7 @@
     ]
     var payload = {
       access_key: key,
-      subject: 'פנייה חדשה: ' + p.name + (p.source ? ' · ' + p.source : ''),
+      subject: 'פנייה חדשה מ: ' + (p.source || 'האתר'),
       from_name: 'אתר עשור רואי חשבון',
       botcheck: false,
     }

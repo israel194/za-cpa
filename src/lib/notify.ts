@@ -56,7 +56,7 @@ function web3Payload(p: NotifyPayload, key: string) {
   }
   const payload: Record<string, unknown> = {
     access_key: key,
-    subject: `${isOrit ? 'הרשמה חדשה לקבוצה' : 'פנייה חדשה'}: ${p.name}${p.source ? ' · ' + p.source : ''}`,
+    subject: `${isOrit ? 'הרשמה חדשה' : 'פנייה חדשה'} מ: ${p.source || (isOrit ? 'דף לחזור לעצמך' : 'האתר הראשי')}`,
     from_name: isOrit ? 'לחזור לעצמך · אורית עשור' : 'אתר עשור רואי חשבון',
     botcheck: false,
   }
