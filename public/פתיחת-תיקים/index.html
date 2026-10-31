@@ -1006,18 +1006,26 @@
         var entity = document.getElementById('entity').value
         var advisor = document.getElementById('advisor').checked
         var tahel = document.getElementById('tahel').checked
-        var message =
-          'בקשה לפתיחת תיק — ' + entity +
-          (advisor ? '\n*בעל/ת תעודת אגודת היועצים והמטפלים במשפחה בישראל — זכאי/ת ל-50% הנחה*' : '') +
-          (tahel ? '\n*הגיע/ה דרך תהל אזולאי — זכאי/ת ל-50% הנחה*' : '') +
-          '\n(נשלח מדף הנחיתה: פתיחת עסק)'
+        // The chosen entity travels as its own `service` field, so it reaches the
+        // inbox under its own Hebrew label instead of being buried in the message.
+        // The discount lines are plain text: asterisks are not markup in an email
+        // and used to arrive as literal characters.
+        var notes = []
+        if (advisor)
+          notes.push(
+            'זכאי/ת ל-50% הנחה, בעל/ת תעודת אגודת היועצים והמטפלים במשפחה בישראל'
+          )
+        if (tahel)
+          notes.push('זכאי/ת ל-50% הנחה, הגיע/ה דרך תהל אזולאי')
+        notes.push('נשלח מדף הנחיתה לפתיחת עסק')
 
         var payload = {
           target: 'office',
           name: document.getElementById('name').value.trim(),
           phone: document.getElementById('phone').value.trim(),
           email: document.getElementById('email').value.trim(),
-          message: message,
+          service: 'פתיחת תיק, ' + entity,
+          message: notes.join('\n'),
         }
 
         btn.disabled = true
