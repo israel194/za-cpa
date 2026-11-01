@@ -33,6 +33,7 @@
   --color-gold-400: #c4a468;
   --color-gold-500: #a8894f;
   --color-gold-600: #8a6a2f;
+  --color-gold-700: #6f5323;            /* small text on gold-100 tints (AA) */
 
   /* Legacy named palettes, re-tuned to the wine/rose/champagne system so every
      existing component inherits the new look without per-file edits. */

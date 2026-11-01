@@ -100,11 +100,11 @@ export default function ActivityAreas() {
                       <Icon size={24} strokeWidth={1.75} />
                     </div>
                     {highlight ? (
-                      <span className="rounded-full bg-gradient-to-l from-gold-200 to-gold-100 px-3 py-1 text-xs font-bold text-gold-600">
+                      <span className="rounded-full bg-gradient-to-l from-gold-200 to-gold-100 px-3 py-1 text-xs font-bold text-gold-700">
                         {t('activityAreas.premium')}
                       </span>
                     ) : (
-                      <span className="font-display text-3xl font-extrabold text-blush-200 transition-colors duration-500 group-hover:text-blush-300">
+                      <span aria-hidden="true" className="font-display text-3xl font-extrabold text-blush-500 transition-colors duration-500 group-hover:text-rose-gold-600">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
                     )}

@@ -48,7 +48,7 @@ export default function WhyUs() {
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary shadow-[0_8px_20px_-10px_rgba(110,26,45,0.4)] transition-colors duration-500 group-hover:bg-primary group-hover:text-gold-200">
                       <Icon size={22} strokeWidth={1.75} />
                     </div>
-                    <span className="font-display text-sm font-bold tracking-widest text-gold-500">
+                    <span aria-hidden="true" className="font-display text-sm font-bold tracking-widest text-gold-600">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
                   </div>

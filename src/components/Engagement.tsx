@@ -54,7 +54,7 @@ export default function Engagement() {
                     </span>
                     <span
                       className={`rounded-full px-3 py-1 text-xs font-bold ${
-                        dark ? 'bg-gold-300/15 text-gold-200' : 'bg-gold-100 text-gold-600'
+                        dark ? 'bg-gold-300/15 text-gold-200' : 'bg-gold-100 text-gold-700'
                       }`}
                     >
                       {t(`engagement.plans.${key}.tag`)}

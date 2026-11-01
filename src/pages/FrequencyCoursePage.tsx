@@ -5,6 +5,7 @@ import { sendLead } from '../lib/notify'
 import { loadContent } from '../lib/cms'
 import { DEFAULT_FREQUENCY, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
 import Reveal from '../components/ui/Reveal'
+import PrivacyNotice from '../components/ui/PrivacyNotice'
 
 const BENEFIT_ICONS = [Waves, Sparkles, Heart]
 const DETAIL_ICONS = [MapPin, Calendar, Clock, Coins, Info]
@@ -371,6 +372,7 @@ export default function FrequencyCoursePage() {
                   <button type="submit" className={`w-full justify-center ${CTA_CLASS}`}>
                     {r.paymentUrl ? 'המשך לתשלום' : 'שליחה'}
                   </button>
+                  <PrivacyNotice controller="orit" />
                 </form>
               </>
             ) : (

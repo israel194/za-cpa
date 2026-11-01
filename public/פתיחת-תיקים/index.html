@@ -532,21 +532,21 @@
             <li class="flex items-center gap-4">
               <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-gold-500 shadow-card"><i class="fa-solid fa-phone"></i></span>
               <div>
-                <div class="text-xs text-navy-800/60">טלפון</div>
+                <div class="text-xs text-navy-800/80">טלפון</div>
                 <a href="tel:0523975659" class="text-base font-bold text-navy-900 hover:text-gold-600" dir="ltr">052-3975659</a>
               </div>
             </li>
             <li class="flex items-center gap-4">
               <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-gold-500 shadow-card"><i class="fa-solid fa-envelope"></i></span>
               <div>
-                <div class="text-xs text-navy-800/60">דוא״ל</div>
+                <div class="text-xs text-navy-800/80">דוא״ל</div>
                 <a href="mailto:office@za-cpa.com" class="text-base font-bold text-navy-900 hover:text-gold-600" dir="ltr">office@za-cpa.com</a>
               </div>
             </li>
             <li class="flex items-center gap-4">
               <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-gold-500 shadow-card"><i class="fa-solid fa-location-dot"></i></span>
               <div>
-                <div class="text-xs text-navy-800/60">כתובת המשרד</div>
+                <div class="text-xs text-navy-800/80">כתובת המשרד</div>
                 <div class="text-base font-bold text-navy-900">רח׳ נחום חפצדי 17, מגדל רם, קומה 11, ירושלים</div>
               </div>
             </li>
@@ -637,9 +637,9 @@
 
             <p id="form-status" class="mt-4 hidden rounded-xl px-4 py-3 text-center text-sm font-semibold"></p>
 
-            <p class="mt-4 text-center text-xs text-navy-800/60">
-              <i class="fa-solid fa-lock text-gold-500"></i>
-              הפרטים נשלחים ישירות למשרד ולא מועברים לצד שלישי.
+            <p class="mt-4 text-xs leading-relaxed text-navy-800/80">
+              <i class="fa-solid fa-lock text-gold-600" aria-hidden="true"></i>
+              מסירת הפרטים אינה חובה לפי דין, אך בלעדיהם לא נוכל לחזור אליך. הפרטים ישמשו למענה לפנייתך ולתיאום השירות. בעל השליטה במידע: משרד עשור רואי חשבון, <span dir="ltr">office@za-cpa.com</span>, <span dir="ltr">02-5000275</span>. הפרטים מועברים באמצעות ספקי שירות טכנולוגיים (כגון Cloudflare ו־Resend) לצורך משלוח הפנייה, ועשויים להיות מעובדים מחוץ לישראל. עומדות לך זכות לעיין במידע וזכות לבקש את תיקונו או מחיקתו. <a href="/privacy" target="_blank" rel="noopener" class="font-semibold underline">מדיניות הפרטיות</a>
             </p>
           </form>
         </div>
@@ -789,7 +789,7 @@
         <div>
           <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold-600"><i class="fa-solid fa-star"></i> פרטיות וחוויה אישית</div>
           <h3 class="mt-1.5 text-xl font-extrabold leading-tight text-navy-900">כמה עוגיות לחוויה מושלמת?</h3>
-          <p class="mt-2 text-sm leading-relaxed text-navy-800/85">עוגיות חיוניות שומרות על האתר עובד חלק. עוגיות אופציונליות (אנליטיקה ושיווק) עוזרות לנו להשתפר — רק בהסכמתכם.</p>
+          <p class="mt-2 text-sm leading-relaxed text-navy-800/85">הדף משתמש באחסון חיוני בלבד (הגדרות נגישות ובחירות העוגיות), ואינו מפעיל כיום כלי אנליטיקה או שיווק. אם יופעלו בעתיד, זה יקרה רק בהסכמתכם.</p>
           <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-navy-800/70">
             <span class="font-medium text-gold-600">הבחירה שלכם, וניתן לשנות בכל רגע.</span>
             <button type="button" data-legal-open="privacy" class="font-semibold text-navy-800 underline decoration-gold-300 underline-offset-4 hover:text-navy-900">למדיניות הפרטיות המלאה</button>
@@ -1259,6 +1259,10 @@
         document.querySelectorAll('[data-legal-open]').forEach(function (b) {
           b.addEventListener('click', function () {
             var which = b.getAttribute('data-legal-open')
+            if (which === 'privacy' || which === 'a11y') {
+              window.open(which === 'privacy' ? '/privacy' : '/accessibility', '_blank', 'noopener')
+              return
+            }
             if (a11yPanel) a11yPanel.classList.add('hidden') // close a11y drawer if open
             closeAll()
             if (modals[which]) {

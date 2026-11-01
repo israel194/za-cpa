@@ -5,8 +5,10 @@ import {
   type FormEvent,
   type InputHTMLAttributes,
   type ReactNode,
+  useId,
 } from 'react'
 import { useTranslation } from 'react-i18next'
+import PrivacyNotice from './ui/PrivacyNotice'
 import { MapPin, Globe, Send, CheckCircle2, Phone } from 'lucide-react'
 import { sendLead } from '../lib/notify'
 
@@ -86,10 +88,11 @@ export default function Contact() {
                 autoComplete="tel"
               />
               <div className="sm:col-span-2">
-                <label className="mb-2 block text-sm font-semibold text-ink-800">
+                <label htmlFor="contact-message" className="mb-2 block text-sm font-semibold text-ink-800">
                   {t('contact.form.message')}
                 </label>
                 <textarea
+                  id="contact-message"
                   rows={5}
                   value={form.message}
                   onChange={handleChange('message')}
@@ -116,6 +119,7 @@ export default function Contact() {
                 </>
               )}
             </button>
+            <PrivacyNotice className="mt-5" />
           </form>
 
           <div className="flex flex-col gap-5 lg:col-span-2">
@@ -159,12 +163,14 @@ function Field({
   label,
   ...rest
 }: { label: string } & InputHTMLAttributes<HTMLInputElement>) {
+  const id = useId()
   return (
     <div>
-      <label className="mb-2 block text-sm font-semibold text-ink-800">
+      <label htmlFor={id} className="mb-2 block text-sm font-semibold text-ink-800">
         {label}
       </label>
       <input
+        id={id}
         {...rest}
         className="w-full rounded-xl border border-blush-200 bg-background/60 px-4 py-3 text-base text-ink-900 transition-all duration-200 placeholder:text-ink-700/40 focus:border-accent focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-gold-300/30"
       />

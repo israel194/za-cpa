@@ -13,12 +13,12 @@ OUT = ROOT / 'public' / 'signatures' / 'index.html'
 IMG = 'https://za-cpa.com/brand/email'
 
 WINE = '#6e1a2d'
-ROSE = '#b84a6c'       # deep rose: AA on white for the title text
+ROSE = '#a33a5d'       # deep rose: AA (4.5:1) on white and on the peach pill
 ROSE_SOFT = '#f3c9d3'  # hairlines
 PEACH_BG = '#fde8de'   # title pill
 BLUSH_BG = '#fbeff0'   # logo tile
 GOLD = '#8a6a2f'
-MUTED = '#8a7479'
+MUTED = '#6d5860'
 TEXT = '#3d2a30'
 
 ADDRESS = 'נחום חפצדי 17, גבעת שאול, ירושלים · מגדל רם, קומה 11'

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Heart, Star, Target, MapPin, Calendar, Clock, Coins, Sparkles, X } from 'lucide-react'
 import { sendLead } from '../lib/notify'
+import PrivacyNotice from '../components/ui/PrivacyNotice'
 
 const PAYMENT_URL = 'https://pay.sumit.co.il/3c09bh/tsf55r/tsf4na/payment/'
 const WA_NUMBER = '972523975659'
@@ -370,6 +371,7 @@ export default function OritGroupPage() {
                   >
                     המשך לתשלום
                   </button>
+                  <PrivacyNotice controller="orit" />
                 </form>
               </>
             ) : (
