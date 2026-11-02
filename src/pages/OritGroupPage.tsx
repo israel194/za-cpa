@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Heart, Star, Target, MapPin, Calendar, Clock, Coins, Sparkles, X, User, MonitorPlay, Waves, Briefcase } from 'lucide-react'
 import { sendLead } from '../lib/notify'
+import { Honeypot, PayChoice } from '../components/ui/PayChoice'
+import { OUTCOME_TEXT, submitSignup, type SignupOutcome } from '../lib/signup'
 import PrivacyNotice from '../components/ui/PrivacyNotice'
 
-// SUMIT payment page for the monthly retreat. The previous page was frozen in SUMIT; while this is
-// empty, signups are still sent to Orit and the visitor sees a thank-you message instead of a redirect.
-const PAYMENT_URL = ''
-const MONTHLY_PRICE = '199 ש״ח'
+// One-time retreat payment. Card payments open a SUMIT page in the customer's name (see lib/register).
+const RETREAT_PRICE = '199 ש״ח'
 const WA_NUMBER = '972523975659'
 const WA_MESSAGE = 'שלום אורית, אשמח לשמוע על הקבוצה'
 
@@ -97,18 +97,20 @@ const details = [
   { icon: MapPin, label: "רח' נחום חפצדי 17, גבעת שאול, ירושלים (מגדל רם — קומה 11)" },
   { icon: Calendar, label: 'כל יום שני' },
   { icon: Clock, label: 'בשעה 20:30 — אחרי שהילדים ישנים' },
-  { icon: Coins, label: '199 ש"ח לחודש, מנוי חודשי' },
+  { icon: Coins, label: '199 ש"ח, תשלום חד פעמי' },
 ]
 
 export default function OritGroupPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [outcome, setOutcome] = useState<SignupOutcome>('manual')
   const [name, setName] = useState('')
   const [lead, setLead] = useState<string | null>(null)
   const mondays = useMemo(() => getNextMondays(4), [])
 
   useEffect(() => {
-    document.title = 'לחזור לעצמך · ריטריט חודשי לנשים | אורית עשור'
+    document.title = 'לחזור לעצמך · ריטריט לנשים | אורית עשור'
   }, [])
 
   useEffect(() => {
@@ -129,24 +131,14 @@ export default function OritGroupPage() {
     return () => document.removeEventListener('keydown', onKey)
   }, [modalOpen])
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const formEl = e.currentTarget
-    const fd = new FormData(formEl)
+    if (busy) return
+    setBusy(true)
+    const result = await submitSignup('retreat', 'דף לחזור לעצמך (ריטריט)', new FormData(e.currentTarget))
+    setOutcome(result)
     setSubmitting(true)
-    void sendLead({
-      target: 'orit',
-      source: 'דף לחזור לעצמך',
-      name: String(fd.get('fullName') ?? name),
-      email: String(fd.get('email') ?? ''),
-      phone: String(fd.get('phone') ?? ''),
-      sessionDate: String(fd.get('sessionDate') ?? ''),
-    })
-    if (PAYMENT_URL) {
-      window.setTimeout(() => {
-        window.location.href = PAYMENT_URL
-      }, 800)
-    }
+    setBusy(false)
   }
 
   const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`
@@ -165,7 +157,7 @@ export default function OritGroupPage() {
           </div>
 
           <span className="inline-flex items-center gap-2 rounded-full bg-blush-100 px-4 py-1.5 text-xs font-semibold text-primary">
-            <Sparkles size={14} /> ריטריט חודשי לנשים · 199 ש״ח בחודש
+            <Sparkles size={14} /> ריטריט לנשים · 199 ש״ח
           </span>
 
           <h1 className="mt-5 font-display text-4xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-6xl">
@@ -175,7 +167,7 @@ export default function OritGroupPage() {
             כי את לא צריכה לבחור בין להיות אמא מדהימה, אשת קריירה מצליחה ואישה שמחה. את יכולה הכל.
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-ink-700 md:text-lg">
-            ערב קבוע בכל שבוע שהוא כולו שלך: מרחב שקט, קבוצה קטנה ותומכת, וכלים לחזור לעצמך. כמו ריטריט, בלי לצאת מהעיר.
+            ערב שכולו שלך: מרחב שקט, קבוצה קטנה ותומכת, וכלים לחזור לעצמך. כמו ריטריט, בלי לצאת מהעיר.
           </p>
 
           <button
@@ -281,7 +273,7 @@ export default function OritGroupPage() {
       <section className="relative bg-background py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-center font-display text-3xl font-extrabold text-ink-900 md:text-4xl">
-            הריטריט החודשי
+            הריטריט הבא
           </h2>
 
           <ul className="mx-auto mt-10 max-w-xl space-y-3">
@@ -445,14 +437,17 @@ export default function OritGroupPage() {
                   </fieldset>
 
                   <div className="rounded-xl bg-blush-50 px-4 py-3 text-center text-base text-ink-800">
-                    מנוי חודשי: <strong className="text-primary">{MONTHLY_PRICE} לחודש</strong>
+                    סה״כ לתשלום: <strong className="text-primary">{RETREAT_PRICE}</strong> <span className="text-sm text-ink-700">(תשלום חד פעמי)</span>
                   </div>
+                  <PayChoice accent="#bd5f7c" />
+                  <Honeypot />
 
                   <button
                     type="submit"
+                    disabled={busy}
                     className="w-full rounded-full bg-primary px-6 py-4 text-base font-bold text-white shadow-[0_10px_24px_-8px_rgba(189,95,124,0.6)] transition-all hover:-translate-y-0.5 hover:bg-primary/90"
                   >
-                    {PAYMENT_URL ? 'המשך לתשלום' : 'שליחה'}
+                    {busy ? 'רגע...' : 'הרשמה'}
                   </button>
                   <PrivacyNotice controller="orit" />
                 </form>
@@ -460,7 +455,7 @@ export default function OritGroupPage() {
             ) : (
               <div className="py-6 text-center">
                 <h2 className="font-display text-2xl font-extrabold text-ink-900">תודה {name}!</h2>
-                <p className="mt-3 text-ink-700">{PAYMENT_URL ? 'מעבירה אותך לעמוד תשלום מאובטח...' : 'קיבלנו את הפרטים, ואורית תחזור אלייך בהקדם.'}</p>
+                <p className="mt-3 text-ink-700">{OUTCOME_TEXT[outcome]}</p>
                 <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-l from-rose-gold-500 to-blush-300 animate-pulse" />
               </div>
             )}

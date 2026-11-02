@@ -8,6 +8,8 @@
  * Secrets: RESEND_API_KEY (sending-only key).  Vars: see wrangler.toml.
  */
 
+import { handleRegister, handleAdminRegistrations } from './registrations.js'
+
 const RESEND_ENDPOINT = 'https://api.resend.com/emails'
 
 const BRAND = {
@@ -45,6 +47,28 @@ export default {
     const url = new URL(request.url)
     if (url.pathname.startsWith('/content/') || url.pathname === '/admin/check') {
       return handleContent(request, env, url, cors, allowed.includes(origin))
+    }
+
+    // Registrations + SUMIT payments. The IPN callback comes from SUMIT's servers (no Origin).
+    if (url.pathname === '/register' || url.pathname.startsWith('/register/')) {
+      const isIpn = url.pathname === '/register/ipn'
+      if (!isIpn && !allowed.includes(origin)) return json({ ok: false, error: 'forbidden_origin' }, 403, cors)
+      const ip = request.headers.get('CF-Connecting-IP') || 'unknown'
+      if (env.LEAD_LIMITER && !isIpn) {
+        const { success } = await env.LEAD_LIMITER.limit({ key: `reg:${ip}` })
+        if (!success) return json({ ok: false, error: 'rate_limited' }, 429, cors)
+      }
+      const notify = async (payload) => {
+        const lead = normalize(payload)
+        await sendOfficeEmail(env, lead)
+        await storeLead(env, lead)
+      }
+      return handleRegister(request, env, url, cors, json, notify)
+    }
+    if (url.pathname === '/admin/registrations' || url.pathname.startsWith('/admin/registrations/')) {
+      if (!allowed.includes(origin)) return json({ ok: false, error: 'forbidden_origin' }, 403, cors)
+      if (!(await isAdmin(request, env))) return json({ ok: false, error: 'unauthorized' }, 401, cors)
+      return handleAdminRegistrations(request, env, url, cors, json)
     }
     if (url.pathname !== '/lead') return json({ ok: false, error: 'not_found' }, 404, cors)
     if (request.method !== 'POST') return json({ ok: false, error: 'method_not_allowed' }, 405, cors)

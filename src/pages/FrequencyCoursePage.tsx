@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Waves, Sparkles, Heart, Check, X, MapPin, Calendar, Clock, Coins, Info, ChevronDown, MessageCircle } from 'lucide-react'
-import { sendLead } from '../lib/notify'
+import { Honeypot, PayChoice } from '../components/ui/PayChoice'
+import { OUTCOME_TEXT, submitSignup, type SignupOutcome } from '../lib/signup'
 import { freshContent, loadContent } from '../lib/cms'
 import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
 import Reveal from '../components/ui/Reveal'
@@ -21,6 +22,8 @@ export default function FrequencyCoursePage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [sent, setSent] = useState(false)
   const [name, setName] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [outcome, setOutcome] = useState<SignupOutcome>('manual')
 
   useEffect(() => {
     let alive = true
@@ -56,19 +59,14 @@ export default function FrequencyCoursePage() {
     setModalOpen(true)
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const fd = new FormData(e.currentTarget)
-    void sendLead({
-      target: 'orit',
-      source: 'דף קורס העלאת תדר',
-      name: String(fd.get('fullName') ?? name),
-      email: String(fd.get('email') ?? ''),
-      phone: String(fd.get('phone') ?? ''),
-      sessionDate: String(fd.get('sessionDate') ?? ''),
-    })
+    if (busy) return
+    setBusy(true)
+    const outcome = await submitSignup('frequency-course', 'דף קורס העלאת תדר', new FormData(e.currentTarget))
+    setOutcome(outcome)
     setSent(true)
-    if (r.paymentUrl) window.setTimeout(() => (window.location.href = r.paymentUrl), 900)
+    setBusy(false)
   }
 
   return (
@@ -375,8 +373,10 @@ export default function FrequencyCoursePage() {
                       סה״כ לתשלום: <Price r={r} />
                     </div>
                   )}
-                  <button type="submit" className={`w-full justify-center ${CTA_CLASS}`}>
-                    {r.paymentUrl ? 'המשך לתשלום' : 'שליחה'}
+                  <PayChoice />
+                  <Honeypot />
+                  <button type="submit" disabled={busy} className={`w-full justify-center disabled:opacity-60 ${CTA_CLASS}`}>
+                    {busy ? 'רגע...' : 'הרשמה'}
                   </button>
                   <PrivacyNotice controller="orit" />
                 </form>
@@ -384,7 +384,7 @@ export default function FrequencyCoursePage() {
             ) : (
               <div className="py-6 text-center">
                 <h2 className="font-display text-2xl font-extrabold text-burgundy-700">תודה{name ? ` ${name}` : ''}!</h2>
-                <p className="mt-3 text-ink-700">{r.paymentUrl ? 'מעבירה אותך לעמוד תשלום מאובטח...' : r.thanks}</p>
+                <p className="mt-3 text-ink-700">{OUTCOME_TEXT[outcome]}</p>
                 <div className="mx-auto mt-6 h-1 w-24 animate-pulse rounded-full bg-gradient-to-l from-[#f7b9a0] to-[#d16d8a]" />
               </div>
             )}

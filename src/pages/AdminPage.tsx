@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { ChevronDown, ArrowUp, ArrowDown, Trash2, Plus, ExternalLink, History, LogOut, Save, RotateCcw, Lock, X } from 'lucide-react'
 import { adminPassword, checkPassword, freshContent, listHistory, loadContent, loadVersion, saveContent, type HistoryEntry } from '../lib/cms'
 import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, FREQUENCY_SCHEMA, withDefaults, type Field, type FrequencyContent } from '../content/frequencyCourse'
+const AdminRegistrations = lazy(() => import('./AdminRegistrations'))
 
 // Pages the admin can edit. Add an entry here (and its slug in the worker's
 // CONTENT_SLUGS) to make another landing page editable.
@@ -38,6 +39,7 @@ const heDate = (iso: string) =>
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false)
+  const [tab, setTab] = useState<'content' | 'registrations'>('content')
   const page = PAGES[0]
 
   useEffect(() => {
@@ -51,9 +53,32 @@ export default function AdminPage() {
     return () => meta.remove()
   }, [])
 
+  const tabBtn = (t: typeof tab, label: string) => (
+    <button
+      type="button"
+      onClick={() => setTab(t)}
+      className={`rounded-full px-4 py-1.5 text-sm font-bold ${tab === t ? 'bg-burgundy-600 text-white' : 'bg-white text-burgundy-700 ring-1 ring-[#f3c9d3]'}`}
+    >
+      {label}
+    </button>
+  )
   return (
     <div dir="rtl" lang="he" className="min-h-screen bg-[#fbf4f3] font-sans text-ink-900">
-      {authed ? <Editor page={page} onLogout={() => (adminPassword.clear(), setAuthed(false))} /> : <Login onOk={() => setAuthed(true)} />}
+      {authed && (
+        <nav className="flex justify-center gap-2 bg-[#fbeff0] px-4 py-2" aria-label="אזורי ניהול">
+          {tabBtn('content', 'עריכת דף הקורס')}
+          {tabBtn('registrations', 'הרשמות ותשלומים')}
+        </nav>
+      )}
+      {!authed ? (
+        <Login onOk={() => setAuthed(true)} />
+      ) : tab === 'content' ? (
+        <Editor page={page} onLogout={() => (adminPassword.clear(), setAuthed(false))} />
+      ) : (
+        <Suspense fallback={null}>
+          <AdminRegistrations />
+        </Suspense>
+      )}
     </div>
   )
 }
