@@ -103,6 +103,11 @@ export default function FrequencyCoursePage() {
           <button type="button" onClick={open} className={`mt-9 ${CTA_CLASS}`}>
             {c.hero.cta}
           </button>
+          {r.priceLabel && (
+            <p className="mt-4 text-lg text-ink-700">
+              <Price r={r} />
+            </p>
+          )}
         </div>
       </section>
 
@@ -280,7 +285,7 @@ export default function FrequencyCoursePage() {
                   </span>
                   <span className="pt-1 leading-relaxed text-ink-800">
                     <strong className="text-burgundy-700">{d.title}: </strong>
-                    {d.body}
+                    {d.title === 'עלות' && r.priceLabel ? <Price r={r} /> : d.body}
                   </span>
                 </li>
               )
@@ -367,7 +372,7 @@ export default function FrequencyCoursePage() {
                   )}
                   {r.priceLabel && (
                     <div className="rounded-xl bg-[#fbeff0] px-4 py-3 text-center text-ink-800">
-                      סה״כ לתשלום: <strong className="text-burgundy-700">{r.priceLabel}</strong>
+                      סה״כ לתשלום: <Price r={r} />
                     </div>
                   )}
                   <button type="submit" className={`w-full justify-center ${CTA_CLASS}`}>
@@ -427,5 +432,23 @@ function Input({
         className="w-full rounded-xl border border-[#f3c9d3] bg-[#fffafa] px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-[#b84a6c] focus:bg-white"
       />
     </div>
+  )
+}
+
+
+/** המחיר: המחיר המלא עם קו חוצה, המחיר לתשלום מודגש, ותווית (למשל "מחיר השקה"). */
+function Price({ r }: { r: FrequencyContent['registration'] }) {
+  return (
+    <span className="inline-flex flex-wrap items-baseline justify-center gap-x-2">
+      {r.priceNote && (
+        <span className="rounded-full bg-[#fbeff0] px-2.5 py-0.5 text-sm font-bold text-[#b84a6c]">{r.priceNote}</span>
+      )}
+      <strong className="text-xl text-burgundy-700">{r.priceLabel}</strong>
+      {r.priceRegular && (
+        <span className="text-ink-700/70">
+          במקום <s>{r.priceRegular}</s>
+        </span>
+      )}
+    </span>
   )
 }

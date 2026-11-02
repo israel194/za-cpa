@@ -35,6 +35,8 @@ export type FrequencyContent = {
     dateLabel: string
     dates: string[]
     priceLabel: string
+    priceRegular: string
+    priceNote: string
     paymentUrl: string
     thanks: string
     whatsappNumber: string
@@ -176,7 +178,7 @@ export const DEFAULT_FREQUENCY: FrequencyContent = {
     },
     {
       title: "עלות",
-      body: "פרטים בשיחה אישית",
+      body: "מחיר השקה 880 ש״ח במקום 1,500 ש״ח",
     },
   ],
   faqTitle: "שאלות נפוצות",
@@ -205,7 +207,9 @@ export const DEFAULT_FREQUENCY: FrequencyContent = {
     modalSubtitle: "השאירי פרטים ונחזור אלייך עם כל הפרטים על הקבוצה הקרובה",
     dateLabel: "מועד מועדף",
     dates: [],
-    priceLabel: "",
+    priceLabel: "880 ש״ח",
+    priceRegular: "1,500 ש״ח",
+    priceNote: "מחיר השקה",
     paymentUrl: "",
     thanks: "קיבלנו את הפרטים, ונחזור אלייך בהקדם.",
     whatsappNumber: "972523975659",
@@ -327,7 +331,9 @@ export const FREQUENCY_SCHEMA: Section[] = [
       { kind: 'text', path: 'registration.modalSubtitle', label: 'משפט בחלון ההרשמה' },
       { kind: 'text', path: 'registration.dateLabel', label: 'כותרת בחירת המועד' },
       { kind: 'strings', path: 'registration.dates', label: 'מועדים לבחירה', itemLabel: 'מועד', hint: 'למשל: יום שני, 16 בנובמבר, 20:30. רשימה ריקה מסתירה את הבחירה' },
-      { kind: 'text', path: 'registration.priceLabel', label: 'מחיר להצגה בחלון', hint: 'למשל: 480 ₪ לכל הקורס. ריק מסתיר' },
+      { kind: 'text', path: 'registration.priceLabel', label: 'המחיר לתשלום', hint: 'למשל: 880 ש״ח. ריק מסתיר את המחיר' },
+      { kind: 'text', path: 'registration.priceRegular', label: 'המחיר המלא (יוצג עם קו חוצה)', hint: 'למשל: 1,500 ש״ח. ריק מסתיר' },
+      { kind: 'text', path: 'registration.priceNote', label: 'תווית המחיר', hint: 'למשל: מחיר השקה' },
       { kind: 'text', path: 'registration.paymentUrl', label: 'קישור לתשלום (SUMIT)', dir: 'ltr', hint: 'אם ממולא, אחרי ההרשמה עוברים לתשלום' },
       { kind: 'text', path: 'registration.thanks', label: 'הודעת תודה (כשאין קישור לתשלום)' },
       { kind: 'text', path: 'registration.whatsappNumber', label: 'מספר וואטסאפ', dir: 'ltr', hint: 'בפורמט בינלאומי: 9725XXXXXXXX' },
