@@ -63,7 +63,7 @@ export default function FrequencyCoursePage() {
     e.preventDefault()
     if (busy) return
     setBusy(true)
-    const outcome = await submitSignup('frequency-course', 'דף קורס העלאת תדר', new FormData(e.currentTarget))
+    const outcome = await submitSignup('frequency-course', 'דף קורס העלאת תדר', new FormData(e.currentTarget), r.paymentUrl)
     setOutcome(outcome)
     setSent(true)
     setBusy(false)

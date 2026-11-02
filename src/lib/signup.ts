@@ -3,8 +3,12 @@ import { register, type PayMethod, type ProductId } from './register'
 
 export type SignupOutcome = 'redirecting' | 'manual' | 'card_unavailable'
 
-/** Registers the signup (worker → KV report + SUMIT page). Falls back to a plain lead email if the worker is unreachable. */
-export async function submitSignup(product: ProductId, sourceLabel: string, fd: FormData): Promise<SignupOutcome> {
+/**
+ * Registers the signup (worker → KV report + SUMIT page in the customer's name). If the worker or the SUMIT
+ * API is not available, a card payment falls back to the static SUMIT payment page (`fallbackPayUrl`), where the
+ * customer enters her own name and email so the invoice is issued to her.
+ */
+export async function submitSignup(product: ProductId, sourceLabel: string, fd: FormData, fallbackPayUrl = ''): Promise<SignupOutcome> {
   const method: PayMethod = fd.get('payMethod') === 'manual' ? 'manual' : 'card'
   const fields = {
     name: String(fd.get('fullName') ?? ''),
@@ -18,11 +22,23 @@ export async function submitSignup(product: ProductId, sourceLabel: string, fd: 
       window.location.href = r.redirect
       return 'redirecting'
     }
+    if (r.fallback && fallbackPayUrl) return goPay(fallbackPayUrl)
     return r.fallback ? 'card_unavailable' : 'manual'
   } catch {
-    void sendLead({ target: 'orit', source: sourceLabel, ...fields, message: method === 'manual' ? 'ביקשה לשלם ידנית' : 'ביקשה לשלם באשראי (המערכת לא הייתה זמינה)' })
+    await sendLead({
+      target: 'orit',
+      source: sourceLabel,
+      ...fields,
+      message: method === 'manual' ? 'ביקשה לשלם ידנית' : fallbackPayUrl ? 'עברה לדף התשלום באשראי ב-SUMIT' : 'ביקשה לשלם באשראי',
+    })
+    if (method === 'card' && fallbackPayUrl) return goPay(fallbackPayUrl)
     return method === 'manual' ? 'manual' : 'card_unavailable'
   }
+}
+
+function goPay(url: string): SignupOutcome {
+  window.location.href = url
+  return 'redirecting'
 }
 
 export const OUTCOME_TEXT: Record<SignupOutcome, string> = {

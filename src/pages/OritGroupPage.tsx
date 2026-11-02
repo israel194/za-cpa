@@ -7,6 +7,10 @@ import PrivacyNotice from '../components/ui/PrivacyNotice'
 
 // One-time retreat payment. Card payments open a SUMIT page in the customer's name (see lib/register).
 const RETREAT_PRICE = '199 ש״ח'
+// SUMIT payment page for the retreat (customer enters her own details). Empty = card payment is offered only once
+// the direct SUMIT connection in the worker is configured; until then only manual payment is shown.
+const RETREAT_PAYMENT_URL = ''
+const RETREAT_CARD = Boolean(RETREAT_PAYMENT_URL)
 const WA_NUMBER = '972523975659'
 const WA_MESSAGE = 'שלום אורית, אשמח לשמוע על הקבוצה'
 
@@ -135,7 +139,7 @@ export default function OritGroupPage() {
     e.preventDefault()
     if (busy) return
     setBusy(true)
-    const result = await submitSignup('retreat', 'דף לחזור לעצמך (ריטריט)', new FormData(e.currentTarget))
+    const result = await submitSignup('retreat', 'דף לחזור לעצמך (ריטריט)', new FormData(e.currentTarget), RETREAT_PAYMENT_URL)
     setOutcome(result)
     setSubmitting(true)
     setBusy(false)
@@ -439,7 +443,7 @@ export default function OritGroupPage() {
                   <div className="rounded-xl bg-blush-50 px-4 py-3 text-center text-base text-ink-800">
                     סה״כ לתשלום: <strong className="text-primary">{RETREAT_PRICE}</strong> <span className="text-sm text-ink-700">(תשלום חד פעמי)</span>
                   </div>
-                  <PayChoice accent="#bd5f7c" />
+                  <PayChoice accent="#bd5f7c" card={RETREAT_CARD} />
                   <Honeypot />
 
                   <button

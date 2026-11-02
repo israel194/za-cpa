@@ -2,11 +2,13 @@ import { CreditCard, HandCoins } from 'lucide-react'
 import type { PayMethod } from '../../lib/register'
 
 /** Card now (SUMIT, invoice emailed automatically) or manual payment arranged with Orit. */
-export function PayChoice({ accent = '#b84a6c' }: { accent?: string }) {
-  const opts: { value: PayMethod; title: string; body: string; Icon: typeof CreditCard }[] = [
+export function PayChoice({ accent = '#b84a6c', card = true }: { accent?: string; card?: boolean }) {
+  type Opt = { value: PayMethod; title: string; body: string; Icon: typeof CreditCard }
+  const all: Opt[] = [
     { value: 'card', title: 'תשלום מאובטח באשראי עכשיו', body: 'חשבונית מס קבלה תישלח אלייך למייל מיד אחרי התשלום.', Icon: CreditCard },
     { value: 'manual', title: 'תשלום ידני', body: 'העברה בנקאית, ביט או מזומן. אורית תיצור איתך קשר, והחשבונית תישלח עם קבלת התשלום.', Icon: HandCoins },
   ]
+  const opts = all.filter((o) => card || o.value === 'manual')
   return (
     <fieldset>
       <legend className="mb-2 block text-sm font-semibold text-ink-800">איך נוח לך לשלם?</legend>
