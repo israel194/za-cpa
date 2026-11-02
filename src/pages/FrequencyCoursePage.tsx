@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Waves, Sparkles, Heart, Check, X, MapPin, Calendar, Clock, Coins, Info, ChevronDown, MessageCircle } from 'lucide-react'
-import { Honeypot, PayChoice } from '../components/ui/PayChoice'
-import { OUTCOME_TEXT, submitSignup, type SignupOutcome } from '../lib/signup'
+import { Link, useNavigate } from 'react-router-dom'
+import { Waves, Sparkles, Heart, Check, MapPin, Calendar, Clock, Coins, Info, ChevronDown, MessageCircle } from 'lucide-react'
 import { freshContent, loadContent } from '../lib/cms'
 import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
 import Reveal from '../components/ui/Reveal'
-import PrivacyNotice from '../components/ui/PrivacyNotice'
 
 const BENEFIT_ICONS = [Waves, Sparkles, Heart]
 const DETAIL_ICONS = [MapPin, Calendar, Clock, Coins, Info]
@@ -19,11 +16,7 @@ const CTA_CLASS =
 
 export default function FrequencyCoursePage() {
   const [c, setC] = useState<FrequencyContent>(DEFAULT_FREQUENCY)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [sent, setSent] = useState(false)
-  const [name, setName] = useState('')
-  const [busy, setBusy] = useState(false)
-  const [outcome, setOutcome] = useState<SignupOutcome>('manual')
+  const navigate = useNavigate()
 
   useEffect(() => {
     let alive = true
@@ -40,34 +33,9 @@ export default function FrequencyCoursePage() {
     document.title = c.seoTitle
   }, [c.seoTitle])
 
-  useEffect(() => {
-    if (!modalOpen) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setModalOpen(false)
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = prev
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [modalOpen])
-
   const r = c.registration
   const waHref = `https://wa.me/${r.whatsappNumber}?text=${encodeURIComponent(r.whatsappMessage)}`
-  const open = () => {
-    setSent(false)
-    setModalOpen(true)
-  }
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    if (busy) return
-    setBusy(true)
-    const outcome = await submitSignup('frequency-course', 'דף קורס העלאת תדר', new FormData(e.currentTarget), r.paymentUrl)
-    setOutcome(outcome)
-    setSent(true)
-    setBusy(false)
-  }
+  const open = () => navigate('/pay/frequency-course')
 
   return (
     <div dir="rtl" lang="he">
@@ -328,113 +296,9 @@ export default function FrequencyCoursePage() {
           </p>
         </div>
       </section>
-
-      {/* REGISTRATION MODAL */}
-      {modalOpen && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-ink-900/50 p-4 backdrop-blur-sm"
-          onClick={(e) => e.target === e.currentTarget && setModalOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="freq-modal-title"
-        >
-          <div className="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-3xl bg-white p-7 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] md:p-9">
-            <button
-              type="button"
-              onClick={() => setModalOpen(false)}
-              className="absolute end-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-ink-700 hover:bg-[#fbeff0]"
-              aria-label="סגירה"
-            >
-              <X size={20} />
-            </button>
-            {!sent ? (
-              <>
-                <h2 id="freq-modal-title" className="font-display text-2xl font-extrabold text-burgundy-700">{r.modalTitle}</h2>
-                <p className="mt-1 text-sm text-ink-700">{r.modalSubtitle}</p>
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                  <Input id="freq-name" name="fullName" label="שם מלא" autoComplete="name" value={name} onChange={setName} />
-                  <Input id="freq-phone" name="phone" label="טלפון" type="tel" autoComplete="tel" dir="ltr" placeholder="050-0000000" />
-                  <Input id="freq-email" name="email" label="דוא״ל" type="email" autoComplete="email" dir="ltr" placeholder="name@example.com" />
-                  {r.dates.length > 0 && (
-                    <fieldset>
-                      <legend className="mb-2 block text-sm font-semibold text-ink-800">{r.dateLabel}</legend>
-                      <div className="space-y-2">
-                        {r.dates.map((d, i) => (
-                          <label key={i} className="flex cursor-pointer items-center gap-3 rounded-xl border border-[#f3c9d3] px-4 py-3 has-[:checked]:border-[#b84a6c] has-[:checked]:bg-[#fbeff0]">
-                            <input type="radio" name="sessionDate" value={d} required={i === 0} className="accent-[#b84a6c]" />
-                            <span className="text-sm text-ink-800">{d}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </fieldset>
-                  )}
-                  {r.priceLabel && (
-                    <div className="rounded-xl bg-[#fbeff0] px-4 py-3 text-center text-ink-800">
-                      סה״כ לתשלום: <Price r={r} />
-                    </div>
-                  )}
-                  <PayChoice />
-                  <Honeypot />
-                  <button type="submit" disabled={busy} className={`w-full justify-center disabled:opacity-60 ${CTA_CLASS}`}>
-                    {busy ? 'רגע...' : 'הרשמה'}
-                  </button>
-                  <PrivacyNotice controller="orit" />
-                </form>
-              </>
-            ) : (
-              <div className="py-6 text-center">
-                <h2 className="font-display text-2xl font-extrabold text-burgundy-700">תודה{name ? ` ${name}` : ''}!</h2>
-                <p className="mt-3 text-ink-700">{OUTCOME_TEXT[outcome]}</p>
-                <div className="mx-auto mt-6 h-1 w-24 animate-pulse rounded-full bg-gradient-to-l from-[#f7b9a0] to-[#d16d8a]" />
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
-
-function Input({
-  id,
-  name,
-  label,
-  type = 'text',
-  autoComplete,
-  dir,
-  placeholder,
-  value,
-  onChange,
-}: {
-  id: string
-  name: string
-  label: string
-  type?: string
-  autoComplete?: string
-  dir?: 'ltr'
-  placeholder?: string
-  value?: string
-  onChange?: (v: string) => void
-}) {
-  return (
-    <div>
-      <label htmlFor={id} className="mb-1 block text-sm font-semibold text-ink-800">{label}</label>
-      <input
-        id={id}
-        name={name}
-        type={type}
-        required
-        autoComplete={autoComplete}
-        dir={dir}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange ? (e) => onChange(e.target.value) : undefined}
-        className="w-full rounded-xl border border-[#f3c9d3] bg-[#fffafa] px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-[#b84a6c] focus:bg-white"
-      />
-    </div>
-  )
-}
-
 
 /** המחיר: המחיר המלא עם קו חוצה, המחיר לתשלום מודגש, ותווית (למשל "מחיר השקה"). */
 function Price({ r }: { r: FrequencyContent['registration'] }) {

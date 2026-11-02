@@ -18,6 +18,7 @@ const OritGroupPage = lazy(() => import('./pages/OritGroupPage'))
 const FrequencyCoursePage = lazy(() => import('./pages/FrequencyCoursePage'))
 const AdminPage = lazy(() => import('./pages/AdminPage'))
 const PaymentResultPage = lazy(() => import('./pages/PaymentResultPage'))
+const PayPage = lazy(() => import('./pages/PayPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 function RouteFallback() {
@@ -127,6 +128,14 @@ export default function App() {
             element={
               <Suspense fallback={<RouteFallback />}>
                 <FrequencyCoursePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="pay/:product"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PayPage />
               </Suspense>
             }
           />

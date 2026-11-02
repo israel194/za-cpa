@@ -1,39 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Heart, Star, Target, MapPin, Calendar, Clock, Coins, Sparkles, X, User, MonitorPlay, Waves, Briefcase } from 'lucide-react'
 import { sendLead } from '../lib/notify'
-import { Honeypot, PayChoice } from '../components/ui/PayChoice'
-import { OUTCOME_TEXT, submitSignup, type SignupOutcome } from '../lib/signup'
 import PrivacyNotice from '../components/ui/PrivacyNotice'
 
-// One-time retreat payment. Card payments open a SUMIT page in the customer's name (see lib/register).
-const RETREAT_PRICE = '199 ש״ח'
-// SUMIT payment page for the retreat (customer enters her own details). Empty = card payment is offered only once
-// the direct SUMIT connection in the worker is configured; until then only manual payment is shown.
-const RETREAT_PAYMENT_URL = ''
-const RETREAT_CARD = Boolean(RETREAT_PAYMENT_URL)
 const WA_NUMBER = '972523975659'
 const WA_MESSAGE = 'שלום אורית, אשמח לשמוע על הקבוצה'
-
-const HEBREW_MONTHS = [
-  'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
-  'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר',
-]
-
-function getNextMondays(count = 4): { value: string; label: string }[] {
-  const today = new Date()
-  const day = today.getDay()
-  const daysUntilMonday = (1 - day + 7) % 7 || 7
-  const dates: { value: string; label: string }[] = []
-  const d = new Date(today)
-  d.setDate(d.getDate() + daysUntilMonday)
-  for (let i = 0; i < count; i++) {
-    const value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-    const label = `יום שני, ${d.getDate()} ב${HEBREW_MONTHS[d.getMonth()]} ${d.getFullYear()}`
-    dates.push({ value, label })
-    d.setDate(d.getDate() + 7)
-  }
-  return dates
-}
 
 const benefits = [
   {
@@ -105,45 +77,12 @@ const details = [
 ]
 
 export default function OritGroupPage() {
-  const [modalOpen, setModalOpen] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const [busy, setBusy] = useState(false)
-  const [outcome, setOutcome] = useState<SignupOutcome>('manual')
-  const [name, setName] = useState('')
+  const navigate = useNavigate()
   const [lead, setLead] = useState<string | null>(null)
-  const mondays = useMemo(() => getNextMondays(4), [])
 
   useEffect(() => {
     document.title = 'לחזור לעצמך · ריטריט לנשים | אורית עשור'
   }, [])
-
-  useEffect(() => {
-    if (modalOpen) {
-      const prev = document.body.style.overflow
-      document.body.style.overflow = 'hidden'
-      return () => {
-        document.body.style.overflow = prev
-      }
-    }
-  }, [modalOpen])
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setModalOpen(false)
-    }
-    if (modalOpen) document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
-  }, [modalOpen])
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    if (busy) return
-    setBusy(true)
-    const result = await submitSignup('retreat', 'דף לחזור לעצמך (ריטריט)', new FormData(e.currentTarget), RETREAT_PAYMENT_URL)
-    setOutcome(result)
-    setSubmitting(true)
-    setBusy(false)
-  }
 
   const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`
 
@@ -176,7 +115,7 @@ export default function OritGroupPage() {
 
           <button
             type="button"
-            onClick={() => setModalOpen(true)}
+            onClick={() => navigate('/pay/retreat')}
             className="mt-9 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(189,95,124,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_18px_36px_-10px_rgba(189,95,124,0.75)]"
           >
             רוצה להצטרף לריטריט?
@@ -297,7 +236,7 @@ export default function OritGroupPage() {
           <div className="mt-12 text-center">
             <button
               type="button"
-              onClick={() => setModalOpen(true)}
+              onClick={() => navigate('/pay/retreat')}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(189,95,124,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_18px_36px_-10px_rgba(189,95,124,0.75)]"
             >
               מצטרפת לריטריט
@@ -358,114 +297,6 @@ export default function OritGroupPage() {
       </section>
 
       {lead && <LeadModal topic={lead} onClose={() => setLead(null)} />}
-
-      {/* REGISTRATION MODAL */}
-      {modalOpen && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-ink-900/50 p-4 backdrop-blur-sm"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setModalOpen(false)
-          }}
-          aria-modal="true"
-          role="dialog"
-        >
-          <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white p-7 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] md:p-9">
-            <button
-              type="button"
-              onClick={() => setModalOpen(false)}
-              className="absolute end-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-ink-700 transition-colors hover:bg-blush-100 hover:text-accent"
-              aria-label="סגירה"
-            >
-              <X size={20} />
-            </button>
-
-            {!submitting ? (
-              <>
-                <h2 className="font-display text-2xl font-extrabold text-ink-900">מצטרפת לריטריט</h2>
-                <p className="mt-1 text-sm text-ink-700">מלאי את הפרטים ובחרי את המפגש הראשון שלך</p>
-
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                  <div>
-                    <label htmlFor="orit-name" className="mb-1 block text-sm font-semibold text-ink-800">שם מלא</label>
-                    <input
-                      id="orit-name"
-                      name="fullName"
-                      type="text"
-                      required
-                      autoComplete="name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="השם שלך"
-                      className="w-full rounded-xl border border-blush-200 bg-background px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-accent focus:bg-white"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="orit-phone" className="mb-1 block text-sm font-semibold text-ink-800">טלפון</label>
-                    <input
-                      id="orit-phone"
-                      name="phone"
-                      type="tel"
-                      required
-                      autoComplete="tel"
-                      placeholder="050-0000000"
-                      dir="ltr"
-                      className="w-full rounded-xl border border-blush-200 bg-background px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-accent focus:bg-white"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="orit-email" className="mb-1 block text-sm font-semibold text-ink-800">דוא״ל</label>
-                    <input
-                      id="orit-email"
-                      name="email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      placeholder="name@example.com"
-                      dir="ltr"
-                      className="w-full rounded-xl border border-blush-200 bg-background px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-accent focus:bg-white"
-                    />
-                  </div>
-                  <fieldset>
-                    <legend className="mb-2 block text-sm font-semibold text-ink-800">המפגש הראשון שלי (יום שני, 20:30)</legend>
-                    <div className="space-y-2">
-                      {mondays.map((m, i) => (
-                        <label
-                          key={m.value}
-                          className="flex cursor-pointer items-center gap-3 rounded-xl border border-blush-100 bg-background px-4 py-3 transition-colors hover:bg-blush-50 has-[:checked]:border-accent has-[:checked]:bg-blush-50"
-                        >
-                          <input type="radio" name="sessionDate" value={m.value} required={i === 0} className="accent-rose-gold-500" />
-                          <span className="text-sm text-ink-800">{m.label}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </fieldset>
-
-                  <div className="rounded-xl bg-blush-50 px-4 py-3 text-center text-base text-ink-800">
-                    סה״כ לתשלום: <strong className="text-primary">{RETREAT_PRICE}</strong> <span className="text-sm text-ink-700">(תשלום חד פעמי)</span>
-                  </div>
-                  <PayChoice accent="#bd5f7c" card={RETREAT_CARD} />
-                  <Honeypot />
-
-                  <button
-                    type="submit"
-                    disabled={busy}
-                    className="w-full rounded-full bg-primary px-6 py-4 text-base font-bold text-white shadow-[0_10px_24px_-8px_rgba(189,95,124,0.6)] transition-all hover:-translate-y-0.5 hover:bg-primary/90"
-                  >
-                    {busy ? 'רגע...' : 'הרשמה'}
-                  </button>
-                  <PrivacyNotice controller="orit" />
-                </form>
-              </>
-            ) : (
-              <div className="py-6 text-center">
-                <h2 className="font-display text-2xl font-extrabold text-ink-900">תודה {name}!</h2>
-                <p className="mt-3 text-ink-700">{OUTCOME_TEXT[outcome]}</p>
-                <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-l from-rose-gold-500 to-blush-300 animate-pulse" />
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
