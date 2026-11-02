@@ -210,7 +210,7 @@ export const DEFAULT_FREQUENCY: FrequencyContent = {
     priceLabel: "880 ש״ח",
     priceRegular: "1,500 ש״ח",
     priceNote: "מחיר השקה",
-    paymentUrl: "https://pay.sumit.co.il/3c09bh/a/doc/14t32yx-c791fbce54-15piv39/",
+    paymentUrl: "",
     thanks: "קיבלנו את הפרטים, ונחזור אלייך בהקדם.",
     whatsappNumber: "972523975659",
     whatsappMessage: "שלום אורית, אשמח לשמוע על קורס העלאת תדר",
