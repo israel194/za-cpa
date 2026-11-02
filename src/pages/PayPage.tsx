@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { Lock, ShieldCheck, Receipt, Calendar, MapPin, Clock, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { freshContent, loadContent } from '../lib/cms'
 import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
-import { Honeypot, PayChoice } from '../components/ui/PayChoice'
+import { Honeypot } from '../components/ui/PayChoice'
 import PrivacyNotice from '../components/ui/PrivacyNotice'
 import { OUTCOME_TEXT, submitSignup, type SignupOutcome } from '../lib/signup'
 import { nextMondays } from '../lib/dates'
@@ -201,14 +201,13 @@ export default function PayPage() {
                         </select>
                       </div>
                     )}
-                    <PayChoice />
                     <Honeypot />
                     <button
                       type="submit"
                       disabled={busy}
                       className="sheen flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-l from-[#d16d8a] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all hover:-translate-y-0.5 disabled:opacity-60"
                     >
-                      <Lock size={18} /> {busy ? 'רגע...' : 'להרשמה ולתשלום'}
+                      <Lock size={18} /> {busy ? 'רגע...' : 'להרשמה ולתשלום מאובטח'}
                     </button>
                     <ul className="flex flex-wrap justify-center gap-x-5 gap-y-1 pt-1 text-xs text-ink-700">
                       <li className="inline-flex items-center gap-1"><ShieldCheck size={14} className="text-[#1f8f4e]" /> תשלום מאובטח ב-SUMIT</li>
