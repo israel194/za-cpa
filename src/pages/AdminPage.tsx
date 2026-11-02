@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { ChevronDown, ArrowUp, ArrowDown, Trash2, Plus, ExternalLink, History, LogOut, Save, RotateCcw, Lock, X } from 'lucide-react'
-import { adminPassword, checkPassword, listHistory, loadContent, loadVersion, saveContent, type HistoryEntry } from '../lib/cms'
-import { DEFAULT_FREQUENCY, FREQUENCY_SCHEMA, withDefaults, type Field, type FrequencyContent } from '../content/frequencyCourse'
+import { adminPassword, checkPassword, freshContent, listHistory, loadContent, loadVersion, saveContent, type HistoryEntry } from '../lib/cms'
+import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, FREQUENCY_SCHEMA, withDefaults, type Field, type FrequencyContent } from '../content/frequencyCourse'
 
 // Pages the admin can edit. Add an entry here (and its slug in the worker's
 // CONTENT_SLUGS) to make another landing page editable.
@@ -13,6 +13,7 @@ const PAGES = [
     schema: FREQUENCY_SCHEMA,
     defaults: DEFAULT_FREQUENCY,
     normalize: withDefaults,
+    since: FREQUENCY_CONTENT_SINCE,
   },
 ]
 
@@ -111,11 +112,13 @@ function Editor({ page, onLogout }: { page: (typeof PAGES)[number]; onLogout: ()
   const dirty = useMemo(() => JSON.stringify(data) !== saved, [data, saved])
 
   useEffect(() => {
-    void loadContent<Data>(page.slug).then(({ content, updatedAt }) => {
+    void loadContent<Data>(page.slug).then((stored) => {
+      const content = freshContent(stored, page.since)
       const d = page.normalize(content ?? page.defaults)
       setData(d)
-      setSaved(JSON.stringify(d))
-      setUpdatedAt(updatedAt)
+      // A stale saved version is not what the site shows: mark the editor dirty so saving syncs it.
+      setSaved(JSON.stringify(stored.content && !content ? page.normalize(stored.content) : d))
+      setUpdatedAt(stored.updatedAt)
     })
   }, [page])
 

@@ -18,6 +18,13 @@ export async function loadContent<T>(slug: string): Promise<Saved<T>> {
   }
 }
 
+/** Returns the saved content, or null when it was saved before `since` (stale). */
+export function freshContent<T>({ content, updatedAt }: Saved<T>, since?: string): T | null {
+  if (!content) return null
+  if (since && (!updatedAt || updatedAt < since)) return null
+  return content
+}
+
 export const adminPassword = {
   get: () => sessionStorage.getItem(PW_KEY) ?? '',
   set: (pw: string) => sessionStorage.setItem(PW_KEY, pw),

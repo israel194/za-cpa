@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Waves, Sparkles, Heart, Check, X, MapPin, Calendar, Clock, Coins, Info, ChevronDown, MessageCircle } from 'lucide-react'
 import { sendLead } from '../lib/notify'
-import { loadContent } from '../lib/cms'
-import { DEFAULT_FREQUENCY, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
+import { freshContent, loadContent } from '../lib/cms'
+import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
 import Reveal from '../components/ui/Reveal'
 import PrivacyNotice from '../components/ui/PrivacyNotice'
 
@@ -11,7 +11,7 @@ const BENEFIT_ICONS = [Waves, Sparkles, Heart]
 const DETAIL_ICONS = [MapPin, Calendar, Clock, Coins, Info]
 
 // Session numbers climb from peach to wine: the "frequency ladder".
-const LADDER = ['#f4b49a', '#ec9f98', '#e08a95', '#d17590', '#bd5f83', '#a44a70', '#8a345a', '#6e1a2d']
+const LADDER = ['#f4b49a', '#ec9f98', '#e08a95', '#d17590', '#bd5f83', '#a44a70', '#8a345a', '#7a2442', '#6e1a2d']
 
 const CTA_CLASS =
   'sheen inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-[#d16d8a] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all duration-300 hover:-translate-y-0.5'
@@ -24,7 +24,8 @@ export default function FrequencyCoursePage() {
 
   useEffect(() => {
     let alive = true
-    void loadContent<FrequencyContent>('frequency-course').then(({ content }) => {
+    void loadContent<FrequencyContent>('frequency-course').then((saved) => {
+      const content = freshContent(saved, FREQUENCY_CONTENT_SINCE)
       if (alive && content) setC(withDefaults(content))
     })
     return () => {
@@ -164,7 +165,7 @@ export default function FrequencyCoursePage() {
             {c.sessions.map((s, i) => {
               const color = LADDER[Math.min(i, LADDER.length - 1)]
               return (
-                <Reveal as="li" key={i} delay={(i % 2) * 90}>
+                <Reveal as="li" key={i} delay={(i % 2) * 90} className={i === c.sessions.length - 1 && c.sessions.length % 2 === 1 ? 'md:col-span-2' : undefined}>
                   <div className="flex h-full items-start gap-5 rounded-3xl border border-white bg-white/90 p-6 shadow-[0_14px_40px_-28px_rgba(110,26,45,0.5)] backdrop-blur-sm">
                     <div className="flex shrink-0 flex-col items-center">
                       <span
