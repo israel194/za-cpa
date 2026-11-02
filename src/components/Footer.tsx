@@ -124,7 +124,7 @@ export default function Footer() {
             to="/orit-group"
             className="text-cream-200/80 underline-offset-2 transition-colors hover:text-gold-300 hover:underline"
           >
-            לחזור לעצמך — קבוצת לימוד לנשים
+            לחזור לעצמך · ריטריט חודשי לנשים
           </Link>
           <span className="mx-2 opacity-60">·</span>
           <Link
