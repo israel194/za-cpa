@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Heart, Star, Target, MapPin, Calendar, Clock, Coins, Sparkles, X, User, MonitorPlay, Waves, Briefcase } from 'lucide-react'
-import { sendLead } from '../lib/notify'
-import PrivacyNotice from '../components/ui/PrivacyNotice'
+import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Heart, Star, Target, MapPin, Calendar, Clock, Coins, Lock, User, MonitorPlay, Waves, Briefcase } from 'lucide-react'
 
-const WA_NUMBER = '972523975659'
-const WA_MESSAGE = 'שלום אורית, אשמח לשמוע על הקבוצה'
+/**
+ * הריטריט מלא עד סוף 2026, ולכן בעמוד הזה אין הרשמה, אין השארת פרטים ואין תשלום.
+ * השארת פרטים ותשלום נעשים באתר הראשי (עמוד יצירת הקשר) או בדף קורס העלאת תדר.
+ */
 
 const benefits = [
   {
@@ -31,7 +31,7 @@ type Service = {
   body: string
   cta: string
   badge?: string
-  action: 'lead' | 'link' | 'soon'
+  action: 'link' | 'soon'
   href?: string
 }
 
@@ -39,9 +39,10 @@ const services: Service[] = [
   {
     icon: User,
     title: 'ליווי אישי',
-    body: 'מפגשים אחד על אחד, בקצב שלך ועל מה שחשוב לך עכשיו. השאירי פרטים ואחזור אלייך לשיחת היכרות.',
-    cta: 'להשאיר פרטים',
-    action: 'lead',
+    body: 'מפגשים אחד על אחד, בקצב שלך ועל מה שחשוב לך עכשיו. השאירי פרטים באתר ואחזור אלייך לשיחת היכרות.',
+    cta: 'להשאיר פרטים באתר',
+    action: 'link',
+    href: '/contact',
   },
   {
     icon: MonitorPlay,
@@ -64,8 +65,9 @@ const services: Service[] = [
     icon: Briefcase,
     title: 'תוכנית ליווי לנשות עסקים',
     body: 'לנשות עסקים שמתמודדות עם בעיות משפחתיות מורכבות, ורוצות להחזיק את העסק ואת הבית מתוך יציבות פנימית.',
-    cta: 'להשאיר פרטים',
-    action: 'lead',
+    cta: 'להשאיר פרטים באתר',
+    action: 'link',
+    href: '/contact',
   },
 ]
 
@@ -77,17 +79,28 @@ const details = [
 ]
 
 export default function OritGroupPage() {
-  const navigate = useNavigate()
-  const [lead, setLead] = useState<string | null>(null)
-
   useEffect(() => {
-    document.title = 'לחזור לעצמך · ריטריט לנשים | אורית עשור'
+    document.title = 'לחזור לעצמך · מלא עד סוף 2026 | אורית עשור'
   }, [])
-
-  const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`
 
   return (
     <div dir="rtl" lang="he">
+      {/* חותמת אלכסונית על פני העמוד. aria-hidden ו-pointer-events-none,
+          כדי שלא תחסום קליק ולא תיקרא פעמיים בקורא מסך. */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-40 overflow-hidden">
+        <div
+          className="absolute left-1/2 top-1/2 w-[260vmax]"
+          style={{ transform: 'translate(-50%, -50%) rotate(-28deg)' }}
+        >
+          <div className="h-[2px] w-full bg-primary/45" />
+          <div className="border-y-2 border-primary/45 py-1.5 text-center md:py-2">
+            <span className="font-display font-extrabold tracking-[0.08em] text-primary/70 [font-size:clamp(1.15rem,4vw,3.25rem)]">
+              מלא עד סוף 2026
+            </span>
+          </div>
+          <div className="h-[2px] w-full bg-primary/45" />
+        </div>
+      </div>
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-peach-100 via-cream-50 to-white" />
@@ -100,7 +113,7 @@ export default function OritGroupPage() {
           </div>
 
           <span className="inline-flex items-center gap-2 rounded-full bg-blush-100 px-4 py-1.5 text-xs font-semibold text-primary">
-            <Sparkles size={14} /> ריטריט לנשים · 199 ש״ח
+            <Lock size={14} /> ההרשמה סגורה · מלא עד סוף 2026
           </span>
 
           <h1 className="mt-5 font-display text-4xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-6xl">
@@ -113,13 +126,9 @@ export default function OritGroupPage() {
             ערב שכולו שלך: מרחב שקט, קבוצה קטנה ותומכת, וכלים לחזור לעצמך. כמו ריטריט, בלי לצאת מהעיר.
           </p>
 
-          <button
-            type="button"
-            onClick={() => navigate('/pay/retreat')}
-            className="mt-9 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(189,95,124,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_18px_36px_-10px_rgba(189,95,124,0.75)]"
-          >
-            רוצה להצטרף לריטריט?
-          </button>
+          <div className="mt-9">
+            <ClosedNotice />
+          </div>
         </div>
       </section>
 
@@ -216,8 +225,11 @@ export default function OritGroupPage() {
       <section className="relative bg-background py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-center font-display text-3xl font-extrabold text-ink-900 md:text-4xl">
-            הריטריט הבא
+            פרטי הריטריט
           </h2>
+          <p className="mt-4 text-center text-base font-semibold text-primary">
+            מלא עד סוף 2026. הפרטים כאן לידיעה בלבד.
+          </p>
 
           <ul className="mx-auto mt-10 max-w-xl space-y-3">
             {details.map(({ icon: Icon, label }) => (
@@ -233,21 +245,8 @@ export default function OritGroupPage() {
             ))}
           </ul>
 
-          <div className="mt-12 text-center">
-            <button
-              type="button"
-              onClick={() => navigate('/pay/retreat')}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(189,95,124,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_18px_36px_-10px_rgba(189,95,124,0.75)]"
-            >
-              מצטרפת לריטריט
-            </button>
-            <p className="mt-4 text-sm text-ink-700">הקבוצה קטנה ואינטימית, ולכן המקומות מוגבלים</p>
-            <p className="mt-2 text-sm text-ink-700">
-              מעדיפה לדבר קודם?{' '}
-              <a href={waHref} target="_blank" rel="noreferrer" className="font-semibold text-accent underline">
-                שלחי הודעת וואטסאפ
-              </a>
-            </p>
+          <div className="mt-12">
+            <ClosedNotice />
           </div>
         </div>
       </section>
@@ -284,8 +283,6 @@ export default function OritGroupPage() {
                 <li key={sv.title}>
                   {sv.action === 'link' ? (
                     <a href={sv.href} className={card + hover}>{inner}</a>
-                  ) : sv.action === 'lead' ? (
-                    <button type="button" onClick={() => setLead(sv.title)} className={card + hover}>{inner}</button>
                   ) : (
                     <div className={card} aria-disabled="true">{inner}</div>
                   )}
@@ -295,101 +292,37 @@ export default function OritGroupPage() {
           </ul>
         </div>
       </section>
-
-      {lead && <LeadModal topic={lead} onClose={() => setLead(null)} />}
     </div>
   )
 }
 
 
-/** חלון קצר להשארת פרטים (ליווי אישי, תוכנית לנשות עסקים). הפנייה נשלחת לאורית. */
-function LeadModal({ topic, onClose }: { topic: string; onClose: () => void }) {
-  const [sent, setSent] = useState(false)
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose()
-    }
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = prev
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [onClose])
-
-  function submit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const fd = new FormData(e.currentTarget)
-    void sendLead({
-      target: 'orit',
-      source: 'דף אורית: ' + topic,
-      name: String(fd.get('fullName') ?? ''),
-      phone: String(fd.get('phone') ?? ''),
-      email: String(fd.get('email') ?? ''),
-      message: String(fd.get('message') ?? ''),
-    })
-    setSent(true)
-  }
-
-  const input =
-    'w-full rounded-xl border border-blush-200 bg-background px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-accent focus:bg-white'
+/** ההרשמה סגורה: מפנה לאתר הראשי, המקום היחיד להשארת פרטים. */
+function ClosedNotice() {
   return (
-    <div
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-ink-900/50 p-4 backdrop-blur-sm"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose()
-      }}
-      aria-modal="true"
-      role="dialog"
-      aria-label={topic}
-    >
-      <div className="relative w-full max-w-md rounded-3xl bg-white p-7 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] md:p-9">
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute end-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-ink-700 transition-colors hover:bg-blush-100 hover:text-accent"
-          aria-label="סגירה"
+    <div className="mx-auto max-w-xl rounded-3xl border-2 border-primary/30 bg-white/95 p-7 text-center shadow-[0_18px_40px_-24px_rgba(189,95,124,0.45)] md:p-9">
+      <span className="inline-flex items-center gap-2 rounded-full bg-blush-100 px-4 py-1.5 text-xs font-semibold text-primary">
+        <Lock size={14} /> ההרשמה סגורה
+      </span>
+      <p className="mt-4 font-display text-xl font-extrabold text-ink-900 md:text-2xl">
+        מלא עד סוף 2026
+      </p>
+      <p className="mt-3 leading-relaxed text-ink-700">
+        לא ניתן להירשם, להשאיר פרטים או לשלם דרך העמוד הזה. להשארת פרטים ולפנייה:
+      </p>
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <Link
+          to="/contact"
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(189,95,124,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
         >
-          <X size={20} />
-        </button>
-        {!sent ? (
-          <>
-            <h2 className="font-display text-2xl font-extrabold text-ink-900">{topic}</h2>
-            <p className="mt-1 text-sm text-ink-700">השאירי פרטים ואחזור אלייך בהקדם</p>
-            <form onSubmit={submit} className="mt-6 space-y-4">
-              <div>
-                <label htmlFor="lead-name" className="mb-1 block text-sm font-semibold text-ink-800">שם מלא</label>
-                <input id="lead-name" name="fullName" type="text" required autoComplete="name" className={input} />
-              </div>
-              <div>
-                <label htmlFor="lead-phone" className="mb-1 block text-sm font-semibold text-ink-800">טלפון</label>
-                <input id="lead-phone" name="phone" type="tel" required autoComplete="tel" dir="ltr" placeholder="050-0000000" className={input} />
-              </div>
-              <div>
-                <label htmlFor="lead-email" className="mb-1 block text-sm font-semibold text-ink-800">דוא״ל</label>
-                <input id="lead-email" name="email" type="email" autoComplete="email" dir="ltr" placeholder="name@example.com" className={input} />
-              </div>
-              <div>
-                <label htmlFor="lead-message" className="mb-1 block text-sm font-semibold text-ink-800">כמה מילים על מה שמעסיק אותך (לא חובה)</label>
-                <textarea id="lead-message" name="message" rows={3} className={input} />
-              </div>
-              <button
-                type="submit"
-                className="w-full rounded-full bg-primary px-6 py-4 text-base font-bold text-white shadow-[0_10px_24px_-8px_rgba(189,95,124,0.6)] transition-all hover:-translate-y-0.5 hover:bg-primary/90"
-              >
-                שליחה
-              </button>
-              <PrivacyNotice controller="orit" />
-            </form>
-          </>
-        ) : (
-          <div className="py-6 text-center">
-            <h2 className="font-display text-2xl font-extrabold text-ink-900">תודה!</h2>
-            <p className="mt-3 text-ink-700">קיבלתי את הפרטים, ואחזור אלייך בהקדם.</p>
-          </div>
-        )}
+          יצירת קשר באתר
+        </Link>
+        <Link
+          to="/frequency-course"
+          className="inline-flex items-center gap-2 rounded-full border-2 border-primary/40 px-7 py-3.5 text-base font-bold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:border-primary"
+        >
+          לקורס העלאת תדר
+        </Link>
       </div>
     </div>
   )

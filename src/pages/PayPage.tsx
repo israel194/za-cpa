@@ -54,23 +54,6 @@ function courseOffer(c: FrequencyContent): Offer {
   }
 }
 
-const RETREAT: Offer = {
-  product: 'retreat',
-  kicker: 'ריטריט לנשים',
-  title: 'לחזור לעצמך',
-  subtitle: 'ערב שכולו שלך: מרחב שקט, קבוצה קטנה ותומכת, וכלים לחזור לעצמך.',
-  price: '199 ש״ח',
-  priceNote: 'תשלום חד פעמי',
-  facts: [
-    { icon: Clock, text: 'יום שני, 20:30' },
-    { icon: MapPin, text: PLACE },
-  ],
-  includes: ['ערב בקבוצה קטנה ואינטימית', 'כלים מעשיים לאיזון, רוגע ובחירה', 'מרחב שקט שכולו בשבילך'],
-  backTo: '/orit-group',
-  backLabel: 'חזרה לדף הריטריט',
-  fallbackPayUrl: '',
-  pickDate: true,
-}
 
 export default function PayPage() {
   const { product } = useParams()
@@ -91,7 +74,10 @@ export default function PayPage() {
     }
   }, [product])
 
-  const offer = product === 'frequency-course' ? courseOffer(course) : product === 'retreat' ? RETREAT : null
+  // הריטריט מלא עד סוף 2026: אין הרשמה ואין תשלום, גם לא דרך קישור ישיר ל-/pay/retreat.
+  // המבקר מוחזר לדף הריטריט, שבו כתוב שהוא מלא. להחזרת המכירה: להחזיר את ההצעה RETREAT
+  // (הנוסח המלא שמור בהיסטוריה, בקומיט שסגר את ההרשמה) ולהוסיף כאן את הענף שלה.
+  const offer = product === 'frequency-course' ? courseOffer(course) : null
 
   useEffect(() => {
     if (offer) document.title = `הרשמה ותשלום · ${offer.title} | אורית עשור`
