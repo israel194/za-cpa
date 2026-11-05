@@ -37,7 +37,7 @@ export default function PrivacyPage() {
     returnObjects: true,
   }) as string[]
 
-  const updatedAt = new Date('2026-04-28').toLocaleDateString(undefined, {
+  const updatedAt = new Date('2026-11-01').toLocaleDateString(undefined, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

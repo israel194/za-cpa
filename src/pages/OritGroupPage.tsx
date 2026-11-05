@@ -1,31 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Heart, Star, Target, MapPin, Calendar, Clock, Coins, Sparkles, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Heart, Star, Target, MapPin, Calendar, Clock, Coins, Sparkles, X, User, MonitorPlay, Waves, Briefcase } from 'lucide-react'
 import { sendLead } from '../lib/notify'
+import PrivacyNotice from '../components/ui/PrivacyNotice'
 
-const PAYMENT_URL = 'https://pay.sumit.co.il/3c09bh/tsf55r/tsf4na/payment/'
 const WA_NUMBER = '972523975659'
 const WA_MESSAGE = 'שלום אורית, אשמח לשמוע על הקבוצה'
-
-const HEBREW_MONTHS = [
-  'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
-  'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר',
-]
-
-function getNextMondays(count = 4): { value: string; label: string }[] {
-  const today = new Date()
-  const day = today.getDay()
-  const daysUntilMonday = (1 - day + 7) % 7 || 7
-  const dates: { value: string; label: string }[] = []
-  const d = new Date(today)
-  d.setDate(d.getDate() + daysUntilMonday)
-  for (let i = 0; i < count; i++) {
-    const value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-    const label = `יום שני, ${d.getDate()} ב${HEBREW_MONTHS[d.getMonth()]} ${d.getFullYear()}`
-    dates.push({ value, label })
-    d.setDate(d.getDate() + 7)
-  }
-  return dates
-}
 
 const benefits = [
   {
@@ -45,57 +25,64 @@ const benefits = [
   },
 ]
 
+type Service = {
+  icon: typeof Heart
+  title: string
+  body: string
+  cta: string
+  badge?: string
+  action: 'lead' | 'link' | 'soon'
+  href?: string
+}
+
+const services: Service[] = [
+  {
+    icon: User,
+    title: 'ליווי אישי',
+    body: 'מפגשים אחד על אחד, בקצב שלך ועל מה שחשוב לך עכשיו. השאירי פרטים ואחזור אלייך לשיחת היכרות.',
+    cta: 'להשאיר פרטים',
+    action: 'lead',
+  },
+  {
+    icon: MonitorPlay,
+    title: 'קורסים דיגיטליים',
+    body: 'הכלים והתהליכים, לצפייה ולתרגול מהבית, בזמן שנוח לך.',
+    cta: 'בקרוב',
+    badge: 'בבנייה',
+    action: 'soon',
+  },
+  {
+    icon: Waves,
+    title: 'קורס העלאת תדר',
+    body: 'תשעה מפגשים לנשים: מתודעה הישרדותית ולחץ אל חיים של בחירה, שקט פנימי וחיבור.',
+    cta: 'לפרטים על הקורס',
+    badge: 'חדש',
+    action: 'link',
+    href: '/frequency-course',
+  },
+  {
+    icon: Briefcase,
+    title: 'תוכנית ליווי לנשות עסקים',
+    body: 'לנשות עסקים שמתמודדות עם בעיות משפחתיות מורכבות, ורוצות להחזיק את העסק ואת הבית מתוך יציבות פנימית.',
+    cta: 'להשאיר פרטים',
+    action: 'lead',
+  },
+]
+
 const details = [
   { icon: MapPin, label: "רח' נחום חפצדי 17, גבעת שאול, ירושלים (מגדל רם — קומה 11)" },
   { icon: Calendar, label: 'כל יום שני' },
   { icon: Clock, label: 'בשעה 20:30 — אחרי שהילדים ישנים' },
-  { icon: Coins, label: '40 ש"ח בלבד למפגש' },
+  { icon: Coins, label: '199 ש"ח, תשלום חד פעמי' },
 ]
 
 export default function OritGroupPage() {
-  const [modalOpen, setModalOpen] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const [name, setName] = useState('')
-  const mondays = useMemo(() => getNextMondays(4), [])
+  const navigate = useNavigate()
+  const [lead, setLead] = useState<string | null>(null)
 
   useEffect(() => {
-    document.title = 'לחזור לעצמך — קבוצת לימוד לנשים | אורית עשור'
+    document.title = 'לחזור לעצמך · ריטריט לנשים | אורית עשור'
   }, [])
-
-  useEffect(() => {
-    if (modalOpen) {
-      const prev = document.body.style.overflow
-      document.body.style.overflow = 'hidden'
-      return () => {
-        document.body.style.overflow = prev
-      }
-    }
-  }, [modalOpen])
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setModalOpen(false)
-    }
-    if (modalOpen) document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
-  }, [modalOpen])
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const formEl = e.currentTarget
-    const fd = new FormData(formEl)
-    setSubmitting(true)
-    void sendLead({
-      target: 'orit',
-      name: String(fd.get('fullName') ?? name),
-      email: String(fd.get('email') ?? ''),
-      phone: String(fd.get('phone') ?? ''),
-      sessionDate: String(fd.get('sessionDate') ?? ''),
-    })
-    window.setTimeout(() => {
-      window.location.href = PAYMENT_URL
-    }, 800)
-  }
 
   const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`
 
@@ -113,7 +100,7 @@ export default function OritGroupPage() {
           </div>
 
           <span className="inline-flex items-center gap-2 rounded-full bg-blush-100 px-4 py-1.5 text-xs font-semibold text-primary">
-            <Sparkles size={14} /> נותרו מקומות אחרונים — הקבוצה קטנה ואינטימית
+            <Sparkles size={14} /> ריטריט לנשים · 199 ש״ח
           </span>
 
           <h1 className="mt-5 font-display text-4xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-6xl">
@@ -122,13 +109,16 @@ export default function OritGroupPage() {
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-700 md:text-xl">
             כי את לא צריכה לבחור בין להיות אמא מדהימה, אשת קריירה מצליחה ואישה שמחה. את יכולה הכל.
           </p>
+          <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-ink-700 md:text-lg">
+            ערב שכולו שלך: מרחב שקט, קבוצה קטנה ותומכת, וכלים לחזור לעצמך. כמו ריטריט, בלי לצאת מהעיר.
+          </p>
 
           <button
             type="button"
-            onClick={() => setModalOpen(true)}
+            onClick={() => navigate('/pay/retreat')}
             className="mt-9 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(189,95,124,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_18px_36px_-10px_rgba(189,95,124,0.75)]"
           >
-            רוצה להצטרף? שומרת מקום
+            רוצה להצטרף לריטריט?
           </button>
         </div>
       </section>
@@ -226,7 +216,7 @@ export default function OritGroupPage() {
       <section className="relative bg-background py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <h2 className="text-center font-display text-3xl font-extrabold text-ink-900 md:text-4xl">
-            הקבוצה הבאה מתחילה בקרוב
+            הריטריט הבא
           </h2>
 
           <ul className="mx-auto mt-10 max-w-xl space-y-3">
@@ -246,12 +236,12 @@ export default function OritGroupPage() {
           <div className="mt-12 text-center">
             <button
               type="button"
-              onClick={() => setModalOpen(true)}
+              onClick={() => navigate('/pay/retreat')}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(189,95,124,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_18px_36px_-10px_rgba(189,95,124,0.75)]"
             >
-              שומרת מקום בקבוצה
+              מצטרפת לריטריט
             </button>
-            <p className="mt-4 text-sm text-ink-700">המקומות מוגבלים — ההרשמה לפי סדר הגעה</p>
+            <p className="mt-4 text-sm text-ink-700">הקבוצה קטנה ואינטימית, ולכן המקומות מוגבלים</p>
             <p className="mt-2 text-sm text-ink-700">
               מעדיפה לדבר קודם?{' '}
               <a href={waHref} target="_blank" rel="noreferrer" className="font-semibold text-accent underline">
@@ -262,109 +252,145 @@ export default function OritGroupPage() {
         </div>
       </section>
 
-      {/* REGISTRATION MODAL */}
-      {modalOpen && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-ink-900/50 p-4 backdrop-blur-sm"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setModalOpen(false)
-          }}
-          aria-modal="true"
-          role="dialog"
-        >
-          <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white p-7 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] md:p-9">
-            <button
-              type="button"
-              onClick={() => setModalOpen(false)}
-              className="absolute end-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-ink-700 transition-colors hover:bg-blush-100 hover:text-accent"
-              aria-label="סגירה"
-            >
-              <X size={20} />
-            </button>
-
-            {!submitting ? (
-              <>
-                <h2 className="font-display text-2xl font-extrabold text-ink-900">שומרת מקום בקבוצה</h2>
-                <p className="mt-1 text-sm text-ink-700">רגע אחד ואת בפנים — מלאי את הפרטים ובחרי מועד</p>
-
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                  <div>
-                    <label htmlFor="orit-name" className="mb-1 block text-sm font-semibold text-ink-800">שם מלא</label>
-                    <input
-                      id="orit-name"
-                      name="fullName"
-                      type="text"
-                      required
-                      autoComplete="name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="השם שלך"
-                      className="w-full rounded-xl border border-blush-200 bg-background px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-accent focus:bg-white"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="orit-phone" className="mb-1 block text-sm font-semibold text-ink-800">טלפון</label>
-                    <input
-                      id="orit-phone"
-                      name="phone"
-                      type="tel"
-                      required
-                      autoComplete="tel"
-                      placeholder="050-0000000"
-                      dir="ltr"
-                      className="w-full rounded-xl border border-blush-200 bg-background px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-accent focus:bg-white"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="orit-email" className="mb-1 block text-sm font-semibold text-ink-800">דוא״ל</label>
-                    <input
-                      id="orit-email"
-                      name="email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      placeholder="name@example.com"
-                      dir="ltr"
-                      className="w-full rounded-xl border border-blush-200 bg-background px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-accent focus:bg-white"
-                    />
-                  </div>
-                  <fieldset>
-                    <legend className="mb-2 block text-sm font-semibold text-ink-800">בחרי מועד (יום שני, 20:30)</legend>
-                    <div className="space-y-2">
-                      {mondays.map((m, i) => (
-                        <label
-                          key={m.value}
-                          className="flex cursor-pointer items-center gap-3 rounded-xl border border-blush-100 bg-background px-4 py-3 transition-colors hover:bg-blush-50 has-[:checked]:border-accent has-[:checked]:bg-blush-50"
-                        >
-                          <input type="radio" name="sessionDate" value={m.value} required={i === 0} className="accent-rose-gold-500" />
-                          <span className="text-sm text-ink-800">{m.label}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </fieldset>
-
-                  <div className="rounded-xl bg-blush-50 px-4 py-3 text-center text-base text-ink-800">
-                    סה״כ לתשלום: <strong className="text-primary">40 ₪</strong>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full rounded-full bg-primary px-6 py-4 text-base font-bold text-white shadow-[0_10px_24px_-8px_rgba(189,95,124,0.6)] transition-all hover:-translate-y-0.5 hover:bg-primary/90"
-                  >
-                    המשך לתשלום
-                  </button>
-                </form>
-              </>
-            ) : (
-              <div className="py-6 text-center">
-                <h2 className="font-display text-2xl font-extrabold text-ink-900">תודה {name}!</h2>
-                <p className="mt-3 text-ink-700">מעבירה אותך לעמוד תשלום מאובטח...</p>
-                <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-l from-rose-gold-500 to-blush-300 animate-pulse" />
-              </div>
-            )}
-          </div>
+      {/* MORE WAYS TO WORK WITH ORIT */}
+      <section className="relative bg-white py-12 md:py-16">
+        <div className="mx-auto max-w-6xl px-6 md:px-10">
+          <h2 className="text-center font-display text-3xl font-extrabold text-ink-900 md:text-4xl">עוד דרכים ללכת איתי</h2>
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((sv) => {
+              const Icon = sv.icon
+              const inner = (
+                <>
+                  <span className="flex items-start justify-between gap-3">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blush-100 text-accent">
+                      <Icon size={24} />
+                    </span>
+                    {sv.badge && (
+                      <span className={`rounded-full px-3 py-1 text-xs font-bold ${sv.badge === 'חדש' ? 'bg-burgundy-600 text-white' : 'bg-cream-100 text-ink-700'}`}>
+                        {sv.badge}
+                      </span>
+                    )}
+                  </span>
+                  <span className="mt-4 block font-display text-lg font-bold leading-snug text-ink-900">{sv.title}</span>
+                  <span className="mt-2 block flex-1 text-sm leading-relaxed text-ink-700">{sv.body}</span>
+                  <span className={`mt-5 inline-flex justify-center rounded-full px-5 py-2.5 text-sm font-bold ${sv.action === 'soon' ? 'bg-cream-100 text-ink-700/70' : 'bg-primary text-white'}`}>
+                    {sv.cta}
+                  </span>
+                </>
+              )
+              const card = 'flex h-full w-full flex-col rounded-2xl border border-blush-100 bg-background p-6 text-start transition-all duration-300'
+              const hover = ' hover:-translate-y-1 hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.4)]'
+              return (
+                <li key={sv.title}>
+                  {sv.action === 'link' ? (
+                    <a href={sv.href} className={card + hover}>{inner}</a>
+                  ) : sv.action === 'lead' ? (
+                    <button type="button" onClick={() => setLead(sv.title)} className={card + hover}>{inner}</button>
+                  ) : (
+                    <div className={card} aria-disabled="true">{inner}</div>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
         </div>
-      )}
+      </section>
+
+      {lead && <LeadModal topic={lead} onClose={() => setLead(null)} />}
+    </div>
+  )
+}
+
+
+/** חלון קצר להשארת פרטים (ליווי אישי, תוכנית לנשות עסקים). הפנייה נשלחת לאורית. */
+function LeadModal({ topic, onClose }: { topic: string; onClose: () => void }) {
+  const [sent, setSent] = useState(false)
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+    }
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [onClose])
+
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const fd = new FormData(e.currentTarget)
+    void sendLead({
+      target: 'orit',
+      source: 'דף אורית: ' + topic,
+      name: String(fd.get('fullName') ?? ''),
+      phone: String(fd.get('phone') ?? ''),
+      email: String(fd.get('email') ?? ''),
+      message: String(fd.get('message') ?? ''),
+    })
+    setSent(true)
+  }
+
+  const input =
+    'w-full rounded-xl border border-blush-200 bg-background px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-accent focus:bg-white'
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-ink-900/50 p-4 backdrop-blur-sm"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+      aria-modal="true"
+      role="dialog"
+      aria-label={topic}
+    >
+      <div className="relative w-full max-w-md rounded-3xl bg-white p-7 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] md:p-9">
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute end-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-ink-700 transition-colors hover:bg-blush-100 hover:text-accent"
+          aria-label="סגירה"
+        >
+          <X size={20} />
+        </button>
+        {!sent ? (
+          <>
+            <h2 className="font-display text-2xl font-extrabold text-ink-900">{topic}</h2>
+            <p className="mt-1 text-sm text-ink-700">השאירי פרטים ואחזור אלייך בהקדם</p>
+            <form onSubmit={submit} className="mt-6 space-y-4">
+              <div>
+                <label htmlFor="lead-name" className="mb-1 block text-sm font-semibold text-ink-800">שם מלא</label>
+                <input id="lead-name" name="fullName" type="text" required autoComplete="name" className={input} />
+              </div>
+              <div>
+                <label htmlFor="lead-phone" className="mb-1 block text-sm font-semibold text-ink-800">טלפון</label>
+                <input id="lead-phone" name="phone" type="tel" required autoComplete="tel" dir="ltr" placeholder="050-0000000" className={input} />
+              </div>
+              <div>
+                <label htmlFor="lead-email" className="mb-1 block text-sm font-semibold text-ink-800">דוא״ל</label>
+                <input id="lead-email" name="email" type="email" autoComplete="email" dir="ltr" placeholder="name@example.com" className={input} />
+              </div>
+              <div>
+                <label htmlFor="lead-message" className="mb-1 block text-sm font-semibold text-ink-800">כמה מילים על מה שמעסיק אותך (לא חובה)</label>
+                <textarea id="lead-message" name="message" rows={3} className={input} />
+              </div>
+              <button
+                type="submit"
+                className="w-full rounded-full bg-primary px-6 py-4 text-base font-bold text-white shadow-[0_10px_24px_-8px_rgba(189,95,124,0.6)] transition-all hover:-translate-y-0.5 hover:bg-primary/90"
+              >
+                שליחה
+              </button>
+              <PrivacyNotice controller="orit" />
+            </form>
+          </>
+        ) : (
+          <div className="py-6 text-center">
+            <h2 className="font-display text-2xl font-extrabold text-ink-900">תודה!</h2>
+            <p className="mt-3 text-ink-700">קיבלתי את הפרטים, ואחזור אלייך בהקדם.</p>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

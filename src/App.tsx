@@ -15,6 +15,10 @@ const ContactPage = lazy(() => import('./pages/ContactPage'))
 const AccessibilityPage = lazy(() => import('./pages/AccessibilityPage'))
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
 const OritGroupPage = lazy(() => import('./pages/OritGroupPage'))
+const FrequencyCoursePage = lazy(() => import('./pages/FrequencyCoursePage'))
+const AdminPage = lazy(() => import('./pages/AdminPage'))
+const PaymentResultPage = lazy(() => import('./pages/PaymentResultPage'))
+const PayPage = lazy(() => import('./pages/PayPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 function RouteFallback() {
@@ -120,6 +124,38 @@ export default function App() {
             }
           />
           <Route
+            path="frequency-course"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <FrequencyCoursePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="pay/:product"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PayPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="payment/thanks"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PaymentResultPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="payment/cancel"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PaymentResultPage cancelled />
+              </Suspense>
+            }
+          />
+          <Route
             path="*"
             element={
               <Suspense fallback={<RouteFallback />}>
@@ -128,6 +164,15 @@ export default function App() {
             }
           />
         </Route>
+        {/* Content admin: standalone, outside the public layout */}
+        <Route
+          path="admin"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <AdminPage />
+            </Suspense>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )

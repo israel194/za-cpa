@@ -1,6 +1,8 @@
 import HeroCinematic from '../components/HeroCinematic'
 import ActivityAreas from '../components/ActivityAreas'
 import WhyUs from '../components/WhyUs'
+import Engagement from '../components/Engagement'
+import Process from '../components/Process'
 import Sectors from '../components/Sectors'
 import Testimonials from '../components/Testimonials'
 import CallToAction from '../components/CallToAction'
@@ -10,14 +12,16 @@ export default function Home() {
   return (
     <>
       <HeroCinematic />
-      <section className="border-y border-border/60 bg-muted/40 py-10">
+      <section className="py-10">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <TrustBadgeRow />
         </div>
       </section>
       <ActivityAreas />
       <WhyUs />
-      <Sectors />
+      <Engagement />
+      <Process />
+      <Sectors variant="full" />
       <Testimonials />
       <CallToAction />
     </>

@@ -36,7 +36,7 @@ export default function Sectors({ variant = 'preview' }: Props) {
           <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             {t('sectors.eyebrow')}
           </div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
+          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-5xl">
             {t('sectors.title')}
           </h2>
           <p className="mt-5 text-lg text-ink-700">{t('sectors.subtitle')}</p>

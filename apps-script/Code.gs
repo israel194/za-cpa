@@ -1,246 +1,224 @@
+// GENERATED from Code.src.gs by build.py. Edit the source, not this file.
 /**
- * ZA-CPA + Orit Group - form notification endpoint.
+ * ZA-CPA + Orit Group — form notification endpoint (readable source).
  *
- * WHY THE HEBREW IS WRITTEN AS NUMBER CODES
- * -----------------------------------------
- * Every Hebrew string below is built from numeric character codes, so this
- * file is pure ASCII. That is deliberate and must stay that way.
+ * DO NOT paste this file into Apps Script. Run `py apps-script/build.py`, which
+ * writes Code.gs with every Hebrew string encoded as \uXXXX escapes. The escaped
+ * file survives any copy/paste or editor encoding, so the Hebrew can never come
+ * out reversed or garbled again (the previous deployment stored it reversed).
  *
- * Plain Hebrew string literals were used here once before. Pasting them into
- * the Apps Script editor stored them in VISUAL order instead of LOGICAL order,
- * and every label in every notification mail came out reversed letter by
- * letter: "shem" arrived as "msh", "hodaa" as "eadoh", and the subject line
- * "pniya hadasha me-ha-atar" as "rta-ah-em ahsdah ayinp". No RTL attribute can
- * repair that, because the Unicode bidi algorithm never reorders letters
- * inside a word - the stored characters themselves were backwards.
- *
- * ASCII digits cannot be reordered by any editor or clipboard, so encoding the
- * labels this way makes that failure impossible to reintroduce.
- *
- * To change a label, edit the generator in the repo and regenerate this file.
- * Never type or paste raw Hebrew into the Apps Script editor.
- *
- * After editing: paste this whole file into the Apps Script editor, then
- * Deploy > Manage deployments > Edit (pencil) > Version: New version > Deploy.
+ * Deploy: paste the whole of Code.gs into the Apps Script editor, then
+ * Deploy → Manage deployments → Edit (pencil) → Version: New version → Deploy.
+ * The web-app URL stays the same.
  */
 
-function h(codes) { return String.fromCharCode.apply(null, codes); }
+var RLM = '\u200F'; // right-to-left mark: forces RTL base direction in plain text
 
-var RLM = h([8207]); // right-to-left mark: forces RTL base direction on a line
-
-var SUBJ_OFFICE = h([1508,1504,1497,1497,1492,32,1495,1491,1513,1492,32,1502,1492,1488,1514,1512]); // pniya hadasha me-ha-atar  (new enquiry from the site)
-var SUBJ_ORIT   = h([1492,1512,1513,1502,1492,32,1495,1491,1513,1492,32,1500,1511,1489,1493,1510,1514,32,1500,1495,1494,1493,1512,32,1500,1506,1510,1502,1498]); // hairshama hadasha  (new Orit Group signup)
-var L_NAME      = h([1513,1501]); // shem  (name)
-var L_EMAIL     = h([1488,1497,1502,1497,1497,1500]); // email
-var L_PHONE     = h([1496,1500,1508,1493,1503]); // telefon  (phone)
-var L_SERVICE   = h([1513,1497,1512,1493,1514,32,1502,1489,1493,1511,1513]); // sherut mevukash  (requested service)
-var L_DATE      = h([1502,1493,1506,1491,32,1502,1489,1493,1511,1513]); // moed mevukash  (requested date)
-var L_MSG       = h([1492,1493,1491,1506,1492]); // hodaa  (message)
-var L_FOOT      = h([1504,1513,1500,1495,32,1488,1493,1496,1493,1502,1496,1497,1514,32,1502,1492,1488,1514,1512]); // nishlah otomatit  (sent automatically)
-var L_NONAME    = h([1500,1500,1488,32,1513,1501]); // lelo shem  (no name given)
-var L_RAW       = h([1513,1490,1497,1488,1492,32,1489,1506,1497,1489,1493,1491,32,1492,1508,1504,1497,1497,1492,46,32,1492,1504,1514,1493,1504,1497,1501,32,1492,1490,1493,1500,1502,1497,1497,1501,32,1502,1510,1493,1512,1508,1497,1501,32,1489,1502,1500,1493,1488,1501]); // shgiaa be-ibud  (processing error, raw payload attached)
-
-var ROUTES = {
-  office: { to: 'office@za-cpa.com', subject: SUBJ_OFFICE },
-  orit:   { to: 'orit@za-cpa.com',   subject: SUBJ_ORIT }
+var BRAND = {
+  wine: '#6e1a2d',
+  deep: '#3a0f1c',
+  gold: '#8a6a2f',
+  champagne: '#d9c08f',
+  ivory: '#fbf7f4',
+  line: '#eadcdb',
+  text: '#2b1a20',
+  muted: '#7a6a6e'
 };
 
-// Bumped whenever this file changes, so doGet() can report which build is
-// actually deployed. The deployed copy and the repo copy have drifted before.
-var VERSION = '2026-09-28-ascii-labels';
+var ROUTES = {
+  office: { to: 'office@za-cpa.com', title: '\u05E4\u05E0\u05D9\u05D9\u05D4 \u05D7\u05D3\u05E9\u05D4 \u05DE\u05D4\u05D0\u05EA\u05E8', subject: '\u05E4\u05E0\u05D9\u05D9\u05D4 \u05D7\u05D3\u05E9\u05D4' },
+  orit:   { to: 'orit@za-cpa.com',   title: '\u05D4\u05E8\u05E9\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4 \u05DC\u05E7\u05D1\u05D5\u05E6\u05EA "\u05DC\u05D7\u05D6\u05D5\u05E8 \u05DC\u05E2\u05E6\u05DE\u05DA"', subject: '\u05D4\u05E8\u05E9\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4 \u05DC\u05E7\u05D1\u05D5\u05E6\u05D4' }
+};
 
-// Fields that get their own Hebrew label, in display order.
-var KNOWN = ['name', 'email', 'phone', 'service', 'sessionDate', 'message'];
+// ── Spam filter ─────────────────────────────────────────────────────────────
+// Returns true for submissions that look automated; doPost then answers "ok"
+// without sending mail, so bots learn nothing.
+function looksLikeSpam(data) {
+  if (data.company_website) return true; // honeypot field on the landing pages
+  var name = String(data.name || '').trim();
+  var inner = name.slice(1);
+  if (name.length >= 8 && /^[A-Za-z]+$/.test(name) && /[a-z]/.test(name) &&
+      (inner.match(/[A-Z]/g) || []).length >= 2) return true; // e.g. "ZzSJUTEzqilpXpwPN"
+  if (data.phone && !normalizePhone(data.phone)) return true; // not an Israeli number
+  return false;
+}
 
-var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// ── Phone helpers ───────────────────────────────────────────────────────────
+// Returns the local form (e.g. 0523975659) or '' when not an Israeli number.
+function normalizePhone(raw) {
+  var d = String(raw || '').replace(/[\s\-().]/g, '');
+  if (d.indexOf('+972') === 0) d = '0' + d.slice(4);
+  else if (d.indexOf('972') === 0 && d.length >= 11) d = '0' + d.slice(3);
+  return /^0(?:[23489]\d{7}|[57]\d{8})$/.test(d) ? d : '';
+}
 
+function displayPhone(local) {
+  // 05x / 07x → 3-7, landlines (02, 03, 04, 08, 09) → 2-7
+  return /^0[57]/.test(local) ? local.slice(0, 3) + '-' + local.slice(3) : local.slice(0, 2) + '-' + local.slice(2);
+}
+
+function intlPhone(local) {
+  return '972' + local.slice(1);
+}
+
+// ── HTML building blocks (inline styles + tables: renders in Gmail/Outlook) ──
 function esc(s) {
   return String(s)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/"/g, '&quot;');
 }
 
-/**
- * One label/value row.
- *
- * `ltr` marks values that are inherently left-to-right, such as a phone
- * number. They go inside <bdi> with unicode-bidi:isolate so the surrounding
- * RTL layout cannot reorder them. Unlike wrapping a value in invisible
- * direction marks, <bdi> adds no characters, so the value still copies out of
- * the mail exactly as the visitor typed it.
- */
-function row(label, value, ltr) {
-  var v = esc(value);
-  if (ltr) v = '<bdi dir="ltr" style="direction:ltr;unicode-bidi:isolate">' + v + '</bdi>';
+function ltr(s) {
+  return '<span dir="ltr" style="unicode-bidi:isolate;direction:ltr">' + s + '</span>';
+}
+
+function button(href, label, bg) {
+  return '<td style="padding:4px">' +
+    '<a href="' + esc(href) + '" style="display:inline-block;padding:12px 18px;border-radius:999px;' +
+    'background:' + bg + ';color:#ffffff;font-weight:bold;font-size:15px;text-decoration:none;white-space:nowrap">' +
+    label + '</a></td>';
+}
+
+function detailRow(label, valueHtml) {
   return '<tr>' +
-    '<td style="padding:5px 0;font-weight:bold;color:#0a1c3a;white-space:nowrap;vertical-align:top">' + esc(label) + ':</td>' +
-    '<td style="padding:5px 14px;color:#222">' + v + '</td>' +
+    '<td style="padding:11px 0;border-bottom:1px solid ' + BRAND.line + ';color:' + BRAND.muted + ';font-size:14px;width:110px;vertical-align:top">' + label + '</td>' +
+    '<td style="padding:11px 0;border-bottom:1px solid ' + BRAND.line + ';color:' + BRAND.text + ';font-size:16px;font-weight:bold">' + valueHtml + '</td>' +
     '</tr>';
 }
 
-/**
- * The submitted address is never normalised, trimmed, lower-cased or rewritten.
- * It is rendered exactly as received, and the same string is placed in the
- * mailto: href so the mail client links it as a whole instead of guessing where
- * the address ends inside an RTL line.
- */
-function emailRow(label, value) {
-  var addr = String(value);
-  return '<tr>' +
-    '<td style="padding:5px 0;font-weight:bold;color:#0a1c3a;white-space:nowrap;vertical-align:top">' + esc(label) + ':</td>' +
-    '<td style="padding:5px 14px">' +
-    '<a href="mailto:' + encodeURI(addr) + '" style="direction:ltr;unicode-bidi:isolate;color:#0a1c3a">' +
-    '<bdi dir="ltr">' + esc(addr) + '</bdi></a>' +
-    '</td></tr>';
+function israelTime() {
+  return Utilities.formatDate(new Date(), 'Asia/Jerusalem', 'dd/MM/yyyy HH:mm');
 }
 
+// Older landing-page builds pack the file type and discounts into `message`;
+// split them out so they get the highlighted box too.
+function splitLegacyMessage(message) {
+  var out = { entity: '', discounts: [], source: '', rest: [] };
+  String(message || '').split('\n').forEach(function (line) {
+    var t = line.trim();
+    if (!t) return;
+    var m = t.match(/^\u05D1\u05E7\u05E9\u05D4 \u05DC\u05E4\u05EA\u05D9\u05D7\u05EA \u05EA\u05D9\u05E7\s*[\u2014\u2013-]\s*(.+)$/);
+    if (m) { out.entity = m[1]; return; }
+    if (/^\*.*\*$/.test(t)) { out.discounts.push(t.replace(/^\*|\*$/g, '')); return; }
+    var s = t.match(/^\(\u05E0\u05E9\u05DC\u05D7 \u05DE\u05D3\u05E3 \u05D4\u05E0\u05D7\u05D9\u05EA\u05D4:\s*(.+)\)$/);
+    if (s) { out.source = '\u05D3\u05E3 \u05E0\u05D7\u05D9\u05EA\u05D4: ' + s[1]; return; }
+    out.rest.push(t);
+  });
+  return out;
+}
+
+// ── Entry points ────────────────────────────────────────────────────────────
 function doPost(e) {
-  var raw = (e && e.postData && e.postData.contents) || '';
-  try {
-    return handle(JSON.parse(raw));
-  } catch (err) {
-    // Never drop a lead: if anything above fails, forward the payload verbatim.
-    try {
-      MailApp.sendEmail({
-        to: ROUTES.office.to,
-        subject: RLM + SUBJ_OFFICE,
-        body: RLM + L_RAW + '\n\n' + raw + '\n\n' + String(err)
-      });
-    } catch (ignored) {}
-    return ContentService.createTextOutput('{"ok":false}');
+  var data = JSON.parse(e.postData.contents);
+  if (looksLikeSpam(data)) {
+    return ContentService.createTextOutput('{"ok":true}');
   }
-}
-
-function handle(data) {
   var route = ROUTES[data.target] || ROUTES.office;
-  var labels = {
-    name: L_NAME, email: L_EMAIL, phone: L_PHONE,
-    service: L_SERVICE, sessionDate: L_DATE
-  };
-  var order = ['name', 'email', 'phone', 'service', 'sessionDate'];
 
-  // Any field the site starts sending that is not in KNOWN still reaches the
-  // inbox under its own key, instead of being silently discarded.
-  var extras = [];
-  for (var key in data) {
-    if (!data.hasOwnProperty(key) || key === 'target') continue;
-    if (KNOWN.indexOf(key) !== -1) continue;
-    if (data[key] === '' || data[key] == null) continue;
-    extras.push({ key: key, value: data[key] });
-  }
+  var legacy = splitLegacyMessage(data.message);
+  var entity = data.entity || legacy.entity;
+  var discounts = (data.discounts && data.discounts.length) ? data.discounts : legacy.discounts;
+  var source = data.source || legacy.source || (data.target === 'orit' ? '\u05D3\u05E3 "\u05DC\u05D7\u05D6\u05D5\u05E8 \u05DC\u05E2\u05E6\u05DE\u05DA"' : '\u05D4\u05D0\u05EA\u05E8 \u05D4\u05E8\u05D0\u05E9\u05D9');
+  var note = legacy.rest.join('\n');
 
-  // ---- plain-text part -------------------------------------------------
-  // Each line opens with an RLM so its label sets RTL base direction. Values
-  // are inserted verbatim, with no added direction marks, so an address copied
-  // out of this part is byte for byte what was submitted.
-  var lines = [];
-  for (var i = 0; i < order.length; i++) {
-    if (data[order[i]]) lines.push(RLM + labels[order[i]] + ': ' + data[order[i]]);
-  }
-  for (var j = 0; j < extras.length; j++) {
-    lines.push(RLM + extras[j].key + ': ' + extras[j].value);
-  }
-  if (data.message) lines.push('', RLM + L_MSG + ':', RLM + data.message);
-  lines.push('', RLM + L_FOOT);
+  var name = String(data.name || '').trim() || '\u05DC\u05DC\u05D0 \u05E9\u05DD';
+  var email = String(data.email || '').trim();
+  var phone = normalizePhone(data.phone);
 
-  // ---- HTML part -------------------------------------------------------
+  // Action buttons
+  var buttons = '';
+  if (phone) {
+    buttons += button('tel:+' + intlPhone(phone), '\u05D4\u05EA\u05E7\u05E9\u05E8\u05D5\u05EA', BRAND.wine);
+    buttons += button('https://wa.me/' + intlPhone(phone), '\u05D5\u05D5\u05D0\u05D8\u05E1\u05D0\u05E4', '#1f8f4e');
+  }
+  if (email) buttons += button('mailto:' + email, '\u05DE\u05E2\u05E0\u05D4 \u05D1\u05DE\u05D9\u05D9\u05DC', BRAND.gold);
+
+  // Details
   var rows = '';
-  if (data.name)        rows += row(L_NAME, data.name, false);
-  if (data.email)       rows += emailRow(L_EMAIL, data.email);
-  if (data.phone)       rows += row(L_PHONE, data.phone, true);
-  if (data.service)     rows += row(L_SERVICE, data.service, false);
-  if (data.sessionDate) rows += row(L_DATE, data.sessionDate, false);
-  for (var k = 0; k < extras.length; k++) {
-    rows += row(extras[k].key, extras[k].value, false);
+  if (phone) rows += detailRow('\u05D8\u05DC\u05E4\u05D5\u05DF', '<a href="tel:+' + intlPhone(phone) + '" style="color:' + BRAND.wine + ';text-decoration:none">' + ltr(displayPhone(phone)) + '</a>');
+  else if (data.phone) rows += detailRow('\u05D8\u05DC\u05E4\u05D5\u05DF', ltr(esc(data.phone)));
+  if (email) rows += detailRow('\u05D0\u05D9\u05DE\u05D9\u05D9\u05DC', '<a href="mailto:' + esc(email) + '" style="color:' + BRAND.wine + ';text-decoration:none">' + ltr(esc(email)) + '</a>');
+  if (entity) rows += detailRow('\u05E1\u05D5\u05D2 \u05EA\u05D9\u05E7', esc(entity));
+  if (data.sessionDate) rows += detailRow('\u05DE\u05D5\u05E2\u05D3 \u05DE\u05D1\u05D5\u05E7\u05E9', esc(data.sessionDate));
+  rows += detailRow('\u05DE\u05E7\u05D5\u05E8', esc(source));
+
+  var highlights = '';
+  if (discounts.length) {
+    highlights = '<tr><td style="padding:0 28px 8px">' +
+      '<div style="background:#f6efe0;border:1px solid ' + BRAND.champagne + ';border-radius:12px;padding:14px 16px">' +
+      '<div style="font-weight:bold;color:' + BRAND.gold + ';margin-bottom:6px;font-size:14px">\u05D6\u05DB\u05D0\u05D5\u05EA \u05DC\u05D4\u05E0\u05D7\u05D4</div>' +
+      discounts.map(function (d) { return '<div style="color:' + BRAND.text + ';font-size:15px;line-height:1.6">\u2713 ' + esc(d) + '</div>'; }).join('') +
+      '</div></td></tr>';
   }
 
-  var msg = '';
-  if (data.message) {
-    msg = '<div style="margin-top:16px">' +
-      '<div style="font-weight:bold;color:#0a1c3a;margin-bottom:4px">' + esc(L_MSG) + ':</div>' +
-      '<div style="color:#222">' + esc(data.message).replace(/\n/g, '<br>') + '</div>' +
-      '</div>';
+  var msgBlock = '';
+  if (note) {
+    msgBlock = '<tr><td style="padding:8px 28px 4px">' +
+      '<div style="font-weight:bold;color:' + BRAND.muted + ';font-size:14px;margin-bottom:6px">\u05D4\u05D5\u05D3\u05E2\u05D4</div>' +
+      '<div style="background:' + BRAND.ivory + ';border-right:4px solid ' + BRAND.champagne + ';border-radius:8px;padding:14px 16px;color:' + BRAND.text + ';font-size:15px;line-height:1.7">' +
+      esc(note).replace(/\n/g, '<br>') + '</div></td></tr>';
   }
 
   var html =
-    '<div dir="rtl" lang="he" style="direction:rtl;text-align:right;' +
-    'font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.65;color:#222">' +
-    '<table dir="rtl" cellpadding="0" cellspacing="0" style="border-collapse:collapse">' + rows + '</table>' +
-    msg +
-    '<div style="margin-top:20px;color:#999;font-size:13px">' + esc(L_FOOT) + '</div>' +
-    '</div>';
+    '<div dir="rtl" lang="he" style="direction:rtl;text-align:right;background:#f4ece9;padding:24px 10px;font-family:Arial,Helvetica,sans-serif">' +
+    '<table role="presentation" dir="rtl" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;border-collapse:separate">' +
+      '<tr><td style="background:' + BRAND.wine + ';padding:22px 28px">' +
+        '<div style="color:' + BRAND.champagne + ';font-size:13px;letter-spacing:1px">\u05E2\u05E9\u05D5\u05E8 \u00B7 \u05E8\u05D5\u05D0\u05D9 \u05D7\u05E9\u05D1\u05D5\u05DF</div>' +
+        '<div style="color:#ffffff;font-size:21px;font-weight:bold;margin-top:4px">' + esc(route.title) + '</div>' +
+      '</td></tr>' +
+      '<tr><td style="padding:24px 28px 6px">' +
+        '<div style="color:' + BRAND.muted + ';font-size:13px">\u05E9\u05DD \u05D4\u05E4\u05D5\u05E0\u05D4</div>' +
+        '<div style="color:' + BRAND.wine + ';font-size:26px;font-weight:bold;margin-top:2px">' + esc(name) + '</div>' +
+      '</td></tr>' +
+      (buttons ? '<tr><td style="padding:10px 24px 6px"><table role="presentation" cellpadding="0" cellspacing="0"><tr>' + buttons + '</tr></table></td></tr>' : '') +
+      '<tr><td style="padding:10px 28px 14px"><table role="presentation" dir="rtl" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">' + rows + '</table></td></tr>' +
+      highlights +
+      msgBlock +
+      '<tr><td style="padding:18px 28px 22px;color:' + BRAND.muted + ';font-size:12px">\u05D4\u05EA\u05E7\u05D1\u05DC \u05D1\u05BE' + ltr(israelTime()) + ' \u00B7 \u05E0\u05E9\u05DC\u05D7 \u05D0\u05D5\u05D8\u05D5\u05DE\u05D8\u05D9\u05EA \u05DE\u05D0\u05EA\u05E8 za-cpa.com</td></tr>' +
+    '</table></div>';
 
-  var options = {
+  // Plain-text fallback: every line starts with RLM so it reads right-to-left.
+  var lines = [route.title, '', '\u05E9\u05DD: ' + name];
+  if (phone) lines.push('\u05D8\u05DC\u05E4\u05D5\u05DF: \u200E' + displayPhone(phone) + '\u200F');
+  else if (data.phone) lines.push('\u05D8\u05DC\u05E4\u05D5\u05DF: \u200E' + data.phone + '\u200F');
+  if (email) lines.push('\u05D0\u05D9\u05DE\u05D9\u05D9\u05DC: \u200E' + email + '\u200F');
+  if (entity) lines.push('\u05E1\u05D5\u05D2 \u05EA\u05D9\u05E7: ' + entity);
+  if (data.sessionDate) lines.push('\u05DE\u05D5\u05E2\u05D3 \u05DE\u05D1\u05D5\u05E7\u05E9: ' + data.sessionDate);
+  discounts.forEach(function (d) { lines.push('\u05D4\u05E0\u05D7\u05D4: ' + d); });
+  lines.push('\u05DE\u05E7\u05D5\u05E8: ' + source);
+  if (note) lines.push('', '\u05D4\u05D5\u05D3\u05E2\u05D4:', note);
+  lines.push('', '\u05D4\u05EA\u05E7\u05D1\u05DC \u05D1\u05BE' + israelTime());
+  var plain = lines.map(function (l) { return l ? RLM + l : l; }).join('\n');
+
+  var mail = {
     to: route.to,
-    subject: RLM + route.subject + ' | ' + (data.name || L_NONAME),
-    body: lines.join('\n'),
+    subject: RLM + route.subject + ': ' + name + ' \u00B7 ' + source,
+    body: plain,
     htmlBody: html,
-    name: 'ZA-CPA Website'
+    name: '\u05D0\u05EA\u05E8 \u05E2\u05E9\u05D5\u05E8 \u05E8\u05D5\u05D0\u05D9 \u05D7\u05E9\u05D1\u05D5\u05DF'
   };
+  if (email) mail.replyTo = email; // "Reply" goes straight to the lead
+  MailApp.sendEmail(mail);
 
-  // An unparseable Reply-To makes MailApp throw, which would lose the lead
-  // entirely, so it is set only when the address parses. Either way the address
-  // itself is shown in the body.
-  if (data.email && EMAIL_RE.test(String(data.email))) options.replyTo = String(data.email);
-
-  MailApp.sendEmail(options);
   return ContentService.createTextOutput('{"ok":true}');
 }
 
-function codes(s) {
-  var out = [];
-  for (var i = 0; i < s.length; i++) out.push(s.charCodeAt(i));
-  return out.join(',');
+function doGet() {
+  return ContentService.createTextOutput('ZA-CPA notify endpoint is live');
 }
 
-// Expected character codes for each label, in logical order.
-var EXPECTED = {
-  name:  '1513,1501',
-  email: '1488,1497,1502,1497,1497,1500',
-  phone: '1496,1500,1508,1493,1503',
-  msg:   '1492,1493,1491,1506,1492'
-};
-
-/**
- * Open the deployment URL in a browser to see which build is actually live.
- *
- * If the page shows only the single line "ZA-CPA notify endpoint is live", an
- * OLD build is still being served. Pasting the file into the editor is not
- * enough on its own - a new version has to be deployed:
- * Deploy > Manage deployments > pencil > Version: New version > Deploy.
- *
- * The character codes are the real evidence. A screen can render text in either
- * direction, but the codes cannot lie about the order they are stored in.
- */
-function doGet() {
-  var actual = {
-    name: codes(L_NAME), email: codes(L_EMAIL),
-    phone: codes(L_PHONE), msg: codes(L_MSG)
-  };
-  var ok = true;
-  var lines = [
-    'ZA-CPA notify endpoint is live',
-    'build: ' + VERSION,
-    '',
-    'Labels as this build stores them (each line should read correctly):',
-    '  ' + RLM + L_NAME,
-    '  ' + RLM + L_EMAIL,
-    '  ' + RLM + L_PHONE,
-    '  ' + RLM + L_SERVICE,
-    '  ' + RLM + L_MSG,
-    '',
-    'Character codes (the actual proof of order):'
-  ];
-  for (var key in EXPECTED) {
-    var good = actual[key] === EXPECTED[key];
-    if (!good) ok = false;
-    lines.push('  ' + key + ': ' + actual[key] + (good ? '  OK' : '  REVERSED, expected ' + EXPECTED[key]));
-  }
-  lines.push('');
-  lines.push(ok ? 'VERDICT: OK - labels are in logical order, mail will read correctly.'
-                : 'VERDICT: BROKEN - this build stores the labels backwards.');
-  return ContentService.createTextOutput(lines.join('\n'));
+// Run once from the Apps Script editor (Run → testEmail) to receive a sample.
+function testEmail() {
+  doPost({ postData: { contents: JSON.stringify({
+    target: 'office',
+    name: '\u05D9\u05E9\u05E8\u05D0\u05DC \u05D9\u05E9\u05E8\u05D0\u05DC\u05D9',
+    phone: '052-3975659',
+    email: 'office@za-cpa.com',
+    entity: '\u05E2\u05D5\u05E1\u05E7 \u05E4\u05D8\u05D5\u05E8',
+    discounts: ['\u05D4\u05D2\u05D9\u05E2/\u05D4 \u05D3\u05E8\u05DA \u05EA\u05D4\u05DC \u05D0\u05D6\u05D5\u05DC\u05D0\u05D9'],
+    source: '\u05D3\u05E3 \u05E0\u05D7\u05D9\u05EA\u05D4: \u05E4\u05EA\u05D9\u05D7\u05EA \u05E2\u05E1\u05E7',
+    message: '\u05D1\u05D3\u05D9\u05E7\u05EA \u05EA\u05D1\u05E0\u05D9\u05EA \u05D4\u05DE\u05D9\u05D9\u05DC.'
+  }) } });
 }

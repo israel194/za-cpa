@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="266 -8 648 324" width="648" height="324">
+  <title>עשור רואות חשבון</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&amp;family=Heebo:wght@400;500&amp;display=swap');
+    .word { font-family: 'Frank Ruhl Libre', 'Noto Serif Hebrew', serif; font-weight: 700; }
+    .tag  { font-family: 'Heebo', 'Assistant', sans-serif; font-weight: 500; }
+  </style>
+  <rect x="266" y="-8" width="648" height="324" fill="#3a0f1c"/>
+  <!-- mark (right side, RTL) -->
+  <svg x="620" y="20" width="260" height="260" viewBox="0 0 512 512">
+    <g transform="translate(0 -14)">
+      <path d="M 90 470 V 214 A 166 166 0 0 1 422 214 V 470" fill="none" stroke="#d9c08f" stroke-width="16"/>
+      <rect x="74" y="484" width="364" height="16" fill="#d9c08f"/>
+      <path d="M 120 470 V 214 A 136 136 0 0 1 392 214 V 470 Z" fill="#fbf7f4"/>
+      <g fill="#6e1a2d">
+        <path d="M 290 176 H 354 V 214 L 290 206 Z"/>
+        <path d="M 160 176 H 222 V 214 L 160 206 Z"/>
+      </g>
+      <g fill="none" stroke="#6e1a2d" stroke-linejoin="round">
+        <path d="M 336 200 V 318 C 336 364 312 384 266 384 H 156" stroke-width="38"/>
+        <path d="M 196 200 L 328 365" stroke-width="28"/>
+      </g>
+    </g>
+  </svg>
+  <!-- wordmark -->
+  <text class="word" x="610" y="176" direction="rtl" text-anchor="start" font-size="150" fill="#fbf7f4">עשור</text>
+  <rect x="318" y="206" width="292" height="3" fill="#d9c08f"/>
+  <text class="tag" x="610" y="268" direction="rtl" text-anchor="start" font-size="44" letter-spacing="6" fill="#d9c08f">רואות חשבון</text>
+</svg>

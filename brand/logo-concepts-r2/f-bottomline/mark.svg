@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>עשור רואי חשבון · סימן</title>
+  <defs>
+    <clipPath id="asor-sun"><path d="M78 295 A178 178 0 0 1 434 295 Z"/></clipPath>
+  </defs>
+  <g clip-path="url(#asor-sun)" fill="#6e1a2d">
+    <rect x="70" y="117" width="372" height="28"/>
+    <rect x="70" y="167" width="372" height="28"/>
+    <rect x="70" y="217" width="372" height="28"/>
+    <rect x="70" y="267" width="372" height="28"/>
+  </g>
+  <rect x="58" y="317" width="396" height="28" fill="#8a6a2f"/>
+  <rect x="58" y="367" width="396" height="28" fill="#8a6a2f"/>
+</svg>

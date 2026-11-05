@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>עשור רואות חשבון: סמל</title>
+  <!-- calyx: neck + flared points, sits behind the body -->
+  <path d="M220 190 L220 132 L184 66 L235 100 L256 40 L277 100 L328 66 L292 132 L292 190 Z"
+        fill="#a8894f" stroke="#a8894f" stroke-width="12" stroke-linejoin="round"/>
+  <!-- body -->
+  <circle cx="256" cy="310" r="170" fill="#6e1a2d"/>
+  <!-- ledger baseline + rising bars (seeds of growth) -->
+  <path d="M164 400 V350 a24 24 0 0 1 48 0 V400 Z" fill="#eed7da"/>
+  <path d="M232 400 V292 a24 24 0 0 1 48 0 V400 Z" fill="#eed7da"/>
+  <path d="M300 400 V234 a24 24 0 0 1 48 0 V400 Z" fill="#d9c08f"/>
+  <rect x="148" y="400" width="216" height="18" rx="9" fill="#d9c08f"/>
+</svg>

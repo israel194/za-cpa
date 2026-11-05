@@ -72,7 +72,7 @@ export default function Header() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 md:px-10">
         <Link to="/" aria-label={`${t('brand.name')} - ${t('brand.subtitle')}`}>
-          <Logo variant="lockup" tone="default" size={44} />
+          <Logo variant="lockup" tone="default" size={54} />
         </Link>
 
         <ul className="hidden items-center gap-6 lg:flex">

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="עשור">
+  <title>עשור</title>
+  <g transform="translate(0 -14)">
+    <path d="M 90 470 V 214 A 166 166 0 0 1 422 214 V 470" fill="none" stroke="#a8894f" stroke-width="16"/>
+    <rect x="74" y="484" width="364" height="16" fill="#a8894f"/>
+    <path d="M 120 470 V 214 A 136 136 0 0 1 392 214 V 470 Z" fill="#6e1a2d"/>
+    <g fill="#fbf7f4">
+      <path d="M 290 176 H 354 V 214 L 290 206 Z"/>
+      <path d="M 160 176 H 222 V 214 L 160 206 Z"/>
+    </g>
+    <g fill="none" stroke="#fbf7f4" stroke-linejoin="round">
+      <path d="M 336 200 V 318 C 336 364 312 384 266 384 H 156" stroke-width="38"/>
+      <path d="M 196 200 L 328 365" stroke-width="28"/>
+    </g>
+  </g>
+</svg>

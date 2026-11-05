@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="150 0 445 210" width="445" height="210">
+  <title>עשור רואות חשבון</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;600&amp;family=Assistant:wght@400;500&amp;display=swap');
+    .wm{font-family:'Frank Ruhl Libre',serif;font-weight:600;}
+    .tg{font-family:'Assistant',sans-serif;font-weight:500;}
+  </style>
+  <g transform="translate(420,18) scale(0.85)">
+    <g fill="#6e1a2d">
+      <path d="M122 30 L182 30 Q173 33 171 44 C166 87 156 125 148 148 Q140 168 114 168 L48 168 L48 159 L108 159 Q116 158 120 146 C126 118 132 82 136 46 Q135 34 122 30 Z"/>
+      <path d="M34 30 L82 30 Q72 32 69 39 L136 116 L127 134 L52 44 Q46 34 34 30 Z"/>
+    </g>
+    <path fill="#a8894f" d="M29 150.5 L42 163.5 L29 176.5 L16 163.5 Z"/>
+  </g>
+  <rect x="404" y="52" width="1.8" height="112" fill="#d9c08f"/>
+  <text class="wm" x="378" y="122" direction="rtl" text-anchor="start" font-size="104" fill="#6e1a2d" letter-spacing="2">עשור</text>
+  <text class="tg" x="378" y="166" direction="rtl" text-anchor="start" font-size="27" fill="#8a6a2f" letter-spacing="5">רואות חשבון</text>
+</svg>

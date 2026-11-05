@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="512" height="512">
+  <title>עשור רואות חשבון — מונוגרמה</title>
+  <g id="monogram" transform="translate(2,-3)">
+    <!-- main stroke flowing into the base ("the ledger line") -->
+    <path fill="#6e1a2d" d="M122 30 L182 30 Q173 33 171 44 C166 87 156 125 148 148 Q140 168 114 168 L48 168 L48 159 L108 159 Q116 158 120 146 C126 118 132 82 136 46 Q135 34 122 30 Z"/>
+    <!-- fine left arm -->
+    <path fill="#6e1a2d" d="M34 30 L82 30 Q72 32 69 39 L136 116 L127 134 L52 44 Q46 34 34 30 Z"/>
+    <!-- the bottom line: gold diamond -->
+    <path fill="#a8894f" d="M29 150.5 L42 163.5 L29 176.5 L16 163.5 Z"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 646 300"><style>@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&amp;family=Assistant:wght@500;600&amp;display=swap');</style>
+<rect width="646" height="300" fill="#3a0f1c"/>
+<g transform="translate(346.64,6.64) scale(0.56)">
+<path d="M360,396 L456,396 L456,352 A200,200 0 0 0 424.29,243.93 L345.53,299.08 A104,104 0 0 1 360,352 Z" fill="#b36672"/>
+<path d="M336.35,285.97 L415.11,230.82 A200,200 0 0 0 331.87,166.95 L298.98,257.3 A104,104 0 0 1 336.35,285.97 Z" fill="#eed7da"/>
+<path d="M213.02,257.3 L180.13,166.95 A200,200 0 0 0 96.89,230.82 L175.65,285.97 A104,104 0 0 1 213.02,257.3 Z" fill="#eed7da"/>
+<path d="M152,396 L152,352 A104,104 0 0 1 166.47,299.08 L87.71,243.93 A200,200 0 0 0 56,352 L56,396 Z" fill="#b36672"/>
+<path d="M178.62,116 L333.38,116 L310.17,136.37 L201.83,136.37 Z" fill="#d9c08f"/>
+<path d="M333.38,116 L283.95,251.83 L275.56,231.45 L310.17,136.37 Z" fill="#8a6a2f"/>
+<path d="M178.62,116 L201.83,136.37 L236.44,231.45 L228.05,251.83 Z" fill="#a8894f"/>
+<path d="M228.05,251.83 L236.44,231.45 L275.56,231.45 L283.95,251.83 A104,104 0 0 0 228.05,251.83 Z" fill="#8a6a2f"/>
+<path d="M201.83,136.37 L310.17,136.37 L275.56,231.45 L236.44,231.45 Z" fill="#a8894f"/>
+</g>
+<text x="344" y="166" text-anchor="end" font-family="'Frank Ruhl Libre', 'Noto Serif Hebrew', serif" font-weight="700" font-size="150" fill="#fbf7f4">עשור</text>
+<text x="344" y="250" text-anchor="end" font-family="'Assistant', 'Heebo', sans-serif" font-weight="600" font-size="45" letter-spacing="6.75" fill="#d9c08f">רואי חשבון</text>
+</svg>
