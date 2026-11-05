@@ -23,8 +23,9 @@ simple = { limit = 5, period = 60 }
 binding = "LEADS_KV"
 id = "e512f25bd3444c3e9feb7e19a5532667"
 
-# Daily report at 18:00 Israel time. Cron runs in UTC, and Israel is UTC+2 in
-# winter / UTC+3 in summer, so fire at both 15:00 and 16:00 UTC; the handler
-# sends only on the run where it is 18:00 in Jerusalem.
+# Daily report at 22:00 Israel time, and on top of it the accumulating
+# spreadsheet once a fortnight. Cron runs in UTC, and Israel is UTC+2 in winter
+# / UTC+3 in summer, so fire at both 19:00 and 20:00 UTC; the handler sends only
+# on the run where it is 22:00 in Jerusalem.
 [triggers]
-crons = ["0 15 * * *", "0 16 * * *"]
+crons = ["0 19 * * *", "0 20 * * *"]

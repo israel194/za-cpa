@@ -10,6 +10,8 @@
 
 import { handleRegister, handleAdminRegistrations } from './registrations.js'
 
+import { buildXlsx, toBase64 } from './xlsx.js'
+
 const RESEND_ENDPOINT = 'https://api.resend.com/emails'
 
 const BRAND = {
@@ -64,6 +66,17 @@ export default {
         await storeLead(env, lead)
       }
       return handleRegister(request, env, url, cors, json, notify)
+    }
+    // Run a report now instead of waiting for the cron (admin only).
+    //   POST /admin/report  { "kind": "daily" | "archive" }
+    if (url.pathname === '/admin/report') {
+      if (!allowed.includes(origin)) return json({ ok: false, error: 'forbidden_origin' }, 403, cors)
+      if (!(await isAdmin(request, env))) return json({ ok: false, error: 'unauthorized' }, 401, cors)
+      const body = await request.json().catch(() => ({}))
+      const result = body.kind === 'archive'
+        ? await runArchiveReport(env, { force: true })
+        : await runDailyReport(env, { force: true })
+      return json({ ok: true, result }, 200, cors)
     }
     if (url.pathname === '/admin/registrations' || url.pathname.startsWith('/admin/registrations/')) {
       if (!allowed.includes(origin)) return json({ ok: false, error: 'forbidden_origin' }, 403, cors)
@@ -123,7 +136,12 @@ export default {
   },
 
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runDailyReport(env))
+    ctx.waitUntil(
+      (async () => {
+        await runDailyReport(env)
+        await runArchiveReport(env)
+      })()
+    )
   },
 }
 
@@ -218,6 +236,18 @@ async function handleContent(request, env, url, cors, originAllowed) {
 
 const LEAD_TTL_SECONDS = 60 * 24 * 60 * 60 // keep 60 days, then auto-delete
 
+// The daily report goes out at this hour, Israel time. wrangler.toml fires the
+// cron at both candidate UTC hours (winter and summer); only the run where it
+// is REPORT_HOUR in Jerusalem actually sends.
+const REPORT_HOUR = 22
+const REPORT_CUTOFF = `${String(REPORT_HOUR).padStart(2, '0')}:00`
+
+// The archive is the permanent copy: one key per lead, no expiry, so the
+// spreadsheet keeps growing and nothing that was once recorded is lost.
+const ARCHIVE_PREFIX = 'arch:'
+const ARCHIVE_EVERY_DAYS = 14
+const ARCHIVE_SENT_KEY = 'archive-sent-at'
+
 function israelParts(date = new Date()) {
   const parts = Object.fromEntries(
     new Intl.DateTimeFormat('en-GB', {
@@ -230,24 +260,33 @@ function israelParts(date = new Date()) {
 async function storeLead(env, lead) {
   if (!env.LEADS_KV) return
   const { day, time } = israelParts()
-  const key = `lead:${day}:${Date.now()}:${crypto.randomUUID().slice(0, 8)}`
-  await env.LEADS_KV.put(key, JSON.stringify({ ...lead, time }), { expirationTtl: LEAD_TTL_SECONDS })
+  const id = `${Date.now()}:${crypto.randomUUID().slice(0, 8)}`
+  const record = { ...lead, day, time }
+  // Working copy for the daily report: expires on its own after 60 days.
+  await env.LEADS_KV.put(`lead:${day}:${id}`, JSON.stringify(record), { expirationTtl: LEAD_TTL_SECONDS })
+  // Permanent copy for the spreadsheet. Written under its own key rather than
+  // appended to one growing value, so two leads in the same second cannot
+  // overwrite each other, and no expirationTtl, so it is never dropped.
+  await env.LEADS_KV.put(`${ARCHIVE_PREFIX}${id}`, JSON.stringify(record))
 }
 
-/** Sends the report for `day` (default: today in Israel). `force` skips the 18:00 and already-sent checks. */
+/** Sends the report for `day` (default: today in Israel). `force` skips the hour and already-sent checks. */
 async function runDailyReport(env, { force = false, day } = {}) {
   const now = israelParts()
-  if (!force && now.hour !== 18) return 'not 18:00 in Israel'
+  if (!force && now.hour !== REPORT_HOUR) return `not ${REPORT_CUTOFF} in Israel`
   const reportDay = day || now.day
   const sentKey = `report-sent:${reportDay}`
   if (!force && (await env.LEADS_KV.get(sentKey))) return 'already sent'
 
-  // Window: 18:00 yesterday → 18:00 today, so leads after 18:00 make the next report.
+  // Window: 22:00 yesterday → 22:00 today, so leads after 22:00 make the next report.
   const prevDay = new Date(Date.parse(`${reportDay}T12:00:00Z`) - 86400000).toISOString().slice(0, 10)
   const leads = [
-    ...(await leadsFor(env, prevDay)).filter((l) => l.time >= '18:00').map((l) => ({ ...l, yesterday: true })),
-    ...(await leadsFor(env, reportDay)).filter((l) => l.time < '18:00'),
+    ...(await leadsFor(env, prevDay)).filter((l) => l.time >= REPORT_CUTOFF).map((l) => ({ ...l, yesterday: true })),
+    ...(await leadsFor(env, reportDay)).filter((l) => l.time < REPORT_CUTOFF),
   ]
+    // The report covers what reached the office inbox. Orit's own pages mail
+    // her directly, so repeating them here would double-report her leads.
+    .filter((l) => l.target !== 'orit')
 
   if (leads.length === 0) return 'no leads'
   leads.sort((a, b) => Number(!a.yesterday) - Number(!b.yesterday) || a.time.localeCompare(b.time))
@@ -303,11 +342,11 @@ ${l.message ? `<div style="font-size:14px;color:${BRAND.text};background:${BRAND
   const html = shell(`דוח פניות יומי · ${dateHe}`, `
 <tr><td style="padding:22px 28px 4px">
 <div style="font-size:28px;font-weight:bold;color:${BRAND.wine}">${count}</div>
-<div style="font-size:14px;color:${BRAND.muted};margin-top:2px">התקבלו מהאתר ומדפי הנחיתה, מ־18:00 אתמול עד 18:00 היום</div>
+<div style="font-size:14px;color:${BRAND.muted};margin-top:2px">פניות שהגיעו ל־office@za-cpa.com מהאתר ומדפי הנחיתה, מ־22:00 אתמול עד 22:00 היום</div>
 <div style="margin-top:10px">${summary}</div>
 </td></tr>
 <tr><td style="padding:6px 28px 8px"><table role="presentation" dir="rtl" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${cards}</table></td></tr>
-<tr><td style="padding:16px 28px 22px;color:${BRAND.muted};font-size:12px">הדוח נשלח אוטומטית בכל יום בשעה 18:00, ורק אם התקבלו פניות.</td></tr>`)
+<tr><td style="padding:16px 28px 22px;color:${BRAND.muted};font-size:12px">הדוח נשלח אוטומטית בכל יום בשעה 22:00, ורק אם התקבלו פניות.</td></tr>`)
 
   const text = [`דוח פניות יומי ${dateHe}: ${count}`, '']
     .concat(leads.map((l, i) => `${i + 1}. ${l.time} | ${l.name} | ${l.phone ? displayPhone(l.phone) : ''} ${l.email || ''} | ${l.source}`))
@@ -321,6 +360,101 @@ ${l.message ? `<div style="font-size:14px;color:${BRAND.text};background:${BRAND
     html,
     text,
   })
+}
+
+// ── Accumulating spreadsheet of every lead (sent fortnightly) ───────────────
+
+const ARCHIVE_COLUMNS = [
+  { header: 'תאריך', width: 12, key: (l) => l.day },
+  { header: 'שעה', width: 8, key: (l) => l.time },
+  { header: 'שם', width: 22, key: (l) => l.name },
+  { header: 'טלפון', width: 16, key: (l) => (l.phone ? displayPhone(l.phone) : l.rawPhone) },
+  { header: 'אימייל', width: 28, key: (l) => l.email },
+  { header: 'העמוד שממנו הושארו הפרטים', width: 32, key: (l) => l.source },
+  { header: 'נשלח אל', width: 20, key: (l) => (l.target === 'orit' ? 'orit@za-cpa.com' : 'office@za-cpa.com') },
+  { header: 'סוג תיק', width: 16, key: (l) => l.entity },
+  { header: 'שירות מבוקש', width: 22, key: (l) => l.service },
+  { header: 'מועד מבוקש', width: 20, key: (l) => l.sessionDate },
+  { header: 'זכאות להנחה', width: 26, key: (l) => (l.discounts || []).join(' · ') },
+  { header: 'הודעה', width: 46, key: (l) => l.message },
+]
+
+/** Every archived lead, oldest first. */
+async function archivedLeads(env) {
+  const out = []
+  let cursor
+  do {
+    const page = await env.LEADS_KV.list({ prefix: ARCHIVE_PREFIX, cursor })
+    for (const k of page.keys) {
+      const v = await env.LEADS_KV.get(k.name, 'json')
+      if (v) out.push(v)
+    }
+    cursor = page.list_complete ? undefined : page.cursor
+  } while (cursor)
+  out.sort((a, b) => `${a.day} ${a.time}`.localeCompare(`${b.day} ${b.time}`))
+  return out
+}
+
+const daysBetween = (fromIso, toIso) => Math.floor((Date.parse(toIso) - Date.parse(fromIso)) / 86400000)
+
+/**
+ * Mails the whole archive as one .xlsx, once every ARCHIVE_EVERY_DAYS days.
+ * The workbook is rebuilt from the archive each time, so it only ever grows:
+ * rows from previous reports stay in it, and nothing is deleted.
+ */
+async function runArchiveReport(env, { force = false } = {}) {
+  if (!env.LEADS_KV) return 'no kv'
+  const now = israelParts()
+  if (!force && now.hour !== REPORT_HOUR) return `not ${REPORT_CUTOFF} in Israel`
+
+  const lastSent = await env.LEADS_KV.get(ARCHIVE_SENT_KEY)
+  if (!force && lastSent && daysBetween(lastSent, now.day) < ARCHIVE_EVERY_DAYS) {
+    return `next in ${ARCHIVE_EVERY_DAYS - daysBetween(lastSent, now.day)} days`
+  }
+
+  const leads = await archivedLeads(env)
+  if (leads.length === 0) return 'archive empty'
+
+  const file = buildXlsx({
+    sheetName: 'מאגר פניות',
+    columns: ARCHIVE_COLUMNS.map(({ header, width }) => ({ header, width })),
+    rows: leads.map((l) => ARCHIVE_COLUMNS.map((c) => c.key(l) || '')),
+  })
+
+  const [y, m, d] = now.day.split('-')
+  const dateHe = `${d}/${m}/${y}`
+  const since = leads[0].day.split('-').reverse().join('/')
+  const newCount = lastSent ? leads.filter((l) => l.day > lastSent).length : leads.length
+  const office = leads.filter((l) => l.target !== 'orit').length
+
+  const html = shell(`מאגר הפניות · ${dateHe}`, `
+<tr><td style="padding:22px 28px 6px">
+<div style="font-size:28px;font-weight:bold;color:${BRAND.wine}">${leads.length} רשומות</div>
+<div style="font-size:14px;color:${BRAND.muted};margin-top:4px">כל מי שהשאיר פרטים באתר מאז ${ltr(esc(since))}, בקובץ אקסל אחד.</div>
+</td></tr>
+<tr><td style="padding:4px 28px 10px"><table role="presentation" dir="rtl" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
+${row('נוספו מאז הדוח הקודם', String(newCount))}
+${row('פניות למשרד', String(office))}
+${row('פניות לאורית', String(leads.length - office))}
+${row('הקובץ המצורף', 'za-cpa-leads.xlsx')}
+</table></td></tr>
+<tr><td style="padding:6px 28px 22px;color:${BRAND.muted};font-size:12.5px;line-height:1.7">
+הקובץ מצטבר: בכל דוח הוא נבנה מחדש מכל הרשומות שנשמרו אי פעם, כולל אלה שכבר הופיעו בדוחות קודמים, ושום שורה אינה נמחקת.
+בכל שורה: התאריך והשעה, הפרטים שהושארו, העמוד שממנו הגיעה הפנייה, ותיבת הדואר שאליה נשלחה.
+הדוח נשלח אחת לשבועיים בשעה ${REPORT_CUTOFF}.
+</td></tr>`)
+
+  await resend(env, {
+    from: env.EMAIL_FROM,
+    to: [env.REPORT_EMAIL],
+    subject: `מאגר הפניות המצטבר · ${dateHe} · ${leads.length} רשומות`,
+    html,
+    text: `‏מאגר הפניות המצטבר, ${dateHe}: ${leads.length} רשומות (${newCount} חדשות). מצורף קובץ אקסל.`,
+    attachments: [{ filename: `za-cpa-leads-${now.day}.xlsx`, content: toBase64(file) }],
+  })
+
+  await env.LEADS_KV.put(ARCHIVE_SENT_KEY, now.day)
+  return `sent ${leads.length}`
 }
 
 function json(body, status, headers) {
