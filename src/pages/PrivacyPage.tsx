@@ -23,8 +23,10 @@ import {
 } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import { openConsentSettings } from '../components/CookieConsent'
+import { useSeo } from '../lib/seo'
 
 export default function PrivacyPage() {
+  useSeo('privacy')
   const { t } = useTranslation()
   const collectItems = t('privacy.collectItems', {
     returnObjects: true,

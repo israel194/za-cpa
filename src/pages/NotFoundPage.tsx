@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { useSeo } from '../lib/seo'
 
 export default function NotFoundPage() {
+  useSeo('notFound', { noIndex: true })
   const { t, i18n } = useTranslation()
   const isRtl = i18n.dir() === 'rtl'
   const Arrow = isRtl ? ArrowLeft : ArrowRight

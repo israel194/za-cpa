@@ -5,6 +5,7 @@ import { X } from 'lucide-react'
 import { FullStamp } from '../components/ui/RetreatClosed'
 import { sendLead } from '../lib/notify'
 import PrivacyNotice from '../components/ui/PrivacyNotice'
+import { useSeo } from '../lib/seo'
 
 /**
  * המחזור של 2026 מלא. החותמת האלכסונית יושבת רק על בלוק ההצטרפות, לא על כל העמוד,
@@ -83,9 +84,7 @@ const details = [
 export default function OritGroupPage() {
   const [lead, setLead] = useState<string | null>(null)
 
-  useEffect(() => {
-    document.title = 'לחזור לעצמך · מלא עד סוף 2026 | אורית עשור'
-  }, [])
+  useSeo('oritGroup', { title: 'לחזור לעצמך · מלא עד סוף 2026' })
 
   return (
     <div dir="rtl" lang="he">
@@ -97,7 +96,7 @@ export default function OritGroupPage() {
 
         <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
           <div className="mx-auto mb-7 h-36 w-36 overflow-hidden rounded-full border-4 border-white shadow-[0_20px_50px_-15px_rgba(189,95,124,0.45)] md:h-40 md:w-40">
-            <img src="/orit/orit.jpeg" alt="אורית עשור — מנחת קבוצות העצמה לנשים" className="h-full w-full object-cover" />
+            <img src="/orit/orit.jpeg" alt="אורית עשור — מנחת קבוצות העצמה לנשים" width="160" height="160" className="h-full w-full object-cover" />
           </div>
 
           <span className="inline-flex items-center gap-2 rounded-full bg-blush-100 px-4 py-1.5 text-xs font-semibold text-primary">
@@ -199,7 +198,7 @@ export default function OritGroupPage() {
         <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
           <h2 className="font-display text-3xl font-extrabold text-ink-900 md:text-4xl">מי אני?</h2>
           <div className="mx-auto mt-8 h-44 w-44 overflow-hidden rounded-full border-4 border-blush-100 shadow-[0_20px_50px_-15px_rgba(189,95,124,0.4)]">
-            <img src="/orit/orit.jpeg" alt="אורית עשור" className="h-full w-full object-cover" />
+            <img src="/orit/orit.jpeg" alt="אורית עשור" width="176" height="176" loading="lazy" className="h-full w-full object-cover" />
           </div>
           <div className="mt-8 space-y-5 text-lg leading-loose text-ink-700">
             <p>אורית עשור, אמא ל-9 קטנטנים, בעלת משרד רואי חשבון. את הדרך שאני מלמדת — אני גם חיה.</p>

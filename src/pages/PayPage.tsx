@@ -9,6 +9,7 @@ import RetreatClosed from '../components/ui/RetreatClosed'
 import { OUTCOME_TEXT, submitSignup, type SignupOutcome } from '../lib/signup'
 import { nextMondays } from '../lib/dates'
 import type { ProductId } from '../lib/register'
+import { useSeo } from '../lib/seo'
 
 type Offer = {
   product: ProductId
@@ -103,9 +104,7 @@ export default function PayPage() {
 
   const offer = product === 'frequency-course' ? courseOffer(course) : product === 'retreat' ? RETREAT : null
 
-  useEffect(() => {
-    if (offer) document.title = `הרשמה ותשלום · ${offer.title} | אורית עשור`
-  }, [offer])
+  useSeo('oritGroup', { title: offer ? `הרשמה ותשלום · ${offer.title}` : 'הרשמה ותשלום', noIndex: true })
 
   if (!offer) return <Navigate to="/orit-group" replace />
 
@@ -159,11 +158,13 @@ export default function PayPage() {
                   <div className="flex items-baseline justify-between gap-3">
                     <span className="text-sm font-semibold text-ink-800">סה״כ לתשלום</span>
                     <span className="text-end">
-                      {offer.regular && <s className="me-2 text-sm text-ink-700/60">{offer.regular}</s>}
+                      {/* 60% שקיפות הורידה את הניגודיות ל-3.67; צבע מלא נותן 5.43 */}
+                      {offer.regular && <s className="me-2 text-sm text-[#6b5f63]">{offer.regular}</s>}
                       <strong className="font-display text-3xl text-burgundy-700">{offer.price}</strong>
                     </span>
                   </div>
-                  {offer.priceNote && <div className="mt-1 text-end text-xs font-bold text-[#b84a6c]">{offer.priceNote}</div>}
+                  {/* a83f5f ולא b84a6c, מאותה סיבה: ניגודיות AA על רקע ורוד בהיר */}
+                  {offer.priceNote && <div className="mt-1 text-end text-xs font-bold text-[#a83f5f]">{offer.priceNote}</div>}
                   <div className="mt-1 text-end text-xs text-ink-700">המחיר כולל מע״מ</div>
                 </div>
               </div>

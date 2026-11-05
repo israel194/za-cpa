@@ -4,6 +4,7 @@ import { ShieldCheck, Eye, Award, ArrowLeft, ArrowRight } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import WhyUs from '../components/WhyUs'
 import CallToAction from '../components/CallToAction'
+import { useSeo } from '../lib/seo'
 
 const valueIcons = {
   reliability: ShieldCheck,
@@ -12,6 +13,7 @@ const valueIcons = {
 }
 
 export default function AboutPage() {
+  useSeo('about')
   const { t, i18n } = useTranslation()
   const isRtl = i18n.dir() === 'rtl'
   const Arrow = isRtl ? ArrowLeft : ArrowRight

@@ -2,8 +2,10 @@ import { useTranslation } from 'react-i18next'
 import PageHero from '../components/PageHero'
 import Sectors from '../components/Sectors'
 import CallToAction from '../components/CallToAction'
+import { useSeo } from '../lib/seo'
 
 export default function SectorsPage() {
+  useSeo('sectors')
   const { t } = useTranslation()
   return (
     <>

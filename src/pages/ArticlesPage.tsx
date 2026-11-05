@@ -3,8 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { BookOpen } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import CallToAction from '../components/CallToAction'
+import { useSeo } from '../lib/seo'
 
 export default function ArticlesPage() {
+  useSeo('articles')
   const { t } = useTranslation()
   return (
     <>

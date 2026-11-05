@@ -24,7 +24,8 @@
     "send": "Send message",
     "sent": "Message sent",
     "loading": "Loading...",
-    "language": "Language"
+    "language": "Language",
+    "sending": "Sending…"
   },
   "lang": {
     "he": "עברית",
@@ -306,7 +307,10 @@
       "email": "Email",
       "phone": "Phone",
       "message": "Message",
-      "messagePlaceholder": "Tell us how we can help..."
+      "messagePlaceholder": "Tell us how we can help...",
+      "successNote": "Your message was received. We will get back to you shortly.",
+      "errorTitle": "Sending failed",
+      "errorBody": "Your details are still in the form. You can try again, or reach us directly:"
     },
     "details": {
       "address": "Address",
@@ -514,7 +518,7 @@
       "standardTitle": "Standard and conformance level",
       "standardText": "The site and its landing pages are made accessible in accordance with Israeli Standard 5568, based on WCAG 2.0, at level AA, as required by regulation 35A of the Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 5773-2013.",
       "methodologyTitle": "How the site was made accessible",
-      "methodologyText": "Accessibility was implemented through code and design adjustments (heading structure, form field labels, colour contrast, alternative text and keyboard support) and checked with an automated testing tool (axe) against WCAG level AA on every page of the site and its landing pages. The latest check was carried out on 1 November 2026, and the issues it found were fixed.",
+      "methodologyText": "Accessibility was implemented through code and design adjustments (heading structure, form field labels, colour contrast, alternative text and keyboard support) and checked with an automated testing tool (axe) against WCAG level AA on every page of the site and its landing pages. The latest check was carried out on 5 November 2026, and the issues it found were fixed.",
       "screenReadersTitle": "Screen reader compatibility",
       "screenReadersText": "The site was designed to support assistive technologies and common screen readers. For the best browsing experience, we recommend using an up-to-date version of your screen reader and browser.",
       "keyboardTitle": "Keyboard navigation",
@@ -632,5 +636,56 @@
     "office": "Providing your details is not required by law, but without them we cannot get back to you. They will be used to respond to your enquiry and arrange the service. Controller: Asor CPA, office@za-cpa.com, 02-5000275. Your details are passed through technology service providers (such as Cloudflare and Resend) to deliver the enquiry, and may be processed outside Israel. You have the right to review the information and to request its correction or deletion.",
     "orit": "Providing your details is not required by law, but without them we cannot get back to you. They will be used to respond and arrange your registration. Controller: Orit Asor, orit@za-cpa.com, 052-3975659. Your details are passed through technology service providers (such as Cloudflare and Resend) to deliver the enquiry, and may be processed outside Israel. You have the right to review the information and to request its correction or deletion.",
     "policy": "Privacy Policy"
+  },
+  "seo": {
+    "brand": "Asor CPA",
+    "home": {
+      "title": "Asor CPA | Certified Public Accountants in Jerusalem",
+      "description": "A boutique accounting firm in Jerusalem: audit of financial statements, bookkeeping and payroll, taxation and refunds, business consulting and real estate."
+    },
+    "about": {
+      "title": "About the firm",
+      "description": "Who we are, how we work and what guides us: reliability, transparency and professional excellence in accounting and tax in Jerusalem."
+    },
+    "team": {
+      "title": "Our team",
+      "description": "The accountants and professionals of Asor CPA, the experience they bring and the areas each of them supports clients in."
+    },
+    "services": {
+      "title": "Our services",
+      "description": "Audit of financial statements, bookkeeping and payroll, taxation and tax refunds, business consulting and real estate transactions."
+    },
+    "sectors": {
+      "title": "Sectors we serve",
+      "description": "Companies, nonprofits, the self-employed and salaried employees. Each has its own regulation, filings and needs, and we know them closely."
+    },
+    "articles": {
+      "title": "Articles and guides",
+      "description": "Short guides on taxation, reporting, bookkeeping and financial management, in plain language and without unnecessary jargon."
+    },
+    "contact": {
+      "title": "Contact us",
+      "description": "17 Nahum Heftsadi St., Jerusalem (Ram Tower, floor 11). Phone 02-5000275, office@za-cpa.com. We would love to hear from you."
+    },
+    "accessibility": {
+      "title": "Accessibility statement",
+      "description": "The accessibility statement for the Asor CPA website: conformance level, the accessibility features, known limitations and how to reach our coordinator."
+    },
+    "privacy": {
+      "title": "Privacy and cookie policy",
+      "description": "What information the site collects, what it is used for, who it is shared with, how long it is kept and your rights under Israeli privacy law."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you were looking for could not be found. You can return to the home page or contact us directly."
+    },
+    "oritGroup": {
+      "title": "Returning to yourself · a retreat for women",
+      "description": "A retreat for women led by Orit Asor in Jerusalem: a quiet evening, a small group and practical tools. The 2026 cycle is full."
+    },
+    "frequencyCourse": {
+      "title": "Raising your frequency course",
+      "description": "Nine sessions for women led by Orit Asor: from survival mode and pressure to a life of choice, inner quiet and connection."
+    }
   }
 }

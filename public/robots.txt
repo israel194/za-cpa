@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Transactional and admin pages carry no public content.
+Disallow: /pay/
+Disallow: /payment/
+Disallow: /admin
+
+Sitemap: https://za-cpa.com/sitemap.xml

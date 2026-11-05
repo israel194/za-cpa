@@ -7,8 +7,10 @@ import Sectors from '../components/Sectors'
 import Testimonials from '../components/Testimonials'
 import CallToAction from '../components/CallToAction'
 import TrustBadgeRow from '../components/ui/TrustBadgeRow'
+import { useSeo } from '../lib/seo'
 
 export default function Home() {
+  useSeo('home')
   return (
     <>
       <HeroCinematic />

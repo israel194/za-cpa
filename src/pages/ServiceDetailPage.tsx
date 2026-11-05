@@ -14,6 +14,7 @@ import {
 import PageHero from '../components/PageHero'
 import CallToAction from '../components/CallToAction'
 import { useServices, type ServiceIcon } from '../data/content'
+import { useSeo } from '../lib/seo'
 
 const iconMap: Record<ServiceIcon, React.ElementType> = {
   audit: FileSearch,
@@ -31,6 +32,8 @@ export default function ServiceDetailPage() {
   const Arrow = isRtl ? ArrowLeft : ArrowRight
 
   const service = services.find((s) => s.slug === slug)
+  // לפני ההחזרה המוקדמת, כדי שההוק ירוץ בכל רינדור
+  useSeo('services', service ? { title: service.title, description: service.summary } : undefined)
   if (!service) return <Navigate to="/services" replace />
 
   const Icon = iconMap[service.iconName]

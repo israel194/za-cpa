@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react'
 import { confirmPayment } from '../lib/register'
+import { useSeo } from '../lib/seo'
 
 type View = 'checking' | 'paid' | 'unverified' | 'cancelled'
 
@@ -11,8 +12,9 @@ export default function PaymentResultPage({ cancelled = false }: { cancelled?: b
   const [view, setView] = useState<View>(cancelled ? 'cancelled' : 'checking')
   const [product, setProduct] = useState('')
 
+  useSeo('oritGroup', { title: 'תשלום', noIndex: true })
+
   useEffect(() => {
-    document.title = 'תשלום | אורית עשור'
     if (cancelled) return
     const q = new URLSearchParams(search)
     const id = q.get('OG-ExternalIdentifier') ?? ''

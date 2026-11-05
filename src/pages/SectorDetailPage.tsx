@@ -12,6 +12,7 @@ import {
 import PageHero from '../components/PageHero'
 import CallToAction from '../components/CallToAction'
 import { useSectors, type SectorIcon } from '../data/content'
+import { useSeo } from '../lib/seo'
 
 const iconMap: Record<SectorIcon, React.ElementType> = {
   companies: Building2,
@@ -28,6 +29,8 @@ export default function SectorDetailPage() {
   const Arrow = isRtl ? ArrowLeft : ArrowRight
 
   const sector = sectors.find((s) => s.slug === slug)
+  // לפני ההחזרה המוקדמת, כדי שההוק ירוץ בכל רינדור
+  useSeo('sectors', sector ? { title: sector.title, description: sector.summary } : undefined)
   if (!sector) return <Navigate to="/sectors" replace />
 
   const Icon = iconMap[sector.iconName]
