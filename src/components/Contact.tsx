@@ -8,6 +8,7 @@ import {
   useId,
 } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 import PrivacyNotice from './ui/PrivacyNotice'
 import { MapPin, Globe, Send, CheckCircle2, Phone } from 'lucide-react'
 import { sendLead } from '../lib/notify'
@@ -23,6 +24,7 @@ const initial: FormState = { name: '', email: '', phone: '', message: '' }
 
 export default function Contact() {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
   const [form, setForm] = useState<FormState>(initial)
   const [sent, setSent] = useState(false)
 
@@ -36,7 +38,8 @@ export default function Contact() {
     e.preventDefault()
     void sendLead({
       target: 'office',
-      source: 'האתר הראשי',
+      // נרשם בדוח ובקובץ האקסל, כדי שיהיה ברור מאיזה עמוד הגיעה הפנייה
+      source: pathname === '/contact' ? 'האתר הראשי · עמוד יצירת קשר' : 'האתר הראשי · עמוד הבית',
       name: form.name,
       email: form.email,
       phone: form.phone,

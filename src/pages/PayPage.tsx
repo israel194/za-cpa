@@ -5,6 +5,7 @@ import { freshContent, loadContent } from '../lib/cms'
 import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
 import { Honeypot } from '../components/ui/PayChoice'
 import PrivacyNotice from '../components/ui/PrivacyNotice'
+import RetreatClosed from '../components/ui/RetreatClosed'
 import { OUTCOME_TEXT, submitSignup, type SignupOutcome } from '../lib/signup'
 import { nextMondays } from '../lib/dates'
 import type { ProductId } from '../lib/register'
@@ -23,6 +24,8 @@ type Offer = {
   backLabel: string
   fallbackPayUrl: string
   pickDate: boolean
+  /** מחזור מלא: במקום טופס הרשמה ותשלום מוצגת חותמת ושמירת מקום למחזור הבא */
+  closed?: boolean
 }
 
 const PLACE = "רח' נחום חפצדי 17, ירושלים (מגדל רם, קומה 11), וגם בגוגל מיט"
@@ -55,6 +58,30 @@ function courseOffer(c: FrequencyContent): Offer {
 }
 
 
+/**
+ * הריטריט "לחזור לעצמך". המחזור של 2026 מלא, ולכן `closed: true`: העמוד מציג
+ * חותמת אלכסונית במקום טופס ההרשמה והתשלום, ומציע שמירת מקום ל-2027.
+ * לפתיחת המכירה מחדש: למחוק את closed ולעדכן את המחיר והמועדים.
+ */
+const RETREAT: Offer = {
+  product: 'retreat',
+  kicker: 'ריטריט לנשים',
+  title: 'לחזור לעצמך',
+  subtitle: 'ערב שכולו שלך: מרחב שקט, קבוצה קטנה ותומכת, וכלים לחזור לעצמך.',
+  price: 'מלא',
+  priceNote: 'עד סוף 2026',
+  facts: [
+    { icon: Clock, text: 'יום שני, 20:30' },
+    { icon: MapPin, text: PLACE },
+  ],
+  includes: ['ערב בקבוצה קטנה ואינטימית', 'כלים מעשיים לאיזון, רוגע ובחירה', 'מרחב שקט שכולו בשבילך'],
+  backTo: '/orit-group',
+  backLabel: 'חזרה לדף הריטריט',
+  fallbackPayUrl: '',
+  pickDate: true,
+  closed: true,
+}
+
 export default function PayPage() {
   const { product } = useParams()
   const [course, setCourse] = useState<FrequencyContent>(DEFAULT_FREQUENCY)
@@ -74,10 +101,7 @@ export default function PayPage() {
     }
   }, [product])
 
-  // הריטריט מלא עד סוף 2026: אין הרשמה ואין תשלום, גם לא דרך קישור ישיר ל-/pay/retreat.
-  // המבקר מוחזר לדף הריטריט, שבו כתוב שהוא מלא. להחזרת המכירה: להחזיר את ההצעה RETREAT
-  // (הנוסח המלא שמור בהיסטוריה, בקומיט שסגר את ההרשמה) ולהוסיף כאן את הענף שלה.
-  const offer = product === 'frequency-course' ? courseOffer(course) : null
+  const offer = product === 'frequency-course' ? courseOffer(course) : product === 'retreat' ? RETREAT : null
 
   useEffect(() => {
     if (offer) document.title = `הרשמה ותשלום · ${offer.title} | אורית עשור`
@@ -149,7 +173,9 @@ export default function PayPage() {
           {/* FORM */}
           <section className="md:col-span-3">
             <div className="rounded-3xl bg-white p-6 shadow-[0_24px_60px_-34px_rgba(110,26,45,0.55)] md:p-8">
-              {outcome ? (
+              {offer.closed ? (
+                <RetreatClosed />
+              ) : outcome ? (
                 <div className="py-10 text-center" role="status">
                   <CheckCircle2 size={52} className="mx-auto text-[#1f8f4e]" />
                   <h2 className="mt-4 font-display text-2xl font-extrabold text-burgundy-700">
