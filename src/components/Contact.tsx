@@ -26,7 +26,8 @@ export default function Contact() {
   const { t } = useTranslation()
   const { pathname } = useLocation()
   const [form, setForm] = useState<FormState>(initial)
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle')
+  const sent = status === 'sent'
 
   const handleChange =
     (key: keyof FormState) =>
@@ -36,7 +37,11 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    void sendLead({
+    if (status === 'sending') return
+    setStatus('sending')
+    // ממתינים לתשובה: קודם הוצגה הודעת תודה גם כששליחה נכשלה, והפנייה אבדה
+    // בלי שאיש ידע. בכישלון הפרטים נשארים בטופס ומוצעות דרכי פנייה חלופיות.
+    const ok = await sendLead({
       target: 'office',
       // נרשם בדוח ובקובץ האקסל, כדי שיהיה ברור מאיזה עמוד הגיעה הפנייה
       source: pathname === '/contact' ? 'האתר הראשי · עמוד יצירת קשר' : 'האתר הראשי · עמוד הבית',
@@ -45,9 +50,13 @@ export default function Contact() {
       phone: form.phone,
       message: form.message,
     })
-    setSent(true)
+    if (!ok) {
+      setStatus('failed')
+      return
+    }
+    setStatus('sent')
     setForm(initial)
-    setTimeout(() => setSent(false), 4000)
+    setTimeout(() => setStatus('idle'), 6000)
   }
 
   return (
@@ -108,7 +117,8 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(189,95,124,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_22px_48px_-12px_rgba(189,95,124,0.7)] sm:w-auto"
+              disabled={status === 'sending'}
+              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(189,95,124,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_22px_48px_-12px_rgba(189,95,124,0.7)] disabled:opacity-60 sm:w-auto"
             >
               {sent ? (
                 <>
@@ -118,10 +128,32 @@ export default function Contact() {
               ) : (
                 <>
                   <Send size={18} />
-                  {t('common.send')}
+                  {status === 'sending' ? t('common.sending') : t('common.send')}
                 </>
               )}
             </button>
+
+            <p aria-live="polite" className="sr-only">
+              {sent ? t('contact.form.successNote') : status === 'failed' ? t('contact.form.errorTitle') : ''}
+            </p>
+
+            {status === 'sent' && (
+              <p className="mt-4 rounded-2xl bg-white/80 px-4 py-3 text-sm font-semibold text-ink-800">
+                {t('contact.form.successNote')}
+              </p>
+            )}
+
+            {status === 'failed' && (
+              <div role="alert" className="mt-4 rounded-2xl border border-primary/30 bg-white px-4 py-4 text-sm leading-relaxed text-ink-800">
+                <p className="font-bold text-primary">{t('contact.form.errorTitle')}</p>
+                <p className="mt-1">{t('contact.form.errorBody')}</p>
+                <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-semibold">
+                  <a href="tel:+97225000275" dir="ltr" className="underline underline-offset-2">02-5000275</a>
+                  <a href="https://wa.me/972523975659" target="_blank" rel="noreferrer" className="underline underline-offset-2">WhatsApp</a>
+                  <a href="mailto:office@za-cpa.com" dir="ltr" className="underline underline-offset-2">office@za-cpa.com</a>
+                </p>
+              </div>
+            )}
             <PrivacyNotice className="mt-5" />
           </form>
 

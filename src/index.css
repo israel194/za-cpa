@@ -411,11 +411,13 @@ html.a11y-reading-guide::after {
   z-index: 100;
   padding: 0.75rem 1.25rem;
   border-radius: 9999px;
-  background: var(--color-rose-gold-500);
+  /* burgundy ולא rose-gold: לבן על rose-gold נותן יחס ניגודיות 4.15,
+     מתחת ל-4.5 הנדרש ברמה AA. לבן על burgundy-600 נותן 8.47. */
+  background: var(--color-burgundy-600);
   color: #fff;
   font-weight: 700;
   font-size: 0.875rem;
-  box-shadow: 0 12px 28px -10px rgba(183, 110, 121, 0.6);
+  box-shadow: 0 12px 28px -10px rgba(110, 26, 45, 0.6);
   transition: top 200ms ease;
 }
 .skip-link:focus {

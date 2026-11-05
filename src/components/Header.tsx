@@ -147,7 +147,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="rounded-full p-2 text-ink-800 hover:bg-blush-100 lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-ink-800 hover:bg-blush-100 lg:hidden"
             aria-label={t('nav.openMenu')}
           >
             {open ? <X size={22} /> : <Menu size={22} />}

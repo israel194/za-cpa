@@ -28,6 +28,8 @@ export default function WhyUs() {
                 src="/orit/orit.jpeg"
                 alt=""
                 loading="lazy"
+                width="64"
+                height="64"
                 className="h-16 w-16 shrink-0 rounded-full border-2 border-gold-300 object-cover object-[center_18%]"
               />
               <div>

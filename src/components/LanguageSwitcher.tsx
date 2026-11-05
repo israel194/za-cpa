@@ -141,7 +141,7 @@ export default function LanguageSwitcher({ variant = 'header' }: Props) {
             aria-current={active ? 'true' : undefined}
             aria-label={labels[lang].native}
             title={labels[lang].native}
-            className={`group flex flex-col items-center gap-1 rounded-lg px-1.5 py-1 transition-all duration-200 ${
+            className={`group flex min-h-11 min-w-11 flex-col items-center justify-center gap-1 rounded-lg px-1.5 py-1 transition-all duration-200 ${
               active
                 ? 'bg-white shadow-[0_4px_14px_-4px_rgba(189,95,124,0.45)]'
                 : 'opacity-70 hover:opacity-100 hover:bg-white/60'

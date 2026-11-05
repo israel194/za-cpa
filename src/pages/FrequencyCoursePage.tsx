@@ -4,6 +4,7 @@ import { Waves, Sparkles, Heart, Check, MapPin, Calendar, Clock, Coins, Info, Ch
 import { freshContent, loadContent } from '../lib/cms'
 import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
 import Reveal from '../components/ui/Reveal'
+import { useSeo } from '../lib/seo'
 
 const BENEFIT_ICONS = [Waves, Sparkles, Heart]
 const DETAIL_ICONS = [MapPin, Calendar, Clock, Coins, Info]
@@ -29,9 +30,7 @@ export default function FrequencyCoursePage() {
     }
   }, [])
 
-  useEffect(() => {
-    document.title = c.seoTitle
-  }, [c.seoTitle])
+  useSeo('frequencyCourse', { title: c.seoTitle.replace(/\s*\|.*$/, '') })
 
   const r = c.registration
   const waHref = `https://wa.me/${r.whatsappNumber}?text=${encodeURIComponent(r.whatsappMessage)}`
@@ -53,6 +52,8 @@ export default function FrequencyCoursePage() {
             <img
               src={c.hero.image}
               alt="אורית עשור"
+              width="288"
+              height="288"
               className="relative h-full w-full rounded-full border-4 border-white object-cover object-[center_18%] shadow-[0_24px_60px_-18px_rgba(110,26,45,0.55)]"
             />
           </div>
@@ -225,7 +226,7 @@ export default function FrequencyCoursePage() {
         <Reveal className="mx-auto max-w-3xl px-6 text-center md:px-10">
           <h2 className="font-display text-3xl font-extrabold text-burgundy-700 md:text-4xl">{c.oritTitle}</h2>
           <div className="mx-auto mt-8 h-40 w-40 overflow-hidden rounded-full border-4 border-[#fbeff0] shadow-[0_20px_50px_-15px_rgba(184,74,108,0.45)]">
-            <img src={c.hero.image} alt="אורית עשור" loading="lazy" className="h-full w-full object-cover object-[center_18%]" />
+            <img src={c.hero.image} alt="אורית עשור" loading="lazy" width="320" height="320" className="h-full w-full object-cover object-[center_18%]" />
           </div>
           <div className="mt-5 space-y-3 text-lg leading-relaxed text-ink-700">
             {c.orit.map((p, i) => (
@@ -304,8 +305,9 @@ export default function FrequencyCoursePage() {
 function Price({ r }: { r: FrequencyContent['registration'] }) {
   return (
     <span className="inline-flex flex-wrap items-baseline justify-center gap-x-2">
+      {/* a83f5f ולא b84a6c: על רקע fbeff0 הניגודיות הייתה 4.41, מתחת ל-4.5 ברמה AA */}
       {r.priceNote && (
-        <span className="rounded-full bg-[#fbeff0] px-2.5 py-0.5 text-sm font-bold text-[#b84a6c]">{r.priceNote}</span>
+        <span className="rounded-full bg-[#fbeff0] px-2.5 py-0.5 text-sm font-bold text-[#a83f5f]">{r.priceNote}</span>
       )}
       <strong className="text-xl text-burgundy-700">{r.priceLabel}</strong>
       {r.priceRegular && (

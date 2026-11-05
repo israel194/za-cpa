@@ -21,8 +21,10 @@ import {
   HandHeart,
 } from 'lucide-react'
 import PageHero from '../components/PageHero'
+import { useSeo } from '../lib/seo'
 
 export default function AccessibilityPage() {
+  useSeo('accessibility')
   const { t } = useTranslation()
   const features = t('a11y.statement.features', {
     returnObjects: true,
@@ -31,7 +33,7 @@ export default function AccessibilityPage() {
     returnObjects: true,
   }) as string[]
 
-  const updatedAt = new Date('2026-11-01').toLocaleDateString(undefined, {
+  const updatedAt = new Date('2026-11-05').toLocaleDateString(undefined, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

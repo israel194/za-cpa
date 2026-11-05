@@ -23,9 +23,15 @@ i18n
     supportedLngs: supportedLanguages,
     interpolation: { escapeValue: false },
     detection: {
+      // קודם בחירה שנשמרה, ואחריה שפת הדפדפן. הגלאי מצמצם en-GB ל-en וכן הלאה,
+      // וכל שפה אחרת נופלת ל-fallbackLng שהוא עברית, כי זו שפת רוב הלקוחות.
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
       lookupLocalStorage: 'za-cpa-lang',
+      convertDetectedLanguage: (lng: string) => {
+        const base = lng.split('-')[0]
+        return base === 'en' || base === 'ar' || base === 'he' ? base : 'he'
+      },
     },
   })
 
