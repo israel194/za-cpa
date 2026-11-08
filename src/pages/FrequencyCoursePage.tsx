@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Waves, Sparkles, Heart, Check, MapPin, Calendar, Clock, Coins, Info, ChevronDown, MessageCircle } from 'lucide-react'
 import { freshContent, loadContent } from '../lib/cms'
 import { DEFAULT_FREQUENCY, FREQUENCY_CONTENT_SINCE, withDefaults, type FrequencyContent } from '../content/frequencyCourse'
@@ -7,17 +7,30 @@ import Reveal from '../components/ui/Reveal'
 import { useSeo } from '../lib/seo'
 
 const BENEFIT_ICONS = [Waves, Sparkles, Heart]
-const DETAIL_ICONS = [MapPin, Calendar, Clock, Coins, Info]
+
+// לפי שם הפרט ולא לפי מקומו ברשימה: במערכת הניהול אפשר להוסיף, למחוק ולשנות
+// סדר של פרטים, וקודם לכן כל שינוי כזה הזיז את כל הסמלים שורה אחת.
+function detailIcon(title: string) {
+  if (title.includes('מקום') || title.includes('כתובת')) return MapPin
+  if (title.includes('מועד') || title.includes('תאריך')) return Calendar
+  if (title.includes('מבנה') || title.includes('שעה') || title.includes('מפגשים')) return Clock
+  if (title.includes('עלות') || title.includes('מחיר')) return Coins
+  return Info
+}
+
+/** הפרט שבו מוצג המחיר. המחיר מופיע פעם אחת בעמוד, כאן בלבד. */
+function isPriceDetail(title: string) {
+  return title.includes('עלות') || title.includes('מחיר')
+}
 
 // Session numbers climb from peach to wine: the "frequency ladder".
 const LADDER = ['#f4b49a', '#ec9f98', '#e08a95', '#d17590', '#bd5f83', '#a44a70', '#8a345a', '#7a2442', '#6e1a2d']
 
 const CTA_CLASS =
-  'sheen inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-[#d16d8a] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all duration-300 hover:-translate-y-0.5'
+  'sheen inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-l from-[#d16d8a] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all duration-300 hover:-translate-y-0.5'
 
 export default function FrequencyCoursePage() {
   const [c, setC] = useState<FrequencyContent>(DEFAULT_FREQUENCY)
-  const navigate = useNavigate()
 
   useEffect(() => {
     let alive = true
@@ -32,9 +45,27 @@ export default function FrequencyCoursePage() {
 
   useSeo('frequencyCourse', { title: c.seoTitle.replace(/\s*\|.*$/, '') })
 
+  // סימון השאלות הנפוצות עבור מנועי החיפוש, מתוך תוכן העמוד עצמו
+  useEffect(() => {
+    const answered = c.faq.filter((q) => q.title.trim() && q.body.trim())
+    if (!answered.length) return
+    const el = document.createElement('script')
+    el.type = 'application/ld+json'
+    el.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: answered.map((q) => ({
+        '@type': 'Question',
+        name: q.title,
+        acceptedAnswer: { '@type': 'Answer', text: q.body },
+      })),
+    })
+    document.head.appendChild(el)
+    return () => el.remove()
+  }, [c.faq])
+
   const r = c.registration
   const waHref = `https://wa.me/${r.whatsappNumber}?text=${encodeURIComponent(r.whatsappMessage)}`
-  const open = () => navigate('/pay/frequency-course')
 
   return (
     <div dir="rtl" lang="he">
@@ -67,14 +98,19 @@ export default function FrequencyCoursePage() {
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-700 md:text-xl">{c.hero.subtitle}</p>
 
-          <button type="button" onClick={open} className={`mt-9 ${CTA_CLASS}`}>
-            {c.hero.cta}
-          </button>
-          {r.priceLabel && (
-            <p className="mt-4 text-lg text-ink-700">
-              <Price r={r} />
-            </p>
-          )}
+          {/* המחיר אינו מופיע כאן אלא רק בפרטי הקורס, בתחתית העמוד.
+              במקומו קישור לאותו אזור, כדי שמי שמחפשת את העלות תגיע אליה בלחיצה. */}
+          <div className="mt-9 flex flex-col items-center gap-4">
+            <Link to="/pay/frequency-course" className={CTA_CLASS}>
+              {c.hero.cta}
+            </Link>
+            <a
+              href="#details"
+              className="rounded-full px-3 py-1 text-sm font-bold text-[#a83f5f] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#d16d8a]/60"
+            >
+              פרטים, מועדים ועלות ←
+            </a>
+          </div>
         </div>
       </section>
 
@@ -165,6 +201,27 @@ export default function FrequencyCoursePage() {
         </div>
       </section>
 
+      {/* MID PAGE CTA: העמוד ארוך, וללא זה יש חמישה מסכים בלי שום פעולה */}
+      <section className="bg-white pt-10 pb-2 md:pt-14">
+        <Reveal className="mx-auto max-w-3xl px-6 md:px-10">
+          <div className="rounded-3xl border border-[#f3c9d3] bg-[#fffafa] px-6 py-8 text-center">
+            <p className="font-display text-xl font-bold leading-snug text-burgundy-700 md:text-2xl">
+              זה נשמע לך מדויק?
+            </p>
+            <p className="mx-auto mt-2 max-w-md leading-relaxed text-ink-700">
+              אפשר לשמור מקום עכשיו, או לראות קודם את{' '}
+              <a href="#details" className="font-bold text-[#a83f5f] underline underline-offset-2">
+                הפרטים, המועדים והעלות
+              </a>
+              .
+            </p>
+            <Link to="/pay/frequency-course" className={`mt-6 ${CTA_CLASS}`}>
+              {r.button}
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
       {/* FORMAT */}
       <section className="bg-white py-10 md:py-14">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
@@ -236,39 +293,68 @@ export default function FrequencyCoursePage() {
         </Reveal>
       </section>
 
-      {/* DETAILS + CTA */}
-      <section className="bg-gradient-to-b from-[#fbeff0] to-[#fde8de]/70 py-10 md:py-14">
+      {/* DETAILS + CTA: נקודת ההחלטה של העמוד, והמקום היחיד שבו מופיע המחיר */}
+      <section id="details" className="scroll-mt-24 bg-gradient-to-b from-[#fbeff0] to-[#fde8de]/70 py-14 md:py-20">
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <Reveal>
-            <h2 className="text-center font-display text-3xl font-extrabold text-burgundy-700 md:text-4xl">{c.detailsTitle}</h2>
+            <div className="overflow-hidden rounded-3xl bg-white shadow-[0_30px_70px_-40px_rgba(110,26,45,0.55)]">
+              {/* הדרגתיות כהה לאורך כולה: על הקצה האפרסקי של הדרגתיות המותג
+                  לבן נותן יחס ניגודיות 1.69, ועל b84a6c הוא 4.96 */}
+              <div className="bg-gradient-to-l from-[#b84a6c] via-burgundy-500 to-burgundy-700 px-6 py-6 text-center md:px-10">
+                <h2 className="font-display text-3xl font-extrabold text-white md:text-4xl">{c.detailsTitle}</h2>
+              </div>
+
+              <div className="px-6 py-8 md:px-10 md:py-10">
+                <ul className="mx-auto max-w-xl space-y-3">
+                  {c.details.map((d, i) => {
+                    const Icon = detailIcon(d.title)
+                    const price = isPriceDetail(d.title) && !!r.priceLabel
+                    return (
+                      <li
+                        key={i}
+                        className={
+                          price
+                            ? 'flex items-start gap-4 rounded-2xl border-2 border-[#f3c9d3] bg-[#fffafa] p-5'
+                            : 'flex items-start gap-4 rounded-2xl border border-[#f6e6ea] bg-white p-5'
+                        }
+                      >
+                        <span
+                          className={
+                            price
+                              ? 'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#f7b9a0] to-[#d16d8a] text-white'
+                              : 'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#fbeff0] text-[#b84a6c]'
+                          }
+                        >
+                          <Icon size={20} />
+                        </span>
+                        <span className="pt-1 leading-relaxed text-ink-800">
+                          <strong className="text-burgundy-700">{d.title}: </strong>
+                          {price ? <Price r={r} /> : d.body}
+                        </span>
+                      </li>
+                    )
+                  })}
+                </ul>
+
+                <div className="mt-8 text-center">
+                  <Link to="/pay/frequency-course" className={`w-full sm:w-auto ${CTA_CLASS}`}>
+                    {r.button}
+                  </Link>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-700">
+                    מעדיפה לדבר קודם?{' '}
+                    <a
+                      href={waHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 font-bold text-[#157a41] underline underline-offset-2"
+                    >
+                      <MessageCircle size={15} /> שלחי הודעת וואטסאפ
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
           </Reveal>
-          <ul className="mx-auto mt-6 max-w-xl space-y-3">
-            {c.details.map((d, i) => {
-              const Icon = DETAIL_ICONS[i % DETAIL_ICONS.length]
-              return (
-                <li key={i} className="flex items-start gap-4 rounded-2xl border border-white bg-white p-5 shadow-[0_6px_20px_-14px_rgba(110,26,45,0.45)]">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#fbeff0] text-[#b84a6c]">
-                    <Icon size={20} />
-                  </span>
-                  <span className="pt-1 leading-relaxed text-ink-800">
-                    <strong className="text-burgundy-700">{d.title}: </strong>
-                    {d.title === 'עלות' && r.priceLabel ? <Price r={r} /> : d.body}
-                  </span>
-                </li>
-              )
-            })}
-          </ul>
-          <div className="mt-8 text-center">
-            <button type="button" onClick={open} className={CTA_CLASS}>
-              {r.button}
-            </button>
-            <p className="mt-4 text-sm text-ink-700">
-              מעדיפה לדבר קודם?{' '}
-              <a href={waHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-bold text-[#1f8f4e] underline">
-                <MessageCircle size={15} /> שלחי הודעת וואטסאפ
-              </a>
-            </p>
-          </div>
         </div>
       </section>
 

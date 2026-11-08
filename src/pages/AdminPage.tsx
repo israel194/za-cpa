@@ -263,7 +263,7 @@ function Editor({ page, onLogout }: { page: (typeof PAGES)[number]; onLogout: ()
       </div>
 
       {toast && (
-        <div className={`fixed inset-x-4 top-20 z-40 mx-auto max-w-sm rounded-2xl px-5 py-3 text-center font-bold text-white shadow-lg ${toast.kind === 'ok' ? 'bg-[#1f8f4e]' : 'bg-red-700'}`}>
+        <div className={`fixed inset-x-4 top-20 z-40 mx-auto max-w-sm rounded-2xl px-5 py-3 text-center font-bold text-white shadow-lg ${toast.kind === 'ok' ? 'bg-[#157a41]' : 'bg-red-700'}`}>
           {toast.text}
         </div>
       )}
