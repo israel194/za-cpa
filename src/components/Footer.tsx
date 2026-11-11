@@ -12,11 +12,11 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative overflow-hidden rounded-t-[2.5rem] bg-gradient-to-br from-navy-800 via-navy-700 to-burgundy-700 text-cream-100 rtl:md:rounded-tl-[6rem] ltr:md:rounded-tr-[6rem]">
+    <footer className="relative overflow-hidden bg-navy-800 text-cream-100">
       <div aria-hidden className="bg-plus-light pointer-events-none absolute inset-0" />
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-gold-300/0 via-gold-300/70 to-gold-300/0"
+        className="absolute inset-x-0 top-0 h-px bg-gold-400/70"
       />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-2 md:px-10 lg:grid-cols-4">
         <div>
