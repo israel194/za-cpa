@@ -141,7 +141,7 @@ export default function Contact() {
                 <p className="font-bold text-primary">{t('contact.form.errorTitle')}</p>
                 <p className="mt-1">{t('contact.form.errorBody')}</p>
                 <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-semibold">
-                  <a href="tel:+97225000275" dir="ltr" className="underline underline-offset-2">02-5000275</a>
+                  <a href="tel:+972523975659" dir="ltr" className="underline underline-offset-2">052-3975659</a>
                   <a href="https://wa.me/972523975659" target="_blank" rel="noreferrer" className="underline underline-offset-2">WhatsApp</a>
                   <a href="mailto:office@za-cpa.com" dir="ltr" className="underline underline-offset-2">office@za-cpa.com</a>
                 </p>

@@ -407,7 +407,7 @@
     "introTitle": "Introduction",
     "intro": "This Privacy Policy (the \"Policy\") describes what information Asor CPA (the \"Firm\", \"we\") collects through this website and its landing pages, for what purpose, to whom it is passed, and your rights regarding it. Every form on the site shows a short notice under section 11 of the Law, which this Policy details.",
     "controllerTitle": "Database controller and contact",
-    "controllerInfo": "Database controller: Asor CPA, company no. 515367779, 17 Nahum Hefetzadi St., Givat Shaul, Jerusalem (Migdal Ram, 11th floor). Phone 02-5000275, email office@za-cpa.com. Privacy contact: Orit Asor, CPA, 052-3975659. Registrations for Orit Asor's groups and courses are handled by Orit Asor, orit@za-cpa.com.",
+    "controllerInfo": "Database controller: Asor CPA, company no. 515367779, 17 Nahum Hefetzadi St., Givat Shaul, Jerusalem (Migdal Ram, 11th floor). Phone 052-3975659, email office@za-cpa.com. Privacy contact: Orit Asor, CPA, at the contact details above. Registrations for Orit Asor's groups and courses are handled by Orit Asor, orit@za-cpa.com.",
     "lawTitle": "Legal framework",
     "lawText": "Information is collected and processed in accordance with the Privacy Protection Law, 5741-1981 (the \"Law\"), as amended inter alia by the Privacy Protection Law (Amendment No. 13), 5784-2024; the Privacy Protection (Data Security) Regulations, 5777-2017; the Privacy Protection (Transfer of Data to Databases Abroad) Regulations, 5761-2001; and, regarding advertising messages, section 30A of the Communications (Telecommunications and Broadcasting) Law, 5742-1982.",
     "collectTitle": "Information we collect",
@@ -633,7 +633,7 @@
     ]
   },
   "formNotice": {
-    "office": "Providing your details is not required by law, but without them we cannot get back to you. They will be used to respond to your enquiry and arrange the service. Controller: Asor CPA, office@za-cpa.com, 02-5000275. Your details are passed through technology service providers (such as Cloudflare and Resend) to deliver the enquiry, and may be processed outside Israel. You have the right to review the information and to request its correction or deletion.",
+    "office": "Providing your details is not required by law, but without them we cannot get back to you. They will be used to respond to your enquiry and arrange the service. Controller: Asor CPA, office@za-cpa.com, 052-3975659. Your details are passed through technology service providers (such as Cloudflare and Resend) to deliver the enquiry, and may be processed outside Israel. You have the right to review the information and to request its correction or deletion.",
     "orit": "Providing your details is not required by law, but without them we cannot get back to you. They will be used to respond and arrange your registration. Controller: Orit Asor, orit@za-cpa.com, 052-3975659. Your details are passed through technology service providers (such as Cloudflare and Resend) to deliver the enquiry, and may be processed outside Israel. You have the right to review the information and to request its correction or deletion.",
     "policy": "Privacy Policy"
   },
@@ -665,7 +665,7 @@
     },
     "contact": {
       "title": "Contact us",
-      "description": "17 Nahum Heftsadi St., Jerusalem (Ram Tower, floor 11). Phone 02-5000275, office@za-cpa.com. We would love to hear from you."
+      "description": "17 Nahum Heftsadi St., Jerusalem (Ram Tower, floor 11). Phone 052-3975659, office@za-cpa.com. We would love to hear from you."
     },
     "accessibility": {
       "title": "Accessibility statement",

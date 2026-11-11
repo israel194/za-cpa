@@ -99,9 +99,9 @@ export default function HeroCinematic() {
             {t('contact.details.addressLine1')} · {t('contact.details.addressLine2')}
           </li>
           <li>
-            <a href="tel:025000275" className="flex items-center gap-2 transition-colors hover:text-accent">
+            <a href="tel:0523975659" className="flex items-center gap-2 transition-colors hover:text-accent">
               <Phone size={15} className="text-gold-600" aria-hidden />
-              <span dir="ltr">02-5000275</span>
+              <span dir="ltr">052-3975659</span>
             </a>
           </li>
           <li>

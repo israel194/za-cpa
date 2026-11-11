@@ -86,16 +86,6 @@ export default function Footer() {
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={16} className="flex-none text-gold-300" />
-              <a
-                href="tel:025000275"
-                className="transition-colors hover:text-white"
-                dir="ltr"
-              >
-                02-5000275
-              </a>
-            </li>
-            <li className="flex items-center gap-2">
               <Mail size={16} className="flex-none text-gold-300" />
               <a
                 href="mailto:office@za-cpa.com"

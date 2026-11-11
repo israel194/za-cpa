@@ -7,7 +7,7 @@ CORS_ORIGINS = "https://za-cpa.com,https://www.za-cpa.com,http://localhost:5188,
 OFFICE_EMAIL = "office@za-cpa.com"
 ORIT_EMAIL = "orit@za-cpa.com"
 EMAIL_FROM = "אתר עשור רואי חשבון <website@za-cpa.com>"
-OFFICE_PHONE = "02-5000275"
+OFFICE_PHONE = "052-3975659"
 REPORT_EMAIL = "orit@za-cpa.com"
 
 # Per-IP limit on lead submissions (Workers Rate Limiting binding).
