@@ -13,7 +13,7 @@ export function FullStamp({ className = '' }: { className?: string }) {
       >
         <div className="h-[2px] w-full bg-primary/45" />
         <div className="border-y-2 border-primary/45 bg-white/35 py-1 text-center">
-          <span className="font-display font-extrabold tracking-[0.08em] text-primary/75 [font-size:clamp(1rem,3.2vw,2.25rem)]">
+          <span className="font-display font-bold tracking-[0.08em] text-primary/75 [font-size:clamp(1rem,3.2vw,2.25rem)]">
             מלא עד סוף 2026
           </span>
         </div>
@@ -50,13 +50,13 @@ export default function RetreatClosed() {
   }
 
   const input =
-    'w-full rounded-xl border border-[#f3c9d3] bg-[#fffafa] px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-[#b84a6c] focus:bg-white'
+    'w-full rounded-xl border border-[#e6d9d6] bg-[#fcf9f5] px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-[#8e3b4a] focus:bg-white'
 
   if (sent) {
     return (
       <div className="py-10 text-center" role="status">
         <CheckCircle2 size={52} className="mx-auto text-[#1f8f4e]" />
-        <h2 className="mt-4 font-display text-2xl font-extrabold text-burgundy-700">הפרטים נקלטו, תודה!</h2>
+        <h2 className="mt-4 display display-md">הפרטים נקלטו, תודה!</h2>
         <p className="mx-auto mt-3 max-w-md leading-relaxed text-ink-700">
           שמרנו את מקומך ברשימה למחזור 2027. אורית תיצור איתך קשר עם פתיחת ההרשמה.
         </p>
@@ -84,7 +84,7 @@ export default function RetreatClosed() {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-l from-[#d16d8a] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-l from-[#9e3a4d] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all hover:-translate-y-0.5"
             >
               שומרת מקום לשנת 2027
             </button>
@@ -92,7 +92,7 @@ export default function RetreatClosed() {
           </>
         ) : (
           <form onSubmit={submit} className="mt-2 space-y-4 text-start">
-            <h2 className="text-center font-display text-xl font-extrabold text-burgundy-700">
+            <h2 className="text-center display display-md">
               שמירת מקום למחזור 2027
             </h2>
             <div>
@@ -118,7 +118,7 @@ export default function RetreatClosed() {
             <button
               type="submit"
               disabled={busy}
-              className="w-full rounded-full bg-gradient-to-l from-[#d16d8a] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all hover:-translate-y-0.5 disabled:opacity-60"
+              className="w-full rounded-full bg-gradient-to-l from-[#9e3a4d] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all hover:-translate-y-0.5 disabled:opacity-60"
             >
               {busy ? 'רגע...' : 'שמירת מקום ל-2027'}
             </button>

@@ -12,10 +12,10 @@ export default function NotFoundPage() {
   return (
     <section className="flex min-h-[80vh] items-center justify-center bg-background px-6 pt-32 pb-20">
       <div className="text-center">
-        <div className="font-display text-7xl font-extrabold text-accent md:text-9xl">
+        <div className="font-display text-7xl font-bold text-accent md:text-9xl">
           404
         </div>
-        <h1 className="mt-4 font-display text-2xl font-extrabold text-ink-900 md:text-3xl">
+        <h1 className="mt-4 display display-md display-ink">
           {t('notFound.title')}
         </h1>
         <p className="mt-3 text-lg text-ink-700">{t('notFound.subtitle')}</p>

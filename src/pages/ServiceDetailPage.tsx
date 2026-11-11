@@ -60,7 +60,7 @@ export default function ServiceDetailPage() {
               <div
                 className={`flex h-16 w-16 items-center justify-center rounded-2xl ${
                   service.premium
-                    ? 'bg-gradient-to-br from-burgundy-400 via-rose-gold-500 to-peach-300 text-white shadow-[0_12px_24px_-10px_rgba(144,58,85,0.5)]'
+                    ? 'border border-gold-300 bg-cream-50 text-gold-600'
                     : 'bg-blush-100 text-accent'
                 }`}
               >
@@ -74,7 +74,7 @@ export default function ServiceDetailPage() {
               )}
             </div>
 
-            <h2 className="font-display text-2xl font-extrabold text-ink-900 md:text-3xl">
+            <h2 className="display display-md display-ink">
               {t('services.whatIncluded')}
             </h2>
             <ul className="mt-6 space-y-3">
@@ -93,8 +93,8 @@ export default function ServiceDetailPage() {
               ))}
             </ul>
 
-            <div className="mt-10 rounded-2xl border border-rose-gold-300/40 bg-blush-50 p-6 md:p-8">
-              <h3 className="font-display text-lg font-bold text-ink-900">
+            <div className="mt-10 rounded-[10px] border border-gold-300 bg-cream-50 p-6 md:p-8">
+              <h3 className="display display-sm display-ink">
                 {t('services.howStart')}
               </h3>
               <p className="mt-2 leading-relaxed text-ink-800">
@@ -102,7 +102,7 @@ export default function ServiceDetailPage() {
               </p>
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
+                className="mt-5 inline-flex items-center gap-2 rounded-[6px] bg-primary px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-burgundy-500"
               >
                 {t('services.scheduleMeeting')}
                 <Arrow size={16} />
@@ -111,8 +111,8 @@ export default function ServiceDetailPage() {
           </div>
 
           <aside>
-            <div className="sticky top-28 rounded-2xl border border-blush-100 bg-background/60 p-6">
-              <h3 className="font-display text-base font-bold text-ink-900">
+            <div className="sticky top-28 rounded-[10px] border border-[color:var(--color-rule)] bg-surface p-6">
+              <h3 className="display display-sm display-ink text-[1.05rem]">
                 {t('services.otherServices')}
               </h3>
               <ul className="mt-4 space-y-1">

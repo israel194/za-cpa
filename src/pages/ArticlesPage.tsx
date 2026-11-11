@@ -19,10 +19,10 @@ export default function ArticlesPage() {
 
       <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blush-100 text-accent">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-[8px] border border-[color:var(--color-rule)] bg-cream-50 text-gold-600">
             <BookOpen size={28} />
           </div>
-          <h2 className="font-display text-2xl font-extrabold text-ink-900 md:text-3xl">
+          <h2 className="display display-md display-ink">
             {t('articles.comingTitle')}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-700">

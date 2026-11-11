@@ -144,21 +144,21 @@ export default function CookieConsent() {
         <div
           role="dialog"
           aria-labelledby="cookie-banner-title"
-          className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl animate-[fadeUp_400ms_ease-out_both] overflow-hidden rounded-3xl border border-blush-200/80 bg-gradient-to-bl from-cream-50 via-white to-blush-50 shadow-[0_32px_70px_-22px_rgba(189,95,124,0.4)] backdrop-blur-md"
+          className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl animate-[fadeUp_400ms_ease-out_both] overflow-hidden rounded-[12px] border border-[color:var(--color-rule-strong)] bg-surface shadow-[var(--shadow-lift)]"
         >
           {/* Decorative glows */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-12 -end-12 h-44 w-44 rounded-full bg-rose-gold-300/40 blur-3xl"
+            className="pointer-events-none hidden"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-16 -start-16 h-48 w-48 rounded-full bg-blush-200/50 blur-3xl"
+            className="pointer-events-none hidden"
           />
           {/* Top thin gold rule */}
           <div
             aria-hidden
-            className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-rose-gold-400 to-transparent"
+            className="absolute inset-x-0 top-0 h-px bg-gold-400"
           />
 
           <div className="relative grid gap-5 p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-6 md:p-7">
@@ -167,9 +167,9 @@ export default function CookieConsent() {
               <div className="relative flex-none">
                 <div
                   aria-hidden
-                  className="absolute inset-0 -z-10 rounded-2xl bg-rose-gold-400/35 blur-md"
+                  className="hidden"
                 />
-                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-10px_rgba(189,95,124,0.6)]">
+                <span className="flex h-12 w-12 items-center justify-center rounded-[8px] border border-[color:var(--color-rule)] bg-cream-50 text-gold-600">
                   <Cookie size={26} />
                 </span>
               </div>
@@ -181,7 +181,7 @@ export default function CookieConsent() {
                 </div>
                 <h3
                   id="cookie-banner-title"
-                  className="mt-1 font-display text-lg font-extrabold leading-tight text-ink-900"
+                  className="mt-1 display display-sm display-ink"
                 >
                   {t('cookies.banner.title')}
                 </h3>
@@ -198,7 +198,7 @@ export default function CookieConsent() {
                 </div>
                 <h3
                   id="cookie-banner-title"
-                  className="mt-1.5 font-display text-xl font-extrabold leading-tight text-ink-900 md:text-2xl"
+                  className="mt-1.5 display display-md display-ink"
                 >
                   {t('cookies.banner.title')}
                 </h3>
@@ -225,7 +225,7 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="group order-1 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-bl from-rose-gold-500 to-rose-gold-600 px-6 py-3 text-sm font-bold text-white shadow-[0_14px_30px_-10px_rgba(189,95,124,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgba(189,95,124,0.8)] md:order-1 md:w-full"
+                className="group order-1 inline-flex items-center justify-center gap-2 rounded-[6px] bg-primary px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-burgundy-500 md:order-1 md:w-full"
               >
                 <Sparkles size={14} className="transition-transform group-hover:scale-110" />
                 {t('cookies.banner.acceptAll')}
@@ -233,7 +233,7 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={essentialOnly}
-                className="order-2 rounded-full border border-blush-200 bg-white/70 px-5 py-2.5 text-sm font-semibold text-ink-800 backdrop-blur-sm transition-all duration-200 hover:border-accent hover:bg-white md:order-2 md:w-full"
+                className="order-2 rounded-[6px] border border-[color:var(--color-rule-strong)] px-5 py-2.5 text-sm font-semibold text-ink-800 transition-colors duration-200 hover:border-primary md:order-2 md:w-full"
               >
                 {t('cookies.banner.essentialOnly')}
               </button>
@@ -262,16 +262,16 @@ export default function CookieConsent() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="cookie-modal-title"
-            className="fixed inset-x-3 top-1/2 z-50 mx-auto max-h-[90vh] max-w-xl -translate-y-1/2 overflow-hidden rounded-3xl border border-blush-100 bg-white shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)]"
+            className="fixed inset-x-3 top-1/2 z-50 mx-auto max-h-[90vh] max-w-xl -translate-y-1/2 overflow-hidden rounded-[12px] border border-[color:var(--color-rule-strong)] bg-surface shadow-[var(--shadow-lift)]"
           >
-            <header className="flex items-center justify-between border-b border-blush-100 bg-gradient-to-bl from-blush-50 to-cream-50 px-6 py-5">
+            <header className="flex items-center justify-between border-b border-[color:var(--color-rule)] bg-cream-50 px-6 py-5">
               <div className="flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white">
                   <Cookie size={18} />
                 </span>
                 <h2
                   id="cookie-modal-title"
-                  className="font-display text-lg font-bold text-ink-900"
+                  className="display display-sm display-ink"
                 >
                   {t('cookies.modal.title')}
                 </h2>
@@ -322,14 +322,14 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={essentialOnly}
-                className="rounded-full border border-blush-200 bg-white px-4 py-2.5 text-sm font-semibold text-ink-800 transition-colors hover:border-accent"
+                className="rounded-[6px] border border-[color:var(--color-rule-strong)] bg-white px-4 py-2.5 text-sm font-semibold text-ink-800 transition-colors hover:border-primary"
               >
                 {t('cookies.banner.essentialOnly')}
               </button>
               <button
                 type="button"
                 onClick={saveDraft}
-                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
+                className="inline-flex items-center gap-1.5 rounded-[6px] bg-primary px-5 py-2.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-burgundy-500"
               >
                 <Check size={14} />
                 {t('cookies.modal.save')}
@@ -337,7 +337,7 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="rounded-full bg-ink-900 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-ink-800"
+                className="rounded-[6px] bg-ink-900 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-ink-800"
               >
                 {t('cookies.banner.acceptAll')}
               </button>
@@ -374,7 +374,7 @@ function CategoryRow({
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
-          <h3 className="font-display text-base font-bold text-ink-900">
+          <h3 className="display display-sm display-ink text-[1.05rem]">
             {title}
           </h3>
           <p className="mt-1.5 text-sm leading-relaxed text-ink-700">{text}</p>

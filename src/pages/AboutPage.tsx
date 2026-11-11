@@ -29,7 +29,7 @@ export default function AboutPage() {
 
       <section className="relative bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 md:px-10">
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-4xl">
+          <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-ink-900 md:text-4xl">
             {t('about.storyTitle')}
           </h2>
           <div className="mt-7 space-y-5 text-lg leading-loose text-ink-700">
@@ -43,7 +43,7 @@ export default function AboutPage() {
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               to="/team"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(189,95,124,0.6)] transition-all hover:-translate-y-0.5 hover:bg-primary/90"
+              className="inline-flex items-center gap-2 rounded-[6px] bg-primary px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-burgundy-500"
             >
               {t('about.meetTeam')}
               <Arrow size={16} />
@@ -63,12 +63,12 @@ export default function AboutPage() {
                 return (
                   <div
                     key={key}
-                    className="rounded-2xl border border-blush-100 bg-background/60 p-7 transition-all duration-300 hover:border-accent/60/60 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.35)]"
+                    className="rounded-[10px] border border-[color:var(--color-rule)] bg-surface p-7 transition-colors duration-200 hover:border-gold-400"
                   >
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blush-100 text-accent">
                       <Icon size={22} />
                     </div>
-                    <h3 className="font-display text-lg font-bold text-ink-900">
+                    <h3 className="display display-sm display-ink">
                       {t(`values.${key}.title`)}
                     </h3>
                     <p className="mt-2 leading-relaxed text-ink-700">

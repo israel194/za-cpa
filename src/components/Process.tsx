@@ -8,31 +8,21 @@ export default function Process() {
   const steps = t('process.steps', { returnObjects: true }) as Step[]
 
   return (
-    <section className="bg-plus relative py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 text-sm font-bold tracking-[0.2em] text-accent">
-            {t('process.eyebrow')}
-          </div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-5xl">
-            {t('process.title')}
-          </h2>
+    <section className="relative bg-cream-50 py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <Reveal>
+          <p className="eyebrow mb-5">{t('process.eyebrow')}</p>
+          <h2 className="display display-lg measure-tight">{t('process.title')}</h2>
         </Reveal>
 
-        <ol className="relative mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          <span
-            aria-hidden
-            className="absolute inset-x-[12%] top-8 hidden h-px bg-gradient-to-l from-gold-300/0 via-gold-400 to-gold-300/0 lg:block"
-          />
+        {/* ארבעה שלבים כעמודות מסורגלות. קודם לכן כל שלב היה עיגול ממוספר
+            על קו מקווקו באמצע המסך, והקו נעלם ממילא מתחת ל-1024 פיקסל. */}
+        <ol className="mt-12 grid gap-x-10 gap-y-0 border-t border-[color:var(--color-rule-strong)] sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, idx) => (
-            <Reveal as="li" key={step.title} delay={idx * 120} className="relative text-center">
-              <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-gold-300 bg-white shadow-[0_12px_30px_-14px_rgba(110,26,45,0.45)]">
-                <span className="font-display text-xl font-extrabold text-primary">
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-              </div>
-              <h3 className="mt-6 font-display text-xl font-bold text-primary">{step.title}</h3>
-              <p className="mx-auto mt-3 max-w-xs leading-relaxed text-ink-700">{step.text}</p>
+            <Reveal as="li" key={step.title} delay={idx * 80} className="border-b border-[color:var(--color-rule)] pt-6 pb-7 lg:border-b-0">
+              <span className="marginal block tabular-nums">{String(idx + 1).padStart(2, '0')}</span>
+              <h3 className="display display-sm mt-3">{step.title}</h3>
+              <p className="mt-2.5 leading-relaxed text-ink-700">{step.text}</p>
             </Reveal>
           ))}
         </ol>

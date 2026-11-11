@@ -30,7 +30,7 @@ export default function Hero() {
           משרד מוביל בליווי פיננסי אישי
         </div>
 
-        <h1 className="font-display text-4xl font-extrabold leading-[1.15] tracking-tight text-ink-900 md:text-6xl lg:text-7xl">
+        <h1 className="font-display text-4xl font-bold leading-[1.15] tracking-tight text-ink-900 md:text-6xl lg:text-7xl">
           משרד רואי חשבון
           <br />
           <span className="bg-gradient-to-l from-rose-gold-600 via-rose-gold-400 to-peach-300 bg-clip-text text-transparent">
@@ -72,7 +72,7 @@ export default function Hero() {
             { stat: '100%', label: 'מחויבות אישית' },
           ].map((item) => (
             <div key={item.label} className="text-center">
-              <div className="font-display text-3xl font-extrabold text-accent md:text-4xl">
+              <div className="display display-lg">
                 {item.stat}
               </div>
               <div className="mt-1 text-sm font-medium text-ink-700 md:text-base">

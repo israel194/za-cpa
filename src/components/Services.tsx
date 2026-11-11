@@ -22,9 +22,11 @@ const iconMap: Record<ServiceIcon, React.ElementType> = {
 
 type Props = {
   variant?: 'preview' | 'full'
+  /** כבוי כשהעמוד כבר נושא את אותה כותרת בראשו */
+  heading?: boolean
 }
 
-export default function Services({ variant = 'full' }: Props) {
+export default function Services({ variant = 'full', heading = true }: Props) {
   const { t, i18n } = useTranslation()
   const services = useServices()
   const isRtl = i18n.dir() === 'rtl'
@@ -33,113 +35,73 @@ export default function Services({ variant = 'full' }: Props) {
   const premiumServices = services.filter((s) => s.premium)
 
   return (
-    <section
-      className={`relative ${variant === 'preview' ? 'bg-white' : 'bg-background'} py-20 md:py-28`}
-    >
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            {t('services.eyebrow')}
-          </div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
-            {t('services.title')}
-          </h2>
-          <p className="mt-5 text-lg text-ink-700">{t('services.subtitle')}</p>
-        </div>
+    <section className={`relative ${variant === 'preview' ? 'bg-surface' : 'bg-background'} py-20 md:py-28`}>
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        {heading && (
+          <>
+            <p className="eyebrow mb-5">{t('services.eyebrow')}</p>
+            <h2 className="display display-lg">{t('services.title')}</h2>
+            <p className="measure mt-5 text-lg text-ink-700">{t('services.subtitle')}</p>
+          </>
+        )}
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className={`${heading ? 'mt-12' : ''} grid gap-x-10 border-t border-[color:var(--color-rule-strong)] sm:grid-cols-2 lg:grid-cols-4`}>
           {standardServices.map((service) => {
             const Icon = iconMap[service.iconName]
             return (
               <Link
                 key={service.slug}
                 to={`/services/${service.slug}`}
-                className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_24px_48px_-24px_rgba(189,95,124,0.4)]"
+                className="group flex flex-col border-b border-[color:var(--color-rule)] pt-6 pb-7 lg:border-b-0"
               >
-                <div
-                  aria-hidden
-                  className={`absolute -top-10 h-32 w-32 rounded-full bg-blush-100/0 transition-colors duration-300 group-hover:bg-blush-100/70 ${
-                    isRtl ? '-end-10' : '-start-10'
-                  }`}
-                />
-                <div className="relative mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blush-100 text-accent transition-all duration-300 group-hover:bg-primary group-hover:text-white">
-                  <Icon size={22} />
-                </div>
-                <h3 className="relative font-display text-lg font-bold leading-snug text-ink-900">
+                <Icon size={20} strokeWidth={1.6} className="text-gold-600" aria-hidden />
+                <h3 className="display display-sm mt-4 transition-colors duration-200 group-hover:text-accent">
                   {service.title}
                 </h3>
-                <p className="relative mt-3 text-sm leading-relaxed text-ink-700">
+                <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-ink-700">
                   {service.summary}
                 </p>
-                <div className="relative mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent">
-                  {t('common.readMore')}
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+                  <span className="link-rule border-accent/40 group-hover:border-accent">{t('common.readMore')}</span>
                   <Arrow
                     size={14}
-                    className={`transition-transform duration-300 ${
-                      isRtl
-                        ? 'group-hover:-translate-x-1'
-                        : 'group-hover:translate-x-1'
-                    }`}
+                    className={`transition-transform duration-200 ${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`}
                   />
-                </div>
+                </span>
               </Link>
             )
           })}
         </div>
 
+        {/* השירות המוביל: פס כהה לרוחב, לא כרטיס בהדרגתיות ורודה עם
+            ארבעה תת כרטיסים לבנים מרחפים עליה. */}
         {premiumServices.map((premium) => (
-          <div
-            key={premium.slug}
-            className="relative mt-20 overflow-hidden rounded-3xl border border-rose-gold-300/50"
-          >
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-gradient-to-bl from-rose-gold-500 via-blush-400 to-peach-300"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.4),transparent_45%),radial-gradient(circle_at_85%_75%,rgba(255,255,255,0.35),transparent_50%)]"
-            />
-            <div
-              aria-hidden
-              className={`pointer-events-none absolute -top-24 h-72 w-72 rounded-full bg-white/15 blur-3xl ${
-                isRtl ? '-end-24' : '-start-24'
-              }`}
-            />
-
-            <div className="relative grid gap-10 p-10 md:grid-cols-[auto_1fr] md:items-center md:gap-14 md:p-14">
-              <div className="flex flex-col items-center text-center md:items-start md:text-start">
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/25 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm">
-                  <Sparkles size={15} />
+          <div key={premium.slug} className="relative mt-16 overflow-hidden rounded-[14px] bg-burgundy-700 text-white">
+            <div aria-hidden className="bg-plus-light pointer-events-none absolute inset-0" />
+            <div className="relative grid gap-10 p-8 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:p-12">
+              <div>
+                <p className="flex items-center gap-2.5 text-[0.7rem] font-bold tracking-[0.18em] text-gold-200">
+                  <Sparkles size={14} aria-hidden />
                   {t('services.premiumBadge')}
-                </div>
-                <h3 className="mt-5 font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+                </p>
+                <h3 className="mt-5 font-display text-3xl font-bold leading-[1.12] text-white md:text-[2.4rem]">
                   {premium.title}
                 </h3>
-                <p className="mt-4 max-w-md text-base leading-relaxed text-white/90 md:text-lg">
-                  {premium.summary}
-                </p>
+                <p className="measure mt-4 leading-relaxed text-white/80">{premium.summary}</p>
                 <Link
                   to={`/services/${premium.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-primary shadow-[0_12px_28px_-10px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-0.5"
+                  className="group mt-7 inline-flex items-center gap-2 rounded-[6px] bg-gold-300 px-6 py-3 text-sm font-bold text-navy-800 transition-colors duration-200 hover:bg-gold-200"
                 >
                   {t('services.moreInfo')}
-                  <Arrow size={16} />
+                  <Arrow size={15} className={`transition-transform duration-200 ${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
                 </Link>
               </div>
 
-              <ul className="grid gap-3 md:gap-4">
+              <ul className="self-center">
                 {premium.bullets.slice(0, 4).map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-4 rounded-2xl bg-white/95 p-5 shadow-[0_12px_36px_-16px_rgba(0,0,0,0.25)] backdrop-blur-sm"
-                  >
-                    <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-burgundy-400 via-rose-gold-500 to-peach-300 text-white shadow-[0_8px_18px_-8px_rgba(144,58,85,0.5)]">
-                      <Building2 size={20} />
-                    </span>
-                    <span className="font-display text-base font-bold text-ink-900 md:text-lg">
-                      {item}
-                    </span>
+                  <li key={item} className="flex items-start gap-3.5 border-t border-white/15 py-4 first:border-t-0 first:pt-0">
+                    <Building2 size={17} strokeWidth={1.6} className="mt-1 shrink-0 text-gold-300" aria-hidden />
+                    <span className="leading-relaxed text-white/90">{item}</span>
                   </li>
                 ))}
               </ul>

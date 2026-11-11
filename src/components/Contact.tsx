@@ -60,21 +60,14 @@ export default function Contact() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-cream-50 to-pink-100 py-24 md:py-32">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 -end-32 h-96 w-96 rounded-full bg-peach-200/45 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-40 -start-32 h-[28rem] w-[28rem] rounded-full bg-pink-200/40 blur-3xl"
-      />
+    <section className="relative overflow-hidden bg-cream-50 py-20 md:py-28">
+      <div aria-hidden className="grain pointer-events-none absolute inset-0" />
 
-      <div className="relative mx-auto max-w-7xl px-6 md:px-10">
+      <div className="relative mx-auto max-w-6xl px-6 md:px-10">
         <div className="mt-2 grid gap-8 lg:grid-cols-5">
           <form
             onSubmit={handleSubmit}
-            className="rounded-3xl border border-blush-100 bg-white/90 p-8 shadow-[0_24px_60px_-32px_rgba(189,95,124,0.4)] backdrop-blur-sm md:p-10 lg:col-span-3"
+            className="rounded-[14px] border border-[color:var(--color-rule)] bg-surface p-8 shadow-[var(--shadow-raise)] md:p-10 lg:col-span-3"
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <Field
@@ -109,7 +102,7 @@ export default function Contact() {
                   value={form.message}
                   onChange={handleChange('message')}
                   required
-                  className="w-full resize-none rounded-xl border border-blush-200 bg-background/60 px-4 py-3 text-base text-ink-900 transition-all duration-200 placeholder:text-ink-700/40 focus:border-accent focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-gold-300/30"
+                  className="w-full resize-none rounded-[6px] border border-[color:var(--color-rule-strong)] bg-background/50 px-4 py-3 text-base text-ink-900 transition-colors duration-200 placeholder:text-ink-700/40 focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/25"
                   placeholder={t('contact.form.messagePlaceholder')}
                 />
               </div>
@@ -118,7 +111,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(189,95,124,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_22px_48px_-12px_rgba(189,95,124,0.7)] disabled:opacity-60 sm:w-auto"
+              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-[6px] bg-primary px-8 py-3.5 text-base font-bold text-white transition-colors duration-200 hover:bg-burgundy-500 disabled:opacity-60 sm:w-auto"
             >
               {sent ? (
                 <>
@@ -179,13 +172,13 @@ export default function Contact() {
               href="https://www.za-cpa.com"
             />
 
-            <div className="rounded-2xl border border-rose-gold-300/40 bg-gradient-to-bl from-rose-gold-500 via-blush-400 to-peach-300 p-8 text-white shadow-[0_24px_56px_-28px_rgba(189,95,124,0.5)]">
-              <h3 className="font-display text-xl font-bold">
-                {t('contact.consultBox.title')}
-              </h3>
-              <p className="mt-2 leading-relaxed text-white/90">
-                {t('contact.consultBox.text')}
-              </p>
+            <div className="relative overflow-hidden rounded-[14px] bg-burgundy-700 p-7 text-white">
+              <div aria-hidden className="bg-plus-light pointer-events-none absolute inset-0" />
+              <div className="relative">
+                <span aria-hidden className="mb-4 block h-px w-10 bg-gold-400" />
+                <h3 className="font-display text-xl font-bold">{t('contact.consultBox.title')}</h3>
+                <p className="mt-2 leading-relaxed text-white/80">{t('contact.consultBox.text')}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -207,7 +200,7 @@ function Field({
       <input
         id={id}
         {...rest}
-        className="w-full rounded-xl border border-blush-200 bg-background/60 px-4 py-3 text-base text-ink-900 transition-all duration-200 placeholder:text-ink-700/40 focus:border-accent focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-gold-300/30"
+        className="w-full rounded-[6px] border border-[color:var(--color-rule-strong)] bg-background/50 px-4 py-3 text-base text-ink-900 transition-colors duration-200 placeholder:text-ink-700/40 focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/25"
       />
     </div>
   )
@@ -230,19 +223,13 @@ function DetailCard({
   return (
     <Wrapper
       {...wrapperProps}
-      className={`group flex items-start gap-4 rounded-2xl border border-blush-100 bg-white/80 p-6 backdrop-blur-sm transition-all duration-300 ${
-        href
-          ? 'hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.4)]'
-          : ''
+      className={`group flex items-start gap-4 rounded-[10px] border border-[color:var(--color-rule)] bg-surface p-6 transition-colors duration-200 ${
+        href ? 'hover:border-gold-400' : ''
       }`}
     >
-      <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-blush-100 text-accent transition-colors group-hover:bg-primary group-hover:text-white">
-        {icon}
-      </span>
+      <span className="mt-0.5 flex-none text-gold-600">{icon}</span>
       <div>
-        <h3 className="font-display text-base font-bold text-ink-900">
-          {title}
-        </h3>
+        <h3 className="display display-sm text-[1.05rem]">{title}</h3>
         {lines.map((line) => (
           <p key={line} className="mt-1 leading-relaxed text-ink-700">
             {line}

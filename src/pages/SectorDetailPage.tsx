@@ -51,11 +51,11 @@ export default function SectorDetailPage() {
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-12px_rgba(189,95,124,0.5)]">
+            <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-[8px] border border-[color:var(--color-rule)] bg-cream-50 text-gold-600">
               <Icon size={28} />
             </div>
 
-            <h2 className="font-display text-2xl font-extrabold text-ink-900 md:text-3xl">
+            <h2 className="display display-md display-ink">
               {t('sectors.howWeHelp', { name: sector.title })}
             </h2>
             <ul className="mt-6 space-y-3">
@@ -74,8 +74,8 @@ export default function SectorDetailPage() {
               ))}
             </ul>
 
-            <div className="mt-10 rounded-2xl border border-rose-gold-300/40 bg-blush-50 p-6 md:p-8">
-              <h3 className="font-display text-lg font-bold text-ink-900">
+            <div className="mt-10 rounded-[10px] border border-gold-300 bg-cream-50 p-6 md:p-8">
+              <h3 className="display display-sm display-ink">
                 {t('sectors.notSure')}
               </h3>
               <p className="mt-2 leading-relaxed text-ink-800">
@@ -83,7 +83,7 @@ export default function SectorDetailPage() {
               </p>
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_12px_28px_-10px_rgba(189,95,124,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
+                className="mt-5 inline-flex items-center gap-2 rounded-[6px] bg-primary px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-burgundy-500"
               >
                 {t('sectors.letsTalk')}
                 <Arrow size={16} />
@@ -92,8 +92,8 @@ export default function SectorDetailPage() {
           </div>
 
           <aside>
-            <div className="sticky top-28 rounded-2xl border border-blush-100 bg-background/60 p-6">
-              <h3 className="font-display text-base font-bold text-ink-900">
+            <div className="sticky top-28 rounded-[10px] border border-[color:var(--color-rule)] bg-surface p-6">
+              <h3 className="display display-sm display-ink text-[1.05rem]">
                 {t('sectors.otherSectors')}
               </h3>
               <ul className="mt-4 space-y-1">

@@ -57,15 +57,15 @@ export default function AdminPage() {
     <button
       type="button"
       onClick={() => setTab(t)}
-      className={`rounded-full px-4 py-1.5 text-sm font-bold ${tab === t ? 'bg-burgundy-600 text-white' : 'bg-white text-burgundy-700 ring-1 ring-[#f3c9d3]'}`}
+      className={`rounded-full px-4 py-1.5 text-sm font-bold ${tab === t ? 'bg-burgundy-600 text-white' : 'bg-white text-burgundy-700 ring-1 ring-[#e6d9d6]'}`}
     >
       {label}
     </button>
   )
   return (
-    <div dir="rtl" lang="he" className="min-h-screen bg-[#fbf4f3] font-sans text-ink-900">
+    <div dir="rtl" lang="he" className="min-h-screen bg-[#f6efe6] font-sans text-ink-900">
       {authed && (
-        <nav className="flex justify-center gap-2 bg-[#fbeff0] px-4 py-2" aria-label="אזורי ניהול">
+        <nav className="flex justify-center gap-2 bg-[#f6efe6] px-4 py-2" aria-label="אזורי ניהול">
           {tabBtn('content', 'עריכת דף הקורס')}
           {tabBtn('registrations', 'הרשמות ותשלומים')}
         </nav>
@@ -100,10 +100,10 @@ function Login({ onOk }: { onOk: () => void }) {
           setBusy(false)
         }}
       >
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#f7b9a0] via-[#d16d8a] to-burgundy-600 text-white">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#d9c08f] via-[#9e3a4d] to-burgundy-600 text-white">
           <Lock size={24} />
         </div>
-        <h1 className="mt-5 text-center text-2xl font-extrabold text-burgundy-700">ניהול תוכן האתר</h1>
+        <h1 className="mt-5 text-center text-2xl font-bold text-burgundy-700">ניהול תוכן האתר</h1>
         <p className="mt-1 text-center text-sm text-ink-700">עשור רואי חשבון</p>
         <label htmlFor="pw" className="mt-7 block text-sm font-semibold">סיסמה</label>
         <input
@@ -112,7 +112,7 @@ function Login({ onOk }: { onOk: () => void }) {
           autoComplete="current-password"
           value={pw}
           onChange={(e) => setPw(e.target.value)}
-          className="mt-1 w-full rounded-xl border border-[#f3c9d3] px-4 py-3 text-base outline-none focus:border-[#b84a6c]"
+          className="mt-1 w-full rounded-xl border border-[#e6d9d6] px-4 py-3 text-base outline-none focus:border-[#8e3b4a]"
           dir="ltr"
           required
         />
@@ -182,16 +182,16 @@ function Editor({ page, onLogout }: { page: (typeof PAGES)[number]; onLogout: ()
   return (
     <>
       {/* Top bar */}
-      <header className="sticky top-0 z-30 border-b border-[#f3c9d3] bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-30 border-b border-[#e6d9d6] bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center gap-2 px-4 py-3">
           <div className="me-auto">
             <div className="text-xs text-ink-700">עריכת דף</div>
-            <div className="font-extrabold text-burgundy-700">{page.title}</div>
+            <div className="font-bold text-burgundy-700">{page.title}</div>
           </div>
-          <a href={page.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-full border border-[#f3c9d3] px-3 py-2 text-sm font-semibold text-burgundy-700">
+          <a href={page.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-full border border-[#e6d9d6] px-3 py-2 text-sm font-semibold text-burgundy-700">
             <ExternalLink size={15} /> צפייה
           </a>
-          <button type="button" onClick={() => setHistoryOpen(true)} className="inline-flex items-center gap-1 rounded-full border border-[#f3c9d3] px-3 py-2 text-sm font-semibold text-burgundy-700">
+          <button type="button" onClick={() => setHistoryOpen(true)} className="inline-flex items-center gap-1 rounded-full border border-[#e6d9d6] px-3 py-2 text-sm font-semibold text-burgundy-700">
             <History size={15} /> גרסאות
           </button>
           <button type="button" onClick={onLogout} className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm text-ink-700" aria-label="יציאה">
@@ -209,15 +209,15 @@ function Editor({ page, onLogout }: { page: (typeof PAGES)[number]; onLogout: ()
           {page.schema.map((section) => {
             const open = openId === section.id
             return (
-              <section key={section.id} className="overflow-hidden rounded-2xl border border-[#f3c9d3] bg-white">
+              <section key={section.id} className="overflow-hidden rounded-2xl border border-[#e6d9d6] bg-white">
                 <button
                   type="button"
                   onClick={() => setOpenId(open ? null : section.id)}
                   className="flex w-full items-center justify-between px-5 py-4 text-start"
                   aria-expanded={open}
                 >
-                  <span className="text-lg font-extrabold text-burgundy-700">{section.title}</span>
-                  <ChevronDown size={20} className={`text-[#b84a6c] transition-transform ${open ? 'rotate-180' : ''}`} />
+                  <span className="text-lg font-bold text-burgundy-700">{section.title}</span>
+                  <ChevronDown size={20} className={`text-[#8e3b4a] transition-transform ${open ? 'rotate-180' : ''}`} />
                 </button>
                 {open && (
                   <div className="space-y-5 border-t border-[#f8e3e7] px-5 py-5">
@@ -243,9 +243,9 @@ function Editor({ page, onLogout }: { page: (typeof PAGES)[number]; onLogout: ()
       </main>
 
       {/* Save bar */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#f3c9d3] bg-white/95 backdrop-blur">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#e6d9d6] bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3">
-          <span className={`text-sm font-semibold ${dirty ? 'text-[#b84a6c]' : 'text-ink-700'}`}>{dirty ? 'יש שינויים שלא נשמרו' : 'הכול שמור'}</span>
+          <span className={`text-sm font-semibold ${dirty ? 'text-[#8e3b4a]' : 'text-ink-700'}`}>{dirty ? 'יש שינויים שלא נשמרו' : 'הכול שמור'}</span>
           {dirty && (
             <button type="button" onClick={() => setData(JSON.parse(saved))} className="ms-auto text-sm font-semibold text-ink-700 underline">
               ביטול שינויים
@@ -255,7 +255,7 @@ function Editor({ page, onLogout }: { page: (typeof PAGES)[number]; onLogout: ()
             type="button"
             disabled={!dirty || busy}
             onClick={save}
-            className={`${dirty ? '' : 'ms-auto'} inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-[#d16d8a] to-burgundy-700 px-6 py-3 font-bold text-white disabled:opacity-40`}
+            className={`${dirty ? '' : 'ms-auto'} inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-[#9e3a4d] to-burgundy-700 px-6 py-3 font-bold text-white disabled:opacity-40`}
           >
             <Save size={17} /> {busy ? 'שומרת...' : 'שמירה ופרסום'}
           </button>
@@ -284,7 +284,7 @@ function Editor({ page, onLogout }: { page: (typeof PAGES)[number]; onLogout: ()
 }
 
 // ── Field editors ─────────────────────────────────────────────────────────
-const INPUT = 'w-full rounded-xl border border-[#f3c9d3] bg-[#fffafa] px-3.5 py-2.5 text-base outline-none focus:border-[#b84a6c] focus:bg-white'
+const INPUT = 'w-full rounded-xl border border-[#e6d9d6] bg-[#fcf9f5] px-3.5 py-2.5 text-base outline-none focus:border-[#8e3b4a] focus:bg-white'
 
 function AutoTextarea({ value, onChange, label }: { value: string; onChange: (v: string) => void; label: string }) {
   const ref = useRef<HTMLTextAreaElement>(null)
@@ -355,9 +355,9 @@ function FieldEditor({ field, value, onChange }: { field: Field; value: unknown;
       {head}
       <div className="space-y-3">
         {list.map((item, i) => (
-          <div key={i} className="rounded-xl border border-[#f8e3e7] bg-[#fffafa] p-3">
+          <div key={i} className="rounded-xl border border-[#f8e3e7] bg-[#fcf9f5] p-3">
             <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs font-bold text-[#b84a6c]">{field.itemLabel} {i + 1}</span>
+              <span className="text-xs font-bold text-[#8e3b4a]">{field.itemLabel} {i + 1}</span>
               {controls(i)}
             </div>
             {field.kind === 'strings' ? (
@@ -384,7 +384,7 @@ function FieldEditor({ field, value, onChange }: { field: Field; value: unknown;
       <button
         type="button"
         onClick={() => onChange([...list, field.kind === 'strings' ? '' : { title: '', body: '' }])}
-        className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-dashed border-[#d16d8a] px-4 py-2 text-sm font-bold text-[#b84a6c]"
+        className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-dashed border-[#9e3a4d] px-4 py-2 text-sm font-bold text-[#8e3b4a]"
       >
         <Plus size={15} /> הוספת {field.itemLabel}
       </button>
@@ -400,7 +400,7 @@ function IconBtn({ children, label, onClick, disabled, danger }: { children: Rea
       title={label}
       disabled={disabled}
       onClick={onClick}
-      className={`flex h-8 w-8 items-center justify-center rounded-lg border border-[#f3c9d3] bg-white disabled:opacity-30 ${danger ? 'text-red-700' : 'text-ink-700'}`}
+      className={`flex h-8 w-8 items-center justify-center rounded-lg border border-[#e6d9d6] bg-white disabled:opacity-30 ${danger ? 'text-red-700' : 'text-ink-700'}`}
     >
       {children}
     </button>
@@ -417,8 +417,8 @@ function HistoryDialog({ slug, onClose, onRestore }: { slug: string; onClose: ()
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink-900/40 p-3 sm:items-center" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="max-h-[80vh] w-full max-w-md overflow-y-auto rounded-3xl bg-white p-6" role="dialog" aria-modal="true" aria-label="גרסאות קודמות">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-extrabold text-burgundy-700">גרסאות קודמות</h2>
-          <button type="button" onClick={onClose} aria-label="סגירה" className="rounded-full p-1.5 hover:bg-[#fbeff0]"><X size={18} /></button>
+          <h2 className="text-xl font-bold text-burgundy-700">גרסאות קודמות</h2>
+          <button type="button" onClick={onClose} aria-label="סגירה" className="rounded-full p-1.5 hover:bg-[#f6efe6]"><X size={18} /></button>
         </div>
         <p className="mt-1 text-sm text-ink-700">כל שמירה שומרת את הגרסה הקודמת (עד 30 אחרונות).</p>
         <div className="mt-4 space-y-2">
@@ -430,7 +430,7 @@ function HistoryDialog({ slug, onClose, onRestore }: { slug: string; onClose: ()
               <span className="text-sm">{heDate(h.ts)}</span>
               <button
                 type="button"
-                className="text-sm font-bold text-[#b84a6c] underline"
+                className="text-sm font-bold text-[#8e3b4a] underline"
                 onClick={async () => onRestore(await loadVersion<Data>(slug, h.ts))}
               >
                 שחזור

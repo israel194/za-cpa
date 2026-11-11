@@ -19,66 +19,52 @@ const iconMap: Record<SectorIcon, React.ElementType> = {
 
 type Props = {
   variant?: 'preview' | 'full'
+  /** כבוי כשהעמוד כבר נושא את אותה כותרת בראשו */
+  heading?: boolean
 }
 
-export default function Sectors({ variant = 'preview' }: Props) {
+export default function Sectors({ variant = 'preview', heading = true }: Props) {
   const { t, i18n } = useTranslation()
   const sectors = useSectors()
   const isRtl = i18n.dir() === 'rtl'
   const Arrow = isRtl ? ArrowLeft : ArrowRight
 
   return (
-    <section
-      className={`relative ${variant === 'preview' ? 'bg-background' : 'bg-white'} py-20 md:py-28`}
-    >
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            {t('sectors.eyebrow')}
-          </div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-5xl">
-            {t('sectors.title')}
-          </h2>
-          <p className="mt-5 text-lg text-ink-700">{t('sectors.subtitle')}</p>
-        </div>
+    <section className={`relative ${variant === 'preview' ? 'bg-background' : 'bg-cream-50'} py-20 md:py-28`}>
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        {heading && (
+          <>
+          <p className="eyebrow mb-5">{t('sectors.eyebrow')}</p>
+          <h2 className="display display-lg">{t('sectors.title')}</h2>
+          <p className="measure mt-5 text-lg text-ink-700">{t('sectors.subtitle')}</p>
+          </>
+        )}
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* ארבעה מגזרים כעמודות על רשת אחת. הסמל קטן ובצבע אחד, ולא עיגול
+            מלא בהדרגתיות: ארבעה עיגולים צבעוניים בשורה הם קישוט, לא מידע. */}
+        <div className={`${heading ? 'mt-12' : ''} grid gap-x-10 border-t border-[color:var(--color-rule-strong)] sm:grid-cols-2 lg:grid-cols-4`}>
           {sectors.map((sector) => {
             const Icon = iconMap[sector.iconName]
             return (
               <Link
                 key={sector.slug}
                 to={`/sectors/${sector.slug}`}
-                className="group relative overflow-hidden rounded-2xl border border-blush-100 bg-white p-8 transition-all
-                  duration-300 hover:-translate-y-1 hover:border-accent/60
-                  hover:shadow-[0_24px_48px_-24px_rgba(189,95,124,0.4)]"
+                className="group flex flex-col border-b border-[color:var(--color-rule)] pt-6 pb-7 lg:border-b-0"
               >
-                <div
-                  aria-hidden
-                  className={`absolute -top-12 h-32 w-32 rounded-full bg-blush-100/0 transition-colors duration-300 group-hover:bg-blush-100/70 ${
-                    isRtl ? '-end-12' : '-start-12'
-                  }`}
-                />
-                <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-gold-500 to-blush-400 text-white shadow-[0_12px_24px_-12px_rgba(189,95,124,0.5)]">
-                  <Icon size={26} />
-                </div>
-                <h3 className="relative font-display text-xl font-bold leading-snug text-ink-900">
+                <Icon size={20} strokeWidth={1.6} className="text-gold-600" aria-hidden />
+                <h3 className="display display-sm mt-4 transition-colors duration-200 group-hover:text-accent">
                   {sector.title}
                 </h3>
-                <p className="relative mt-3 text-sm leading-relaxed text-ink-700">
+                <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-ink-700">
                   {sector.summary}
                 </p>
-                <div className="relative mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent">
-                  {t('common.readMore')}
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+                  <span className="link-rule border-accent/40 group-hover:border-accent">{t('common.readMore')}</span>
                   <Arrow
                     size={14}
-                    className={`transition-transform duration-300 ${
-                      isRtl
-                        ? 'group-hover:-translate-x-1'
-                        : 'group-hover:translate-x-1'
-                    }`}
+                    className={`transition-transform duration-200 ${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`}
                   />
-                </div>
+                </span>
               </Link>
             )
           })}

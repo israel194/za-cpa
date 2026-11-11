@@ -193,7 +193,7 @@ export default function AccessibilityMenu() {
                 </span>
                 <h2
                   id="a11y-title"
-                  className="font-display text-lg font-bold text-ink-900"
+                  className="display display-sm display-ink"
                 >
                   {t('a11y.title')}
                 </h2>

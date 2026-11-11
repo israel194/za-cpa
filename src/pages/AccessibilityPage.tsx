@@ -143,7 +143,7 @@ export default function AccessibilityPage() {
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/25 backdrop-blur-sm">
                 <HandHeart size={20} />
               </span>
-              <h2 className="font-display text-2xl font-extrabold md:text-3xl">
+              <h2 className="display display-md display-invert">
                 {t('a11y.statement.coordinatorTitle')}
               </h2>
             </div>
@@ -208,7 +208,7 @@ export default function AccessibilityPage() {
           <div className="mt-10 rounded-2xl border border-blush-100 bg-cream-50/60 p-6">
             <div className="flex items-center gap-2 text-rose-gold-500">
               <Calendar size={18} />
-              <h3 className="font-display text-base font-bold text-ink-900">
+              <h3 className="display display-sm display-ink text-[1.05rem]">
                 {t('a11y.statement.updatedTitle')}
               </h3>
             </div>
@@ -237,7 +237,7 @@ function Block({
         <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blush-100 text-rose-gold-500">
           {icon}
         </span>
-        <h2 className="font-display text-xl font-extrabold text-ink-900 md:text-2xl">
+        <h2 className="display display-md display-ink">
           {title}
         </h2>
       </div>

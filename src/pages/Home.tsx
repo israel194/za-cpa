@@ -6,7 +6,6 @@ import Process from '../components/Process'
 import Sectors from '../components/Sectors'
 import Testimonials from '../components/Testimonials'
 import CallToAction from '../components/CallToAction'
-import TrustBadgeRow from '../components/ui/TrustBadgeRow'
 import { useSeo } from '../lib/seo'
 
 export default function Home() {
@@ -14,11 +13,8 @@ export default function Home() {
   return (
     <>
       <HeroCinematic />
-      <section className="py-10">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <TrustBadgeRow />
-        </div>
-      </section>
+      {/* שורת התגים שהייתה כאן חזרה על שני הנתונים שכבר מופיעים בראש העמוד
+          (12 שנים, 250 לקוחות), ושני הנותרים הם הצהרות תאימות שמקומן בתחתית. */}
       <ActivityAreas />
       <WhyUs />
       <Engagement />

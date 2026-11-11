@@ -15,7 +15,7 @@ export default function ServicesPage() {
         subtitle={t('services.subtitle')}
         crumbs={[{ to: '/services', label: t('nav.services') }]}
       />
-      <Services />
+      <Services heading={false} />
       <CallToAction />
     </>
   )

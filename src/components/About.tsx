@@ -20,45 +20,33 @@ const values = [
 
 export default function About() {
   return (
-    <section id="about" className="relative bg-white py-24 md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 md:px-10 lg:grid-cols-2 lg:gap-20">
+    <section id="about" className="relative bg-surface py-20 md:py-28">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 md:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         <div>
-          <div className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            אודות
-          </div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink-900 md:text-5xl">
-            אודות המשרד
-          </h2>
-          <p className="mt-7 text-lg leading-loose text-ink-700 md:text-xl">
+          <p className="eyebrow mb-5">אודות</p>
+          <h2 className="display display-lg">אודות המשרד</h2>
+          <p className="measure mt-6 text-lg leading-loose text-ink-700">
             משרדנו מעניק שירות אישי, מקצועי ומקיף, תוך התאמה מדויקת לצרכים
             הפיננסיים של כל לקוח. אנו דוגלים באמינות, שקיפות וחתירה למצוינות.
           </p>
-
-          <div className="mt-10 flex h-1 w-24 rounded-full bg-gradient-to-l from-rose-gold-500 to-blush-300" />
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-1">
+        {/* שלושה ערכים כרשימה מסורגלת. קודם לכן כל ערך ישב בכרטיס משלו,
+            ושלושה כרטיסים זהים זה מתחת לזה אינם היררכיה אלא מילוי שטח. */}
+        <dl className="lg:pt-14">
           {values.map(({ icon: Icon, title, text }) => (
             <div
               key={title}
-              className="group flex items-start gap-5 rounded-2xl border border-blush-100 bg-background/60 p-6 transition-all
-                duration-300 hover:-translate-y-0.5 hover:border-accent/60/60 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(189,95,124,0.35)]"
+              className="grid grid-cols-[auto_1fr] items-start gap-x-5 border-t border-[color:var(--color-rule)] py-6 first:border-t-0 first:pt-0"
             >
-              <div
-                className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-blush-100
-                  text-accent transition-colors group-hover:bg-primary group-hover:text-white"
-              >
-                <Icon size={22} />
-              </div>
+              <Icon size={20} strokeWidth={1.6} className="mt-1 text-gold-600" aria-hidden />
               <div>
-                <h3 className="font-display text-lg font-bold text-ink-900">
-                  {title}
-                </h3>
-                <p className="mt-1.5 leading-relaxed text-ink-700">{text}</p>
+                <dt className="display display-sm">{title}</dt>
+                <dd className="measure mt-2 leading-relaxed text-ink-700">{text}</dd>
               </div>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   )

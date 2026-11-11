@@ -14,7 +14,7 @@ const MANUAL_METHODS = [
 const STATUS_STYLE: Record<Registration['status'], string> = {
   paid: 'bg-[#e6f4ea] text-[#1f6b3a]',
   awaiting_card: 'bg-[#fff4e0] text-[#8a5a00]',
-  awaiting_manual: 'bg-[#fbeff0] text-[#b84a6c]',
+  awaiting_manual: 'bg-[#f6efe6] text-[#8e3b4a]',
   cancelled: 'bg-[#eee] text-ink-700',
 }
 
@@ -79,7 +79,7 @@ export default function AdminRegistrations() {
 
   const replace = (r: Registration) => setRows((all) => all.map((x) => (x.id === r.id ? r : x)))
 
-  const select = 'rounded-lg border border-[#f3c9d3] bg-white px-3 py-2 text-sm'
+  const select = 'rounded-lg border border-[#e6d9d6] bg-white px-3 py-2 text-sm'
   return (
     <div className="mx-auto max-w-7xl px-4 py-6">
       {!sumitOk && (
@@ -102,7 +102,7 @@ export default function AdminRegistrations() {
           {totals.count} נרשמות · {totals.paid} שילמו · {totals.sum.toLocaleString('he-IL')} ש״ח
         </span>
         <span className="flex-1" />
-        <button type="button" onClick={() => void load()} className="inline-flex items-center gap-1 rounded-lg border border-[#f3c9d3] bg-white px-3 py-2 text-sm">
+        <button type="button" onClick={() => void load()} className="inline-flex items-center gap-1 rounded-lg border border-[#e6d9d6] bg-white px-3 py-2 text-sm">
           <RefreshCw size={15} /> רענון
         </button>
         <button type="button" onClick={download} className="inline-flex items-center gap-1 rounded-lg bg-burgundy-600 px-3 py-2 text-sm font-bold text-white">
@@ -111,9 +111,9 @@ export default function AdminRegistrations() {
       </div>
       {error && <p className="mt-4 text-sm text-[#b42318]">{error}</p>}
 
-      <div className="mt-4 overflow-x-auto rounded-2xl border border-[#f3c9d3] bg-white">
+      <div className="mt-4 overflow-x-auto rounded-2xl border border-[#e6d9d6] bg-white">
         <table className="w-full min-w-[900px] text-sm">
-          <thead className="bg-[#fbeff0] text-right text-burgundy-700">
+          <thead className="bg-[#f6efe6] text-right text-burgundy-700">
             <tr>
               {['נרשמה', 'שם', 'טלפון / מייל', 'תוכנית', 'סכום', 'סטטוס', 'תשלום', ''].map((h) => (
                 <th key={h} className="px-3 py-2 font-bold">{h}</th>
@@ -122,7 +122,7 @@ export default function AdminRegistrations() {
           </thead>
           <tbody>
             {shown.map((r) => (
-              <tr key={r.id} className="border-t border-[#f6e3e7] align-top">
+              <tr key={r.id} className="border-t border-[#e6d9d6] align-top">
                 <td className="px-3 py-2 whitespace-nowrap">{fmtDate(r.createdAt)}</td>
                 <td className="px-3 py-2 font-semibold">{r.name}</td>
                 <td className="px-3 py-2" dir="ltr">{r.phone}<br />{r.email}</td>
@@ -150,7 +150,7 @@ export default function AdminRegistrations() {
                     <button
                       type="button"
                       onClick={() => void setCancelled(r.id, r.status !== 'cancelled').then(replace)}
-                      className="rounded-lg border border-[#f3c9d3] px-3 py-1.5 text-xs"
+                      className="rounded-lg border border-[#e6d9d6] px-3 py-1.5 text-xs"
                     >
                       {r.status === 'cancelled' ? 'שחזור' : 'ביטול'}
                     </button>
@@ -194,15 +194,15 @@ function MarkPaidDialog({ reg, sumitOk, onClose, onDone }: { reg: Registration; 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4" role="dialog" aria-modal="true" aria-label="סימון תשלום">
       <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">
-        <h2 className="font-display text-xl font-extrabold text-burgundy-700">סימון תשלום ידני</h2>
+        <h2 className="display display-md">סימון תשלום ידני</h2>
         <p className="mt-1 text-sm text-ink-700">{reg.name} · {reg.productName} · {reg.amount} ש״ח</p>
         <label className="mt-4 block text-sm font-semibold">אמצעי תשלום
-          <select value={method} onChange={(e) => setMethod(e.target.value)} className="mt-1 w-full rounded-lg border border-[#f3c9d3] px-3 py-2">
+          <select value={method} onChange={(e) => setMethod(e.target.value)} className="mt-1 w-full rounded-lg border border-[#e6d9d6] px-3 py-2">
             {MANUAL_METHODS.map((m) => <option key={m.value} value={m.value}>{m.label}</option>)}
           </select>
         </label>
         <label className="mt-3 block text-sm font-semibold">תאריך התשלום
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="mt-1 w-full rounded-lg border border-[#f3c9d3] px-3 py-2" />
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="mt-1 w-full rounded-lg border border-[#e6d9d6] px-3 py-2" />
         </label>
         <label className="mt-3 flex items-center gap-2 text-sm">
           <input type="checkbox" checked={invoice && !noInvoice} disabled={!sumitOk || noInvoice} onChange={(e) => setInvoice(e.target.checked)} />
@@ -213,7 +213,7 @@ function MarkPaidDialog({ reg, sumitOk, onClose, onDone }: { reg: Registration; 
           <button type="button" disabled={busy} onClick={() => void save()} className="flex-1 rounded-lg bg-burgundy-600 px-4 py-2 font-bold text-white disabled:opacity-60">
             {busy ? 'שומרת...' : 'שמירה'}
           </button>
-          <button type="button" onClick={onClose} className="rounded-lg border border-[#f3c9d3] px-4 py-2">ביטול</button>
+          <button type="button" onClick={onClose} className="rounded-lg border border-[#e6d9d6] px-4 py-2">ביטול</button>
         </div>
       </div>
     </div>

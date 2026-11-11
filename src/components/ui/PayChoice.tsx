@@ -2,7 +2,7 @@ import { CreditCard, HandCoins } from 'lucide-react'
 import type { PayMethod } from '../../lib/register'
 
 /** Card now (SUMIT, invoice emailed automatically) or manual payment arranged with Orit. */
-export function PayChoice({ accent = '#b84a6c', card = true }: { accent?: string; card?: boolean }) {
+export function PayChoice({ accent = '#8e3b4a', card = true }: { accent?: string; card?: boolean }) {
   type Opt = { value: PayMethod; title: string; body: string; Icon: typeof CreditCard }
   const all: Opt[] = [
     { value: 'card', title: 'תשלום מאובטח באשראי עכשיו', body: 'חשבונית מס קבלה תישלח אלייך למייל מיד אחרי התשלום.', Icon: CreditCard },
@@ -16,7 +16,7 @@ export function PayChoice({ accent = '#b84a6c', card = true }: { accent?: string
         {opts.map(({ value, title, body, Icon }, i) => (
           <label
             key={value}
-            className="flex cursor-pointer items-start gap-3 rounded-xl border border-[#f3c9d3] px-4 py-3 has-[:checked]:border-[#b84a6c] has-[:checked]:bg-[#fbeff0]"
+            className="flex cursor-pointer items-start gap-3 rounded-xl border border-[#e6d9d6] px-4 py-3 has-[:checked]:border-[#8e3b4a] has-[:checked]:bg-[#f6efe6]"
           >
             <input type="radio" name="payMethod" value={value} defaultChecked={i === 0} className="mt-1" style={{ accentColor: accent }} />
             <Icon size={18} className="mt-0.5 shrink-0" style={{ color: accent }} />

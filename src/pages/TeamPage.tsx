@@ -18,7 +18,7 @@ export default function TeamPage() {
           { to: '/team', label: t('nav.team') },
         ]}
       />
-      <Team />
+      <Team heading={false} />
       <CallToAction
         title={t('cta.teamTitle')}
         subtitle={t('cta.teamSubtitle')}

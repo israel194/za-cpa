@@ -66,7 +66,7 @@ export default function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-background/90 backdrop-blur-md border-b border-blush-100 shadow-[0_1px_24px_rgba(189,95,124,0.06)]'
+          ? 'bg-background/95 backdrop-blur-md border-b border-[color:var(--color-rule)]'
           : 'bg-transparent'
       }`}
     >
@@ -108,7 +108,7 @@ export default function Header() {
                     isRtl ? 'end-0' : 'start-0'
                   }`}
                 >
-                  <div className="min-w-[16rem] overflow-hidden rounded-2xl border border-blush-100 bg-white py-2 shadow-[0_24px_48px_-16px_rgba(189,95,124,0.25)]">
+                  <div className="min-w-[16rem] overflow-hidden rounded-[10px] border border-[color:var(--color-rule)] bg-surface py-2 shadow-[var(--shadow-lift)]">
                     {item.to && (
                       <Link
                         to={item.to}
@@ -137,9 +137,8 @@ export default function Header() {
           <LanguageSwitcher />
           <Link
             to="/contact"
-            className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white
-              shadow-[0_8px_24px_-8px_rgba(189,95,124,0.6)] transition-all duration-300
-              hover:bg-primary/90 hover:shadow-[0_12px_28px_-8px_rgba(189,95,124,0.7)] xl:inline-block"
+            className="hidden rounded-[6px] bg-primary px-5 py-2.5 text-sm font-bold text-white
+              transition-colors duration-200 hover:bg-burgundy-500 xl:inline-block"
           >
             {t('nav.bookMeeting')}
           </Link>
@@ -147,7 +146,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-11 w-11 items-center justify-center rounded-full text-ink-800 hover:bg-blush-100 lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-[6px] text-ink-800 hover:bg-muted lg:hidden"
             aria-label={t('nav.openMenu')}
           >
             {open ? <X size={22} /> : <Menu size={22} />}
@@ -217,7 +216,7 @@ export default function Header() {
             <li className="pt-3">
               <Link
                 to="/contact"
-                className="block rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-white"
+                className="block rounded-[6px] bg-primary px-5 py-3 text-center text-sm font-bold text-white"
               >
                 {t('nav.bookMeeting')}
               </Link>

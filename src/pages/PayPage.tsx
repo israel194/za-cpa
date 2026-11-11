@@ -118,12 +118,12 @@ export default function PayPage() {
   }
 
   const input =
-    'w-full rounded-xl border border-[#f3c9d3] bg-[#fffafa] px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-[#b84a6c] focus:bg-white'
+    'w-full rounded-xl border border-[#e6d9d6] bg-[#fcf9f5] px-4 py-3 text-base text-ink-900 outline-none transition-colors focus:border-[#8e3b4a] focus:bg-white'
 
   return (
-    <div dir="rtl" lang="he" className="min-h-screen bg-gradient-to-b from-[#fde8de] via-[#fbeff0] to-white px-4 pt-28 pb-16 md:pt-32">
+    <div dir="rtl" lang="he" className="min-h-screen bg-gradient-to-b from-[#fcf9f5] via-[#f6efe6] to-white px-4 pt-28 pb-16 md:pt-32">
       <div className="mx-auto max-w-5xl">
-        <Link to={offer.backTo} className="inline-flex items-center gap-1 text-sm font-semibold text-[#b84a6c] hover:underline">
+        <Link to={offer.backTo} className="inline-flex items-center gap-1 text-sm font-semibold text-[#8e3b4a] hover:underline">
           <ArrowRight size={16} /> {offer.backLabel}
         </Link>
 
@@ -131,21 +131,21 @@ export default function PayPage() {
           {/* ORDER SUMMARY */}
           <aside className="md:col-span-2">
             <div className="overflow-hidden rounded-3xl bg-white shadow-[0_24px_60px_-34px_rgba(110,26,45,0.55)]">
-              <div className="bg-gradient-to-l from-[#c2577a] via-burgundy-600 to-burgundy-700 px-6 py-6 text-white">
+              <div className="bg-gradient-to-l from-[#82283b] via-burgundy-600 to-burgundy-700 px-6 py-6 text-white">
                 <div className="text-xs font-bold tracking-wide text-white/80">{offer.kicker}</div>
-                <h1 className="mt-1 font-display text-3xl font-extrabold">{offer.title}</h1>
+                <h1 className="mt-1 font-display text-3xl font-bold">{offer.title}</h1>
                 <p className="mt-2 text-sm leading-relaxed text-white/90">{offer.subtitle}</p>
               </div>
               <div className="px-6 py-5">
                 <ul className="space-y-2.5 text-sm text-ink-800">
                   {offer.facts.map(({ icon: Icon, text }) => (
                     <li key={text} className="flex items-start gap-2.5">
-                      <Icon size={17} className="mt-0.5 shrink-0 text-[#b84a6c]" />
+                      <Icon size={17} className="mt-0.5 shrink-0 text-[#8e3b4a]" />
                       <span>{text}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="my-5 h-px bg-[#f6e3e7]" />
+                <div className="my-5 h-px bg-[#e6d9d6]" />
                 <ul className="space-y-2 text-sm text-ink-800">
                   {offer.includes.map((t) => (
                     <li key={t} className="flex items-start gap-2.5">
@@ -154,17 +154,17 @@ export default function PayPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-5 rounded-2xl bg-[#fbeff0] px-5 py-4">
+                <div className="mt-5 rounded-2xl bg-[#f6efe6] px-5 py-4">
                   <div className="flex items-baseline justify-between gap-3">
                     <span className="text-sm font-semibold text-ink-800">סה״כ לתשלום</span>
                     <span className="text-end">
                       {/* 60% שקיפות הורידה את הניגודיות ל-3.67; צבע מלא נותן 5.43 */}
-                      {offer.regular && <s className="me-2 text-sm text-[#6b5f63]">{offer.regular}</s>}
+                      {offer.regular && <s className="me-2 text-sm text-[#3d2a30]">{offer.regular}</s>}
                       <strong className="font-display text-3xl text-burgundy-700">{offer.price}</strong>
                     </span>
                   </div>
                   {/* a83f5f ולא b84a6c, מאותה סיבה: ניגודיות AA על רקע ורוד בהיר */}
-                  {offer.priceNote && <div className="mt-1 text-end text-xs font-bold text-[#a83f5f]">{offer.priceNote}</div>}
+                  {offer.priceNote && <div className="mt-1 text-end text-xs font-bold text-[#6e1a2d]">{offer.priceNote}</div>}
                   <div className="mt-1 text-end text-xs text-ink-700">המחיר כולל מע״מ</div>
                 </div>
               </div>
@@ -179,14 +179,14 @@ export default function PayPage() {
               ) : outcome ? (
                 <div className="py-10 text-center" role="status">
                   <CheckCircle2 size={52} className="mx-auto text-[#1f8f4e]" />
-                  <h2 className="mt-4 font-display text-2xl font-extrabold text-burgundy-700">
+                  <h2 className="mt-4 display display-md">
                     {outcome === 'redirecting' ? 'מעבירה אותך לתשלום...' : 'ההרשמה נקלטה, תודה!'}
                   </h2>
                   <p className="mx-auto mt-3 max-w-md leading-relaxed text-ink-700">{OUTCOME_TEXT[outcome]}</p>
                 </div>
               ) : (
                 <>
-                  <h2 className="font-display text-2xl font-extrabold text-burgundy-700">הפרטים שלך</h2>
+                  <h2 className="display display-md">הפרטים שלך</h2>
                   <p className="mt-1 text-sm text-ink-700">החשבונית תופק על השם הזה ותישלח למייל שתכתבי.</p>
                   <form onSubmit={onSubmit} className="relative mt-6 space-y-4">
                     <div>
@@ -218,13 +218,13 @@ export default function PayPage() {
                     <button
                       type="submit"
                       disabled={busy}
-                      className="sheen flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-l from-[#d16d8a] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all hover:-translate-y-0.5 disabled:opacity-60"
+                      className="sheen flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-l from-[#9e3a4d] via-burgundy-500 to-burgundy-700 px-8 py-4 text-base font-bold text-white shadow-[0_16px_36px_-12px_rgba(110,26,45,0.6)] transition-all hover:-translate-y-0.5 disabled:opacity-60"
                     >
                       <Lock size={18} /> {busy ? 'רגע...' : 'להרשמה ולתשלום מאובטח'}
                     </button>
                     <ul className="flex flex-wrap justify-center gap-x-5 gap-y-1 pt-1 text-xs text-ink-700">
                       <li className="inline-flex items-center gap-1"><ShieldCheck size={14} className="text-[#1f8f4e]" /> תשלום מאובטח ב-SUMIT</li>
-                      <li className="inline-flex items-center gap-1"><Receipt size={14} className="text-[#b84a6c]" /> חשבונית מס קבלה למייל</li>
+                      <li className="inline-flex items-center gap-1"><Receipt size={14} className="text-[#8e3b4a]" /> חשבונית מס קבלה למייל</li>
                     </ul>
                     <PrivacyNotice controller="orit" />
                   </form>

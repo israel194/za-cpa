@@ -15,90 +15,59 @@ export default function Engagement() {
   const Arrow = isRtl ? ArrowLeft : ArrowRight
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-blush-50 to-background py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 text-sm font-bold tracking-[0.2em] text-accent">
-            {t('engagement.eyebrow')}
-          </div>
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-5xl">
-            {t('engagement.title')}
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-ink-700">
+    <section className="relative border-y border-[color:var(--color-rule)] bg-surface py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <Reveal>
+          <p className="eyebrow mb-5">{t('engagement.eyebrow')}</p>
+          <h2 className="display display-lg">{t('engagement.title')}</h2>
+          <p className="measure mt-5 text-lg leading-relaxed text-ink-700">
             {t('engagement.subtitle')}
           </p>
         </Reveal>
 
-        <div className="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
+        {/* שלושה מסלולים כהשוואה על רשת משותפת. קודם לכן זה היה שלושה
+            כרטיסי תמחור שבהם האמצעי כהה ומוגבה, התבנית המוכרת ביותר
+            באינטרנט, והיא גם רמזה על מדרג מחירים שאינו קיים כאן. */}
+        <div className="mt-12 grid gap-x-10 border-t border-[color:var(--color-rule-strong)] lg:grid-cols-3">
           {plans.map(({ key, icon: Icon, ...rest }, idx) => {
-            const dark = 'dark' in rest && rest.dark
+            const marked = 'dark' in rest && rest.dark
             const items = t(`engagement.plans.${key}.items`, { returnObjects: true }) as string[]
             return (
-              <Reveal key={key} delay={idx * 110} className={dark ? 'lg:-my-4' : ''}>
-                <article
-                  className={`relative flex h-full flex-col overflow-hidden rounded-3xl p-8 md:p-10 ${
-                    dark
-                      ? 'bg-gradient-to-br from-navy-800 via-burgundy-700 to-burgundy-600 text-white shadow-[0_40px_80px_-35px_rgba(58,15,28,0.8)]'
-                      : 'border border-border bg-white shadow-[0_24px_60px_-40px_rgba(110,26,45,0.35)]'
-                  }`}
-                >
-                  {dark && <div aria-hidden className="bg-plus-light pointer-events-none absolute inset-0" />}
-
-                  <div className="relative flex items-center justify-between">
-                    <span
-                      className={`flex h-12 w-12 items-center justify-center rounded-full ${
-                        dark ? 'bg-white/10 text-gold-200' : 'bg-blush-100 text-primary'
-                      }`}
-                    >
-                      <Icon size={22} strokeWidth={1.75} />
-                    </span>
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-bold ${
-                        dark ? 'bg-gold-300/15 text-gold-200' : 'bg-gold-100 text-gold-700'
-                      }`}
-                    >
+              <Reveal
+                key={key}
+                delay={idx * 80}
+                className={`flex flex-col border-b border-[color:var(--color-rule)] lg:border-b-0 ${
+                  marked ? 'lg:border-x lg:border-x-[color:var(--color-rule)] lg:px-10' : ''
+                }`}
+              >
+                <article className="flex h-full flex-col pt-6 pb-8">
+                  <div className="flex items-baseline gap-3">
+                    <Icon size={19} strokeWidth={1.6} className="translate-y-0.5 text-gold-600" aria-hidden />
+                    <span className="text-[0.7rem] font-bold tracking-[0.18em] text-gold-600">
                       {t(`engagement.plans.${key}.tag`)}
                     </span>
                   </div>
 
-                  <h3 className={`relative mt-7 font-display text-2xl font-extrabold ${dark ? 'text-white' : 'text-primary'}`}>
-                    {t(`engagement.plans.${key}.title`)}
-                  </h3>
-                  <p className={`relative mt-3 leading-relaxed ${dark ? 'text-white/75' : 'text-ink-700'}`}>
-                    {t(`engagement.plans.${key}.text`)}
-                  </p>
+                  <h3 className="display display-md mt-4">{t(`engagement.plans.${key}.title`)}</h3>
+                  <p className="mt-3 leading-relaxed text-ink-700">{t(`engagement.plans.${key}.text`)}</p>
 
-                  <div className={`relative my-7 h-px ${dark ? 'bg-white/15' : 'bg-border'}`} />
-
-                  <ul className="relative flex-1 space-y-4">
+                  <ul className="mt-6 flex-1 space-y-3 border-t border-[color:var(--color-rule)] pt-6">
                     {items.map((item) => (
                       <li key={item} className="flex items-start gap-3">
-                        <span
-                          className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
-                            dark ? 'bg-gold-300 text-navy-800' : 'bg-primary text-white'
-                          }`}
-                        >
-                          <Check size={12} strokeWidth={3} />
-                        </span>
-                        <span className={`text-[15px] leading-relaxed ${dark ? 'text-white/90' : 'text-ink-800'}`}>
-                          {item}
-                        </span>
+                        <Check size={15} strokeWidth={2.5} className="mt-1 shrink-0 text-gold-600" aria-hidden />
+                        <span className="text-[0.95rem] leading-relaxed text-ink-800">{item}</span>
                       </li>
                     ))}
                   </ul>
 
                   <Link
                     to="/contact"
-                    className={`sheen group relative mt-9 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold transition-all duration-300 hover:-translate-y-0.5 ${
-                      dark
-                        ? 'bg-gradient-to-l from-gold-300 to-gold-200 text-navy-800'
-                        : 'border border-primary/20 text-primary hover:border-primary hover:bg-primary hover:text-white'
-                    }`}
+                    className="group mt-7 inline-flex items-center gap-2 self-start text-sm font-bold text-primary transition-colors hover:text-accent"
                   >
-                    {t('engagement.cta')}
+                    <span className="link-rule border-gold-400">{t('engagement.cta')}</span>
                     <Arrow
-                      size={16}
-                      className={`transition-transform duration-300 ${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`}
+                      size={15}
+                      className={`transition-transform duration-200 ${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`}
                     />
                   </Link>
                 </article>

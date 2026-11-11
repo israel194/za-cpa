@@ -15,7 +15,7 @@ export default function SectorsPage() {
         subtitle={t('sectors.subtitleLong')}
         crumbs={[{ to: '/sectors', label: t('nav.sectors') }]}
       />
-      <Sectors variant="full" />
+      <Sectors variant="full" heading={false} />
       <CallToAction />
     </>
   )
