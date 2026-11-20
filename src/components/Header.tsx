@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Phone } from 'lucide-react'
 import { useServices, useSectors } from '../data/content'
 import LanguageSwitcher from './LanguageSwitcher'
 import Logo from './Logo'
@@ -86,7 +86,8 @@ export default function Header() {
                   {item.label}
                   <ChevronDown
                     size={14}
-                    className="transition-transform duration-200 group-hover:rotate-180"
+                    className="transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                    aria-hidden
                   />
                 </button>
               ) : (
@@ -104,7 +105,7 @@ export default function Header() {
 
               {item.children && (
                 <div
-                  className={`invisible absolute top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 ${
+                  className={`invisible absolute top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 ${
                     isRtl ? 'end-0' : 'start-0'
                   }`}
                 >
@@ -133,8 +134,18 @@ export default function Header() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden lg:block">
+            <LanguageSwitcher />
+          </div>
+          <a
+            href="tel:+972523975659"
+            aria-label={t('nav.callNow')}
+            title={t('nav.callNow')}
+            className="flex h-11 w-11 items-center justify-center rounded-[6px] bg-primary text-white transition-colors duration-200 hover:bg-burgundy-500 lg:hidden"
+          >
+            <Phone size={20} aria-hidden />
+          </a>
           <Link
             to="/contact"
             className="hidden rounded-[6px] bg-primary px-5 py-2.5 text-sm font-bold text-white
@@ -148,6 +159,8 @@ export default function Header() {
             onClick={() => setOpen((v) => !v)}
             className="flex h-11 w-11 items-center justify-center rounded-[6px] text-ink-800 hover:bg-muted lg:hidden"
             aria-label={t('nav.openMenu')}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -155,7 +168,7 @@ export default function Header() {
       </nav>
 
       {open && (
-        <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-blush-100 bg-background/98 backdrop-blur-md lg:hidden">
+        <div id="mobile-menu" className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-blush-100 bg-background/98 backdrop-blur-md lg:hidden">
           <ul className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
             {navItems.map((item) => (
               <li key={item.label}>
@@ -163,6 +176,7 @@ export default function Header() {
                   <>
                     <button
                       type="button"
+                      aria-expanded={mobileExpanded === item.label}
                       onClick={() =>
                         setMobileExpanded((v) =>
                           v === item.label ? null : item.label
@@ -213,6 +227,9 @@ export default function Header() {
                 )}
               </li>
             ))}
+            <li className="flex justify-center pt-3">
+              <LanguageSwitcher variant="inline" />
+            </li>
             <li className="pt-3">
               <Link
                 to="/contact"

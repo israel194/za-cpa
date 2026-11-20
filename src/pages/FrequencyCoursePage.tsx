@@ -75,7 +75,7 @@ export default function FrequencyCoursePage() {
 
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:gap-16 md:px-10">
           <div>
-          <span className="inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.16em] text-gold-600">
+          <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] text-gold-600">
             <Waves size={13} /> {c.hero.badge}
           </span>
 

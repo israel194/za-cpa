@@ -33,6 +33,8 @@ export default function Services({ variant = 'full', heading = true }: Props) {
   const Arrow = isRtl ? ArrowLeft : ArrowRight
   const standardServices = services.filter((s) => !s.premium)
   const premiumServices = services.filter((s) => s.premium)
+  // Without the section heading the cards sit directly under the page h1.
+  const CardHeading = heading ? 'h3' : 'h2'
 
   return (
     <section className={`relative ${variant === 'preview' ? 'bg-surface' : 'bg-background'} py-20 md:py-28`}>
@@ -55,9 +57,9 @@ export default function Services({ variant = 'full', heading = true }: Props) {
                 className="group flex flex-col border-b border-[color:var(--color-rule)] pt-6 pb-7 lg:border-b-0"
               >
                 <Icon size={20} strokeWidth={1.6} className="text-gold-600" aria-hidden />
-                <h3 className="display display-sm mt-4 transition-colors duration-200 group-hover:text-accent">
+                <CardHeading className="display display-sm mt-4 transition-colors duration-200 group-hover:text-accent">
                   {service.title}
-                </h3>
+                </CardHeading>
                 <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-ink-700">
                   {service.summary}
                 </p>
@@ -80,13 +82,13 @@ export default function Services({ variant = 'full', heading = true }: Props) {
             <div aria-hidden className="bg-plus-light pointer-events-none absolute inset-0" />
             <div className="relative grid gap-10 p-8 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:p-12">
               <div>
-                <p className="flex items-center gap-2.5 text-[0.7rem] font-bold tracking-[0.18em] text-gold-200">
+                <p className="flex items-center gap-2.5 text-xs font-bold tracking-[0.18em] text-gold-200">
                   <Sparkles size={14} aria-hidden />
                   {t('services.premiumBadge')}
                 </p>
-                <h3 className="mt-5 font-display text-3xl font-bold leading-[1.12] text-white md:text-[2.4rem]">
+                <CardHeading className="mt-5 font-display text-3xl font-bold leading-[1.12] text-white md:text-[2.4rem]">
                   {premium.title}
-                </h3>
+                </CardHeading>
                 <p className="measure mt-4 leading-relaxed text-white/80">{premium.summary}</p>
                 <Link
                   to={`/services/${premium.slug}`}

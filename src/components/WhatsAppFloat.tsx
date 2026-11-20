@@ -24,7 +24,7 @@ export default function WhatsAppFloat() {
       target="_blank"
       rel="noreferrer"
       aria-label={t('whatsapp')}
-      className="group fixed bottom-6 left-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_-8px_rgba(37,211,102,0.55)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#1da851] hover:shadow-[0_22px_48px_-8px_rgba(37,211,102,0.7)] focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
+      className="group fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 z-40 flex h-14 w-14 sm:bottom-6 sm:left-6 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_-8px_rgba(37,211,102,0.55)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#1da851] hover:shadow-[0_22px_48px_-8px_rgba(37,211,102,0.7)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40"
     >
       <WhatsAppIcon size={28} />
       <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-[#25D366] opacity-50 blur-md transition-opacity group-hover:opacity-80" />

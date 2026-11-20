@@ -79,7 +79,7 @@ export default function ActivityAreas() {
                     <Icon size={18} strokeWidth={1.6} className="text-gold-600" aria-hidden />
                     {t(`activityAreas.items.${key}.title`)}
                     {highlight && (
-                      <span className="text-[0.68rem] font-bold tracking-[0.16em] text-gold-600">
+                      <span className="text-xs font-bold tracking-[0.16em] text-gold-600">
                         {t('activityAreas.premium')}
                       </span>
                     )}

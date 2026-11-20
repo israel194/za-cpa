@@ -95,7 +95,7 @@ export default function OritGroupPage() {
         <div className="relative mx-auto max-w-6xl px-6 md:px-10">
           <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:gap-16">
             <div>
-              <span className="inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.16em] text-gold-600">
+              <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] text-gold-600">
                 <Lock size={13} /> מלא עד סוף 2026 · נפתחת רשימה ל-2027
               </span>
 
@@ -245,7 +245,7 @@ export default function OritGroupPage() {
                   <span className="flex items-center justify-between gap-3">
                     <Icon size={20} strokeWidth={1.6} className="text-gold-600" aria-hidden />
                     {sv.badge && (
-                      <span className="text-[0.68rem] font-bold tracking-[0.16em] text-gold-600">{sv.badge}</span>
+                      <span className="text-xs font-bold tracking-[0.16em] text-gold-600">{sv.badge}</span>
                     )}
                   </span>
                   <span className="mt-4 block display display-sm display-ink">{sv.title}</span>

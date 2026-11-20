@@ -155,7 +155,7 @@ export default function LanguageSwitcher({ variant = 'header' }: Props) {
               <Flag />
             </span>
             <span
-              className={`text-[10px] font-semibold leading-none ${
+              className={`text-xs font-semibold leading-none ${
                 active ? 'text-primary' : 'text-ink-700'
               }`}
             >
