@@ -176,7 +176,7 @@ export default function Contact() {
               <div aria-hidden className="bg-plus-light pointer-events-none absolute inset-0" />
               <div className="relative">
                 <span aria-hidden className="mb-4 block h-px w-10 bg-gold-400" />
-                <h3 className="font-display text-xl font-bold">{t('contact.consultBox.title')}</h3>
+                <h2 className="font-display text-xl font-bold">{t('contact.consultBox.title')}</h2>
                 <p className="mt-2 leading-relaxed text-white/80">{t('contact.consultBox.text')}</p>
               </div>
             </div>
@@ -218,7 +218,8 @@ function DetailCard({
   href?: string
 }) {
   const Wrapper: ElementType = href ? 'a' : 'div'
-  const wrapperProps = href ? { href, target: '_blank', rel: 'noreferrer' } : {}
+  const external = href?.startsWith('http')
+  const wrapperProps = href ? (external ? { href, target: '_blank', rel: 'noreferrer' } : { href }) : {}
 
   return (
     <Wrapper
@@ -229,7 +230,7 @@ function DetailCard({
     >
       <span className="mt-0.5 flex-none text-gold-600">{icon}</span>
       <div>
-        <h3 className="display display-sm text-[1.05rem]">{title}</h3>
+        <h2 className="display display-sm text-[1.05rem]">{title}</h2>
         {lines.map((line) => (
           <p key={line} className="mt-1 leading-relaxed text-ink-700">
             {line}

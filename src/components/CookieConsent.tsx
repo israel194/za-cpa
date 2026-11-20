@@ -6,7 +6,6 @@ import {
   X,
   Settings as SettingsIcon,
   Check,
-  Sparkles,
   ArrowLeft,
   ArrowRight,
 } from 'lucide-react'
@@ -139,111 +138,61 @@ export default function CookieConsent() {
 
   return (
     <>
-      {/* Marketing-style banner — premium gradient card */}
+      {/* Compact consent bar: keeps the first screen visible on mobile */}
       {bannerOpen && !modalOpen && (
         <div
           role="dialog"
           aria-labelledby="cookie-banner-title"
-          className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-3xl animate-[fadeUp_400ms_ease-out_both] overflow-hidden rounded-[12px] border border-[color:var(--color-rule-strong)] bg-surface shadow-[var(--shadow-lift)]"
+          aria-describedby="cookie-banner-text"
+          className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-4xl animate-[fadeUp_400ms_ease-out_both] overflow-hidden rounded-[12px] border border-[color:var(--color-rule-strong)] bg-surface shadow-[var(--shadow-lift)]"
         >
-          {/* Decorative glows */}
-          <div
-            aria-hidden
-            className="pointer-events-none hidden"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none hidden"
-          />
-          {/* Top thin gold rule */}
-          <div
-            aria-hidden
-            className="absolute inset-x-0 top-0 h-px bg-gold-400"
-          />
-
-          <div className="relative grid gap-5 p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-6 md:p-7">
-            {/* Icon side */}
-            <div className="flex items-start gap-4 md:items-center">
-              <div className="relative flex-none">
-                <div
-                  aria-hidden
-                  className="hidden"
-                />
-                <span className="flex h-12 w-12 items-center justify-center rounded-[8px] border border-[color:var(--color-rule)] bg-cream-50 text-gold-600">
-                  <Cookie size={26} />
-                </span>
-              </div>
-              {/* Mobile-only inline title (hidden on md) */}
-              <div className="md:hidden">
-                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-                  <Sparkles size={12} />
-                  {t('cookies.banner.eyebrow')}
-                </div>
-                <h3
-                  id="cookie-banner-title"
-                  className="mt-1 display display-sm display-ink"
-                >
+          <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gold-400" />
+          <div className="relative flex flex-col gap-3 p-4 md:flex-row md:items-center md:gap-6 md:px-6 md:py-4">
+            <div className="flex min-w-0 flex-1 items-start gap-3">
+              <span className="mt-0.5 hidden h-10 w-10 flex-none items-center justify-center rounded-[8px] border border-[color:var(--color-rule)] bg-cream-50 text-gold-600 sm:flex">
+                <Cookie size={22} aria-hidden />
+              </span>
+              <div className="min-w-0">
+                <h2 id="cookie-banner-title" className="flex items-center gap-1.5 text-sm font-bold text-ink-900">
+                  <Cookie size={16} aria-hidden className="text-gold-600 sm:hidden" />
                   {t('cookies.banner.title')}
-                </h3>
+                </h2>
+                <p id="cookie-banner-text" className="mt-1 text-[13px] leading-relaxed text-ink-800 md:text-sm">
+                  {t('cookies.banner.text')}{' '}
+                  <Link
+                    to="/privacy"
+                    className="inline-flex items-center gap-1 font-semibold text-ink-900 underline decoration-rose-gold-300 underline-offset-4 transition-colors hover:text-primary hover:decoration-rose-gold-500"
+                  >
+                    {t('cookies.banner.policyLink')}
+                    <Arrow size={12} aria-hidden />
+                  </Link>
+                </p>
               </div>
             </div>
 
-            {/* Body */}
-            <div>
-              {/* Desktop title */}
-              <div className="hidden md:block">
-                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-                  <Sparkles size={12} />
-                  {t('cookies.banner.eyebrow')}
-                </div>
-                <h3
-                  id="cookie-banner-title"
-                  className="mt-1.5 display display-md display-ink"
-                >
-                  {t('cookies.banner.title')}
-                </h3>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-ink-800 md:text-[15px]">
-                {t('cookies.banner.text')}
-              </p>
-              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-700">
-                <span className="font-medium text-accent">
-                  {t('cookies.banner.tagline')}
-                </span>
-                <Link
-                  to="/privacy"
-                  className="inline-flex items-center gap-1 font-semibold text-ink-800 underline decoration-rose-gold-300 underline-offset-4 transition-colors hover:text-primary hover:decoration-rose-gold-500"
-                >
-                  {t('cookies.banner.policyLink')}
-                  <Arrow size={11} />
-                </Link>
-              </div>
-            </div>
-
-            {/* Buttons — vertical column on desktop, wrap on mobile */}
-            <div className="flex flex-wrap gap-2 md:flex-col md:gap-2.5">
+            <div className="flex flex-none items-center gap-2">
               <button
                 type="button"
                 onClick={acceptAll}
-                className="group order-1 inline-flex items-center justify-center gap-2 rounded-[6px] bg-primary px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-burgundy-500 md:order-1 md:w-full"
+                className="inline-flex min-h-11 flex-1 items-center justify-center rounded-[6px] bg-primary px-5 text-sm font-bold text-white transition-colors duration-200 hover:bg-burgundy-500 md:flex-none"
               >
-                <Sparkles size={14} className="transition-transform group-hover:scale-110" />
                 {t('cookies.banner.acceptAll')}
               </button>
               <button
                 type="button"
                 onClick={essentialOnly}
-                className="order-2 rounded-[6px] border border-[color:var(--color-rule-strong)] px-5 py-2.5 text-sm font-semibold text-ink-800 transition-colors duration-200 hover:border-primary md:order-2 md:w-full"
+                className="inline-flex min-h-11 flex-1 items-center justify-center rounded-[6px] border border-[color:var(--color-rule-strong)] px-4 text-sm font-semibold text-ink-800 transition-colors duration-200 hover:border-primary md:flex-none"
               >
                 {t('cookies.banner.essentialOnly')}
               </button>
               <button
                 type="button"
                 onClick={openSettings}
-                className="order-3 inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-ink-700 transition-colors hover:text-primary md:order-3 md:w-full"
+                aria-label={t('cookies.banner.settings')}
+                title={t('cookies.banner.settings')}
+                className="inline-flex h-11 w-11 flex-none items-center justify-center rounded-[6px] text-ink-700 transition-colors hover:bg-cream-50 hover:text-primary"
               >
-                <SettingsIcon size={12} />
-                {t('cookies.banner.settings')}
+                <SettingsIcon size={18} aria-hidden />
               </button>
             </div>
           </div>

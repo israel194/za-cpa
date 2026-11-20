@@ -27,9 +27,9 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
+          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
             {t('footer.servicesTitle')}
-          </h4>
+          </h2>
           <ul className="mt-4 space-y-2 text-sm text-cream-200/80">
             {services.map((s) => (
               <li key={s.slug}>
@@ -45,9 +45,9 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
+          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
             {t('footer.sectorsTitle')}
-          </h4>
+          </h2>
           <ul className="mt-4 space-y-2 text-sm text-cream-200/80">
             {sectors.map((s) => (
               <li key={s.slug}>
@@ -63,9 +63,9 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
+          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-gold-300">
             {t('footer.contactTitle')}
-          </h4>
+          </h2>
           <ul className="mt-4 space-y-3 text-sm text-cream-200/80">
             <li className="flex items-start gap-2">
               <MapPin size={16} className="mt-0.5 flex-none text-gold-300" />

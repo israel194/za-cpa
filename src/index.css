@@ -178,7 +178,7 @@ body {
 /* The small mark above a heading. One weight, one tracking, everywhere. */
 .eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   color: var(--color-gold-600);
@@ -192,6 +192,26 @@ body {
   height: 1px;
   background: var(--color-gold-400);
   flex: none;
+}
+
+/* Hebrew and Arabic have no capitals to space out: tracking breaks the
+   word into loose letters and screen readers may spell it. Keep tracking
+   for Latin only. Placed before the a11y letter-spacing levels so the
+   user's own spacing choice still wins. */
+html:is([lang="he"], [lang="ar"]) .eyebrow,
+html:is([lang="he"], [lang="ar"]) .marginal,
+html:is([lang="he"], [lang="ar"]) [class*="tracking-"] {
+  letter-spacing: normal;
+}
+
+/* One visible keyboard focus ring for every interactive element. */
+:where(a, button, [role="button"], summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+/* On the dark footer the wine ring would vanish. */
+footer :where(a, button, [role="button"], [tabindex]):focus-visible {
+  outline-color: var(--color-gold-400);
 }
 
 /* Hairline rules replace most card borders. */
@@ -518,9 +538,13 @@ html.a11y-reading-guide::after {
 /* Skip link — only visible on keyboard focus */
 .skip-link {
   position: fixed;
-  top: -3rem;
-  inset-inline-start: 50%;
-  transform: translateX(-50%);
+  /* Far enough up that the shadow does not peek in as a pink smudge, and
+     centred with left/right auto so RTL does not push it off-centre. */
+  top: -6rem;
+  left: 0;
+  right: 0;
+  width: max-content;
+  margin-inline: auto;
   z-index: 100;
   padding: 0.75rem 1.25rem;
   border-radius: 9999px;

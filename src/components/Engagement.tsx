@@ -43,7 +43,7 @@ export default function Engagement() {
                 <article className="flex h-full flex-col pt-6 pb-8">
                   <div className="flex items-baseline gap-3">
                     <Icon size={19} strokeWidth={1.6} className="translate-y-0.5 text-gold-600" aria-hidden />
-                    <span className="text-[0.7rem] font-bold tracking-[0.18em] text-gold-600">
+                    <span className="text-xs font-bold tracking-[0.18em] text-gold-600">
                       {t(`engagement.plans.${key}.tag`)}
                     </span>
                   </div>
